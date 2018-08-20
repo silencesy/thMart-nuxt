@@ -1,13 +1,14 @@
 <template>
   <div>
     <nuxt/>
+    <AppLogo/>
   </div>
 </template>
 <script>
-import bottom from "../../thMart-nuxt/components/layout/bottom.vue"
+  import AppLogo from '~/components/layout/bottom.vue'
   export default {
     components: {
-      bottom
+      AppLogo
     }
   }
 </script>
