@@ -3,6 +3,7 @@
 		{{project}}
 		<div @click="aaa">123123</div>
 		{{project2}}
+		<el-tag>标签一</el-tag>
 	</div>
 </template>
 <script>
