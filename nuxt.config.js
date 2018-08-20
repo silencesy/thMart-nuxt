@@ -26,7 +26,10 @@ module.exports = {
    * [plugins description]
    * @type {Array}
    */
-  plugins: [{src:'~plugins/element-ui', ssr: false}],
+  plugins: [
+    {src:'~plugins/element-ui', ssr: true},
+    {src:'~plugins/vue-awesome-swiper', ssr: false}
+  ],
   /*
   ** Build configuration
   */

@@ -1,9 +1,18 @@
 <template>
-	<div>
-		{{project}}
-		<div @click="aaa">123123</div>
-		{{project2}}
-		<el-tag>标签一</el-tag>
+
+	<div v-if="project">
+	<el-carousel indicator-position="outside">
+    <el-carousel-item v-for="(item,index) in project" :key="index">
+	      <img :src="item.pic" alt="">
+	    </el-carousel-item>
+	  </el-carousel>
+		
+		<el-switch
+		  v-model="value2"
+		  active-color="#13ce66"
+		  inactive-color="#ff4949">
+		</el-switch>
+
 	</div>
 </template>
 <script>
@@ -11,31 +20,28 @@
 	export default {
 		data() {
 			return {
-				project: {},
-				project2: {}
+				value1: true,
+        value2: true,
+		       	project: []
 			}
 		},
-		asyncData (context) {
-		    return axios.post('https://proj6.thatsmags.com/thmartApi/Ads/Home/list')
-		    .then((res) => {
-			    return { project: res.data }
-    		})
+		async asyncData () {
+			let data=await axios.post('https://proj6.thatsmags.com/thmartApi/Ads/Home/list')
+      		return {project: data.data.data.article.data}
 		},
 		middleware: 'userAuth',
 		methods: {
-			aaa() {
-				axios.post('https://proj6.thatsmags.com/thmartApi/Ads/Home/list')
-			    .then((res) => {
-				    this.project2 = res.data;
-	    		})
-			}
+			
 		}
 	}
 </script>
 <style scoped>
-	div {
-		color: $theme_color;
-		width: 100px;
-		height: 100px;
+	.BaseSwiper img {
+		width: 100%;
+		display: block;
 	}
+	.el-carousel__item img {
+	    width: 100%;
+	  }
+  
 </style>
