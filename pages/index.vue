@@ -20,6 +20,7 @@
 			    return { project: res.data }
     		})
 		},
+		middleware: 'userAuth',
 		methods: {
 			aaa() {
 				axios.post('https://proj6.thatsmags.com/thmartApi/Ads/Home/list')

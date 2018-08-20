@@ -1,9 +1,18 @@
 <template>
   <div>
     <nuxt/>
+    <AppLogo />
   </div>
 </template>
+<script>
+  import AppLogo from '~/components/AppLogo.vue'
 
+export default {
+  components: {
+    AppLogo
+  }
+}
+</script>
 <style>
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
