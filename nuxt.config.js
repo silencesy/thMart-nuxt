@@ -16,12 +16,21 @@ module.exports = {
   },
   // css重置
   css: ['~assets/css/style.css',
-        { src: '~assets/sass/common.sass', lang: 'sass' }
+        { src: '~assets/sass/common.sass', lang: 'sass' },
+        {src:'element-ui/lib/theme-chalk/index.css'}
   ],
   /*
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
+  /**
+   * [plugins description]
+   * @type {Array}
+   */
+  plugins: [
+    {src:'~plugins/element-ui', ssr: true},
+    {src:'~plugins/vue-awesome-swiper', ssr: false}
+  ],
   /*
   ** Build configuration
   */
