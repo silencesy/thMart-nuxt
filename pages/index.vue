@@ -33,5 +33,6 @@
 <style scoped>
 	div {
 		color: $theme_color;
+		width: 100px;
 	}
 </style>
