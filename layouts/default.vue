@@ -3,7 +3,14 @@
     <nuxt/>
   </div>
 </template>
-
+<script>
+import bottom from "../../thMart-nuxt/components/layout/bottom.vue"
+  export default {
+    components: {
+      bottom
+    }
+  }
+</script>
 <style>
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -20,7 +27,7 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
-
+ 
 .button--green {
   display: inline-block;
   border-radius: 4px;
