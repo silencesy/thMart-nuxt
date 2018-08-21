@@ -10,6 +10,7 @@
     }
   }
 </script>
-<style scoped>
-	
+<style lang='sass' scoped>
+	/*@import '~/assets/sass/common.sass'*/
+
 </style>

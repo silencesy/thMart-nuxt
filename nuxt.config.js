@@ -16,7 +16,7 @@ module.exports = {
   },
   // css重置
   css: ['~assets/css/style.css',
-        { src: '~assets/sass/common.sass', lang: 'sass' },
+        
         {src:'element-ui/lib/theme-chalk/index.css'}
   ],
   /*
