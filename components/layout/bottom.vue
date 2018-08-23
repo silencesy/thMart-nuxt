@@ -46,8 +46,7 @@
             padding-bottom: 10px
         li
             float: left
-            margin-right: 20px
-            margin-right: 147px
+            margin-right: 141px;
         li:first-child
             img 
                 @include wh(60px, 45px)

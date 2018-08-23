@@ -38,7 +38,7 @@
             li 
                 float: left
                 a
-                    padding: 0 51px 
+                    padding: 0 50px 
                     display: inline-block
                     @include hh(40px, 40px)
             li:first-child
@@ -52,7 +52,7 @@
                     padding-right: 15px
             li:nth-child(2)
                 a
-                    padding-left: 97px
+                    padding-left: 100px
             li:last-child
                 a 
                     padding-right: 0
