@@ -1,14 +1,23 @@
 <template>
   <div>
+    <top/>
+    <homeHead/>
+    <homeNav/>
     <nuxt/>
-    <AppLogo/>
+    <bottom/>
   </div>
 </template>
 <script>
-  import AppLogo from '~/components/layout/bottom.vue'
+  import top from '~/components/layout/top.vue'
+  import homeHead from '~/components/layout/homeHead.vue'
+  import homeNav from '~/components/layout/homeNav.vue'
+  import bottom from '~/components/layout/bottom.vue' 
   export default {
     components: {
-      AppLogo
+      top,
+      bottom,
+      homeHead,
+      homeNav
     }
   }
 </script>
