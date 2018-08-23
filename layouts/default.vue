@@ -1,12 +1,25 @@
 <template>
   <div>
+    <top/>
+    <homeHead/>
+    <homeNav/>
     <nuxt/>
+    <bottom/>
   </div>
 </template>
 <script>
-export default {
-  
-}
+  import top from '~/components/layout/top.vue'
+  import homeHead from '~/components/layout/homeHead.vue'
+  import homeNav from '~/components/layout/homeNav.vue'
+  import bottom from '~/components/layout/bottom.vue' 
+  export default {
+    components: {
+      top,
+      bottom,
+      homeHead,
+      homeNav
+    }
+  }
 </script>
 <style>
 html {
@@ -24,7 +37,7 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
-
+ 
 .button--green {
   display: inline-block;
   border-radius: 4px;
