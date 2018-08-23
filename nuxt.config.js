@@ -26,8 +26,17 @@ module.exports = {
    * [plugins description]
    * @type {Array}
    */
+  modules: [
+    '@nuxtjs/axios',
+  ],
+  axios: {
+    prefix: '',
+    proxy: true
+  },
   plugins: [
     {src:'~plugins/element-ui', ssr: true},
+    '~/plugins/axios',
+    // {src:'~plugins/axios', ssr: false},
     {src:'~plugins/vue-awesome-swiper', ssr: false}
   ],
   /*
@@ -38,16 +47,17 @@ module.exports = {
     ** Run ESLint on save
     */
     // loaders配置
-    // loaders: [
-    //   {
-    //     test: /\.(png|jpe?g|gif|svg)/,
-    //    loader: "url-loader",
-    //    query: {
-    //       limit:  10000,
-    //       name: 'img/[name].[hash].[text]'
-    //    } 
-    //   }
-    // ],
+    loaders: [
+      {
+        test: /\.(png|jpe?g|gif|svg)/,
+       loader: "url-loader",
+       query: {
+          limit:  10000,
+          name: 'img/[name].[hash].[text]'
+       } 
+      }
+    ],
+    vendor: ['axios'],
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({

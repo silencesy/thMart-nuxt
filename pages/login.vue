@@ -7,12 +7,13 @@
 			<input type="password" v-model="password">
 		</div>
 		<button @click="submitform">提交</button>
-		<p>{{token}}</p>
 	</div>
 </template>
 <script>
-	import axios from 'axios';
+	// import axios from '~/plugins/axios'
+	// import f from '~/plugins/F'
 	import Cookie from 'js-cookie'
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		data() {
 			return {
@@ -26,26 +27,31 @@
 				var that = this;
 				console.log(that.name);
 				console.log(that.password);
-				axios.post('https://proj6.thatsmags.com/thmartApi/User/mobileLogin',{
+				that.$axios.post('https://proj6.thatsmags.com/thmartApi/' + interfaceApi.login,{
 					mobile: that.name,
 					password: that.password	
-				})
-			    .then((res) => {
-				    that.token = res;
-				    if (res.data.code==1) {
-				    	Cookie.set('token', res.data.data.token);
-				    	that.$router.push('/');
-				    	// alert(123);
+				}).then(res=> {
+					if (res.data.code==1) {
+				    	that.$store.commit('SET_USER',res.data.data.token);
+				    	
+				    	that.$router.replace({name: 'index'});
 				    }
-	    		})
+				})
+				// axios.post(interfaceApi.login,{
+				// 	mobile: that.name,
+				// 	password: that.password	
+				// })
+			 //    .then((res) => {
+			 //    	// console.log(res);
+				//     // that.token = res;
+				//     f();
+				//     if (res.data.code==1) {
+				//     	that.$store.commit('SET_USER',res.data.data.token);
+				//     	that.$router.replace({name: 'index'});
+				//     }
+	   //  		})
 			}
-		},
-		// asyncData (context) {
-		//     return axios.post('https://proj6.thatsmags.com/thmartApi/Ads/Home/list')
-		//     .then((res) => {
-		// 	    return { token: res.data }
-  //   		})
-		// }
+		}
 	}
 </script>
 <style scoped>

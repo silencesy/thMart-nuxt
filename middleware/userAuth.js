@@ -4,6 +4,8 @@ export default function ({route, req, res, redirect}) {
   let isClient = process.client;
   let isServer = process.server;
   let redirectURL = '/login';
+  // token用户标识
+  // path回调地址
   var token, path
   //在服务端
   if (isServer) {
@@ -21,6 +23,6 @@ export default function ({route, req, res, redirect}) {
   }
   //需要进行权限判断的页面开头
   if (!token) {
-       redirect(redirectURL)
+    redirect(redirectURL)
   }
 }
