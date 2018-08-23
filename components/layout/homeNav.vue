@@ -52,7 +52,7 @@
                     padding-right: 15px
             li:nth-child(2)
                 a
-                    padding-left: 99px
+                    padding-left: 97px
             li:last-child
                 a 
                     padding-right: 0
