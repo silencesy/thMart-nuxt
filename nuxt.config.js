@@ -35,10 +35,9 @@ module.exports = {
     proxy: true
   },
   plugins: [
+    {src:'~/plugins/vue-awesome-swiper', ssr: false},
     {src:'~plugins/element-ui', ssr: true},
-    '~/plugins/axios',
-    // {src:'~plugins/axios', ssr: false},
-    {src:'~plugins/vue-awesome-swiper', ssr: false}
+    '~/plugins/axios'
   ],
   /*
   ** Build configuration
