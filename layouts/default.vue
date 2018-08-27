@@ -1,23 +1,26 @@
 <template>
   <div>
     <top/>
-    <homeHead/>
     <homeNav/>
+    <shopNav/>
     <nuxt/>
+    <userNav/>
     <bottom/>
   </div>
 </template>
 <script>
   import top from '~/components/layout/top.vue'
-  import homeHead from '~/components/layout/homeHead.vue'
   import homeNav from '~/components/layout/homeNav.vue'
+  import shopNav from '~/components/layout/shopNav.vue'
+  import userNav from '~/components/layout/userNav.vue'
   import bottom from '~/components/layout/bottom.vue' 
   export default {
     components: {
       top,
-      bottom,
-      homeHead,
-      homeNav
+      homeNav,
+      shopNav,
+      userNav,
+      bottom
     }
   }
 </script>
