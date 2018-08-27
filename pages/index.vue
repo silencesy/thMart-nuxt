@@ -9,22 +9,7 @@
 					<div class="deal-logo" :style="{backgroundImage:'url(' + homeData.deal.pic + ')'}"></div>
 				</nuxt-link>
 				<div class="deal-swiper">
-					<swiper :options="swiperOption"  ref="baseSwiper">
-						<swiper-slide v-for="(item,index) in homeData.deal.data" :key="index">
-							<!-- <div class="slide-item" :style="{backgroundImage:'url(' + item.pic + ')'}"></div> -->
-							<!-- <img class="slide-item" :src="item.pic" alt=""> -->
-							<div>
-								<div>
-									<img class="slide-item" :src="item.pic" alt="">
-								</div>
-								<div>
-									<p>123</p>
-								</div>
-							</div>
-						</swiper-slide>
-						<div class="swiper-button-prev"></div><!--左箭头-->
-    					<div class="swiper-button-next"></div><!--右箭头-->
-					</swiper>
+					
 				</div>
 			</div>
 		</div>
@@ -35,18 +20,7 @@
 	export default {
 		data() {
 			return {
-				swiperOption: {  
-					pagination: {
-						el: '.swiper-pagination',
-						clickable: true,
-					},
-					slidesPerView : 5,
-  			// 		slidesPerGroup : 5,
-					navigation: {
-					    nextEl: '.swiper-button-next',
-					    prevEl: '.swiper-button-prev',
-					},
-		        } 
+				
 			}
 		},
 		async asyncData ({app}) {
@@ -61,9 +35,7 @@
 			
 		},
 	  	computed: {  
-		    swiper() {  
-		      return this.$refs.baseSwiper.swiper;  
-		    }  
+		    
 	  	},
 		methods: {
 
