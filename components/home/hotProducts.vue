@@ -1,0 +1,150 @@
+<template>
+    <div class="container hotProducts">
+    	<div class="hotTitle"><img src="~static/images/hot.png" alt=""></div>
+    	<div class="products">
+			<nuxt-link to="/">
+				<b class="hot"><i>SALE</i></b>
+				<div><img src="~static/images/flower.jpg" alt=""></div>
+				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+				<span>¥1499</span>
+				<del>¥1599</del>
+			</nuxt-link>
+			<nuxt-link to="/">
+				<b class="hot"><i>SALE</i></b>
+				<div><img src="~static/images/flower.jpg" alt=""></div>
+				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+				<span>¥1499</span>
+				<del>¥1599</del>
+			</nuxt-link>
+			<nuxt-link to="/">
+				<b class="hot"><i>SALE</i></b>
+				<div><img src="~static/images/flower.jpg" alt=""></div>
+				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+				<span>¥1499</span>
+				<del>¥1599</del>
+			</nuxt-link>
+			<nuxt-link to="/">
+				<b class="hot"><i>SALE</i></b>
+				<div><img src="~static/images/flower.jpg" alt=""></div>
+				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+				<span>¥1499</span>
+				<del>¥1599</del>
+			</nuxt-link>
+			<nuxt-link to="/">
+				<b class="hot"><i>SALE</i></b>
+				<div><img src="~static/images/flower.jpg" alt=""></div>
+				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+				<span>¥1499</span>
+				<del>¥1599</del>
+			</nuxt-link>
+			<nuxt-link to="/">
+				<b class="hot"><i>SALE</i></b>
+				<div><img src="~static/images/flower.jpg" alt=""></div>
+				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+				<span>¥1499</span>
+				<del>¥1599</del>
+			</nuxt-link>
+			<nuxt-link to="/">
+				<b class="hot"><i>SALE</i></b>
+				<div><img src="~static/images/flower.jpg" alt=""></div>
+				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+				<span>¥1499</span>
+				<del>¥1599</del>
+			</nuxt-link>
+			<nuxt-link to="/">
+				<b class="hot"><i>SALE</i></b>
+				<div><img src="~static/images/flower.jpg" alt=""></div>
+				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+				<span>¥1499</span>
+				<del>¥1599</del>
+			</nuxt-link>
+			<nuxt-link to="/">
+				<b class="hot"><i>SALE</i></b>
+				<div><img src="~static/images/flower.jpg" alt=""></div>
+				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+				<span>¥1499</span>
+				<del>¥1599</del>
+			</nuxt-link>
+			<nuxt-link to="/">
+				<b class="hot"><i>SALE</i></b>
+				<div><img src="~static/images/flower.jpg" alt=""></div>
+				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+				<span>¥1499</span>
+				<del>¥1599</del>
+			</nuxt-link>
+			<nuxt-link to="/">
+				<b class="hot"><i>SALE</i></b>
+				<div><img src="~static/images/flower.jpg" alt=""></div>
+				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+				<span>¥1499</span>
+				<del>¥1599</del>
+			</nuxt-link>
+			<nuxt-link to="/">
+				<b class="hot"><i>SALE</i></b>
+				<div><img src="~static/images/flower.jpg" alt=""></div>
+				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+				<span>¥1499</span>
+				<del>¥1599</del>
+			</nuxt-link>
+		</div>
+    </div>
+</template>
+
+<style lang='sass' type="text/css" scoped>
+    @import '~/assets/sass/common.sass' 
+    .hotProducts
+    	.hotTitle
+    		text-align: center
+    		margin: 25px 0 15px 0
+    	.products 
+    		overflow: hidden
+    		margin: 0 -6px
+    		a
+    			display: inline-block
+    			position: relative
+    			@include wh(190px, 285px)
+    			border-radius: $border_radius
+    			float: left
+    			border: $border
+    			margin: 6px
+    			div 
+    				@include wh(188px, 188px)
+    				margin-bottom: 9px
+    				img 
+    					@include wh(188px, 188px)
+    			p
+    				overflow: hidden 
+    				text-overflow: ellipsis
+    				display: -webkit-box
+    				-webkit-box-orient: vertical
+    				-webkit-line-clamp: 2
+    				line-height: 24px
+    				min-height: 44px
+    				text-align: center
+    				padding: 0 15px
+    			span 
+    				padding-left: 15px
+    				color: $theme_color
+    				display: inline-block 
+    				margin-top: 10px
+    			del 
+    				position: absolute
+    				right: 15px
+    				bottom: 15px
+    				@include sc(14px, #999)
+    			b
+    				position: absolute
+    				top: 0
+    				left: 0
+    				background-color: $theme_color
+    				@include whch(38px, 18px, center, 18px)
+    				border-radius: $border_radius 
+    				i 
+    					@include sc(12px, #fff)
+    		a:hover
+    			box-shadow: 0 0 10px #dfdfdf
+    			transition: all .2s
+    			-webkit-transition: all .2s
+    			-moz-transition: all .2s
+    			-o-transition: all .2s
+</style>

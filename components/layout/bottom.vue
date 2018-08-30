@@ -38,72 +38,74 @@
 
 <style lang='sass' type="text/css" scoped>
     @import '~/assets/sass/common.sass'
-    .bottomTop 
-        ul
-            overflow: hidden
-            line-height: 45px
-            border-bottom: $border_bottom
-            padding-bottom: 10px
-        li
-            float: left
-            margin-right: 141px;
-        li:first-child
+    .bottom
+        margin-top: 15px
+        .bottomTop 
+            ul
+                overflow: hidden
+                line-height: 45px
+                border-bottom: $border_bottom
+                padding-bottom: 10px
+            li
+                float: left
+                margin-right: 141px;
+            li:first-child
+                img 
+                    @include wh(60px, 45px)
+            li:last-child
+                margin-right: 0       
             img 
-                @include wh(60px, 45px)
-        li:last-child
-            margin-right: 0       
-        img 
-            vertical-align: middle
-            margin-right: 5px
+                vertical-align: middle
+                margin-right: 5px
 
-    .bottomFoot
-        margin-top: 20px
-        padding-bottom: 20px
-        border-bottom: $border_bottom
-        overflow: hidden
-        > div
-            float: left 
-            width: 20%
-        .left, .right
-            @include wc(160px, center)
-            img
-                @include wh(160px, 160px)
-            span
-                display: block   
-                font-size: 14px
-        div:nth-child(1),div:nth-child(3)
-            margin-right: 35px
-        .center
-            width: 550px
-            margin: 0 50px
-            .iconfont
-                color: $theme_color    
-                padding-right: 5px
-            .icon-hezuo-copy
-                color: $describe_color
-                font-size: 18px
-            p:first-child
-                font-size: 18px
-                margin-top: 6px
-            p:not(:first-child)
-                padding-left: 20px
-                line-height: 25px
-                color: $describe_color 
-            p:nth-child(2)
-                a
-                    color: #20ABF8
-            p:last-child
-                margin-top: 15px
-                text-align: center
-                a
-                    @include whch(260px, 37px, center, 34px)
+        .bottomFoot
+            margin-top: 20px
+            padding-bottom: 20px
+            border-bottom: $border_bottom
+            overflow: hidden
+            > div
+                float: left 
+                width: 20%
+            .left, .right
+                @include wc(160px, center)
+                img
+                    @include wh(160px, 160px)
+                span
+                    display: block   
+                    font-size: 14px
+            div:nth-child(1),div:nth-child(3)
+                margin-right: 35px
+            .center
+                width: 550px
+                margin: 0 50px
+                .iconfont
+                    color: $theme_color    
+                    padding-right: 5px
+                .icon-hezuo-copy
                     color: $describe_color
-                    border: $border
-                    border-radius: $border_radius
-                    display: inline-block
-    
-    .copy
-        text-align: center
-        margin: 10px 0
-        @include sc(14px, $tips_color)
+                    font-size: 18px
+                p:first-child
+                    font-size: 18px
+                    margin-top: 6px
+                p:not(:first-child)
+                    padding-left: 20px
+                    line-height: 25px
+                    color: $describe_color 
+                p:nth-child(2)
+                    a
+                        color: #20ABF8
+                p:last-child
+                    margin-top: 15px
+                    text-align: center
+                    a
+                        @include whch(260px, 37px, center, 34px)
+                        color: $describe_color
+                        border: $border
+                        border-radius: $border_radius
+                        display: inline-block
+        
+        .copy
+            text-align: center
+            margin: 10px 0
+            @include sc(14px, $tips_color)
 </style>

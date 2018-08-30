@@ -2,24 +2,27 @@
   <div>
     <top/>
     <homeNav/>
-    <shopNav/>
+    <!-- <shopNav/> -->
     <nuxt/>
-    <userNav/>
+    
+    <!-- <userNav/> -->
     <bottom/>
   </div>
 </template>
 <script>
   import top from '~/components/layout/top.vue'
   import homeNav from '~/components/layout/homeNav.vue'
-  import shopNav from '~/components/layout/shopNav.vue'
-  import userNav from '~/components/layout/userNav.vue'
+  // import shopNav from '~/components/layout/shopNav.vue'
+  // import userNav from '~/components/layout/userNav.vue'
+  // import floor from '~/components/home/floor.vue'
   import bottom from '~/components/layout/bottom.vue' 
   export default {
     components: {
       top,
       homeNav,
-      shopNav,
-      userNav,
+      // shopNav,
+      // userNav,
+      // floor,
       bottom
     }
   }

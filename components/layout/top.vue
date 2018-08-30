@@ -36,11 +36,14 @@
             .login
                 display: inline-block
                 a
-                    @include sc(14px, $describe_color)
+                    @include sc(14px, $describe_color)     
                 a:after
                     @include line
+                    padding-left: 15px
                 a:last-child:after 
                     content: ''
+                a:last-child
+                    padding-left: 15px
         .right  
             float: right
             a
