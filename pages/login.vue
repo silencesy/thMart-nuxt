@@ -1,59 +1,46 @@
-<template>
-	<div>
-		<div>
-			<input type="text" v-model="name">
+ <template>
+	<div class="login">
+		<div class="container">
+			<div class="loginBox">
+				 <el-tabs v-model="activeName" @tab-click="handleClick">
+				    <el-tab-pane label="Login via password" name="first">
+						<h1>1111</h1>
+				    </el-tab-pane>
+				    <el-tab-pane label="Login via SMS" name="second">Login via SMS</el-tab-pane>
+				</el-tabs>
+			</div>
 		</div>
-		<div>
-			<input type="password" v-model="password">
-		</div>
-		<button @click="submitform">提交</button>
 	</div>
 </template>
+<script src="//unpkg.com/vue/dist/vue.js"></script>
+<script src="//unpkg.com/element-ui@2.4.6/lib/index.js"></script>
 <script>
-	// import axios from '~/plugins/axios'
-	// import f from '~/plugins/F'
-	import Cookie from 'js-cookie'
-	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
-		data() {
-			return {
-				name: "",
-				password: "",
-				token: ""
-			}
-		},
-		methods: {
-			submitform() {
-				var that = this;
-				console.log(that.name);
-				console.log(that.password);
-				that.$axios.post('https://proj6.thatsmags.com/thmartApi/' + interfaceApi.login,{
-					mobile: that.name,
-					password: that.password	
-				}).then(res=> {
-					if (res.data.code==1) {
-				    	that.$store.commit('SET_USER',res.data.data.token);
-				    	
-				    	that.$router.replace({name: 'index'});
-				    }
-				})
-				// axios.post(interfaceApi.login,{
-				// 	mobile: that.name,
-				// 	password: that.password	
-				// })
-			 //    .then((res) => {
-			 //    	// console.log(res);
-				//     // that.token = res;
-				//     f();
-				//     if (res.data.code==1) {
-				//     	that.$store.commit('SET_USER',res.data.data.token);
-				//     	that.$router.replace({name: 'index'});
-				//     }
-	   //  		})
-			}
-		}
+	 	layout: 'loginHome',
+	    data() {
+	      return {
+	        activeName: 'first'
+	      };
+	    },
+	    methods: {
+	      handleClick(tab, event) {
+	        console.log(tab, event);
+	      }
+	    }
 	}
 </script>
-<style scoped>
-	
+<style lang='sass' scoped>
+	@import '~/assets/sass/common.sass'
+	.login
+		@include wh(100%, 500px)
+		background: url("~static/images/lu.jpg") no-repeat
+		background-size: cover 
+		overflow: hidden
+		.container
+			overflow: hidden
+			.loginBox
+				float: right
+				margin-top: 100px
+				@include wh(350px, 300px)
+				background-color: #fff
 </style>
