@@ -2,94 +2,28 @@
     <div class="container hotProducts">
     	<div class="hotTitle"><img src="~static/images/hot.png" alt=""></div>
     	<div class="products">
-			<nuxt-link to="/">
+			<nuxt-link to="/" v-for="(item,index) in hotData" :key="index">
 				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-				<span>¥1499</span>
-				<del>¥1599</del>
-			</nuxt-link>
-			<nuxt-link to="/">
-				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-				<span>¥1499</span>
-				<del>¥1599</del>
-			</nuxt-link>
-			<nuxt-link to="/">
-				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-				<span>¥1499</span>
-				<del>¥1599</del>
-			</nuxt-link>
-			<nuxt-link to="/">
-				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-				<span>¥1499</span>
-				<del>¥1599</del>
-			</nuxt-link>
-			<nuxt-link to="/">
-				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-				<span>¥1499</span>
-				<del>¥1599</del>
-			</nuxt-link>
-			<nuxt-link to="/">
-				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-				<span>¥1499</span>
-				<del>¥1599</del>
-			</nuxt-link>
-			<nuxt-link to="/">
-				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-				<span>¥1499</span>
-				<del>¥1599</del>
-			</nuxt-link>
-			<nuxt-link to="/">
-				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-				<span>¥1499</span>
-				<del>¥1599</del>
-			</nuxt-link>
-			<nuxt-link to="/">
-				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-				<span>¥1499</span>
-				<del>¥1599</del>
-			</nuxt-link>
-			<nuxt-link to="/">
-				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-				<span>¥1499</span>
-				<del>¥1599</del>
-			</nuxt-link>
-			<nuxt-link to="/">
-				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-				<span>¥1499</span>
-				<del>¥1599</del>
-			</nuxt-link>
-			<nuxt-link to="/">
-				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-				<span>¥1499</span>
-				<del>¥1599</del>
+				<div><img :src="item.pic" alt=""></div>
+				<p>{{item.title}}</p>
+				<span>¥{{item.price}}</span>
+				<del v-if="item.originalPrice">¥{{item.originalPrice}}</del>
 			</nuxt-link>
 		</div>
     </div>
 </template>
-
+<script>
+	export default {
+		props: {
+			hotData: {
+				type: Array,
+				default: function() {
+					return []
+				}
+			}
+		}
+	}
+</script>
 <style lang='sass' type="text/css" scoped>
     @import '~/assets/sass/common.sass' 
     .hotProducts

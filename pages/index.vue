@@ -1,5 +1,5 @@
 <template>
-	<div class="home">
+	<div class="home" ref="mescroll">
 		<!-- 轮播图 -->
 		<SwiperComponent :swiperData="homeData.figure"/>
 		<!-- today's deal -->
@@ -14,26 +14,17 @@
 			</div>
 		</div>
 		<div class="homeSection container">
+			<!-- 商户组 -->
 			<div class="hotShops">
 				<div class="title">
 					<img src="~static/images/shops.png" alt="">
 					<nuxt-link to="/">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
 				</div>
 				<div class="pic">
-					<nuxt-link to="/"><img src="~static/images/clorox.jpg" alt=""></nuxt-link>
-					<nuxt-link to="/"><img src="~static/images/clorox.jpg" alt=""></nuxt-link>
-					<nuxt-link to="/"><img src="~static/images/clorox.jpg" alt=""></nuxt-link>
-					<nuxt-link to="/"><img src="~static/images/clorox.jpg" alt=""></nuxt-link>
-					<nuxt-link to="/"><img src="~static/images/clorox.jpg" alt=""></nuxt-link>
-					<nuxt-link to="/"><img src="~static/images/clorox.jpg" alt=""></nuxt-link>
-					<nuxt-link to="/"><img src="~static/images/clorox.jpg" alt=""></nuxt-link>
-					<nuxt-link to="/"><img src="~static/images/clorox.jpg" alt=""></nuxt-link>
-					<nuxt-link to="/"><img src="~static/images/clorox.jpg" alt=""></nuxt-link>
-					<nuxt-link to="/"><img src="~static/images/clorox.jpg" alt=""></nuxt-link>
-					<nuxt-link to="/"><img src="~static/images/clorox.jpg" alt=""></nuxt-link>
-					<nuxt-link to="/"><img src="~static/images/clorox.jpg" alt=""></nuxt-link>
+					<nuxt-link v-for="(item,index) in homeData.shop.data" :key="index" to="/"><img :src="item.pic" :alt="item.title"></nuxt-link>
 				</div>
 			</div>
+			<!-- 团购组 -->
 			<div class="groupBuy">
 				<div class="title">
 					<img src="~static/images/groupBuy.png" alt="">
@@ -96,62 +87,31 @@
 				</div>
 			</div>
 		</div>
-		<floor/>
+		<floor :floorData="homeData.ticketing"/>
 		<div class="homeAd container"><img src="~static/images/ad.jpg" alt=""></div>
-		<floor/> 
-		<floor/>
-		<floor/>
+		<floor :floorData="homeData.flowers"/>
+		<floor :floorData="homeData.thDispatcher"/>
+		<floor :floorData="homeData.homeWare"/>
+		<floor :floorData="homeData.babyProduct"/>
+		<floor :floorData="homeData.toys"/>
+		<floor :floorData="homeData.coupon"/>
+		<floor :floorData="homeData.electronic"/>
 		<div class="editor container">
 			<div class="title">
 				<img src="~static/images/editor.png" alt="">
 				<nuxt-link to="/">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
 			</div>
 			<div class="articlePer">
-				<nuxt-link to="/">
-					<p><img src="~static/images/lays.jpg" alt=""></p> 
+				<nuxt-link to="/" v-for="(item,index) in homeData.article.data" :key="index" v-if="index<6">
+					<p><img :src="item.pic" alt=""></p> 
 					<div class="per">
-						<p>Tackle Your Next Toilet Emergency with These Handy Tissue Packs Tissue Packs</p>
-						<span>2018-08-29</span>
-					</div>
-				</nuxt-link>
-				<nuxt-link to="/">
-					<p><img src="~static/images/lays.jpg" alt=""></p> 
-					<div class="per">
-						<p>Tackle Your Next Toilet Emergency with These Handy Tissue Packs Tissue Packs</p>
-						<span>2018-08-29</span>
-					</div>
-				</nuxt-link>
-				<nuxt-link to="/">
-					<p><img src="~static/images/lays.jpg" alt=""></p> 
-					<div class="per">
-						<p>Tackle Your Next Toilet Emergency with These Handy Tissue Packs Tissue Packs</p>
-						<span>2018-08-29</span>
-					</div>
-				</nuxt-link>
-				<nuxt-link to="/">
-					<p><img src="~static/images/lays.jpg" alt=""></p> 
-					<div class="per">
-						<p>Tackle Your Next Toilet Emergency with These Handy Tissue Packs Tissue Packs</p>
-						<span>2018-08-29</span>
-					</div>
-				</nuxt-link>
-				<nuxt-link to="/">
-					<p><img src="~static/images/lays.jpg" alt=""></p> 
-					<div class="per">
-						<p>Tackle Your Next Toilet Emergency with These Handy Tissue Packs Tissue Packs</p>
-						<span>2018-08-29</span>
-					</div>
-				</nuxt-link>
-				<nuxt-link to="/">
-					<p><img src="~static/images/lays.jpg" alt=""></p> 
-					<div class="per">
-						<p>Tackle Your Next Toilet Emergency with These Handy Tissue Packs Tissue Packs</p>
-						<span>2018-08-29</span>
+						<p>{{item.title}}</p>
+						<span>{{item.createTime}}</span>
 					</div>
 				</nuxt-link>
 			</div>
 		</div>
-		<hotProducts/>
+		<hotProducts :hotData='hotData'/>
 	</div>
 </template>
 <script>
@@ -165,12 +125,22 @@
 		},
 		data() {
 			return {
-				
+				// 上拉加载数据
+				hotData: [],
+				// 是否结束上拉
+				end: false,
+				hotGoodsPara: {
+					id: 12,
+					pageSize: 18,
+					page: 0,
+					sort: 'order_asc'
+				},
+				totalPage: -1
 			}
 		},
 		async asyncData ({app}) {
 		 	const homeData = await app.$axios.post('https://proj6.thatsmags.com/thmartApi/Ads/Home/list')
-  			return { homeData: homeData.data.data }
+  			return { homeData: homeData.data.data}
 		},
 		components: {
 			SwiperComponent,
@@ -178,14 +148,87 @@
 			hotProducts
 		},
 		mounted() {
-
 			
+		   this.pullRefresh();
 		},
 	  	computed: {  
 		    
 	  	},
 		methods: {
+			//文档的总高度
+            getScrollTop: function () {
+                var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
+                if (document.body) {
+                    bodyScrollTop = document.body.scrollTop;
+                }
+                if (document.documentElement) {
+                    documentScrollTop = document.documentElement.scrollTop;
+                }
+                scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
+                return scrollTop;
+            },
+            //浏览器视口的高度
+            getScrollHeight: function () {
+                var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
+                if (document.body) {
+                    bodyScrollHeight = document.body.scrollHeight;
+                }
+                if (document.documentElement) {
+                    documentScrollHeight = document.documentElement.scrollHeight;
+                }
+                scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
+                return scrollHeight;
+            },
+            //浏览器视口的高度
+            getWindowHeight: function () {
+                var windowHeight = 0;
+                if (document.compatMode == "CSS1Compat") {
+                    windowHeight = document.documentElement.clientHeight;
+                } else {
+                    windowHeight = document.body.clientHeight;
+                }
+                return windowHeight;
+            },
+            // 下拉加载ajax
+            pullRefresh: function () {
+                var that = this;
+                window.onscroll = function () {
+                    that.scrollChange()
+                }
+            },
+            scrollChange: function () {
+                var that = this;
+                that.scollY = that.getScrollTop() + that.getWindowHeight() - that.getScrollHeight();
+                // 把下拉刷新置为false，防止多次请求
+                if (that.end) {
+                	return false;
+                }
+                if (that.scollY >= -1200) {
+                    if (!that.pullRefreshss) {
+                        return false;
+                    }
+                    that.end = true;
+                    // 模拟ajax请求
+                    that.$axios.post('https://proj6.thatsmags.com/thmartApi/Ads/list',that.hotGoodsPara).then(res=> {
+						if (res.data.data.totalPage == 0 || res.data.data.totalPage == that.totalPage) {
+							that.end = true;
+						} else {
+							that.end = false;
+						}
+						that.totalPage = res.data.data.totalPage;
+						that.hotData = that.hotData.concat(res.data.data.data);
 
+					})
+                    that.pullRefreshss = false;
+                    // 加页码数
+                    that.hotGoodsPara.page++;
+                }
+                else {
+                    // 其他时候把下拉刷新置为true
+                    that.pullRefreshss = true;
+                }
+            }
+			
 		}
 	}
 </script>

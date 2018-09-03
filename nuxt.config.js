@@ -37,7 +37,7 @@ module.exports = {
   },
   plugins: [
     {src:'~/plugins/vue-awesome-swiper', ssr: false},
-    {src:'~plugins/element-ui', ssr: true},
+    {src:'~plugins/element-ui', ssr: true},                                                                                                   
     '~/plugins/axios'
   ],
   /*

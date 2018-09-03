@@ -3,84 +3,63 @@
         <div class="top">
             <div class="topLeft"> 
                 <nuxt-link to="/"> 
-                    <img src="~static/images/floor.png" alt="">
+                    <img :src="floorData.pic" alt="">
                 </nuxt-link>
             </div>
             <div class="topList">
                 <div class="listTop">
-                    <div>
+                    <div v-for="(item,index) in floorTopFourPic" :key="index">
+                        <nuxt-link to="/">
+                            <p>{{item.title}}</p>
+                            <span>￥{{item.price}}</span>
+                            <img :src="item.pic" alt="">
+                        </nuxt-link> 
+                    </div>
+                    <!-- <div>
                         <nuxt-link to="/">
                             <p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
                             <span>¥1499</span>
                             <img src="~static/images/flower.jpg" alt="">
                         </nuxt-link> 
-                    </div>
-                    <div>
-                        <nuxt-link to="/">
-                            <p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-                            <span>¥1499</span>
-                            <img src="~static/images/flower.jpg" alt="">
-                        </nuxt-link> 
-                    </div>
-                    <div>
-                        <nuxt-link to="/">
-                            <p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-                            <span>¥1499</span>
-                            <img src="~static/images/flower.jpg" alt="">
-                        </nuxt-link> 
-                    </div>
-                    <div>
-                        <nuxt-link to="/">
-                            <p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-                            <span>¥1499</span>
-                            <img src="~static/images/flower.jpg" alt="">
-                        </nuxt-link> 
-                    </div>
+                    </div> -->
+                   
                 </div> 
                 <div class="listBottom">
-                    <nuxt-link to="/">
+                    <nuxt-link to="/" v-for="(item,index) in floorCenterFourPic" :key="index">
                         <p class="smallPic">
-                            <img src="~static/images/flower.jpg" alt="">
+                            <img :src="item.pic" alt="">
                             <span><i>SALE</i></span>
                         </p>
                         <div>
-                            <p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-                            <span>¥1499</span>
-                            <del>¥1599</del>
+                            <p>{{item.title}}</p>
+                            <span>¥ {{item.price}}</span>
+                            <del v-if="item.originalPrice">¥ {{item.originalPrice}}</del>
                         </div>
                     </nuxt-link>
-                    <nuxt-link to="/">
+                    <!-- <nuxt-link to="/">
                         <p class="smallPic"><img src="~static/images/flower.jpg" alt=""></p>
                         <div>
                             <p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
                             <span>¥1499</span>
                             <del>¥1599</del>
                         </div>
-                    </nuxt-link>
-                    <nuxt-link to="/">
-                        <p class="smallPic">
-                            <img src="~static/images/flower.jpg" alt="">
-                            <span><i>SALE</i></span>
-                        </p>
-                        <div>
-                            <p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-                            <span>¥1499</span>
-                            <del>¥1599</del>
-                        </div>
-                    </nuxt-link>
-                    <nuxt-link to="/">
-                        <p class="smallPic"><img src="~static/images/flower.jpg" alt=""></p>
-                        <div>
-                            <p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-                            <span>¥1499</span>
-                            <del>¥1599</del>
-                        </div>
-                    </nuxt-link>
+                    </nuxt-link> -->
                 </div>
             </div>
         </div>
         <div class="bottom">
-            <nuxt-link to="/">
+            <nuxt-link to="/" v-for="(item,index) in floorBootomFourPic" :key="index">
+                <p class="smallPic">
+                    <img :src="item.pic" alt="">
+                    <span><i>SALE</i></span>
+                </p>
+                <div>
+                    <p>{{item.title}}</p>
+                    <span>¥ {{item.price}}</span>
+                    <del v-if="item.originalPrice">¥ {{item.originalPrice}}</del>
+                </div>
+            </nuxt-link>
+           <!--  <nuxt-link to="/">
                 <p class="smallPic">
                     <img src="~static/images/flower.jpg" alt="">
                     <span><i>SALE</i></span>
@@ -90,55 +69,41 @@
                     <span>¥1499</span>
                     <del>¥1599</del>
                 </div>
-            </nuxt-link>
-            <nuxt-link to="/">
-                <p class="smallPic">
-                    <img src="~static/images/flower.jpg" alt="">
-                    <span><i>SALE</i></span>
-                </p>
-                <div>
-                    <p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-                    <span>¥1499</span>
-                    <del>¥1599</del>
-                </div>
-            </nuxt-link>
-            <nuxt-link to="/">
-                <p class="smallPic">
-                    <img src="~static/images/flower.jpg" alt="">
-                    <span><i>SALE</i></span>
-                </p>
-                <div>
-                    <p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-                    <span>¥1499</span>
-                    <del>¥1599</del>
-                </div>
-            </nuxt-link>
-            <nuxt-link to="/">
-                <p class="smallPic">
-                    <img src="~static/images/flower.jpg" alt="">
-                    <span><i>SALE</i></span>
-                </p>
-                <div>
-                    <p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-                    <span>¥1499</span>
-                    <del>¥1599</del>
-                </div>
-            </nuxt-link>
-            <nuxt-link to="/">
-                <p class="smallPic">
-                    <img src="~static/images/flower.jpg" alt="">
-                    <span><i>SALE</i></span>
-                </p>
-                <div>
-                    <p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-                    <span>¥1499</span>
-                    <del>¥1599</del>
-                </div>
-            </nuxt-link>
+            </nuxt-link> -->
         </div>
     </div>
 </template>
+<script>
+    export default {
+        props: {
+            floorData: {
+                type: Object,
+                default: function() {
+                    return {
+                        data:[],
+                        pic: ""
+                    }
+                }
+            }
+        },
+        data() {
+            return {
 
+            }
+        },
+        computed: {
+            floorTopFourPic: function() {
+                return this.floorData.data.slice(0,4);
+            },
+            floorCenterFourPic: function() {
+                return this.floorData.data.slice(5,9);
+            },
+            floorBootomFourPic: function() {
+                return this.floorData.data.slice(10,14);
+            }
+        }
+    }
+</script>
 <style lang='sass' type="text/css" scoped>
     @import '~/assets/sass/common.sass'
     .floor 
