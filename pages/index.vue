@@ -296,7 +296,7 @@
 						display: -webkit-box 
 						-webkit-box-orient: vertical
 						-webkit-line-clamp: 2 
-						line-height: 24px 
+						line-height: 22px 
 						min-height: 44px
 						
 					span 
@@ -397,7 +397,7 @@
 						display: -webkit-box 
 						-webkit-box-orient: vertical 
 						-webkit-line-clamp: 2
-						line-height: 24px 
+						line-height: 22px 
 						min-height: 44px 
 						margin-top: 4px
 						margin-bottom: 5px
