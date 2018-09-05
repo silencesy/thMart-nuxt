@@ -24,11 +24,16 @@
 	</div>
 </template>
 <script>
-  export default {
-    components: {
+	export default {
+		data() {
+			return {
+				
+			}
+		},
+	    components: {
 
-    }
-  }
+	    }
+	}
 </script>
 <style lang='sass' scoped>
 	@import '~/assets/sass/common.sass'

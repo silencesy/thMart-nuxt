@@ -4,9 +4,27 @@
             <div class="top">
                 <div class="left">
                     <span>That’s making your life easier !</span> 
-                    <div class="login">
+                    <!-- <div class="login">
                         <nuxt-link to="">Login</nuxt-link>
                         <nuxt-link to="">Sign up</nuxt-link>
+                    </div> -->
+                    <div class="logged">
+                        <el-dropdown>
+                            <nuxt-link to="/" class="el-dropdown-link">
+                                Username<i class="el-icon-arrow-down el-icon--right"></i>
+                            </nuxt-link>
+                            <el-dropdown-menu slot="dropdown">
+                                <div class="dropdownBox">
+                                    <nuxt-link to="/" class="userPic">
+                                        <img src="~/static/images/lays.jpg" alt="">
+                                    </nuxt-link>
+                                    <nuxt-link to="/" class="info">
+                                        <p>Username</p>
+                                        <p>Log out</p>
+                                    </nuxt-link>
+                                </div>
+                            </el-dropdown-menu>
+                        </el-dropdown>
                     </div>
                 </div>
                 <div class="right">
@@ -16,7 +34,7 @@
                     </nuxt-link>
                     <nuxt-link to="">My Order</nuxt-link>
                     <nuxt-link to="">Do Business With Us</nuxt-link>
-                </div> 
+                </div>
             </div> 
         </div>
         <div class="topLine"></div>
@@ -44,6 +62,14 @@
                     content: ''
                 a:last-child
                     padding-left: 15px
+            .logged 
+                display: inline-block
+                .el-dropdown 
+                    cursor: pointer
+                .el-icon--right
+                    padding-left: 5px
+                .popper__arrow
+                    display: none                       
         .right  
             float: right
             a
@@ -76,4 +102,23 @@
                     @include whch(16px, 16px, center, 16px)
     .topLine
         border-bottom: $border_bottom
+    .dropdownBox
+        overflow: hidden
+        padding: 5px
+        a 
+            float: left
+            display: inline-block
+        .userPic
+            margin-right: 10px
+            img 
+                @include wh(60px, 60px)
+                border-radius: 50%
+        .info
+            p:first-child
+                margin-top: 10px
+            p:last-child
+                @include sc(14px, #999)
+                margin-top: 10px
+
+
 </style>
