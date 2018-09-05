@@ -3,39 +3,79 @@
 		<signStep flag="2"/>
 		<div class="sign">
 			<div class="password">
-				<input type="text" placeholder="Enter password" name="" value="">
+				<input v-model="password" type="password" placeholder="Enter password" name="" value="">
 			</div>
 			<div class="rePassword">
-				<input type="text" placeholder="Please re-enter your password" value="" name="">
+				<input v-model="repeatPassword" @keyup.enter="submit" type="password" placeholder="Please re-enter your password" value="" name="">
 			</div>
-			<div class="btn">
+			<div class="btn" @click="submit">
 				<button>Submit</button>
 			</div>
-			<p>Have an account already? <nuxt-link to="">Log in</nuxt-link></p>
+			<p>Have an account already? <nuxt-link to="/login">Log in</nuxt-link></p>
 		</div>
 	</div>
 </template>
 <script>
 	import signStep from '~/components/layout/signStep.vue'
+	// 统一验证
+	import v from "~/assets/js/validate"
+	// 统一接口
+	import interfaceApi from '~/plugins/interfaceApi'
+	// 提示语
+	import prompt from '~/assets/js/prompt'
 	export default {
 		layout: 'signHome',
 		data() {
 			return {
-				
+				password: '',
+				repeatPassword: ''
 			}
 		},
 		components: {
 			signStep
 		},
 		mounted() {
-
-			
+			this.verificationPhone();
 		},
 	  	computed: {  
 		    
 	  	},
 		methods: {
-
+			submit() {
+				var that = this;
+				if (!v.password(that.password)) {
+					this.$message({
+						message: prompt.password,
+						type: 'warning'
+			        });
+					return false;
+				} else if (that.password != that.repeatPassword) {
+					this.$message({
+						message: prompt.twoPasswords,
+						type: 'warning'
+			        });
+					return false;
+				}
+				// 获取验证码
+			    that.$axios.post(interfaceApi.mobileRegister,{
+			    	mobile: that.$route.query.phone,
+			    	code: that.$route.query.code,
+			    	password: that.password,
+			    	rePassword: that.repeatPassword
+			    })
+				.then(function (response) {
+					if (response.data.code == 1) {
+						that.$router.push({name: 'signSuccess'});
+					}
+				});
+			},
+			// 验证是否验证手机
+			verificationPhone() {
+				var phone = this.$route.query.phone || null;
+				if (!phone) {
+					this.$router.push({name: 'signPhone'});
+				}
+			}
 		}
 	}
 </script>
@@ -61,6 +101,7 @@
 			background-color: $theme_color
 			margin-top: 25px
 			border-radius: $border_radius
+			cursor: pointer
 			button
 				color: #fff
 				background: no-repeat

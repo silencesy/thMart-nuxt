@@ -5,8 +5,8 @@
                 <div class="left">
                     <span>That’s making your life easier !</span> 
                     <div class="login">
-                        <nuxt-link to="">Login</nuxt-link>
-                        <nuxt-link to="">Sign up</nuxt-link>
+                        <a @click="login">Login</a>
+                        <a>Sign up</a>
                     </div>
                 </div>
                 <div class="right">
@@ -22,7 +22,16 @@
         <div class="topLine"></div>
     </div>
 </template>
-
+<script>
+    export default {
+        methods: {
+            login() {
+                this.user.SetComebackAddress();
+                this.$router.push({name: 'login'});
+            }
+        }
+    }
+</script>
 <style lang='sass' type="text/css" scoped>
     @import '~/assets/sass/common.sass'
     .top
@@ -35,7 +44,8 @@
                 margin-right: 50px
             .login
                 display: inline-block
-                a
+                a   
+                    cursor: pointer
                     @include sc(14px, $describe_color)     
                 a:after
                     @include line

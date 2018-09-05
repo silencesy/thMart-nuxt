@@ -1,65 +1,91 @@
 <template>
 	<div class="">
-		<passwordStep flag="1" />
-		<div class="pW">
-			<div class="phone">
-				<input type="text" placeholder="Enter phone number" name="" value="">
-				<button>Send Code</button>
-			</div>
+		<passwordStep />
+		<div class="sign">
+			<sendCode @childChangeNumber ="changePhoneNumber" />
 			<div class="code">
-				<input type="text" placeholder="Enter verification code" value="" name="">
+				<input v-model="code" type="text" placeholder="Enter verification code" value="" name="">
 			</div>
-			<div class="btn">
+			<div class="btn" @click="NextStep">
 				<button>Next Step</button>
 			</div>
+			<p>Have an account already? <nuxt-link to="/login">Log in</nuxt-link></p>
 		</div>
 	</div>
 </template>
 <script>
 	import passwordStep from '~/components/layout/passwordStep.vue'
+	import sendCode from '~/components/base/sendCode.vue'
+	// 统一验证
+	import v from "~/assets/js/validate"
+	// 统一接口
+	import interfaceApi from '~/plugins/interfaceApi'
+	// 提示语
+	import prompt from '~/assets/js/prompt'
 	export default {
-		layout: 'passwordHome',
+		layout: 'signHome',
 		data() {
 			return {
-				
+				phoneNumber: '',
+				code: ''
 			}
 		},
 		components: {
-			passwordStep
+			passwordStep,
+			sendCode
 		},
 		mounted() {
-
+			
 			
 		},
 	  	computed: {  
 		    
 	  	},
 		methods: {
-
+			// 改变电话号码
+			changePhoneNumber(number) {
+				this.phoneNumber=number
+			},
+			// 下一步
+			NextStep() {
+				var that = this;
+				if (!v.tel(that.phoneNumber)) {
+					this.$message({
+						message: prompt.number,
+						type: 'warning'
+			        });
+					return false;
+				} else if (!v.required(that.code)) {
+					this.$message({
+						message: prompt.code,
+						type: 'warning'
+			        });
+					return false;
+				}
+				// 获取验证码
+			    that.$axios.post(interfaceApi.checkMobileAndCode,{
+			    	mobile: that.phoneNumber,
+			    	code: that.code
+			    })
+				.then(function (response) {
+					console.log(response)
+					if (response.data.code == 1) {
+						that.$router.push({name: 'passwordRepeat',query: {id: response.data.data.id}})
+					}
+				});
+			}
 		}
 	}
 </script>
 <style lang='sass' scoped>
 	@import '~/assets/sass/common.sass'
-	.pW 
+	.sign 
 		width: 413px
 		margin: 0 auto
 		padding-left: 5px
 		.phone
 			overflow: hidden
-			input
-				float: left
-				@include wh(298px, 36px)
-				padding-left: 10px
-				border-radius: $border_radius
-			button
-				float: left
-				background-color: $theme_color
-				@include whch(90px, 36px, center, 36px)
-				font-size: 14px
-				color: #fff
-				border-radius: $border_radius
-				margin-left: 15px
+			
 		.code
 			input
 				@include wh(400px, 36px)
@@ -70,10 +96,17 @@
 			@include whch(400px, 36px, center, 36px)
 			background-color: $theme_color
 			margin-top: 25px
-			margin-bottom: 200px
 			border-radius: $border_radius
+			cursor: pointer
 			button
 				color: #fff
 				background: no-repeat
 				font-size: 16px
+		p 
+			@include sc(14px, $describe_color)
+			text-align: center
+			margin-top: 20px
+			margin-bottom: 200px
+			a 
+				@include sc(14px, $theme_color)
 </style>

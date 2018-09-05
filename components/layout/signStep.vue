@@ -1,5 +1,5 @@
 <template>
-    <div class="step container">
+    <div class="step">
         <ul>
         	<li>
 				<i :class="{green: flag==1 || flag==2 || flag==3}">1</i>

@@ -1,4 +1,4 @@
-import utils from '~/utils/utils'
+import utils from '~/assets/js/utils'
  
 export default function ({route, req, res, redirect}) {
   let isClient = process.client;

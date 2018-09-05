@@ -32,12 +32,21 @@ module.exports = {
     '@nuxtjs/axios',
   ],
   axios: {
-    prefix: '',
+    // 是否使用https协议
+    https: true,
+    // 设置请求基础路径
+    prefix: 'http://proj6.thatsmags.com/thmartApi/',
     proxy: true
   },
+
   plugins: [
     {src:'~/plugins/vue-awesome-swiper', ssr: false},
-    {src:'~plugins/element-ui', ssr: true},                                                                                                   
+    {src:'~plugins/element-ui', ssr: true},
+    /**
+     * [公共函数]
+     * @type {String，Function}
+     */
+    {src:'~plugins/common', ssr: false},                                                                                       
     '~/plugins/axios'
   ],
   /*

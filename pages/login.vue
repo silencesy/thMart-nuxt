@@ -4,13 +4,13 @@
 			<div class="loginBox">
 				 <el-tabs v-model="activeName" @tab-click="handleClick">
 				    <el-tab-pane label="Login via password" name="first">
-						<el-input placeholder="Phone">
+						<el-input v-model="phoneNumber" placeholder="Phone">
 							<i slot="prefix" class="iconfont icon-zhanghao"></i>
 						</el-input>
-						<el-input placeholder="Password">
+						<el-input v-model="password" type="password" placeholder="Password">
 							<i slot="prefix" class="iconfont icon-mima1"></i>
 						</el-input>
-						<button class="btn">Login</button>
+						<button class="btn" @click="loginPassword">Login</button>
 						<div class="foot">
 							<nuxt-link to="/signPhone">Sign Up</nuxt-link>
 							<nuxt-link to="/passwordPhone">Forgot Password</nuxt-link>	
@@ -20,14 +20,19 @@
 						</div>
 				    </el-tab-pane>
 				    <el-tab-pane label="Login via SMS" name="second">
-						<el-input placeholder="Enter phone number">
+						<el-input placeholder="Enter phone number" v-model='phoneNumber'>
 							<i slot="prefix" class="iconfont icon-zhanghao"></i>
 						</el-input>
-						<button class="codeBtn">Send Code</button>
-						<el-input placeholder="Enter verification code">
+						<button class="codeBtn" :class="{bg: sendMsgDisabled}" @click="sendCode">
+							<span v-if="!sendMsgDisabled">Send Code</span>
+							<span v-if="sendMsgDisabled">{{time}}</span>
+						</button>
+						<el-input placeholder="Enter verification code" v-model="code">
 							<i slot="prefix" class="iconfont icon-mima1"></i>
 						</el-input>
-						<button class="btn">Login</button>
+						<button class="btn" @click="loginSms">
+							Login
+						</button>
 						<div class="foot">
 							<nuxt-link to="/signPhone">Sign Up</nuxt-link>
 							<nuxt-link to="/passwordPhone">Forgot Password</nuxt-link>	
@@ -41,20 +46,122 @@
 		</div>
 	</div>
 </template>
-<script src="//unpkg.com/vue/dist/vue.js"></script>
-<script src="//unpkg.com/element-ui@2.4.6/lib/index.js"></script>
 <script>
+	// 验证正则
+	import v from "~/assets/js/validate"
+	// 设置cookie
+	import Cookie from 'js-cookie'
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
+	// 提示语
+	import prompt from '~/assets/js/prompt'
 	export default {
 	 	layout: 'loginHome',
 	    data() {
 	      return {
-	        activeName: 'first'
+	        activeName: 'first',
+	        phoneNumber: '',
+	        password: '',
+	        code: '',
+	        sendMsgDisabled: false,
+	        time: 60
 	      };
 	    },
 	    methods: {
-	      handleClick(tab, event) {
-	        console.log(tab, event);
-	      }
+	      	handleClick(tab, event) {
+	      	  	console.log(tab, event);
+	      	},
+			// 密码登录
+			loginPassword() {
+				if (!v.tel(this.phoneNumber)) {
+					this.$message({
+						message: prompt.number,
+						type: 'warning'
+			        });
+		      		return false;
+		      	} else if (!v.password(this.password)) {
+		      		this.$message({
+						message: prompt.password,
+						type: 'warning'
+			        });
+		      		return false;
+		      	}
+				this.login();
+		    },
+		    // 短信登录
+		    loginSms() {
+		    	if (!v.tel(this.phoneNumber)) {
+		      		this.$message({
+						message: prompt.number,
+						type: 'warning'
+			        });
+		      		return false;
+		      	} else if (!v.required(this.code)) {
+		      		this.$message({
+						message: prompt.code,
+						type: 'warning'
+			        });
+		      		return false;
+		      	}
+		    	this.login();
+		    },
+		    // 发送验证码
+	      	sendCode() {
+	      		var that = this;
+				if (!that.sendMsgDisabled) {
+					if(!that.phoneNumber) {
+						this.$message({
+							message: prompt.number,
+							type: 'warning'
+				        });
+						return false;
+					} else if (!(/^1[34578]\d{9}$/.test(that.phoneNumber))) {
+						this.$message({
+							message: prompt.number,
+							type: 'warning'
+				        });
+						return false;
+					}
+					that.sendMsgDisabled = true;
+				    let interval = window.setInterval(function() {
+						if ((that.time--) <= 0) {
+							that.time = 60;
+							that.sendMsgDisabled = false;
+							window.clearInterval(interval);
+						}
+				    }, 1000);
+				    // 获取验证码
+				    that.$axios.post(interfaceApi.UsermobileCode,{
+				    	mobile: that.phoneNumber
+				    })
+					.then(function (response) {
+						console.log(response);
+					});
+				}
+			},
+			// 发送登录请求
+			login() {
+				var that = this;
+				that.$axios.post(interfaceApi.login,{
+					mobile: that.phoneNumber,
+					password: that.password,
+					code: that.code
+				}).then(res=> {
+					if (res.data.code==1) {
+						// console.log(res);
+						/**
+						 * 登录成功之后设置store (token,nickname,headimgurl)
+						 */
+				    	Cookie.set('token', res.data.data.token);
+						that.$store.commit('SET_USER',res.data.data.token);
+						Cookie.set('nickname',res.data.data.nickname);
+						Cookie.set('headimgurl',res.data.data.headimgurl);
+						that.$store.commit('NICKNAME',res.data.data.nickname);
+						that.$store.commit('HEADIMGURL',res.data.data.headimgurl);	
+				    	that.user.JumpBackToPage();
+				    }
+				})
+			}
 	    }
 	}
 </script>
@@ -98,4 +205,6 @@
 			border-radius: $border_radius
 			right: 5px 
 			top: 5px
+		.codeBtn.bg
+			background-color: #ccc
 </style>
