@@ -1,7 +1,7 @@
 <template>
   	<el-carousel :interval="6000" arrow="always" height="340px">
     	<el-carousel-item v-for="(item,index) in swiperData" :key="index">
-    		<nuxt-link :to="{name: 'login'}">
+    		<nuxt-link :to="{name: 'loginModule-login'}">
     			<div class="slide-item" :style="{backgroundImage:'url(' + item.pic + ')'}"></div>
     		</nuxt-link>
     	</el-carousel-item>
