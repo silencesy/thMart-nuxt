@@ -139,7 +139,7 @@
                                 display: -webkit-box
                                 -webkit-box-orient: vertical
                                 -webkit-line-clamp: 2
-                                line-height: 24px
+                                line-height: 22px
                                 min-height: 44px
                             span
                                 color: $theme_color
@@ -192,7 +192,7 @@
                                 display: -webkit-box
                                 -webkit-box-orient: vertical
                                 -webkit-line-clamp: 2
-                                line-height: 24px
+                                line-height: 22px
                                 min-height: 44px
                             span 
                                 color: $theme_color 
@@ -241,7 +241,7 @@
                         display: -webkit-box
                         -webkit-box-orient: vertical
                         -webkit-line-clamp: 2
-                        line-height: 24px
+                        line-height: 22px
                         min-height: 44px
                     span 
                         color: $theme_color 
