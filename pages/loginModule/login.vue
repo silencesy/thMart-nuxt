@@ -12,8 +12,8 @@
 						</el-input>
 						<button class="btn" @click="loginPassword">Login</button>
 						<div class="foot">
-							<nuxt-link to="/signPhone">Sign Up</nuxt-link>
-							<nuxt-link to="/passwordPhone">Forgot Password</nuxt-link>	
+							<nuxt-link :to="{name: 'loginModule-signPhone'}">Sign Up</nuxt-link>
+							<nuxt-link :to="{name: 'loginModule-passwordPhone'}">Forgot Password</nuxt-link>	
 						</div>
 						<div class="wechat">
 							<span class="iconfont icon-weixin1"></span>
@@ -34,8 +34,8 @@
 							Login
 						</button>
 						<div class="foot">
-							<nuxt-link to="/signPhone">Sign Up</nuxt-link>
-							<nuxt-link to="/passwordPhone">Forgot Password</nuxt-link>	
+							<nuxt-link :to="{name: 'loginModule-signPhone'}">Sign Up</nuxt-link>
+							<nuxt-link :to="{name: 'loginModule-passwordPhone'}">Forgot Password</nuxt-link>	
 						</div>
 						<div class="wechat">
 							<span class="iconfont icon-weixin1"></span>

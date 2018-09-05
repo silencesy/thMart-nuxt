@@ -1,6 +1,6 @@
 <template>
 	<div class="">
-		<passwordStep flag="2"/>
+		<signStep flag="2"/>
 		<div class="sign">
 			<div class="password">
 				<input v-model="password" type="password" placeholder="Enter password" name="" value="">
@@ -11,12 +11,12 @@
 			<div class="btn" @click="submit">
 				<button>Submit</button>
 			</div>
-			<p>Have an account already? <nuxt-link to="/login">Log in</nuxt-link></p>
+			<p>Have an account already? <nuxt-link :to="{name: 'loginModule-login'}">Log in</nuxt-link></p>
 		</div>
 	</div>
 </template>
 <script>
-	import passwordStep from '~/components/layout/passwordStep.vue'
+	import signStep from '~/components/layout/signStep.vue'
 	// 统一验证
 	import v from "~/assets/js/validate"
 	// 统一接口
@@ -32,7 +32,7 @@
 			}
 		},
 		components: {
-			passwordStep
+			signStep
 		},
 		mounted() {
 			this.verificationPhone();
@@ -57,23 +57,23 @@
 					return false;
 				}
 				// 获取验证码
-			    that.$axios.post(interfaceApi.resetPassword,{
-			    	id: this.$route.query.id,
+			    that.$axios.post(interfaceApi.mobileRegister,{
+			    	mobile: that.$route.query.phone,
+			    	code: that.$route.query.code,
 			    	password: that.password,
 			    	rePassword: that.repeatPassword
 			    })
 				.then(function (response) {
-					console.log(response)
 					if (response.data.code == 1) {
-						that.$router.push({name: 'passwordSuccess'});
+						that.$router.push({name: 'loginModule-signSuccess'});
 					}
 				});
 			},
 			// 验证是否验证手机
 			verificationPhone() {
-				var id = this.$route.query.id || null;
-				if (!id) {
-					this.$router.push({name: 'passwordPhone'});
+				var phone = this.$route.query.phone || null;
+				if (!phone) {
+					this.$router.push({name: 'loginModule-signPhone'});
 				}
 			}
 		}

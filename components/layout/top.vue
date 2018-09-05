@@ -4,10 +4,10 @@
             <div class="top">
                 <div class="left">
                     <span>That’s making your life easier !</span> 
-                    <!-- <div class="login">
-                        <nuxt-link to="">Login</nuxt-link>
-                        <nuxt-link to="">Sign up</nuxt-link>
-                    </div> -->
+                    <div class="login">
+                        <nuxt-link :to="{name: 'loginModule-login'}">Login</nuxt-link>
+                        <nuxt-link :to="{name: 'loginModule-signPhone'}">Sign up</nuxt-link>
+                    </div>
                     <div class="logged">
                         <el-dropdown>
                             <nuxt-link to="/" class="el-dropdown-link">

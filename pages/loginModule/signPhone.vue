@@ -9,7 +9,7 @@
 			<div class="btn" @click="NextStep">
 				<button>Next Step</button>
 			</div>
-			<p>Have an account already? <nuxt-link to="/login">Log in</nuxt-link></p>
+			<p>Have an account already? <nuxt-link :to="{name: 'loginModule-login'}">Log in</nuxt-link></p>
 		</div>
 	</div>
 </template>
@@ -69,7 +69,7 @@
 			    })
 				.then(function (response) {
 					if (response.data.code == 1) {
-						that.$router.push({name: 'signPassword',query: {phone: that.phoneNumber,code: that.code}})
+						that.$router.push({name: 'loginModule-signPassword',query: {phone: that.phoneNumber,code: that.code}})
 					}
 				});
 			}
