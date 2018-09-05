@@ -125,7 +125,7 @@
 		},
 		data() {
 			return {
-				// 上拉加载数据
+				// 上拉加载数据//
 				hotData: [],
 				// 是否结束上拉
 				end: false,
