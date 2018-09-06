@@ -111,13 +111,13 @@
 				</nuxt-link>
 			</div>
 		</div>
-		<hotProducts :hotData='hotData'/>
+		<goodsItem :hotData='hotData' />
 	</div>
 </template>
 <script>
 	import SwiperComponent from "~/components/base/Swiper"
-	import floor from '~/components/home/floor.vue'
-	import hotProducts from '~/components/home/hotProducts.vue'
+	import floor from '~/components/home/floor'
+	import goodsItem from '~/components/base/goodsItem'
 	export default {
 		layout: 'indexHome',
 		layout (context) {
@@ -135,7 +135,11 @@
 					page: 0,
 					sort: 'order_asc'
 				},
-				totalPage: -1
+				totalPage: -1,
+				// goodsItemStyleObj: {
+				// 	width: '50px',
+				// 	height: '100px'
+				// }
 			}
 		},
 		async asyncData ({app}) {
@@ -145,7 +149,7 @@
 		components: {
 			SwiperComponent,
 			floor,
-			hotProducts
+			goodsItem
 		},
 		mounted() {
 			
