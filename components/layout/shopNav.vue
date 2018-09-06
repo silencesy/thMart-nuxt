@@ -3,7 +3,7 @@
         <div class="container">
             <div class="homeHead">
                 <div class="left">
-                    <img src="~static/images/thmart.png" alt="">
+                    <nuxt-link to="/"><img src="~static/images/thmart.png" alt=""></nuxt-link>
                     <div class="shopName">
                         <span>Amor flora</span>
                         <span><i class="iconfont icon-unreview"></i>Favourite</span>
@@ -56,7 +56,7 @@
                 vertical-align: middle
         .left
             img
-                @include wh(75px, 45px)
+                @include wh(95px, 60px)
                 padding-right: 15px
                 border-right: $border
             .shopName 

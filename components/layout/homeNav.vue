@@ -2,7 +2,7 @@
     <div class="nav">
         <div class="container">
             <div class="homeHead">
-                <div class="left"><img src="~static/images/thmart.png" alt=""></div>
+                <div class="left"><nuxt-link to="/"><img src="~static/images/thmart.png" alt=""></nuxt-link></div>
                 <div class="center">
                     <i v-show="searchTipsTextShow" class="iconfont icon-sousuo"> What are you looking for?</i>
                     <input type="search" @focus="handleinput()" value="" name="" id="">
@@ -69,7 +69,7 @@
                 vertical-align: middle
         .left
             img
-                @include wh(60px, 45px)
+                @include wh(80px, 60px)
         .right
             float: right
             img

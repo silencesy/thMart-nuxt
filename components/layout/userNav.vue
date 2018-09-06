@@ -2,7 +2,7 @@
     <div class="userNav">
         <div class="container">
             <div class="userHead">
-                <div class="left iconfont icon-thmart"></div>
+                <div><nuxt-link to="/" class="iconfont icon-thmart left"></nuxt-link></div>
                 <div class="center">
                     <div class="userCenter">
                         <i v-show="searchTipsTextShow" class="iconfont icon-sousuo"> What are you looking for?</i>

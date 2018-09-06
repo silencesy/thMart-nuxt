@@ -23,7 +23,7 @@
 	// 提示语
 	import prompt from '~/assets/js/prompt'
 	export default {
-		layout: 'signHome',
+		layout: 'passwordHome',
 		data() {
 			return {
 				phoneNumber: '',
