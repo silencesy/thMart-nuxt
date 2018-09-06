@@ -1,5 +1,6 @@
 <template>
 	<div class="shopHome">
+	
 		<rank />
 	</div>
 </template>
@@ -21,7 +22,7 @@
 	  	computed: {  
 		    
 	  	},
-		methods: {
+		methods: {s
 
 		}
 	}
