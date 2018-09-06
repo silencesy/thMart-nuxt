@@ -3,7 +3,7 @@
         <div class="bottom">
         	<div class="bottomTop">
         		<ul>
-        			<li><img src="~static/images/thmart.png" alt=""></li>
+        			<li><nuxt-link to="/"><img src="~static/images/thmart.png" alt=""></nuxt-link></li>
         			<li><img src="~static/images/pray.svg" alt=""> Special Offers Every Day</li>
         			<li><img src="~static/images/plus.svg" alt=""> Quality Guaranteed</li>
         			<li><img src="~static/images/car.svg" alt=""> Enjoy Free Shipping for All Purchases</li>

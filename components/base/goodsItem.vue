@@ -2,16 +2,16 @@
     <div class="container hotProducts">
     	<div class="hotTitle"><img src="~static/images/hot.png" alt=""></div>
     	<div class="products">
-			<nuxt-link to="/" v-for="(item,index) in hotData" :key="index">
-				<b class="hot"><i>SALE</i></b>
-				<div><img :src="item.pic" alt=""></div>
-				<p>{{item.title}}</p>
-				<span>¥{{item.price}}</span>
-				<del v-if="item.originalPrice">¥{{item.originalPrice}}</del>
+			<nuxt-link to="/" v-for="(item,index) in hotData" :key="index" :style="styleObj">
+                <b class="hot"><i>SALE</i></b>
+                <div :style="imgBox"><img :style="imgBox" :src="item.pic" alt=""></div>
+                <p>{{item.title}}</p>
+                <span>¥{{item.price}}</span>
+                <del v-if="item.originalPrice">¥{{item.originalPrice}}</del>
 			</nuxt-link>
 		</div>
     </div>
-</template>
+</template>`
 <script>
 	export default {
 		props: {
@@ -20,8 +20,26 @@
 				default: function() {
 					return []
 				}
-			}
-		}
+			},
+            styleObj: {
+                type: Object,
+                default: function() {
+                    return {
+                        width: '190px',
+                        height: '285px'
+                    }
+                }
+            }
+		},
+        computed: {
+            imgBox: function() {
+                let imgBoxstyleObj = {};
+                imgBoxstyleObj['width'] = (parseInt(this.styleObj.width) - 2) + 'px';
+                imgBoxstyleObj['height'] = (parseInt(this.styleObj.width) - 2) + 'px';
+                console.log(imgBoxstyleObj)
+                return imgBoxstyleObj;
+            }
+        }
 	}
 </script>
 <style lang='sass' type="text/css" scoped>
@@ -36,16 +54,12 @@
     		a
     			display: inline-block
     			position: relative
-    			@include wh(190px, 285px)
     			border-radius: $border_radius
     			float: left
     			border: $border
     			margin: 6px
     			div 
-    				@include wh(188px, 188px)
     				margin-bottom: 9px
-    				img 
-    					@include wh(188px, 188px)
     			p
     				overflow: hidden 
     				text-overflow: ellipsis

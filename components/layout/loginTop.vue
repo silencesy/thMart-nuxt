@@ -3,7 +3,7 @@
         <div class="container">
             <div class="homeHead">
                 <div class="left">
-                    <img src="~static/images/thmart.png" alt="">
+                    <nuxt-link to="/"><img src="~static/images/thmart.png" alt=""></nuxt-link>
                     <span class="loginName">LOGIN</span>
                 </div>
                 <div class="right"><img src="~static/images/thmartCode.jpg" alt=""></div>
@@ -36,7 +36,7 @@
                 vertical-align: middle
         .left
             img
-                @include wh(75px, 45px)
+                @include wh(80px, 60px)
                 margin-right: 15px
             .loginName 
                 float: right
