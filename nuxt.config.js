@@ -36,12 +36,15 @@ module.exports = {
     https: true,
     // 设置请求基础路径
     prefix: 'http://proj6.thatsmags.com/thmartApi/',
+    baseURL: 'http://proj6.thatsmags.com/thmartApi/',
+    browserBaseURL: 'http://proj6.thatsmags.com/thmartApi/',
     proxy: true
   },
 
   plugins: [
     {src:'~/plugins/vue-awesome-swiper', ssr: false},
     {src:'~plugins/element-ui', ssr: true},
+    // {src:'~plugins/api', ssr: true},
     /**
      * [公共函数]
      * @type {String，Function}
@@ -77,6 +80,15 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+    }
+  },
+  /**
+   * [router]
+   * @type {Object}
+   */
+  router: {
+    scrollBehavior: function (to, from, savedPosition) {
+      return { x: 0, y: 0 }
     }
   }
 }

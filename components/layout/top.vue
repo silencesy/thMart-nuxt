@@ -4,24 +4,24 @@
             <div class="top">
                 <div class="left">
                     <span>That’s making your life easier !</span> 
-                    <div class="login">
+                    <div class="login" v-if="!$store.state.token">
                         <nuxt-link :to="{name: 'loginModule-login'}">Login</nuxt-link>
                         <nuxt-link :to="{name: 'loginModule-signPhone'}">Sign up</nuxt-link>
                     </div>
-                    <div class="logged">
+                    <div class="logged" v-if="$store.state.token">
                         <el-dropdown>
                             <nuxt-link to="/" class="el-dropdown-link">
-                                Username<i class="el-icon-arrow-down el-icon--right"></i>
+                                {{$store.state.nickname}}<i class="el-icon-arrow-down el-icon--right"></i>
                             </nuxt-link>
                             <el-dropdown-menu slot="dropdown">
                                 <div class="dropdownBox">
                                     <nuxt-link to="/" class="userPic">
-                                        <img src="~/static/images/lays.jpg" alt="">
+                                        <img :src="$store.state.headimgurl" alt="">
                                     </nuxt-link>
                                     <nuxt-link to="/" class="info">
-                                        <p>Username</p>
-                                        <p>Log out</p>
+                                        <p>{{$store.state.nickname}}</p>
                                     </nuxt-link>
+                                    <p @click="logout">Log out</p>
                                 </div>
                             </el-dropdown-menu>
                         </el-dropdown>
@@ -41,11 +41,21 @@
     </div>
 </template>
 <script>
+    import Cookie from 'js-cookie'
     export default {
         methods: {
             login() {
                 this.user.SetComebackAddress();
                 this.$router.push({name: 'login'});
+            },
+            logout() {
+                // 下线
+                Cookie.remove('token');
+                this.$store.commit('SET_USER','');
+                Cookie.remove('nickname');
+                Cookie.remove('headimgurl');
+                this.$store.commit('NICKNAME','');
+                this.$store.commit('HEADIMGURL','');
             }
         }
     }
@@ -115,6 +125,10 @@
     .dropdownBox
         overflow: hidden
         padding: 5px
+        p
+            @include sc(14px, #999)
+            margin-top: 30px
+            cursor: pointer
         a 
             float: left
             display: inline-block
@@ -126,9 +140,8 @@
         .info
             p:first-child
                 margin-top: 10px
-            p:last-child
-                @include sc(14px, #999)
-                margin-top: 10px
+
+                
 
 
 </style>

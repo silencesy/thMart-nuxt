@@ -12,6 +12,8 @@ let api = {
 	// 重置密码获取短信
 	checkMobileAndCode: 'User/checkMobileAndCode',
 	// 重置密码
-	resetPassword: 'User/resetPassword'
+	resetPassword: 'User/resetPassword',
+	// 商户首页
+	shop: 'Brand/detail'
 }
 export default api
