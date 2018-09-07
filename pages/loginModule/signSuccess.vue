@@ -10,7 +10,7 @@
 	</div>
 </template>
 <script>
-	import signStep from '~/components/layout/signStep.vue'
+	import signStep from '~/components/layout/signStep'
 	export default {
 		layout: 'signHome',
 		data() {

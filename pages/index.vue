@@ -111,7 +111,7 @@
 				</nuxt-link>
 			</div>
 		</div>
-		<goodsItem :hotData='hotData' />
+		<goodsItem :hotData='hotData' :titleIsShow="titleIsShow" />
 	</div>
 </template>
 <script>
@@ -140,6 +140,7 @@
 				// 	width: '50px',
 				// 	height: '100px'
 				// }
+				titleIsShow: true
 			}
 		},
 		async asyncData ({app}) {
