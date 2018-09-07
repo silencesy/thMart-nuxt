@@ -14,6 +14,10 @@ let api = {
 	// 重置密码
 	resetPassword: 'User/resetPassword',
 	// 商户首页
-	shop: 'Brand/detail'
+	shop: 'Brand/detail',
+	// 文章列表
+	articleList: 'Article/list',
+	// 文章详情页
+	articleDetail: 'Article/detail'
 }
 export default api

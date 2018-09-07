@@ -2,22 +2,17 @@
 	<div class="articleContent">
 		<div class="bread">
 			<el-breadcrumb separator-class="el-icon-arrow-right">
-			  <el-breadcrumb-item :to="{ path: '~pages/index' }">Home</el-breadcrumb-item>
+			  <el-breadcrumb-item to="/">Home</el-breadcrumb-item>
 			  <el-breadcrumb-item>Editor’s Pick</el-breadcrumb-item>
-			  <el-breadcrumb-item>Get Premium Italian Coffee …</el-breadcrumb-item>
+			  <el-breadcrumb-item>{{articleData.title}}</el-breadcrumb-item>
 			</el-breadcrumb>
 		</div>
 		<div class="container articleDetails">
 			<div class="articlePer">
 				<div class="content">
-					<h3>Get Premium Italian Coffee Delivered Right to Your Doorstep</h3>
-					<span>2018.08.08</span>
-					<div class="text">
-						<p>Looking to mix up your morning coffee routine? thMart has you covered with a range of products from Italian coffee brand Illy.</p>
-						<div><img src="~static/images/flower.jpg" alt=""></div>
-						<p>Here are some Illy Coffee products currently available on thMart...</p>
-						<p>No need to run to the store to pick up your ground coffee, it can now be delivered right to your home. Illy Coffee Drip Grind is available in medium and dark roasts, and each set comes in packs of four. Start your morning the right way with this drip coffee, which is easy to use and allows you to brew single cups of coffee.</p>
-					</div>
+					<h3>{{articleData.title}}</h3>
+					<span>{{articleData.createTime}}</span>
+					<div class="text" v-html="articleData.article_content"></div>
 					<div class="goods">
 						<div><img src="~static/images/flower.jpg" alt=""></div>
 						<div>
@@ -30,14 +25,34 @@
 					</div>
 				</div>
 			</div>
-			<moreArticle />
+			<moreArticle :articleData="articleList" />
 		</div>
 	</div>
 </template>
 <script>
 	import moreArticle from "~/components/base/moreArticle"
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'indexHome',
+		validate ({ params }) {
+		// Must be a number
+			return /^\d+$/.test(params.id)
+		},
+		async asyncData ({app,params}) {
+		 	const articleData = await app.$axios.post(interfaceApi.articleDetail,{
+		 		id: params.id
+		 	})
+		 	const articleList = await app.$axios.post(interfaceApi.articleList,{
+		 		page: 1,
+		 		pageSize: 5,
+		 		sort: 'createTime_desc',
+		 	})
+  			return { 
+  				articleData: articleData.data.data,
+  				articleList: articleList.data.data.data
+  			}
+		},
 		data(){
             return{
 
