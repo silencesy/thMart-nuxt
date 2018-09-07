@@ -1,5 +1,6 @@
 <template>
 	<div class="shopHome">
+		<shopNav :infoData="shopData" />
 		<!-- 轮播图 -->
 		<SwiperComponent :swiperData="shopData.figure"/>
 		<div class="container">
@@ -14,6 +15,7 @@
 	</div>
 </template>
 <script>
+    import shopNav from '~/components/layout/shopNav.vue'
 	import SwiperComponent from "~/components/base/Swiper"
 	// 接口API
 	import interfaceApi from '~/plugins/interfaceApi'
@@ -38,6 +40,7 @@
   			return { shopData: shopData.data.data}
 		},
 		components: {
+			shopNav,
 			SwiperComponent
 		},
 		mounted() {

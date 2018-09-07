@@ -2,21 +2,17 @@
     <div class="moreArticle">
     	<div class="moreTitle">Related Articles</div>
     	<div class="products">
-			<nuxt-link to="/">
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>Kellogg's Corn Flake Copy 5</p>
+			<nuxt-link v-for="item in articleData" :to="{name: 'article-id',params: {id: item.id}}" :key="item.id">
+				<div><img :src="item.pic" alt=""></div>
+				<p>{{item.title}}</p>
 			</nuxt-link>
-            <nuxt-link to="/">
-                <div><img src="~static/images/flower.jpg" alt=""></div>
-                <p>Kellogg's Corn Flake Copy 5</p>
-            </nuxt-link>
 		</div>
     </div>
 </template>
 <script>
 	export default {
 		props: {
-			hotData: {
+			articleData: {
 				type: Array,
 				default: function() {
 					return []
