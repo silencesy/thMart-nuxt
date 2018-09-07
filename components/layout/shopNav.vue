@@ -5,7 +5,7 @@
                 <div class="left">
                     <nuxt-link to="/"><img src="~static/images/thmart.png" alt=""></nuxt-link>
                     <div class="shopName">
-                        <span>Amor flora</span>
+                        <span>{{infoData.name}}</span>
                         <span><i class="iconfont icon-unreview"></i>Favourite</span>
                     </div>
                 </div>
@@ -30,6 +30,14 @@
 </template>
 <script>
     export default {
+        props: {
+            infoData: {
+                type: Object,
+                default: function() {
+                    return {}
+                }
+            }
+        },
         data() {
             return {
                 searchText: '',
