@@ -1,7 +1,14 @@
 <template>
 	<div class="shopHome container">
-		<rank @alert = "alert" :isShowObj="isShowObj" />
+		<rank @Sort = "Sort" :isShowObj="isShowObj" />
 		<goodsItem />
+		<div class="changePage">
+			<el-pagination
+			  	background
+			  	layout="prev, pager, next"
+			  	:total="300">
+			</el-pagination>
+		</div>
 	</div>
 </template>
 <script>
@@ -12,7 +19,6 @@
 		data() {
 			return {
 				isShowObj: {
-					rankSearchIsShow: false,
                     priceIsShow: true
 				}
 			}
@@ -29,8 +35,8 @@
 		    
 	  	},
 		methods: {
-			alert() {
-				alert(1)
+			Sort(index) {
+				console.log(index);
 			}
 		}
 	}

@@ -3,33 +3,28 @@
         <div class="rankBox">
             <div class="title">
                 <div>
-                    <span :class="{active: latestActive}" @click="latestRank('createTime_desc')">Latest</span>
-                    <span :class="{active: priceActive}" v-if="isShowObj.priceIsShow" @click="priceRank">Price</span>
+                    <span @click="tab('createTime_desc')" :class="{active:index == 'createTime_desc'}">Latest</span>
+                    <span @click="tab('sellNumber_desc')" :class="{active:index == 'sellNumber_desc'}">Sale</span>
+                    <span @click="tab('price_desc')" :class="{active:index == 'price_desc'}" v-if="isShowObj.priceIsShow">Price</span>
                 </div>
-                <div>
-                    <i :class="{active: arrowTopActive}" class="el-icon-caret-top"></i>
-                    <i :class="{active: arrowBottomActive}" class="el-icon-caret-bottom"></i>
+                <div @click="tab('price_desc')">
+                    <i class="el-icon-caret-top" :class="{active:index == 'price_desc' && lift == 'price_asc'}"></i>
+                    <i class="el-icon-caret-bottom" :class="{active:index == 'price_desc' && lift == 'price_desc'}"></i>
                 </div>
             </div>
-            <div class="rankSearch" v-if="isShowObj.rankSearchIsShow">
-                123
-            </div>
+            <div class="rankSearch" v-if="isShowObj.rankSearchIsShow"></div>
 		</div>
     </div>
 </template>
 <script>
-    /**
-     * isShowObj 是一个对象
-     * isShowObj.rankSearchIsShow 是否显示搜索框
-     * isShowObj.priceIsShow 是否显示价格排序
-     */
+
 	export default {
         props: {
             isShowObj: {
                 type: Object,
                 default: function() {
                     return {
-                        rankSearchIsShow: true,
+                        rankSearchIsShow: false,
                         priceIsShow: true
                     }
                 }
@@ -37,24 +32,49 @@
         },
         data () {
             return {
-                latestActive: true,
-                priceActive: false,
-                arrowTopActive: false,
-                arrowBottomActive: false
+                index: 'createTime_desc',
+                lift: 'price_desc',
+                first: false
             }
         },
         methods: {
-            latestRank() {
-                // this.$emit('alert')
-                this.latestActive = true;
-                this.priceActive = false;
-                this.arrowTopActive = false;
-                this.arrowBottomActive = false;
+           tab(index) {
+                var that = this;
+                if (that.index!=index) {
+                    that.index = index;
+                    if (index == 'createTime_desc'||index == 'sellNumber_desc') {
+                        that.$emit('Sort',index);
+                    }
+                }
+                setTimeout(function(){
+                    if(that.first) {
+                        that.first = false;
+                        that.$emit('Sort',that.lift);
+                    } else if (that.index == 'price_desc' && index == 'price_desc'){
+                        if (that.lift == 'price_desc') {
+                            that.lift = 'price_asc';
+                            that.$emit('Sort',that.lift);
+                        } else {
+                            that.lift = 'price_desc';
+                            that.$emit('Sort',that.lift);
+                        }
+                    }
+                },20);
             },
-            priceRank() {
-                this.latestActive = false;
-                this.priceActive = true;
-                this.arrowBottomActive = true;
+            init() {
+                this.index = 'createTime_desc';
+                this.lift ='price_desc';
+                this.first = false;
+            }
+        },
+        watch: {
+            index: function(newVal,oldVal) {
+                var that = this;
+                if (newVal=='price_desc') {
+                    that.first = true;
+                } else {
+                    that.first = false;
+                }
             }
         }
 	}
@@ -79,7 +99,9 @@
                 .active
                     color: $theme_color
                 span:first-child
-                    margin-right: 115px
+                    margin-right: 90px
+                span:nth-child(2)
+                    margin-right: 90px
             >div:nth-child(2)
                 position: relative
                 padding-left: 5px
