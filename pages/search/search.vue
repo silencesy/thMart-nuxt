@@ -1,14 +1,10 @@
 <template>
-	<div class="goodsContent">
-		<div class="bread">
-			<el-breadcrumb separator-class="el-icon-arrow-right">
-			  <el-breadcrumb-item :to="{ path: '~pages/index' }">Home</el-breadcrumb-item>
-			  <el-breadcrumb-item>Flowers
-			  </el-breadcrumb-item>
-			</el-breadcrumb>
-		</div>
+	<div class="search">
 		<div class="container goodsListBox">
 			<div class="goodsList">
+				<div class="searchNav">
+					
+				</div>
 				<div class="item">
 					<rank />
 				</div>
@@ -30,19 +26,15 @@
 	import rank from "~/components/base/rank"
 	import goodsItem from "~/components/base/goodsItem"
 	export default {
-		layout: 'indexHome',
-		props: {
-
-	    },
-		data(){
-            return{
-            	num1: 1,
+		layout: 'searchHome',
+		data() {
+			return {
 				goodsItemStyleObj: {
 					width: '172px',
 					height: '275px'
 				}
-	        }
-        },
+			}
+		},
 		components: {
 			moreGoods,
 			rank,
@@ -55,26 +47,18 @@
 	  	computed: {  
 		    
 	  	},
-		methods:{
+		methods: {
 
-        }
+		}
 	}
 </script>
-<style lang='sass' type="text/css" scoped>
+
+<style lang='sass' scoped>
 	@import '~/assets/sass/common.sass'
-	.goodsContent
-		.bread 
-			width: 100%
-			background-color: #eee
-			margin-bottom: 15px
-			.el-breadcrumb
-				@include hh(36px, 36px)
-				width: 1200px
-				margin: 0 auto
+	.search
 		.goodsListBox 
 			overflow: hidden
 			.goodsList
 				float: left
 				width: 942px
-
 </style>

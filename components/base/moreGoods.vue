@@ -1,6 +1,6 @@
 <template>
     <div class="moreProducts">
-    	<div class="moreTitle">更多商品</div>
+    	<div class="moreTitle">Featured Products</div>
     	<div class="products">
 			<nuxt-link to="/">
 				<b class="hot"><i>SALE</i></b>
