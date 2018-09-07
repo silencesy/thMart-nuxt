@@ -1,6 +1,6 @@
 <template>
     <div class="container hotProducts">
-    	<div class="hotTitle"><img src="~static/images/hot.png" alt=""></div>
+    	<div class="hotTitle" v-if="titleIsShow"><img src="~static/images/hot.png" alt=""></div>
     	<div class="products">
 			<nuxt-link to="/" v-for="(item,index) in hotData" :key="index" :style="styleObj">
                 <b class="hot"><i>SALE</i></b>
@@ -29,6 +29,10 @@
                         height: '285px'
                     }
                 }
+            },
+            titleIsShow: {
+                type: Boolean,
+                default: false
             }
 		},
         computed: {
