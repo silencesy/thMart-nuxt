@@ -119,12 +119,28 @@ input
 	width: 100%
 	text-align: center
 	margin: 20px 0
+.changePage .el-pagination.is-background .el-pager li:hover
+	color: #F9421E
 .changePage .el-pagination.is-background .el-pager li:not(.disabled).active
 	background-color: #F9421E
-.changePage .el-pager li:hover
-	color: #606266
-.changePage .el-pagination.is-background .el-pager li:not(.disabled):hover
-	color: #606266
+.changePage .el-pagination.is-background .el-pager li.active:hover
+	color: #fff
+//tab样式
+.tabBox .el-tabs--top .el-tabs__item.is-top:last-child
+	padding-right: 20px
+.tabBox .el-tabs__item.is-active
+	color: #fff
+	background-color: #F9421E
+.tabBox .el-tabs__active-bar
+	background-color: rgba(0,0,0,0)
+.tabBox	.el-tabs--top .el-tabs__item.is-top:nth-child(2)
+	padding-left: 20px
+.tabBox .el-tabs__nav-wrap:after
+	background-color: #F9421E
+.tabBox .el-tabs__item:hover
+	color: #F9421E
+.tabBox .el-tabs__item.is-active:hover
+	color: #fff
 //主体字体颜色
 $font_color: #222
 
