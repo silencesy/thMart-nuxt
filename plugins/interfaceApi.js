@@ -15,6 +15,8 @@ let api = {
 	resetPassword: 'User/resetPassword',
 	// 商户首页
 	shop: 'Brand/detail',
+	// 商品列表页
+	goodsList: 'Item/list',
 	// 文章列表
 	articleList: 'Article/list',
 	// 文章详情页
