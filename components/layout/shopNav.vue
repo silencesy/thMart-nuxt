@@ -21,9 +21,9 @@
         <div class="shopTopPic"><img src="~static/images/top-banner.png" alt=""></div>
         <div class="container shopContainer">
             <div class="shopTitle">
-                <nuxt-link to="">Home</nuxt-link>
-                <nuxt-link to="">All</nuxt-link>
-                <nuxt-link to="">Sales</nuxt-link>
+                <nuxt-link :to="{name: 'shop-id',params: {id: infoData.id}}">Home</nuxt-link>
+                <nuxt-link :to="{path: '/shop/shopGoodsList',query: {id: infoData.id}}">All</nuxt-link>
+                <nuxt-link :to="{path: '/shop/shopGoodsList',query: {id: infoData.id}}">Sales</nuxt-link>
             </div>
         </div>
     </div>
@@ -36,7 +36,8 @@
                 default: function() {
                     return {}
                 }
-            }
+            },
+            // configObj: 
         },
         data() {
             return {

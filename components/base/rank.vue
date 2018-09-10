@@ -3,9 +3,9 @@
         <div class="rankBox">
             <div class="title">
                 <div>
-                    <span @click="tab('createTime_desc')" :class="{active:index == 'createTime_desc'}">Latest</span>
-                    <span @click="tab('sellNumber_desc')" :class="{active:index == 'sellNumber_desc'}">Sale</span>
-                    <span @click="tab('price_desc')" :class="{active:index == 'price_desc'}" v-if="isShowObj.priceIsShow">Price</span>
+                    <span class="noselect" @click="tab('createTime_desc')" :class="{active:index == 'createTime_desc'}">Latest</span>
+                    <span class="noselect" @click="tab('sellNumber_desc')" :class="{active:index == 'sellNumber_desc'}">Sale</span>
+                    <span class="noselect" @click="tab('price_desc')" :class="{active:index == 'price_desc'}" v-if="isShowObj.priceIsShow">Price</span>
                 </div>
                 <div @click="tab('price_desc')">
                     <i class="el-icon-caret-top" :class="{active:index == 'price_desc' && lift == 'price_asc'}"></i>
