@@ -91,7 +91,7 @@
 				width: 942px
 				border: $border
 				border-radius: $border_radius
-				padding: 15px
+				padding: 25px 15px 15px 15px
 				.content 
 					width: 750px
 					margin: 0 auto
@@ -104,17 +104,7 @@
 						display: block
 						margin: 20px 0
 						text-align: center
-					.text 
-						div
-							width: 750px
-							text-align: center
-							img 
-								max-width: 100%
-								display: inline-block
-								margin: 15px 0
-						p 
-							@include sc(14px, #666)
-							line-height: 24px
+
 					.goods
 						overflow: hidden
 						background-color: #eee
