@@ -4,10 +4,10 @@
             <div class="title">
                 <div>
                     <span class="noselect" @click="tab('createTime_desc')" :class="{active:index == 'createTime_desc'}">Latest</span>
-                    <span class="noselect" @click="tab('sellNumber_desc')" :class="{active:index == 'sellNumber_desc'}">Sale</span>
+                    <span class="noselect" @click="tab('sellNumber_desc')" :class="{active:index == 'sellNumber_desc'}" v-if="isShowObj.saleIsShow">Sale</span>
                     <span class="noselect" @click="tab('price_desc')" :class="{active:index == 'price_desc'}" v-if="isShowObj.priceIsShow">Price</span>
                 </div>
-                <div @click="tab('price_desc')">
+                <div @click="tab('price_desc')" v-if="isShowObj.priceIsShow">
                     <i class="el-icon-caret-top" :class="{active:index == 'price_desc' && lift == 'price_asc'}"></i>
                     <i class="el-icon-caret-bottom" :class="{active:index == 'price_desc' && lift == 'price_desc'}"></i>
                 </div>
@@ -25,7 +25,8 @@
                 default: function() {
                     return {
                         rankSearchIsShow: false,
-                        priceIsShow: true
+                        priceIsShow: true,
+                        saleIsShow: true
                     }
                 }
             }
