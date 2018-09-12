@@ -18,19 +18,17 @@
 				<rank :isShowObj="isShowObj" />
 				<div class="normalShop">
 					<div>
-						<nuxt-link to="/"><img src="~/static/images/flower.jpg" alt=""></nuxt-link>
-						<nuxt-link to="/"><img src="~/static/images/flower.jpg" alt=""></nuxt-link>
-						<nuxt-link to="/"><img src="~/static/images/flower.jpg" alt=""></nuxt-link>
-						<nuxt-link to="/"><img src="~/static/images/flower.jpg" alt=""></nuxt-link>
-						<nuxt-link to="/"><img src="~/static/images/flower.jpg" alt=""></nuxt-link>
-						<nuxt-link to="/"><img src="~/static/images/flower.jpg" alt=""></nuxt-link>
+						<nuxt-link v-for="item in shopListData.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img :src="item.pic" alt=""></nuxt-link>
 					</div>
 				</div>
 				<div class="changePage">
 					<el-pagination
 					  	background
 					  	layout="prev, pager, next"
-					  	:total="300">
+					  	:current-page.sync="currentPage"
+						@size-change="handleSizeChange"
+	      				@current-change="handleCurrentChange"
+					  	:total="shopListData.totalPage * 10">
 					</el-pagination>
 				</div>
 			</div>
@@ -41,6 +39,8 @@
 <script>
 	import moreGoods from "~/components/base/moreGoods"
 	import rank from "~/components/base/rank"
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'indexHome',
 		data() {
@@ -50,7 +50,18 @@
                     saleIsShow: false,
                     rankSearchIsShow: true
 				},
+				currentPage: 1
 			}
+		},
+		async asyncData ({app,params}) {
+			const param = {
+				id: 5,
+				page: 1,
+				pageSize: 10,
+				sort: 'order_asc'
+			}
+		 	const shopListData = await app.$axios.post(interfaceApi.adsList,param)
+  			return { shopListData: shopListData.data.data}
 		},
 		components: {
 			moreGoods,
@@ -64,7 +75,17 @@
 		    
 	  	},
 		methods: {
-
+			// 改变页数
+			handleSizeChange(val) {
+		        // this.param.page = val;
+		        // this.getData();
+		    },
+		    // 上下页
+		    handleCurrentChange(val) {
+		        // this.param.page = val;
+		        // this.goBackTop();
+		        // this.getData();
+		    }
 		}
 	}
 </script>

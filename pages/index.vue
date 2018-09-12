@@ -21,7 +21,7 @@
 					<nuxt-link to="/">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
 				</div>
 				<div class="pic">
-					<nuxt-link v-for="(item,index) in homeData.shop.data" :key="index" :to="{name: 'shop-id',params: {id: item.id}}"><img :src="item.pic" :alt="item.title"></nuxt-link>
+					<nuxt-link v-for="item in homeData.shop.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img :src="item.pic" :alt="item.title"></nuxt-link>
 				</div>
 			</div>
 			<!-- 团购组 -->
