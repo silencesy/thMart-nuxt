@@ -12,7 +12,10 @@ const store = () => new Vuex.Store({
   state: {
     token: null,
     nickname: null,
-    headimgurl: null
+    headimgurl: null,
+    // 搜索文字
+    searchText: '',
+    classification: 'categories'
   },
 
   mutations: {
@@ -27,8 +30,15 @@ const store = () => new Vuex.Store({
     // 设置用户头像地址
     HEADIMGURL: function (state, headimgurl) {
       state.headimgurl = headimgurl;
+    },
+    // 搜索页设置搜索文字
+    SET_SEARCH: function (state, text) {
+      state.searchText = text;
+    },
+    // 搜索页设置搜索分类
+    SET_CLASSIFICATION: function (state, text) {
+      state.classification = text;
     }
-
   },
 
   actions: {

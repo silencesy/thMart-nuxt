@@ -81,8 +81,8 @@
 			},
 			// 回到顶部
 			goBackTop() {
-				document.body.scrollTop = 255
-				document.documentElement.scrollTop = 255
+				document.body.scrollTop = 0
+				document.documentElement.scrollTop = 0
 			},
 			// 排序方式
 			Sort(index) {

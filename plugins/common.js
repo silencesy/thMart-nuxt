@@ -15,7 +15,7 @@ var commonJs= {
         		if (address) {
         			window.location.href = address;
         		} else {
-        			window.location.href = 'http://localhost:3000/user';
+        			window.location.href = 'http://localhost:3000';
         		}
         	}
         };

@@ -1,40 +1,32 @@
 <template>
 	<div class="articleBox">
         <div class="articleList">
-            <div class="list">
-                <nuxt-link to="">
+            <div class="list" v-for="item in articleData" :key="item.id">
+                <nuxt-link :to="{name: 'article-id',params: {id: item.id}}">
                     <div>
-                        <img src="~/static/images/flower.jpg" alt="">
+                        <img :src="item.pic" alt="">
                     </div>
                     <div>                        
-                        <p>Tackle Your Next Toilet Emergency with These Handy Tissue Packs</p>
-                        <span>Be prepared with handy tissue packs from Tempo</span>
-                        <i>2018-08-29</i>                       
+                        <p>{{item.title}}</p>
+                        <span>{{item.description}}</span>
+                        <i>{{item.createTime}}</i>                       
                     </div>
                 </nuxt-link>
             </div>
-            <div class="list">
-                <nuxt-link to="">
-                    <div>
-                        <img src="~/static/images/flower.jpg" alt="">
-                    </div>
-                    <div>                        
-                        <p>Tackle Your Next Toilet Emergency with These Handy Tissue Packs</p>
-                        <span>Be prepared with handy tissue packs from Tempo</span>
-                        <i>2018-08-29</i>                       
-                    </div>
-                </nuxt-link>
-            </div>
+            <div class="no-result" v-if="articleData.length == 0">No result</div>
         </div>
     </div>
 </template>
 <script>
 	export default {
-        data() {
-            return {
-
+        props: {
+            articleData: {
+                type: Array,
+                default: function() {
+                    return []
+                }
             }
-        },
+        }
 	}
 </script>
 <style lang='sass' type="text/css" scoped>

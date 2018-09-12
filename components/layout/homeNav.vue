@@ -5,8 +5,8 @@
                 <div class="left"><nuxt-link to="/"><img src="~static/images/thmart.png" alt=""></nuxt-link></div>
                 <div class="center">
                     <i v-show="searchTipsTextShow" class="iconfont icon-sousuo"> What are you looking for?</i>
-                    <input type="search" @focus="handleinput()" value="" name="" id="">
-                    <button>Search</button>
+                    <input type="search" v-model="searchText" @focus="handleinput" @blur="blurinput" value="" name="" id="">
+                    <button @click="searchBtn">Search</button>
                 </div>
                 <div class="right"><img src="~static/images/thmartCode.jpg" alt=""></div>
             </div> 
@@ -50,8 +50,18 @@
         },
         methods: {
             handleinput() {
-                this.searchTipsTextShow = false
+                this.searchTipsTextShow = false;
             },
+            blurinput() {
+                if (this.searchText.length>0) {
+                    this.searchTipsTextShow = false;
+                } else {
+                    this.searchTipsTextShow = true;  
+                }
+            },
+            searchBtn() {
+                this.$router.push({path: '/searchModeule/search',query: {searchInfo: this.searchText,classification: 'categories'}});
+            }
         }
     }
 </script>

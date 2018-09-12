@@ -20,6 +20,10 @@ let api = {
 	// 文章列表
 	articleList: 'Article/list',
 	// 文章详情页
-	articleDetail: 'Article/detail'
+	articleDetail: 'Article/detail',
+	/**
+	 * 广告位置id，5：推荐品牌；12：首页热销商品；17：首页促销商品；34：thDispatcher
+	 */
+	adsList: 'Ads/list'
 }
 export default api

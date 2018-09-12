@@ -1,5 +1,5 @@
 <template>
-    <div class="container hotProducts">
+    <div class="hotProducts" :class="{container: styleObj.container}">
     	<div class="hotTitle" v-if="titleIsShow"><img src="~static/images/hot.png" alt=""></div>
     	<div class="products">
 			<nuxt-link to="/" v-for="(item,index) in hotData" :key="index" :style="styleObj">
@@ -10,8 +10,9 @@
                 <del v-if="item.originalPrice">¥{{item.originalPrice}}</del>
 			</nuxt-link>
 		</div>
+        <div v-if="hotData.length == 0" class="no-result">No result</div>
     </div>
-</template>`
+</template>
 <script>
 	export default {
 		props: {
@@ -26,7 +27,8 @@
                 default: function() {
                     return {
                         width: '190px',
-                        height: '285px'
+                        height: '285px',
+                        container: true
                     }
                 }
             },
@@ -99,4 +101,5 @@
     			-webkit-transition: all .2s
     			-moz-transition: all .2s
     			-o-transition: all .2s
+            
 </style>

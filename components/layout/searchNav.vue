@@ -5,8 +5,8 @@
                 <div class="left"><nuxt-link to="/"><img src="~static/images/thmart.png" alt=""></nuxt-link></div>
                 <div class="center">
                     <i v-show="searchTipsTextShow" class="iconfont icon-sousuo"> What are you looking for?</i>
-                    <input type="search" @focus="handleinput()" value="" name="" id="">
-                    <button>Search</button>
+                    <input type="search" @focus="handleinput()" @blur="blurInput" v-model="searchText" name="" id="">
+                    <button @click="bindSearch">Search</button>
                 </div>
                 <div class="right"><img src="~static/images/thmartCode.jpg" alt=""></div>
             </div> 
@@ -18,14 +18,46 @@
     export default {
         data() {
             return {
-                searchText: '',
-                searchTipsTextShow: true
+                searchTipsTextShow: false
             }
         },
+        created() {
+           
+        },
+        mounted() {
+            this.blurInput();
+        },
         methods: {
+            // 搜索框获取焦点
             handleinput() {
                 this.searchTipsTextShow = false
             },
+            // 搜索框失去焦点
+            blurInput() {
+                if (this.searchText) {
+                    this.searchTipsTextShow = false
+                } else {
+                    this.searchTipsTextShow = true
+                }
+            },
+            // 开始搜索
+            bindSearch() {
+                // 页面？后面的值改变了不会刷新页面获取数据 所以强制刷新一下
+                this.$router.push({path: '/searchModeule/search',query: {searchInfo: this.$store.state.searchText,classification: this.$store.state.classification}});
+                setTimeout(function(){
+                    window.location.reload();
+                },20);
+            }
+        },
+        computed: {
+            searchText: {
+                get () {
+                    return this.$store.state.searchText
+                },
+                set (val) {
+                    this.$store.commit('SET_SEARCH', val)
+                }
+            }
         }
     }
 </script>
