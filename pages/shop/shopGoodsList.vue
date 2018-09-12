@@ -7,11 +7,11 @@
 			<goodsItem :hotData = "shopGoodsData.data" />
 			<div class="changePage">
 				<el-pagination
+					:current-page.sync="currentPage"
 					@size-change="handleSizeChange"
       				@current-change="handleCurrentChange"
 				  	:background="background"
 				  	layout="prev, pager, next"
-				  	:current-page.sync="currentPage"
 				  	:total="shopGoodsData.totalPage * 10">
 				</el-pagination>
 			</div>
@@ -74,6 +74,7 @@
 			// 改变排序
 			changeSortParam(sort) {
 				this.param.sort = sort;
+				this.currentPage = 1;
 			},
 			// 改变页数
 			changePageParam(page) {

@@ -6,6 +6,9 @@
 	width: 1200px;
 	margin: 0 auto;
 }
+.theme_color {
+	color: #F9421E !important;
+}
 ul,li {
 	list-style: none;
 }

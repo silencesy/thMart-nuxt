@@ -16,10 +16,10 @@
                         <nuxt-link to=""><i class="iconfont icon-fenlei"></i>All Categories</nuxt-link>
                     </li>
                     <li>
-                        <nuxt-link to="">Home</nuxt-link>
+                        <nuxt-link to="/">Home</nuxt-link>
                     </li>
                     <li>
-                        <nuxt-link to="">Ticketing</nuxt-link>
+                        <nuxt-link :class="{theme_color: $route.params.id == 1}" :to="{name: 'category-id',params: {id: 1}}">Ticketing</nuxt-link>
                     </li>
                     <li>
                         <nuxt-link to="">Family</nuxt-link>
@@ -45,8 +45,12 @@
         data() {
             return {
                 searchText: '',
-                searchTipsTextShow: true
+                searchTipsTextShow: true,
+                activeCategoryData: ''
             }
+        },
+        mounted() {
+            this.activeCategory();
         },
         methods: {
             handleinput() {
@@ -61,6 +65,11 @@
             },
             searchBtn() {
                 this.$router.push({path: '/searchModeule/search',query: {searchInfo: this.searchText,classification: 'categories'}});
+            },
+            // 高亮显示分类
+            activeCategory() {
+                console.log(this.$route)
+                this.activeCategoryData = this.$route.path;
             }
         }
     }
