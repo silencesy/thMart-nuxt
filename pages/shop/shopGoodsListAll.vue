@@ -1,8 +1,7 @@
 <template>
 	<div>
-		<shopNav />
+		<!-- <shopNav /> -->
 		<div class="shopHome container">
-
 			<rank @Sort = "Sort" :isShowObj="isShowObj" />
 			<goodsItem :hotData = "shopGoodsData.data" />
 			<div class="changePage">

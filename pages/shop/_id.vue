@@ -1,6 +1,6 @@
 <template>
 	<div class="shopHome">
-		<shopNav :infoData="shopData" />
+		<!-- <shopNav :infoData="shopData" /> -->
 		<!-- 轮播图 -->
 		<SwiperComponent :swiperData="shopData.figure"/>
 		<div class="container">
@@ -33,10 +33,10 @@
 				
 			}
 		},
-		async asyncData ({app,params}) {
+		async asyncData ({app,params,store}) {
 		 	const shopData = await app.$axios.post(interfaceApi.shop,{
 		 		id: params.id
-		 	})
+		 	});
   			return { shopData: shopData.data.data}
 		},
 		components: {
@@ -45,13 +45,19 @@
 		},
 		mounted() {
 			console.log(this.$api);
-			
+			this.setShopInfo();
 		},
 	  	computed: {  
 		    
 	  	},
 		methods: {
-
+			setShopInfo() {
+				// 设置商户的信息在layout布局中的shopnav组件中使用数据
+				const shopInfo = {};
+			 	shopInfo['name'] = this.shopData.name;
+			 	shopInfo['id'] = this.shopData.id;
+			 	this.$store.commit('SET_SHOP_INFO',shopInfo);
+			}
 		}
 	}
 </script>

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import utils from '~/assets/js/utils'
 Vue.use(Router)
 var commonJs= {
     install(Vue){
@@ -17,7 +18,12 @@ var commonJs= {
         		} else {
         			window.location.href = 'http://localhost:3000';
         		}
-        	}
+        	},
+            // 判断是否登录
+            isLogin: function () {
+                var isLoginObj = utils.getcookiesInClient();
+                return isLoginObj.token?true: false;
+            }
         };
         
     }

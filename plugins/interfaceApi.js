@@ -24,6 +24,10 @@ let api = {
 	/**
 	 * 广告位置id，5：推荐品牌；12：首页热销商品；17：首页促销商品；34：thDispatcher
 	 */
-	adsList: 'Ads/list'
+	adsList: 'Ads/list',
+	// 商品详情页
+	goodsDeatail: 'Item/detail',
+	// 获取单个sku
+	getSkuInfo: 'Sku/detail'
 }
 export default api

@@ -8,11 +8,13 @@
             </div>
             <div class="topList">
                 <div class="listTop">
-                    <div v-for="(item,index) in floorTopFourPic" :key="index">
-                        <nuxt-link to="/">
-                            <p>{{item.title}}</p>
-                            <span>￥{{item.price}}</span>
-                            <img :src="item.pic" alt="">
+                    <div v-for="item in floorTopFourPic" :key="item.id">
+                        <nuxt-link  :to="{name: 'goods-id', params: {id: item.id}}">
+                            <div>
+                                <p>{{item.title}}</p>
+                                <span>￥{{item.price}}</span>
+                                <img :src="item.pic" alt="">
+                            </div>
                         </nuxt-link> 
                     </div>
                     <!-- <div>
@@ -25,7 +27,7 @@
                    
                 </div> 
                 <div class="listBottom">
-                    <nuxt-link to="/" v-for="(item,index) in floorCenterFourPic" :key="index">
+                    <nuxt-link :to="{name: 'goods-id', params: {id: item.id}}" v-for="item in floorCenterFourPic" :key="item.id">
                         <p class="smallPic">
                             <img :src="item.pic" alt="">
                             <span><i>SALE</i></span>
@@ -48,7 +50,7 @@
             </div>
         </div>
         <div class="bottom">
-            <nuxt-link to="/" v-for="(item,index) in floorBootomFourPic" :key="index">
+            <nuxt-link :to="{name: 'goods-id', params: {id: item.id}}" v-for="item in floorBootomFourPic" :key="item.id">
                 <p class="smallPic">
                     <img :src="item.pic" alt="">
                     <span><i>SALE</i></span>
@@ -133,6 +135,8 @@
                         border-bottom: $border            
                         a
                             display: inline-block
+                            width: 100%
+                            height: 100%
                             p 
                                 overflow: hidden
                                 text-overflow: ellipsis

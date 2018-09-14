@@ -2,7 +2,7 @@
     <div class="hotProducts" :class="{container: styleObj.container}">
     	<div class="hotTitle" v-if="titleIsShow"><img src="~static/images/hot.png" alt=""></div>
     	<div class="products">
-			<nuxt-link to="/" v-for="(item,index) in hotData" :key="index" :style="styleObj">
+			<nuxt-link :to="{name: 'goods-id', params: {id: item.id}}" v-for="item in hotData" :key="item.id" :style="styleObj">
                 <b class="hot"><i>SALE</i></b>
                 <div :style="imgBox"><img :style="imgBox" :src="item.pic" alt=""></div>
                 <p>{{item.title}}</p>

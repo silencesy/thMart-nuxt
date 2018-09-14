@@ -15,7 +15,8 @@ const store = () => new Vuex.Store({
     headimgurl: null,
     // 搜索文字
     searchText: '',
-    classification: 'categories'
+    classification: 'categories',
+    shopInfo: {}
   },
 
   mutations: {
@@ -38,7 +39,12 @@ const store = () => new Vuex.Store({
     // 搜索页设置搜索分类
     SET_CLASSIFICATION: function (state, text) {
       state.classification = text;
+    },
+    // 设置商户信息
+    SET_SHOP_INFO: function(state,obj) {
+      state.shopInfo = obj;
     }
+
   },
 
   actions: {

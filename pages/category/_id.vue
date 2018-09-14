@@ -86,11 +86,6 @@
 			initParam() {
 				this.param.page = 1;
 			},
-			// 回到顶部
-			goBackTop() {
-				document.body.scrollTop = 0
-				document.documentElement.scrollTop = 0
-			},
 			// 改变排序
 			changeSortParam(sort) {
 				this.param.sort = sort;
@@ -104,6 +99,11 @@
 					console.log(res);
 					that.goodsListData = res.data.data;
 				})
+			},
+			// 回到顶部
+			goBackTop() {
+				document.body.scrollTop = 0
+				document.documentElement.scrollTop = 0
 			},
 			// 改变页数
 			handleSizeChange(val) {

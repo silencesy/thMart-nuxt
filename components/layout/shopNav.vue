@@ -5,7 +5,7 @@
                 <div class="left">
                     <nuxt-link to="/"><img src="~static/images/thmart.png" alt=""></nuxt-link>
                     <div class="shopName">
-                        <span>{{infoData.name}}</span>
+                        <span>{{$store.state.shopInfo.name}}</span>
                         <span><i class="iconfont icon-unreview"></i>Favourite</span>
                     </div>
                 </div>
@@ -21,9 +21,9 @@
         <div class="shopTopPic"><img src="~static/images/top-banner.png" alt=""></div>
         <div class="container shopContainer">
             <div class="shopTitle">
-                <nuxt-link :to="{name: 'shop-id',params: {id: infoData.id}}">Home</nuxt-link>
-                <nuxt-link :to="{path: '/shop/shopGoodsList',query: {id: infoData.id}}">All</nuxt-link>
-                <nuxt-link :to="{path: '/shop/shopGoodsList',query: {id: infoData.id}}">Sales</nuxt-link>
+                <nuxt-link :to="{name: 'shop-id',params: {id: $store.state.shopInfo.id?$store.state.shopInfo.id:$route.query.id}}" :class="{theme_color: $route.name == 'shop-id'}">Home</nuxt-link>
+                <nuxt-link :to="{path: '/shop/shopGoodsListALL',query: {id: $store.state.shopInfo.id?$store.state.shopInfo.id:$route.query.id}}" :class="{theme_color: $route.name == 'shop-shopGoodsListAll'}">All</nuxt-link>
+                <nuxt-link :to="{path: '/shop/shopGoodsListSale',query: {id: $store.state.shopInfo.id?$store.state.shopInfo.id:$route.query.id}}" :class="{theme_color: $route.name == 'shop-shopGoodsListSale'}">Sales</nuxt-link>
             </div>
         </div>
     </div>
