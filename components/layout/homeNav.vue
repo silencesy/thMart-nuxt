@@ -19,7 +19,7 @@
                         <nuxt-link :class="{theme_color: $route.path == '/'}" to="/">Home</nuxt-link>
                     </li>
                     <li>
-                        <nuxt-link :class="{theme_color: $route.params.id == 1}" :to="{name: 'category-id',params: {id: 1}}">Ticketing</nuxt-link>
+                        <nuxt-link :class="{theme_color: $route.path == '/category/1'}" :to="{name: 'category-id',params: {id: 1}}">Ticketing</nuxt-link>
                     </li>
                     <li>
                         <nuxt-link to="">Family</nuxt-link>
@@ -28,7 +28,7 @@
                         <nuxt-link to="">GroupBuy</nuxt-link>
                     </li>
                     <li>
-                        <nuxt-link to="">Editor’s Pick</nuxt-link>
+                        <nuxt-link to="/article/articleList" :class="{theme_color: $route.path == '/article/articleList'}">Editor’s Pick</nuxt-link>
                     </li>
                     <li>
                         <nuxt-link :class="{theme_color: $route.path == '/shop/shopList'}" to="/shop/shopList">Shops</nuxt-link>

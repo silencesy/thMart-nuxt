@@ -18,7 +18,7 @@
 			<div class="hotShops">
 				<div class="title">
 					<img src="~static/images/shops.png" alt="">
-					<nuxt-link to="/">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
+					<nuxt-link to="/shop/shopList">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
 				</div>
 				<div class="pic">
 					<nuxt-link v-for="item in homeData.shop.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img :src="item.pic" :alt="item.title"></nuxt-link>

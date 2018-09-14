@@ -1,17 +1,20 @@
 <template>
     <div>
         <top/>
+        <shopNav/>
         <nuxt/>
         <bottom/>
     </div>
 </template>
 <script>
     import top from '~/components/layout/top.vue'
-    import bottom from '~/components/layout/bottom.vue' 
+    import bottom from '~/components/layout/bottom.vue'
+    import shopNav from '~/components/layout/shopNav.vue'
     export default {
         components: {
           top,
-          bottom
+          bottom,
+          shopNav
         }
     }
 </script>

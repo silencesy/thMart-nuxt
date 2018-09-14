@@ -50,14 +50,20 @@
                     saleIsShow: false,
                     rankSearchIsShow: true
 				},
-				currentPage: 1
+				currentPage: 1,
+				param: {
+					id: 5,
+					page: 1,
+					pageSize: 6,
+					sort: 'order_asc'
+				}
 			}
 		},
 		async asyncData ({app,params}) {
 			const param = {
 				id: 5,
 				page: 1,
-				pageSize: 10,
+				pageSize: 6,
 				sort: 'order_asc'
 			}
 		 	const shopListData = await app.$axios.post(interfaceApi.adsList,param)
@@ -75,16 +81,28 @@
 		    
 	  	},
 		methods: {
+			// 获取数据
+			getData() {
+				var that = this;
+				that.$axios.post(interfaceApi.adsList,that.param).then(res=> {
+					that.shopListData = res.data.data;
+				})
+			},
+			// 回到顶部
+			goBackTop() {
+				document.body.scrollTop = 0
+				document.documentElement.scrollTop = 0
+			},
 			// 改变页数
 			handleSizeChange(val) {
-		        // this.param.page = val;
-		        // this.getData();
+		        this.param.page = val;
+		        this.getData();
 		    },
 		    // 上下页
 		    handleCurrentChange(val) {
-		        // this.param.page = val;
-		        // this.goBackTop();
-		        // this.getData();
+		        this.param.page = val;
+		        this.goBackTop();
+		        this.getData();
 		    }
 		}
 	}

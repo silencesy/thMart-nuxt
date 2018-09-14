@@ -3,14 +3,17 @@
 		<div class="container articleListBox">
 			<div class="articleList">
 				<div class="item">
-					<rank />
+					<articleRank @Sort="Sort" />
 				</div>
-				<articleItem />
+				<articleItem :articleData="articleListData.data" />
 				<div class="changePage">
 					<el-pagination
 					  	background
 					  	layout="prev, pager, next"
-					  	:total="300">
+					  	:current-page.sync="currentPage"
+						@size-change="handleSizeChange"
+	      				@current-change="handleCurrentChange"
+					  	:total="articleListData.totalPage * 10">
 					</el-pagination>
 				</div>
 			</div>
@@ -20,8 +23,10 @@
 </template>
 <script>
 	import moreGoods from "~/components/base/moreGoods"
-	import rank from "~/components/base/rank"
+	import articleRank from "~/components/base/articleRank"
 	import articleItem from "~/components/base/articleItem"
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'indexHome',
 		props: {
@@ -29,13 +34,27 @@
 	    },
 		data(){
             return{
-            	num1: 1,
-			
+            	param: {
+	        		page: 1,
+	        		pageSize: 10,
+	        		sort: 'createTime_desc'
+	        	},
+	        	currentPage: 1,
+				
 	        }
         },
+        async asyncData ({app,params}) {
+        	const param = {
+        		page: 1,
+        		pageSize: 10,
+        		sort: 'createTime_desc'
+        	}
+		 	const articleListData = await app.$axios.post(interfaceApi.articleList,param)
+  			return { articleListData: articleListData.data.data}
+		},
 		components: {
 			moreGoods,
-			rank,
+			articleRank,
 			articleItem
 		},
 		mounted() {
@@ -46,7 +65,48 @@
 		    
 	  	},
 		methods:{
-
+			// 初始化参数
+			initParam() {
+				this.param.page = 1;
+			},
+			
+			// 改变排序
+			changeSortParam(sort) {
+				this.param.sort = sort;
+				this.currentPage = 1;
+			},
+			// 获取数据
+			getData() {
+				var that = this;
+				that.$axios.post(interfaceApi.articleList,that.param).then(res=> {
+					that.articleListData = res.data.data;
+				})
+			},
+			// 回到顶部
+			goBackTop() {
+				document.body.scrollTop = 0
+				document.documentElement.scrollTop = 0
+			},
+			// 改变页数
+			handleSizeChange(val) {
+		        this.param.page = val;
+		        this.getData();
+		    },
+		    // 上下页
+		    handleCurrentChange(val) {
+		        this.param.page = val;
+		        this.goBackTop();
+		        this.getData();
+		    },
+		    // 排序方式
+			Sort(index) {
+				// console.log(index);
+				var that = this;
+				that.goBackTop();
+				that.initParam();
+				that.changeSortParam(index);
+				that.getData();
+			}
         }
 	}
 </script>
