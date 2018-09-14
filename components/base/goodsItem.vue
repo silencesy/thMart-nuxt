@@ -101,5 +101,9 @@
     			-webkit-transition: all .2s
     			-moz-transition: all .2s
     			-o-transition: all .2s
+
+    .hotProducts
+        .products 
+            padding-top: 5px
             
 </style>

@@ -47,7 +47,7 @@
             return{
             	num1: 1,
 				goodsItemStyleObj: {
-					width: '178px',
+					width: '178.5px',
 					height: '275px'
 				},
 				currentPage: 1,

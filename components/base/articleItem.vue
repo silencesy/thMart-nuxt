@@ -36,6 +36,8 @@
         .articleList
             overflow: hidden
             width: 942px
+            .list:first-child, .list:nth-child(2)
+                margin-top: 0
             .list 
                 width: 463px
                 float: left
@@ -51,6 +53,7 @@
                         float: left
                     >div:first-child
                         @include wh(160px, 105px)
+                        margin-right: 10px
                         img 
                             @include wh(160px, 105px)
                     >div:nth-child(2)

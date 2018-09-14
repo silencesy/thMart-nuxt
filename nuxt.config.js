@@ -12,7 +12,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: '//at.alicdn.com/t/font_771689_k2umzynxwl.css' }
+      { rel: 'stylesheet', href: '//at.alicdn.com/t/font_771689_cb1epfyexhk.css' }
     ]
   },
   // css重置

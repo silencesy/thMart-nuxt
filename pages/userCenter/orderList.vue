@@ -21,7 +21,19 @@
 		                        <nuxt-link to="/">Shipped</nuxt-link>
 		                    </li>
 		                </ul>               
-		            </div> 				
+		            </div>
+					<div class="orderTitle">
+						<span>Product Name</span>
+						<span>Price</span>
+						<span>Quantity</span>
+						<span>Final Price</span>
+						<span>Status</span>
+					</div>
+					<userOrder flag="pay" type="unpaid" />
+					<userOrder flag="details" type="closed" />
+					<userOrder flag="details" type="unshipped" />
+					<userOrder flag="track" type="progress" />
+					<userOrder flag="track" type="shipped" />
 				</div>
 			</userLayout>
 			<goodsItem :titleIsShow="titleIsShow" />
@@ -31,16 +43,19 @@
 <script>
 	import goodsItem from "~/components/base/goodsItem"
 	import userLayout from "~/components/user/userLayout"
+	import userOrder from "~/components/user/userOrder"
 	export default {
 		layout: 'userHome',
 		data() {
 			return {
 				titleIsShow: true,
+
 			}
 		},
 		components: {
 			goodsItem, 
-			userLayout
+			userLayout,
+			userOrder
 		},
 		mounted() {
 
@@ -80,5 +95,13 @@
 				li:last-child
 					a:after
 						content: " "
-
+			.orderTitle 
+				border-bottom: $border
+				span 
+					width: 155px
+					text-align: center
+					display: inline-block
+					padding: 15px 0 
+				span:first-child 
+					width: 320px
 </style>

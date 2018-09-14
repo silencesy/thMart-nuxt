@@ -90,7 +90,7 @@
 			return {
 				activeName: 'categories',
 				goodsItemStyleObj: {
-					width: '178px',
+					width: '178.5px',
 					height: '275px',
 					container: false
 				},	
