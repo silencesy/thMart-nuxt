@@ -1,14 +1,10 @@
 <template>
 	<div class="user">
-		<orderStatus>
+		<orderStatus type="2">
 			<div slot="statusInfo" class="statusInfo">
 				<p>
 					<span><img src="~/static/images/icon-yuandian.png" alt="">2018-08-17 14:37:13</span>
-					<span>您未及时支付，该笔订单已关闭</span>
-				</p>
-				<p>
-					<span><i class="iconfont icon-dot"></i>2018-08-17 14:22:13</span>
-					<span>您提交了订单，请在15分钟内支付，否则该笔订单将关闭。</span>
+					<span>支付成功，商家正在备货中，即将发货。</span>
 				</p>
 			</div>
 		</orderStatus>

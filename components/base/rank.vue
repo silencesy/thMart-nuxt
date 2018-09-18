@@ -3,9 +3,9 @@
         <div class="rankBox">
             <div class="title">
                 <div>
-                    <span class="noselect" @click="tab('createTime_desc')" :class="{active:index == 'createTime_desc'}">Latest</span>
-                    <span class="noselect" @click="tab('sellNumber_desc')" :class="{active:index == 'sellNumber_desc'}" v-if="isShowObj.saleIsShow">Sale</span>
-                    <span class="noselect" @click="tab('price_desc')" :class="{active:index == 'price_desc'}" v-if="isShowObj.priceIsShow">Price</span>
+                    <span class="noselect latest" @click="tab('createTime_desc')" :class="{active:index == 'createTime_desc'}">Latest</span>
+                    <span class="noselect sale" @click="tab('sellNumber_desc')" :class="{active:index == 'sellNumber_desc'}" v-if="isShowObj.saleIsShow">Sale</span>
+                    <span class="noselect price" @click="tab('price_desc')" :class="{active:index == 'price_desc'}" v-if="isShowObj.priceIsShow">Price</span>
                 </div>
                 <div @click="tab('price_desc')" v-if="isShowObj.priceIsShow">
                     <i class="el-icon-caret-top" :class="{active:index == 'price_desc' && lift == 'price_asc'}"></i>
@@ -99,9 +99,9 @@
                     cursor: pointer
                 .active
                     color: $theme_color
-                span:first-child
+                span.latest
                     margin-right: 90px
-                span:nth-child(2)
+                span.sale
                     margin-right: 90px
             >div:nth-child(2)
                 position: relative

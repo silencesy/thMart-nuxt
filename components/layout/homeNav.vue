@@ -25,7 +25,7 @@
                         <nuxt-link to="">Family</nuxt-link>
                     </li>
                     <li>
-                        <nuxt-link to="">GroupBuy</nuxt-link>
+                        <nuxt-link :class="{theme_color: $route.path == '/groupBuy/1'}" :to="{name: 'groupBuy-id',params: {id: 1}}">GroupBuy</nuxt-link>
                     </li>
                     <li>
                         <nuxt-link to="/article/articleList" :class="{theme_color: $route.path == '/article/articleList'}">Editor’s Pick</nuxt-link>
