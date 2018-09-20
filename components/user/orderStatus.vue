@@ -66,7 +66,14 @@
                     <span>Final Price</span>
                     <span>Status</span>
                 </div>
-                <div class="details">
+                <div class="details" v-for="item in 2" :key="item">
+                    <div class="titleDetails">
+                        <div>
+                            <span class="iconfont icon--dianpu"></span>
+                            <span>Shop Name</span>
+                        </div>
+                        <div class="iconfont icon-combinedshapefuben"></div>
+                    </div>
                     <div class="detailsLeft">
                         <div class="listPer">
                             <div class="goods">
@@ -246,6 +253,7 @@
             .details 
                 overflow: hidden 
                 border: $border
+                margin-bottom: 15px
                 .detailsLeft
                     float: left
                     overflow: hidden
@@ -355,4 +363,20 @@
                     .iconfont 
                         color: $theme_color
                         padding-left: 50px
+
+    .titleDetails
+        padding-top: 15px
+        padding-bottom: 10px
+        border-bottom: $border
+        cursor: pointer
+        overflow: hidden
+        div:first-child
+            float: left
+            .icon--dianpu
+                padding-left: 15px
+                padding-right: 10px
+                font-size: 21px
+        div:nth-child(2)
+            float: right
+            padding-right: 15px
 </style>

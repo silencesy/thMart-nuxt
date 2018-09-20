@@ -1,8 +1,15 @@
 <template>
 	<div class="cart">
 		<div class="container">
-    		<div class="cartBox">
-    			<p class="title">All Goods</p>
+    		<div class="cartBox" v-for="item in 2" :key="item">
+    			<div class="title">
+    				<div>
+    					<span class="iconfont icon-weixuanzhong"></span>
+    					<span class="iconfont icon--dianpu"></span>
+    					<span>Shop Name</span>
+    				</div>
+    				<div class="iconfont icon-combinedshapefuben"></div>
+    			</div>
     			<p class="titleList">
     				<span>Product Name</span>
     				<span>Price</span>
@@ -134,10 +141,28 @@
 		.container
 			.cartBox
 				border: $border
-				padding: 15px
+				padding: 0 15px 15px 15px
+				margin-bottom: 20px
 				.title 
+					padding-top: 15px
 					padding-bottom: 10px
 					border-bottom: $border
+					cursor: pointer
+					overflow: hidden
+					div:first-child
+						float: left
+						.icon-weixuanzhong 
+							font-size: 21px
+							padding-left: 7px
+							padding-right: 15px
+							vertical-align: middle
+						.icon--dianpu
+							padding-right: 10px
+							font-size: 21px
+					div:nth-child(2)
+						float: right
+
+
 				.titleList
 					padding: 15px 0
 					border-bottom: $border
@@ -164,6 +189,7 @@
 							overflow: hidden
 							width: 345px
 							padding-right: 15px
+							cursor: pointer
 							>div
 								float: left
 							div
@@ -211,7 +237,6 @@
 				border: $border
 				padding: 10px 15px 10px 0
 				overflow: hidden
-				margin-top: 20px
 				.left
 					float: left
 					margin-top: 6px
