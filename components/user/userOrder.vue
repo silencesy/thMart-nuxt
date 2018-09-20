@@ -134,6 +134,7 @@
                         display: block
             .details 
                 overflow: hidden 
+                width: 100%
                 .detailsLeft
                     float: left
                     overflow: hidden
