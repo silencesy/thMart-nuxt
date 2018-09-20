@@ -182,7 +182,6 @@
                         ps.push(ps[j].concat(arr[i]));
                     }
                 }
-
                 return ps;
             },
             /**
