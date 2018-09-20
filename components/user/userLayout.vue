@@ -3,22 +3,22 @@
         <div class="userLeft">
             <ul>
                 <li>
-                    <nuxt-link to="/">
-                        <img src="~/static/images/flower.jpg" alt=""> 
-                        <p>UserName</p>
+                    <nuxt-link to="/userCenter/user">
+                        <img :src="$store.state.headimgurl" alt=""> 
+                        <p>{{$store.state.nickname}}</p>
                     </nuxt-link>
                 </li>
-                <li>
-                    <nuxt-link to="/">User Center</nuxt-link>
+                <li :class="{active: active=='userCenter'}">
+                    <nuxt-link to="/userCenter/user">User Center</nuxt-link>
+                </li>
+                <li :class="{active: active=='userInfo'}">
+                    <nuxt-link to="/userCenter/userinfo">Personal Info</nuxt-link>
+                </li>
+                <li :class="{active: active=='orderList'}">
+                    <nuxt-link to="/userCenter/orderlist">Orders</nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to="/">Personal Info</nuxt-link>
-                </li>
-                <li>
-                    <nuxt-link to="/">Orders</nuxt-link>
-                </li>
-                <li>
-                    <nuxt-link to="/">Cart</nuxt-link>
+                    <nuxt-link to="/userCenter/cart">Cart</nuxt-link>
                 </li>
                 <li>
                     <nuxt-link to="/">Wishlist</nuxt-link>
@@ -38,6 +38,12 @@
 </template>
 <script>
 	export default {
+        props: {
+            active: {
+                type: String,
+                default: 'userCenter'
+            }
+        },
 		data() {
             return {
 
@@ -57,10 +63,11 @@
             padding-top: 20px 
             ul 
                 li
-                    padding: 11px 0 
+                    border-left: 4px solid #eee
                     a 
                         display: inline-block
                         width: 100%
+                        padding: 11px 0
                         img 
                             @include wh(80px, 80px)
                             border-radius: 50%
@@ -73,6 +80,9 @@
                             padding: 0 15px
                 li:first-child 
                     border-bottom: 1px solid #dfdfdf
+                li.active
+                    background-color: #fff
+                    border-left: 4px solid $theme_color
         .userRight  
             width: 1000px
             float: left 

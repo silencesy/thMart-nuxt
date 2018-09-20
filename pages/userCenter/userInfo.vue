@@ -1,14 +1,14 @@
 <template>
 	<div class="user">
 		<div class="container">
-			<userLayout>
+			<userLayout active="userInfo">
 				<div class="userInfo" slot="userContent">
 					<div class="title">Personal Info</div>
 					<div class="info">
 						<div>
 							<span>Profile Photo :</span>
 							<div class="photo">
-								<div><img src="~/static/images/flower.jpg" alt=""></div>
+								<div><img :src="$store.state.headimgurl" alt=""></div>
 								<button class="photoBtn">Edit</button>
 							</div>
 						</div>
@@ -36,6 +36,7 @@
 	import userLayout from "~/components/user/userLayout"
 	export default {
 		layout: 'userHome',
+		middleware: 'userAuth',
 		data() {
 			return {
 				titleIsShow: true,

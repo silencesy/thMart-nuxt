@@ -95,8 +95,8 @@
     			</div>
     			<div class="right">
     				<span>Selected <i>1</i> Goods</span>
-    				<span>Total: <i>¥ 99</i></span>
-    				<i>优惠 <i>¥ 10</i></i>
+    				<span>Total: <i>¥ {{cartData.total}}</i></span>
+    				<i v-if="cartData.reduceTotal!=0">优惠 <i>¥ {{cartData.reduceTotal}}</i></i>
     				<button>Checkout Now</button>
     			</div>
     		</div>
@@ -104,6 +104,8 @@
 	</div>
 </template>
 <script>
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'userHome',
 		data() {
@@ -111,6 +113,11 @@
 				num1: 1,
 				num2: 1,
 			}
+		},
+		middleware: 'userAuth',
+		async asyncData ({app,params,store}) {
+		 	const cartData = await app.$axios.post(interfaceApi.cartList);
+  			return { cartData: cartData.data.data}
 		},
 		components: {
 

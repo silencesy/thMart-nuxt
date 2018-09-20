@@ -1,7 +1,7 @@
 <template>
 	<div class="user">
 		<div class="container">
-			<userLayout>
+			<userLayout active="userCenter">
 				<div class="" slot="userContent">
 					<div class="userTitle">
 		                <ul>
@@ -53,74 +53,23 @@
 			            	<div class="title">Wishlist</div>
 			            	<div class="wishList">
 			            		<div class="wishBox goods">
-				            		<nuxt-link to="/" class="boxPer">
+				            		<nuxt-link v-for="item in goodsList" :key="item.id" :to="{name: 'goods-id', params: {id: item.id}}"  class="boxPer">
 				            			<div>
 					            			<div>
-					            				<img src="~/static/images/flower.jpg" alt="">
+					            				<img :src="item.pic" alt="">
 					            			</div>
-					            			<p>Maxtra Filter Cartridge Filter Cartridge</p>
-					            			<span>¥14999</span>
+					            			<p>{{item.title}}</p>
+					            			<span>¥{{item.price}}</span>
 					            		</div>
-				            		</nuxt-link>
-				            		<nuxt-link to="/" class="boxPer">
-				            			<div>
-					            			<div>
-					            				<img src="~/static/images/flower.jpg" alt="">
-					            			</div>
-					            			<p>Maxtra Filter Cartridge Filter Cartridge</p>
-					            			<span>¥14999</span>
-					            		</div>
-				            		</nuxt-link>
-				            		<nuxt-link to="/" class="boxPer">
-				            			<div>
-					            			<div>
-					            				<img src="~/static/images/flower.jpg" alt="">
-					            			</div>
-					            			<p>Maxtra Filter Cartridge Filter Cartridge</p>
-					            			<span>¥14999</span>
-					            		</div>
-				            		</nuxt-link>
-				            		<nuxt-link to="/" class="boxPer">
-				            			<div>
-					            			<div>
-					            				<img src="~/static/images/flower.jpg" alt="">
-					            			</div>
-					            			<p>Maxtra Filter Cartridge Filter Cartridge</p>
-					            			<span>¥14999</span>
-					            		</div>
-				            		</nuxt-link>									
+				            		</nuxt-link>								
 				            	</div>
 				            	<div class="wishBox shop">
-				            		<nuxt-link to="/" class="boxPer">
+				            		<nuxt-link v-for="item in shopList" :key="item.contentId" :to="{name: 'shop-id',params: {id: item.contentId}}" class="boxPer">
 				            			<div>
 					            			<div>
-					            				<img src="~/static/images/flower.jpg" alt="">
+					            				<img :src="item.pic" alt="">
 					            			</div>
-					            			<p>Maxtra Filter Cartridge Filter Cartridge</p>
-					            		</div>
-				            		</nuxt-link>
-				            		<nuxt-link to="/" class="boxPer">
-				            			<div>
-					            			<div>
-					            				<img src="~/static/images/flower.jpg" alt="">
-					            			</div>
-					            			<p>Maxtra Filter Cartridge Filter Cartridge</p>
-					            		</div>
-				            		</nuxt-link>
-				            		<nuxt-link to="/" class="boxPer">
-				            			<div>
-					            			<div>
-					            				<img src="~/static/images/flower.jpg" alt="">
-					            			</div>
-					            			<p>Maxtra Filter Cartridge Filter Cartridge</p>
-					            		</div>
-				            		</nuxt-link>
-				            		<nuxt-link to="/" class="boxPer">
-				            			<div>
-					            			<div>
-					            				<img src="~/static/images/flower.jpg" alt="">
-					            			</div>
-					            			<p>Maxtra Filter Cartridge Filter Cartridge</p>
+					            			<p>{{item.name}}</p>
 					            		</div>
 				            		</nuxt-link>
 				            	</div>
@@ -136,12 +85,33 @@
 <script>
 	import goodsItem from "~/components/base/goodsItem"
 	import userLayout from "~/components/user/userLayout"
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'userHome',
 		data() {
 			return {
 				titleIsShow: true,
 			}
+		},
+		middleware: 'userAuth',
+		async asyncData ({app}) {
+			const goodsPara = {
+				type: 1,
+				page: 1,
+				pageSize: 4
+			}
+			const shopPara = {
+				type: 2,
+				page: 1,
+				pageSize: 4
+			}
+		 	const goodsList = await app.$axios.post(interfaceApi.CollectList,goodsPara);
+		 	const shopList = await app.$axios.post(interfaceApi.CollectList,shopPara);
+  			return { 
+  				goodsList: goodsList.data.data.data,
+  				shopList: shopList.data.data.data
+  			}
 		},
 		components: {
 			goodsItem, 

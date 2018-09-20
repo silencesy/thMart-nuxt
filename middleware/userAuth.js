@@ -19,7 +19,7 @@ export default function ({route, req, res, redirect}) {
     path = route.path;
   }
   if (path) {
-    redirectURL = '/login?ref=' + encodeURIComponent(path)
+    redirectURL = '/loginModule/login?ref=' + encodeURIComponent(path)
   }
   //需要进行权限判断的页面开头
   if (!token) {
