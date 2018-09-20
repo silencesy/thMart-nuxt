@@ -14,7 +14,7 @@
 				<div class="item">
 					<rank :isShowObj="isShowObj" @Sort = "Sort"/>
 				</div>
-				<groupBuyItem :styleObj="goodsItemStyleObj" :hotData="goodsListData.data"/>
+				<goodsItem :hotData="goodsListData.data"/>
 				<div class="changePage">
 					<el-pagination
 					  	background
@@ -26,14 +26,12 @@
 					</el-pagination>
 				</div>
 			</div>
-			<moreGroupGoods />
 		</div>
 	</div>
 </template>
 <script>
-	import moreGroupGoods from "~/components/base/moreGroupGoods"
 	import rank from "~/components/base/rank"
-	import groupBuyItem from "~/components/base/groupBuyItem"
+	import goodsItem from "~/components/base/goodsItem"
 	// 接口API
 	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
@@ -52,10 +50,6 @@
                     rankSearchIsShow: false,
                     priceIsShow: true,
                     saleIsShow: false
-				},
-				goodsItemStyleObj: {
-					width: '178.5px',
-					height: '275px'
 				},
 				currentPage: 1,
 				param: {
@@ -77,9 +71,8 @@
   			return { goodsListData: goodsListData.data.data }
 		},
 		components: {
-			moreGroupGoods,
 			rank,
-			groupBuyItem
+			goodsItem
 		},
 		mounted() {
 
@@ -148,9 +141,6 @@
 				margin: 0 auto
 		.goodsListBox 
 			overflow: hidden
-			.goodsList
-				float: left
-				width: 942px
 	.bannerPic 
 		width: 100%
 		margin-bottom: 12px
