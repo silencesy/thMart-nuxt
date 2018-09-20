@@ -109,15 +109,17 @@
             padding-top: 5px
     .products
         .countDown
-            @include whch(100%, 26px, center, 27px)
+            @include whch(100%, 26px, center, 26px)
             position: absolute
             top: 150px
             background-color: #FFB510
             color: #fff
             span
-                padding: 2px
+                @include whch(20px, 20px, center, 21px)
                 background-color: #0000005c
+                font-size: 14px
                 border-radius: $border_radius
+                display: inline-block
             i 
                 padding: 0 5px
 </style>

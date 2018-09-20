@@ -117,7 +117,7 @@
                         <div class="right">
                             <div>
                                 <p>¥198</p>
-                                <span>含快递费¥10</span>
+                                <span>RMB10 shipping fee included</span>
                             </div>
                         </div>
                         <div class="right rightBtn">
