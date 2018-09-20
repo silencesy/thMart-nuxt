@@ -1,7 +1,7 @@
 <template>
 	<div class="user">
 		<div class="container">
-			<userLayout>
+			<userLayout active="orderList">
 				<div class="" slot="userContent">
 					<div class="userTitle">
 		                <ul>
@@ -46,6 +46,7 @@
 	import userOrder from "~/components/user/userOrder"
 	export default {
 		layout: 'userHome',
+		middleware: 'userAuth',
 		data() {
 			return {
 				titleIsShow: true,

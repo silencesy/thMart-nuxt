@@ -10,15 +10,15 @@
                     </div>
                     <div class="logged" v-if="$store.state.token">
                         <el-dropdown>
-                            <nuxt-link to="/" class="el-dropdown-link">
+                            <nuxt-link to="/userCenter/user" class="el-dropdown-link">
                                 {{$store.state.nickname}}<i class="el-icon-arrow-down el-icon--right"></i>
                             </nuxt-link>
                             <el-dropdown-menu slot="dropdown">
                                 <div class="dropdownBox">
-                                    <nuxt-link to="/" class="userPic">
+                                    <nuxt-link to="/userCenter/user" class="userPic">
                                         <img :src="$store.state.headimgurl" alt="">
                                     </nuxt-link>
-                                    <nuxt-link to="/" class="info">
+                                    <nuxt-link to="/userCenter/user" class="info">
                                         <p>{{$store.state.nickname}}</p>
                                     </nuxt-link>
                                     <p @click="logout">Log out</p>
@@ -28,11 +28,11 @@
                     </div>
                 </div>
                 <div class="right">
-                    <nuxt-link to="" class="cart">
+                    <nuxt-link to="/userCenter/cart" class="cart">
                         <i class="iconfont icon-gouwuche"></i>Cart
                         <span class="number">12</span>
                     </nuxt-link>
-                    <nuxt-link to="">My Order</nuxt-link>
+                    <nuxt-link to="/userCenter/orderlist">My Order</nuxt-link>
                     <nuxt-link to="">Do Business With Us</nuxt-link>
                 </div>
             </div> 

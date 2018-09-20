@@ -28,6 +28,12 @@ let api = {
 	// 商品详情页
 	goodsDeatail: 'Item/detail',
 	// 获取单个sku
-	getSkuInfo: 'Sku/detail'
+	getSkuInfo: 'Sku/detail',
+	// 购物车列表
+	cartList: 'Cart/list',
+	// 收藏
+	Collect: 'Collect/collect',
+	// 收藏列表
+	CollectList: 'Collect/list'
 }
 export default api
