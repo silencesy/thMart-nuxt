@@ -62,6 +62,9 @@
             },
             searchBtn() {
                 this.$router.push({path: '/searchModeule/search',query: {searchInfo: this.searchText,classification: 'categories'}});
+            },
+            sss() {
+                alert(123);
             }
         }
     }
