@@ -1,6 +1,6 @@
 <template>
 	<div class="user">
-		<orderStatus type="3">
+		<orderStatus type="3" :orderDetails="orderDetails">
 			<div slot="statusInfo" class="statusInfo">
 				<p>
 					<span><img src="~/static/images/icon-yuandian.png" alt="">2018-08-17 14:37:13</span>
@@ -15,6 +15,8 @@
 	</div>
 </template>
 <script>
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	import orderStatus from "~/components/user/orderStatus"
 	export default {
 		layout: 'userHome',
@@ -22,6 +24,17 @@
 			return {
 				
 			}
+		},
+		middleware: 'userAuth',
+		async asyncData ({app,query}) {
+        	console.log(query.orderNumber)
+			let param = {
+				orderNumber: query.orderNumber,
+			}
+		 	const orderDetails = await app.$axios.post(interfaceApi.OrderDetail,param);
+  			return { 
+  				orderDetails: orderDetails.data.data
+  			}
 		},
 		components: {
 			orderStatus

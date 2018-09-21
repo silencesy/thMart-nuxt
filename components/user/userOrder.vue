@@ -2,9 +2,9 @@
     <div class="userOrder">
         <div class="orderDetail">
             <div class="date">
-                <span>2018-08-16 13:94:23</span>
-                <span>Order No. : 2018081523865897</span>
-                <span><i class="iconfont icon--dianpu"></i> Amor flor</span>
+                <!-- <span>2018-08-16 13:94:23</span> -->
+                <span>Order No. : {{orderDataList.orderNumber}}</span>
+                <!-- <span><i class="iconfont icon--dianpu"></i> Amor flor</span> -->
                 <div class="dateRight">
                     <span :class="{status: type=='unpaid'}">Unpaid</span>
                     <span class="del" :class="{status: type=='closed'}"><i class="iconfont icon-shanchu"></i> Closed</span>
@@ -15,69 +15,51 @@
             </div>
             <div class="details">
                 <div class="detailsLeft">
-                    <div class="listPer">
+                    <div class="listPer" v-for="item in orderDataList.skuList" :key="item.skuId">
                         <div class="goods">
-                            <nuxt-link to="/">
-                                <div><img src="~/static/images/flower.jpg" alt=""></div>
+                            <nuxt-link :to="{name: 'goods-id', params: {id: item.goodsId}}">
+                                <div><img :src="item.pic" alt=""></div>
                                 <div>
-                                    <p>Midea Air Fryer, Oil Free Design, Oil Free Design, Model: TN20A</p>
-                                    <span>Color: Black</span>
+                                    <p>{{item.title}}</p>
+                                    <span>
+                                        <i v-for="(val,index) in item.skuPropName" :key="index">
+                                            {{val[0]}}
+                                        </i>
+                                    </span>
                                 </div>
                             </nuxt-link>
                         </div>
                         <div class="price">
                             <div>
-                                <span>¥99</span>
-                                <del>¥129</del>
+                                <span>¥{{item.price}}</span>
+                                <!-- <del>¥129</del> -->
                             </div>
                         </div>
                         <div class="number price">
                             <div>
-                                <span>2</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="listPer">
-                        <div class="goods">
-                            <nuxt-link to="/">
-                                <div><img src="~/static/images/flower.jpg" alt=""></div>
-                                <div>
-                                    <p>Midea Air Fryer, Oil Free Design, Oil Free Design, Model: TN20A</p>
-                                    <span>Color: Black</span>
-                                </div>
-                            </nuxt-link>
-                        </div>
-                        <div class="price">
-                            <div>
-                                <span>¥99</span>
-                                <del>¥129</del>
-                            </div>
-                        </div>
-                        <div class="number price">
-                            <div>
-                                <span>2</span>
+                                <span>{{item.number}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="detailsRight">
-                    <div class="right">
+                    <div class="right" :style="{height: 114.5*orderDataList.skuList.length + 'px'}">
                         <div>
-                            <p>¥198</p>
-                            <span>RMB10 shipping fee included</span>
+                            <p>¥{{orderDataList.priceTotal}}</p>
+                            <span v-if="orderDataList.feeTotal != 0">RMB10 shipping fee included</span>
                         </div>
                     </div>
-                    <div class="right rightBtn">
+                    <div class="right rightBtn" :style="{height: 114.5*orderDataList.skuList.length + 'px'}">
                         <div :class="{statusBtn: flag=='pay'}">
                             <button class="redColor">Pay</button>
-                            <button class="greyColor">Details</button>  
+                            <button class="greyColor" @click="goDetails(orderDataList.status,orderDataList.orderNumber)">Details</button>  
                         </div>
                         <div :class="{statusBtn: flag=='details'}">
-                            <button class="greyColor">Details</button>
+                            <button class="greyColor" @click="goDetails(orderDataList.status,orderDataList.orderNumber)">Details</button>
                         </div>
                         <div :class="{statusBtn: flag=='track'}">
-                            <button class="greyColor">Details</button>
-                            <nuxt-link to="/" >Tracking your Order >></nuxt-link>
+                            <button class="greyColor" @click="goDetails(orderDataList.status,orderDataList.orderNumber)">Details</button>
+                            <!-- <nuxt-link to="/" >Tracking your Order >></nuxt-link> -->
                         </div>
                     </div>
                 </div>
@@ -89,17 +71,39 @@
 	export default {
         props: {
             flag: {
-                type: [Number,String],
+                type: String,
                 default: 'pay'
             },
             type: {
-                type: [Number,String],
+                type: String,
                 default: 'unpaid'
             },
+            orderDataList: {
+                type: Object,
+                default: function() {
+                    return {}
+                }
+            }
         },
-	   data() {
+	    data() {
             return {
 
+            }
+        },
+        methods: {
+            // 跳转详情页
+            goDetails(status,orderNumber) {
+                if (status == 0) { // 未支付
+                    this.$router.push({path: '/userCenter/orderStatus/orderUnpaid',query: {orderNumber: orderNumber}})
+                } else if (status == 1) { // 支付
+                    this.$router.push({path: '/userCenter/orderStatus/orderPaid',query: {orderNumber: orderNumber}}) 
+                } else if (status == 2) {// 运输中
+                    this.$router.push({path: '/userCenter/orderStatus/orderProgress',query: {orderNumber: orderNumber}})
+                } else if (status == 3) { // 到货
+                    this.$router.push({path: '/userCenter/orderStatus/orderShipped',query: {orderNumber: orderNumber}})
+                } else if (status == 4) { // 关闭
+                    this.$router.push({path: '/userCenter/orderStatus/orderClosed',query: {orderNumber: orderNumber}})
+                }
             }
         }
 	}
@@ -198,7 +202,7 @@
                     float: left
                     .right 
                         float: left
-                        @include wh(152px, 229px) 
+                        width: 152px
                         position: relative
                         >div
                             @include center

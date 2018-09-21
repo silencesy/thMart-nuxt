@@ -15,7 +15,7 @@
                     <nuxt-link to="/userCenter/userinfo">Personal Info</nuxt-link>
                 </li>
                 <li :class="{active: active=='orderList'}">
-                    <nuxt-link to="/userCenter/orderlist">Orders</nuxt-link>
+                    <nuxt-link to="/userCenter/orderlist/all">Orders</nuxt-link>
                 </li>
                 <li>
                     <nuxt-link to="/userCenter/cart">Cart</nuxt-link>

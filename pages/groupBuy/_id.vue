@@ -5,7 +5,7 @@
 		<div class="bread">
 			<el-breadcrumb separator-class="el-icon-arrow-right">
 			  <el-breadcrumb-item to="/">Home</el-breadcrumb-item>
-			  <el-breadcrumb-item>Flowers
+			  <el-breadcrumb-item>GroupBuy
 			  </el-breadcrumb-item>
 			</el-breadcrumb>
 		</div>

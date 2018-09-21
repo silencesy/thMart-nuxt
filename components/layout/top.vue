@@ -32,7 +32,7 @@
                         <i class="iconfont icon-gouwuche"></i>Cart
                         <span class="number">12</span>
                     </nuxt-link>
-                    <nuxt-link to="/userCenter/orderlist">My Order</nuxt-link>
+                    <nuxt-link to="/userCenter/orderList/all">My Order</nuxt-link>
                     <nuxt-link to="">Do Business With Us</nuxt-link>
                 </div>
             </div> 

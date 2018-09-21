@@ -3,8 +3,8 @@
         <div class="bread">
             <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item to="/userCenter/user">User Center</el-breadcrumb-item>
-              <el-breadcrumb-item>Orders</el-breadcrumb-item>
-              <el-breadcrumb-item>Order No. :2018081523864839</el-breadcrumb-item>
+              <el-breadcrumb-item to="/userCenter/orderlist/unpaid"><a>Orders</a></el-breadcrumb-item>
+              <el-breadcrumb-item>Order No. :{{orderDetails.orderNumber}}</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="container statusContainer">
@@ -37,20 +37,21 @@
                             <span>Ordered :</span>
                             <span>Receiver :</span>
                             <span class="address">Address :</span>
-                            <span>Shipping :</span>
-                            <span>Quantity Discount :</span>
-                            <span>thMart-Coupons :</span>
+                            <span v-if="orderDetails.feeTotal!=0">Shipping :</span>
+                            <!-- <span>Quantity Discount :</span> -->
+                            <!-- <span>thMart-Coupons :</span> -->
                             <span>Final Price :</span>
                         </div>
                         <div class="right">
-                            <span>2017121245326</span>
-                            <span>2018-08-08 15:23:45</span>
-                            <span>Amanda 136****3567</span>
-                            <span class="address">上海市黄浦区蒙自路169号智造局一期 2号楼305</span>
-                            <span>¥ 10</span>
-                            <span>¥ 10</span>
-                            <span>¥ 5</span>
-                            <span>¥ 398</span>
+                            <span>{{orderDetails.orderNumber}}</span>
+                            <span>{{orderDetails.orderTime}}</span>
+                            <span>{{orderDetails.fullName}} {{orderDetails.phone}}</span>
+                            <span class="address">{{orderDetails.province}}{{orderDetails.city}}{{orderDetails.regionDetail}}</span>
+                            <span v-if="orderDetails.feeTotal!=0">¥ {{orderDetails.feeTotal}}</span>
+                            <!-- <span>¥ 10</span> -->
+                            <!-- <span>¥ 5</span> -->
+                            <span>¥ {{orderDetails.priceTotal}} <button v-if="orderDetails.status == 0" class="redColor">Pay</button></span>
+
                         </div>
                     </div>
                     <div class="statusRight">
@@ -66,33 +67,38 @@
                     <span>Tracking your Order</span>
                     <span>Final Price</span>
                 </div>
-                <div class="details" v-for="item in 2" :key="item">
+                <div class="details" v-for="(item,index) in orderDetails.data.brand" :key="index">
                     <div class="titleDetails">
                         <div>
                             <span class="iconfont icon--dianpu"></span>
-                            <span>Shop Name</span>
+                            <span>{{item.brandName}}</span>
                         </div>
                         <div class="iconfont icon-combinedshapefuben"></div>
                     </div>
                     <div class="detailsLeft">
-                        <div class="listPer">
+                        <div class="listPer" v-for="val in item.data" :key="val.skuId">
                             <div class="goods">
-                                <nuxt-link to="/">
-                                    <div><img src="~/static/images/flower.jpg" alt=""></div>
+                                <nuxt-link :to="{name: 'goods-id', params: {id: val.goodsId}}">
+                                    <div><img :src="val.pic" alt=""></div>
                                     <div>
-                                        <p>Midea Air Fryer, Oil Free Design, Oil Free Design, Model: TN20A</p>
-                                        <span>Color: Black</span>
+                                        <p>{{val.title}}</p>
+                                        <span>
+                                            <i v-for="(value,index) in val.skuPropName" :key="index">
+                                                {{value[0]}}
+                                            </i>
+                                        </span>
                                     </div>
                                 </nuxt-link>
                             </div>
                             <div class="price">
                                 <div>
-                                    <span>¥99</span>
-                                    <del>¥129</del>
+                                    <span>¥{{val.price}}</span>
+                                    <!-- <del>¥129</del> -->
                                 </div>
                             </div>
                             <div class="number price">
                                 <div>
+<<<<<<< HEAD
                                     <span>2</span>
                                 </div>
                             </div>
@@ -121,6 +127,9 @@
                             <div class="number price">
                                 <div>
                                     <span>2</span>
+=======
+                                    <span>{{val.number}}</span>
+>>>>>>> 5e9cb9e16a224ffd7ba6cdd630cdaa4fe95112f1
                                 </div>
                             </div>
                             <div class="wuliu wuliuGrey price">
@@ -131,13 +140,17 @@
                         </div>                        
                     </div>
                     <div class="detailsRight">
-                        <div class="right">
+                        <div class="right" :style="{height: item.data.length * 114.5 + 'px'}">
                             <div>
-                                <p>¥198</p>
-                                <span>RMB10 shipping fee included</span>
+                                <p>¥ 123</p>
+                                <!-- <span>RMB10 shipping fee included</span> -->
                             </div>
                         </div>
+<<<<<<< HEAD
 <!--                         <div class="right rightBtn">
+=======
+                        <div class="right rightBtn"  :style="{height: item.data.length * 114.5 + 'px'}">
+>>>>>>> 5e9cb9e16a224ffd7ba6cdd630cdaa4fe95112f1
                             <div :class="{statusBtn: flag=='pay'}">
                                 <button class="redColor">Pay</button> 
                             </div>
@@ -157,12 +170,18 @@
 	export default {
         props: {
             type: {
-                type: [Number,String],
+                type: String,
                 default: ' '
             },
             flag: {
-                type: [Number,String],
+                type: String,
                 default: ' '
+            },
+            orderDetails: {
+                type: Object,
+                default: function() {
+                    return {}
+                }
             }
         },
 	   data() {
@@ -174,6 +193,10 @@
 </script>
 <style lang='sass' type="text/css" scoped>
     @import '~/assets/sass/common.sass' 
+    .redColor
+        background-color: $theme_color
+        @include sc(16px, #fff)
+        padding: 10px 20px
     .iconfont.icon-jindutiao1-copy
         color: #dfdfdf
         padding: 17px 20px 0 20px
@@ -342,7 +365,11 @@
                     float: left
                     .right 
                         float: left
+<<<<<<< HEAD
                         @include wh(175px, 229px) 
+=======
+                        width: 185px
+>>>>>>> 5e9cb9e16a224ffd7ba6cdd630cdaa4fe95112f1
                         position: relative
                         >div
                             @include center
@@ -362,9 +389,7 @@
                                 @include whch(100px, 30px, center, 30px)
                                 border-radius: $border_radius
                                 margin-bottom: 15px
-                            .redColor
-                                background-color: $theme_color
-                                @include sc(16px, #fff)
+                            
                             .greyColor
                                 background-color: #fff 
                                 border: $border

@@ -6,19 +6,19 @@
 					<div class="userTitle">
 		                <ul>
 		                    <li>
-		                        <nuxt-link to="/">All</nuxt-link>
+		                        <nuxt-link to="/userCenter/orderlist/all">All</nuxt-link>
 		                    </li>
 		                    <li>
-		                        <nuxt-link to="/">Unpaid</nuxt-link>
+		                        <nuxt-link to="/userCenter/orderlist/unpaid">Unpaid</nuxt-link>
 		                    </li>
 		                    <li>
-		                        <nuxt-link to="/">Unshipped</nuxt-link>
+		                        <nuxt-link to="/userCenter/orderlist/unshipped">Unshipped</nuxt-link>
 		                    </li>
 		                    <li>
-		                        <nuxt-link to="/">In Progress</nuxt-link>
+		                        <nuxt-link to="/userCenter/orderlist/progress">In Progress</nuxt-link>
 		                    </li>
 		                    <li>
-		                        <nuxt-link to="/">Shipped</nuxt-link>
+		                        <nuxt-link to="/userCenter/orderlist/shipped">Shipped</nuxt-link>
 		                    </li>
 		                </ul>               
 		            </div>
