@@ -63,8 +63,8 @@
                     <span>Product Name</span>
                     <span>Price</span>
                     <span>Quantity</span>
+                    <span>Tracking your Order</span>
                     <span>Final Price</span>
-                    <span>Status</span>
                 </div>
                 <div class="details" v-for="item in 2" :key="item">
                     <div class="titleDetails">
@@ -96,6 +96,11 @@
                                     <span>2</span>
                                 </div>
                             </div>
+                            <div class="wuliu price">
+                                <div>
+                                    <a>Tracking your Order</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="listPer">
                             <div class="goods">
@@ -118,7 +123,12 @@
                                     <span>2</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="wuliu wuliuGrey price">
+                                <div>
+                                    <a>Tracking your Order</a>
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
                     <div class="detailsRight">
                         <div class="right">
@@ -127,11 +137,11 @@
                                 <span>RMB10 shipping fee included</span>
                             </div>
                         </div>
-                        <div class="right rightBtn">
+<!--                         <div class="right rightBtn">
                             <div :class="{statusBtn: flag=='pay'}">
                                 <button class="redColor">Pay</button> 
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -245,11 +255,12 @@
                     span 
                         color: #666
                         display: inline-block
-                        width: 190px
+                        width: 195px
                         text-align: center
                     span:first-child
-                        width: 408px
-
+                        width: 405px
+                    span:last-child
+                        width: 175px
             .details 
                 overflow: hidden 
                 border: $border
@@ -310,6 +321,20 @@
                             >div 
                                 span 
                                     color: #666
+                        .wuliu 
+                            >div 
+                                a 
+                                    display: inline-block
+                                    @include whch(145px, 30px, center, 30px)
+                                    @include sc(14px, #fff)
+                                    background-color: #F9421E
+                                    border-radius: 4px 
+                                    cursor: pointer
+                        .wuliuGrey
+                            >div 
+                                a 
+                                    background-color: #ccc
+                                    cursor: default                                    
                     .listPer:last-child 
                         border-bottom: none
                 .detailsRight 
@@ -317,12 +342,11 @@
                     float: left
                     .right 
                         float: left
-                        @include wh(185px, 229px) 
+                        @include wh(175px, 229px) 
                         position: relative
                         >div
                             @include center
                     .right:first-child
-                        border-right: $border
                         text-align: center 
                         p 
                             color: $theme_color
@@ -379,4 +403,6 @@
         div:nth-child(2)
             float: right
             padding-right: 15px
+
+
 </style>
