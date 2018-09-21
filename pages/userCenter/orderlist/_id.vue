@@ -54,7 +54,19 @@
 					
 				</div>
 			</userLayout>
+			<div class="changePage" v-if="totalPage!=0">
+				<el-pagination
+				  	background
+				  	layout="prev, pager, next"
+				  	:current-page.sync="currentPage"
+					@size-change="handleSizeChange"
+      				@current-change="handleCurrentChange"
+				  	:total="totalPage * 10">
+				</el-pagination>
+			</div>
 			<goodsItem :titleIsShow="titleIsShow" />
+
+
 		</div>
 	</div>
 </template>
@@ -74,7 +86,8 @@
 		data() {
 			return {
 				titleIsShow: true,
-				status: ''
+				status: '',
+				currentPage: 1
 			}
 		},
 		async asyncData ({app,params}) {
@@ -94,14 +107,15 @@
 			const param = {
 				status: status,
 				page: 1,
-				pageSize: 100
+				pageSize: 5
 			}
 		 	// const goodsList = await app.$axios.post(interfaceApi.CollectList,goodsPara);
 		 	const orderList = await app.$axios.post(interfaceApi.orderList,param);
   			return {
   				active: params.id,
   				status: status,
-  				orderList: orderList.data.data.data
+  				orderList: orderList.data.data.data,
+  				totalPage: orderList.data.data.totalPage
   			}
 		},
 		components: {
@@ -117,7 +131,32 @@
 		    
 	  	},
 		methods: {
-
+			// 获取数据
+			getData(val) {
+				var that = this;
+				const param = {
+					status: that.status,
+					page: val,
+					pageSize: 5
+				}
+				that.$axios.post(interfaceApi.orderList,param).then(res=> {
+					that.orderList = res.data.data.data;
+				})
+			},
+			// 回到顶部
+			goBackTop() {
+				document.body.scrollTop = 0
+				document.documentElement.scrollTop = 0
+			},
+			// 改变页数
+			handleSizeChange(val) {
+		        this.getData(val);
+		    },
+		    // 上下页
+		    handleCurrentChange(val) {
+		        this.goBackTop();
+		        this.getData(val);
+		    }
 		}
 	}
 </script>

@@ -3,7 +3,11 @@
         <div class="bread">
             <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item to="/userCenter/user">User Center</el-breadcrumb-item>
-              <el-breadcrumb-item to="/userCenter/orderlist/unpaid"><a>Orders</a></el-breadcrumb-item>
+              <el-breadcrumb-item v-if="orderDetails.status == 4" to="/userCenter/orderlist/all"><a>Orders</a></el-breadcrumb-item>
+              <el-breadcrumb-item v-if="orderDetails.status == 0" to="/userCenter/orderlist/unpaid"><a>Orders</a></el-breadcrumb-item>
+              <el-breadcrumb-item  v-if="orderDetails.status == 1" to="/userCenter/orderlist/unshipped"><a>Orders</a></el-breadcrumb-item>
+              <el-breadcrumb-item  v-if="orderDetails.status == 2" to="/userCenter/orderlist/progress"><a>Orders</a></el-breadcrumb-item>
+              <el-breadcrumb-item  v-if="orderDetails.status == 3" to="/userCenter/orderlist/shipped"><a>Orders</a></el-breadcrumb-item>
               <el-breadcrumb-item>Order No. :{{orderDetails.orderNumber}}</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -35,6 +39,8 @@
                         <div class="left">
                             <span>Order No. :</span>
                             <span>Ordered :</span>
+                            <span v-if="orderDetails.payTime != 0">payTime :</span>
+                            <span v-if="orderDetails.sendTime != 0">sendTime :</span>
                             <span>Receiver :</span>
                             <span class="address">Address :</span>
                             <span v-if="orderDetails.feeTotal!=0">Shipping :</span>
@@ -45,6 +51,8 @@
                         <div class="right">
                             <span>{{orderDetails.orderNumber}}</span>
                             <span>{{orderDetails.orderTime}}</span>
+                            <span v-if="orderDetails.payTime != 0">{{orderDetails.payTime}}</span>
+                            <span v-if="orderDetails.sendTime != 0">{{orderDetails.sendTime}}</span>
                             <span>{{orderDetails.fullName}} {{orderDetails.phone}}</span>
                             <span class="address">{{orderDetails.province}}{{orderDetails.city}}{{orderDetails.regionDetail}}</span>
                             <span v-if="orderDetails.feeTotal!=0">¥ {{orderDetails.feeTotal}}</span>
