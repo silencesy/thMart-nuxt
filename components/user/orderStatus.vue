@@ -106,7 +106,6 @@
                             </div>
                             <div class="number price">
                                 <div>
-<<<<<<< HEAD
                                     <span>2</span>
                                 </div>
                             </div>
@@ -116,53 +115,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="listPer">
-                            <div class="goods">
-                                <nuxt-link to="/">
-                                    <div><img src="~/static/images/flower.jpg" alt=""></div>
-                                    <div>
-                                        <p>Midea Air Fryer, Oil Free Design, Oil Free Design, Model: TN20A</p>
-                                        <span>Color: Black</span>
-                                    </div>
-                                </nuxt-link>
-                            </div>
-                            <div class="price">
-                                <div>
-                                    <span>¥99</span>
-                                    <del>¥129</del>
-                                </div>
-                            </div>
-                            <div class="number price">
-                                <div>
-                                    <span>2</span>
-=======
-                                    <span>{{val.number}}</span>
->>>>>>> 5e9cb9e16a224ffd7ba6cdd630cdaa4fe95112f1
-                                </div>
-                            </div>
-                            <div class="wuliu wuliuGrey price">
-                                <div>
-                                    <a>Tracking your Order</a>
-                                </div>
-                            </div>
-                        </div>                        
+                                              
                     </div>
                     <div class="detailsRight">
-                        <div class="right" :style="{height: item.data.length * 114.5 + 'px'}">
+                        <div class="right" :style="{height: item.data.length * 114 + 'px'}">
                             <div>
                                 <p>¥ 123</p>
                                 <!-- <span>RMB10 shipping fee included</span> -->
                             </div>
                         </div>
-<<<<<<< HEAD
-<!--                         <div class="right rightBtn">
-=======
-                        <div class="right rightBtn"  :style="{height: item.data.length * 114.5 + 'px'}">
->>>>>>> 5e9cb9e16a224ffd7ba6cdd630cdaa4fe95112f1
-                            <div :class="{statusBtn: flag=='pay'}">
-                                <button class="redColor">Pay</button> 
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -373,11 +334,7 @@
                     float: left
                     .right 
                         float: left
-<<<<<<< HEAD
-                        @include wh(175px, 229px) 
-=======
-                        width: 185px
->>>>>>> 5e9cb9e16a224ffd7ba6cdd630cdaa4fe95112f1
+                        width: 175px
                         position: relative
                         >div
                             @include center
