@@ -72,8 +72,8 @@
                     <span>Product Name</span>
                     <span>Price</span>
                     <span>Quantity</span>
+                    <span>Tracking your Order</span>
                     <span>Final Price</span>
-                    <span>Status</span>
                 </div>
                 <div class="details" v-for="(item,index) in orderDetails.data.brand" :key="index">
                     <div class="titleDetails">
@@ -106,10 +106,46 @@
                             </div>
                             <div class="number price">
                                 <div>
-                                    <span>{{val.number}}</span>
+<<<<<<< HEAD
+                                    <span>2</span>
+                                </div>
+                            </div>
+                            <div class="wuliu price">
+                                <div>
+                                    <a>Tracking your Order</a>
                                 </div>
                             </div>
                         </div>
+                        <div class="listPer">
+                            <div class="goods">
+                                <nuxt-link to="/">
+                                    <div><img src="~/static/images/flower.jpg" alt=""></div>
+                                    <div>
+                                        <p>Midea Air Fryer, Oil Free Design, Oil Free Design, Model: TN20A</p>
+                                        <span>Color: Black</span>
+                                    </div>
+                                </nuxt-link>
+                            </div>
+                            <div class="price">
+                                <div>
+                                    <span>¥99</span>
+                                    <del>¥129</del>
+                                </div>
+                            </div>
+                            <div class="number price">
+                                <div>
+                                    <span>2</span>
+=======
+                                    <span>{{val.number}}</span>
+>>>>>>> 5e9cb9e16a224ffd7ba6cdd630cdaa4fe95112f1
+                                </div>
+                            </div>
+                            <div class="wuliu wuliuGrey price">
+                                <div>
+                                    <a>Tracking your Order</a>
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
                     <div class="detailsRight">
                         <div class="right" :style="{height: item.data.length * 114.5 + 'px'}">
@@ -118,11 +154,15 @@
                                 <!-- <span>RMB10 shipping fee included</span> -->
                             </div>
                         </div>
+<<<<<<< HEAD
+<!--                         <div class="right rightBtn">
+=======
                         <div class="right rightBtn"  :style="{height: item.data.length * 114.5 + 'px'}">
+>>>>>>> 5e9cb9e16a224ffd7ba6cdd630cdaa4fe95112f1
                             <div :class="{statusBtn: flag=='pay'}">
                                 <button class="redColor">Pay</button> 
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -246,11 +286,12 @@
                     span 
                         color: #666
                         display: inline-block
-                        width: 190px
+                        width: 195px
                         text-align: center
                     span:first-child
-                        width: 408px
-
+                        width: 405px
+                    span:last-child
+                        width: 175px
             .details 
                 overflow: hidden 
                 border: $border
@@ -311,6 +352,20 @@
                             >div 
                                 span 
                                     color: #666
+                        .wuliu 
+                            >div 
+                                a 
+                                    display: inline-block
+                                    @include whch(145px, 30px, center, 30px)
+                                    @include sc(14px, #fff)
+                                    background-color: #F9421E
+                                    border-radius: 4px 
+                                    cursor: pointer
+                        .wuliuGrey
+                            >div 
+                                a 
+                                    background-color: #ccc
+                                    cursor: default                                    
                     .listPer:last-child 
                         border-bottom: none
                 .detailsRight 
@@ -318,12 +373,15 @@
                     float: left
                     .right 
                         float: left
+<<<<<<< HEAD
+                        @include wh(175px, 229px) 
+=======
                         width: 185px
+>>>>>>> 5e9cb9e16a224ffd7ba6cdd630cdaa4fe95112f1
                         position: relative
                         >div
                             @include center
                     .right:first-child
-                        border-right: $border
                         text-align: center 
                         p 
                             color: $theme_color
@@ -378,4 +436,6 @@
         div:nth-child(2)
             float: right
             padding-right: 15px
+
+
 </style>
