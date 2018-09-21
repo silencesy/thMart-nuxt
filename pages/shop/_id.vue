@@ -33,11 +33,16 @@
 				
 			}
 		},
-		async asyncData ({app,params,store}) {
-		 	const shopData = await app.$axios.post(interfaceApi.shop,{
-		 		id: params.id
-		 	});
-  			return { shopData: shopData.data.data}
+		async asyncData ({app,params,store,redirect}) {
+			try {
+				const shopData = await app.$axios.post(interfaceApi.shop,{
+			 		id: params.id
+			 	});
+	  			return { shopData: shopData.data.data}
+			} catch(e) {
+				redirect('/')
+			}
+		 	
 		},
 		components: {
 			shopNav,

@@ -34,6 +34,10 @@ let api = {
 	// 收藏
 	Collect: 'Collect/collect',
 	// 收藏列表
-	CollectList: 'Collect/list'
+	CollectList: 'Collect/list',
+	// 订单列表
+	orderList: 'Order/list',
+	// 订单详情页
+	OrderDetail: 'Order/detail'
 }
 export default api

@@ -15,7 +15,7 @@
 						<div>
 							<span>Username :</span>
 							<div class="name">
-								<span>Amanda<i class="iconfont icon-bianji"></i></span>
+								<span>{{$store.state.nickname}}<i class="iconfont icon-bianji"></i></span>
 							</div>
 						</div>
 						<div>
