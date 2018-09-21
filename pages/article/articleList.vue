@@ -127,5 +127,6 @@
 			.articleList
 				float: left
 				width: 942px
-
+		.item 
+			margin-bottom: 15px
 </style>
