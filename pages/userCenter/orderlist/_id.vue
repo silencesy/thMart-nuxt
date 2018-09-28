@@ -45,13 +45,9 @@
 						<div v-else-if="item.status == 4">
 							<userOrder :orderDataList="item" flag="details" type="closed" />
 						</div>
-						<!-- <userOrder flag="pay" type="unpaid" />
-						<userOrder flag="details" type="closed" />
-						<userOrder flag="details" type="unshipped" />
-						<userOrder flag="track" type="progress" />
-						<userOrder flag="track" type="shipped" /> -->
 					</div>
-					
+					<!-- 没有订单的情况 -->
+					<!-- <div class="noOrderList"><p>No more order</p></div>-->
 				</div>
 			</userLayout>
 			<div class="changePage" v-if="totalPage!=0">
@@ -65,8 +61,6 @@
 				</el-pagination>
 			</div>
 			<goodsItem :titleIsShow="titleIsShow" />
-
-
 		</div>
 	</div>
 </template>
@@ -198,4 +192,10 @@
 					padding: 15px 0 
 				span:first-child 
 					width: 320px
+	.noOrderList
+		position: relative
+		height: 311px
+		p 
+			@include center
+			color: #999
 </style>

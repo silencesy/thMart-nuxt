@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <nuxt-link to="/userCenter/user">
-                        <img :src="$store.state.headimgurl" alt=""> 
+                        <div class="hasImg"><img :src="$store.state.headimgurl" alt=""></div>
                         <p>{{$store.state.nickname}}</p>
                     </nuxt-link>
                 </li>
@@ -21,13 +21,13 @@
                     <nuxt-link to="/userCenter/cartModule/cart">Cart</nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to="/">Wishlist</nuxt-link>
+                    <nuxt-link to="/userCenter/wish/wish">Wishlist</nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to="/">thMart-Coupons</nuxt-link>
+                    <nuxt-link to="/userCenter/coupons/coupons">thMart-Coupons</nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to="/">Address Book</nuxt-link>
+                    <nuxt-link to="/userCenter/address/addressList">Address Book</nuxt-link>
                 </li>
             </ul>
         </div>
@@ -35,7 +35,7 @@
             <slot name="userContent"></slot>           
         </div>
     </div>
-</template>
+</template> 
 <script>
 	export default {
         props: {
@@ -68,11 +68,14 @@
                         display: inline-block
                         width: 100%
                         padding: 11px 0
-                        img 
+                        .hasImg
+                            display: inline-block
                             @include wh(80px, 80px)
-                            border-radius: 50%
-                            text-align: center
-                            margin-bottom: 5px
+                            img 
+                                @include wh(80px, 80px)
+                                border-radius: 50%
+                                text-align: center
+                                margin-bottom: 5px
                         p 
                             white-space: nowrap
                             text-overflow: ellipsis

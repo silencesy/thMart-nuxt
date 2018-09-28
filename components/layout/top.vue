@@ -16,7 +16,7 @@
                             <el-dropdown-menu slot="dropdown">
                                 <div class="dropdownBox">
                                     <nuxt-link to="/userCenter/user" class="userPic">
-                                        <img :src="$store.state.headimgurl" alt="">
+                                        <div class="headImg"><img :src="$store.state.headimgurl" alt=""></div>
                                     </nuxt-link>
                                     <nuxt-link to="/userCenter/user" class="info">
                                         <p>{{$store.state.nickname}}</p>
@@ -134,9 +134,12 @@
             display: inline-block
         .userPic
             margin-right: 10px
-            img 
+            .headImg
+                display: inline-block 
                 @include wh(60px, 60px)
-                border-radius: 50%
+                img 
+                    @include wh(60px, 60px)
+                    border-radius: 50%
         .info
             p:first-child
                 margin-top: 10px
