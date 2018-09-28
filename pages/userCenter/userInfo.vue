@@ -65,7 +65,7 @@
 		.container
 			.userInfo
 				.title
-					padding-bottom: 15px 
+					padding-bottom: 13px 
 					border-bottom: $border
 				.info 
 					margin-top: 20px

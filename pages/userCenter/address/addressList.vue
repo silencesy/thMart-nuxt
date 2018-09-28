@@ -5,7 +5,7 @@
 				<div class="addressList" slot="userContent">
 					<div class="title">
 						<span>Address Book</span>
-						<nuxt-link to="/">+ Add New Shipping Address</nuxt-link>
+						<nuxt-link to="/userCenter/address/addAddress">+ Add New Shipping Address</nuxt-link>
 					</div>
 					<div class="addressBox">
 						<div class="box">

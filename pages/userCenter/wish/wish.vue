@@ -75,7 +75,7 @@
 		.container
 			.wish
 				.title
-					padding-bottom: 15px 
+					padding-bottom: 13px 
 					border-bottom: $border
 				.section
 	 				.box	 				
