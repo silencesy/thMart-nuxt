@@ -18,7 +18,7 @@
                     <nuxt-link to="/userCenter/orderlist/all">Orders</nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to="/userCenter/cart">Cart</nuxt-link>
+                    <nuxt-link to="/userCenter/cartModule/cart">Cart</nuxt-link>
                 </li>
                 <li>
                     <nuxt-link to="/">Wishlist</nuxt-link>

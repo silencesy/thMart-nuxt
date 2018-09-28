@@ -38,6 +38,14 @@ let api = {
 	// 订单列表
 	orderList: 'Order/list',
 	// 订单详情页
-	OrderDetail: 'Order/detail'
+	OrderDetail: 'Order/detail',
+	/**
+	 * 购物车
+	 */
+	changeSelectAndTotalPrice: 'Cart/changeSelectAndTotalPrice',
+	// 修改购物车数量
+	editNumber: 'Cart/editNumber',
+	// 删除
+	cartDelete: 'Cart/delete'
 }
 export default api

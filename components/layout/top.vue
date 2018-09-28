@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="right">
-                    <nuxt-link to="/userCenter/cart" class="cart">
+                    <nuxt-link to="/userCenter/cartModule/cart" class="cart">
                         <i class="iconfont icon-gouwuche"></i>Cart
                         <span class="number">12</span>
                     </nuxt-link>

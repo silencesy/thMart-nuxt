@@ -11,32 +11,17 @@
 	</div>
 </template>
 <script>
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'userHome',
-		// head: {
-		//     title: 'thmart',
-		//     meta: [
-		//       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
-		//     ]
-		// },
-		// middleware: 'userAuth',
-		data() {
-			return {
-
-			}
-		},
-		components: {
-
-		},
-		mounted() {
-
-			
-		},
-	  	computed: {  
-		    
-	  	},
-		methods: {
-
+		middleware: 'userAuth',
+		async asyncData ({app,params,store,redirect}) {
+		 	const dataList = await app.$axios.post(interfaceApi.cartList);
+		 	// 如果购物车数量为0，则跳转空购物车
+		 	if (dataList.data.data.data.length > 0) {
+		 		redirect('/userCenter/cartModule/cart');
+		 	}
 		}
 	}
 </script>
