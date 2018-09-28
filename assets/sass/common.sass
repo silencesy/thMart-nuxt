@@ -39,13 +39,29 @@ input
 table 
 	border-collapse: collapse
 	border-spacing: 0
+textarea
+	outline: none
+	padding: 5px
+	resize: none
+	border: 1px solid #dfdfdf
+	font-family: "Arial"
 // 没有数据
 .no-result
 	text-align: center
 	padding: 20px
 	background-color: #eee
 	color: #666
+//重置element样式
+.el-tabs__item.is-active 
+    color: #f9421e
+.el-tabs__active-bar
+	background-color: #f9421e
+.el-tabs__item:hover
+	color: #f9421e
 
+//收藏页面
+.wish .el-tabs__item
+	font-size: 16px
 //登陆页面
 .loginBox .el-tabs__nav 
 	width: 100%

@@ -27,7 +27,6 @@
 			}
 		},
 		async asyncData ({app,query}) {
-        	console.log(query.orderNumber)
 			let param = {
 				orderNumber: query.orderNumber,
 			}

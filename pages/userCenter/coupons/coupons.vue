@@ -1,11 +1,11 @@
 <template>
-	<div class="user">
+	<div class="coupons">
 		<div class="container">
 			<userLayout>
-				<div class="userInfo" slot="userContent">
-					<div class="title">Personal Info</div>
-					<div>
-						
+				<div class="couponsContent" slot="userContent">
+					<div class="title">thMart-Coupons</div>
+					<div class="noCoupons">
+						<p>More coupons are on the way!</p>
 					</div>
 				</div>
 			</userLayout>
@@ -42,12 +42,18 @@
 
 <style lang='sass' scoped>
 	@import '~/assets/sass/common.sass'
-	.user 
+	.coupons 
 		.container
-			.userInfo
+			.couponsContent
 				.title
 					padding-bottom: 15px 
 					border-bottom: $border
+				.noCoupons 
+					position: relative
+					height: 385px
+					p 
+						@include center
+						color: #999
 
 
 

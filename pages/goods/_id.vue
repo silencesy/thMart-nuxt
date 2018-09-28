@@ -134,7 +134,8 @@
 			}
 		 	const goodsInfo = await app.$axios.post(interfaceApi.goodsDeatail,param);
   			return { 
-  					goodsInfo: goodsInfo.data.data}
+  					goodsInfo: goodsInfo.data.data
+            }
 		},
 		components: {
 			moreGoods,

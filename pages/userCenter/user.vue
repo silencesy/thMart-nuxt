@@ -26,27 +26,15 @@
 		            	<div>
 		            		<div class="title">Delivery Status</div>
 			            	<div class="status">
-			            		<div>
+			            		<div v-for="item in 3" :key="item">
 			            			<div><img src="~/static/images/flower.jpg" alt=""></div>
 			            			<div>
 			            				<p>[上海市]快件离开上海已发往卢湾</p>
 			            				<span>2018.08.15 07:21:45 <nuxt-link to="/">Tracking Your Order >></nuxt-link></span>
 			            			</div>
 			            		</div>
-								<div>
-			            			<div><img src="~/static/images/flower.jpg" alt=""></div>
-			            			<div>
-			            				<p>[上海市]快件离开上海已发往卢湾</p>
-			            				<span>2018.08.15 07:21:45 <nuxt-link to="/">Tracking Your Order >></nuxt-link></span>
-			            			</div>
-			            		</div>
-			            		<div>
-			            			<div><img src="~/static/images/flower.jpg" alt=""></div>
-			            			<div>
-			            				<p>[上海市]快件离开上海已发往卢湾</p>
-			            				<span>2018.08.15 07:21:45 <nuxt-link to="/">Tracking Your Order >></nuxt-link></span>
-			            			</div>
-			            		</div>
+			            		<!-- 没有订单状态的情况 -->
+			            		<!-- <div class="noOrder"><p>No more delivery status</p></div> -->
 			            	</div>
 			            </div>
 			            <div>
@@ -73,6 +61,8 @@
 					            		</div>
 				            		</nuxt-link>
 				            	</div>
+				            	<!-- 没有收藏的情况 -->
+				            	<!-- <div class="noWish"><p>No more wishlist</p></div> -->
 			            	</div> 
 			            </div>
 		            </div>				
@@ -233,4 +223,16 @@
 										white-space: nowrap
 										display: block
 										min-height: 22px
+	.noOrder
+		position: relative
+		height: 305px
+		p 
+			@include center
+			color: #999
+	.noWish
+		position: relative
+		height: 279px
+		p 
+			@include center
+			color: #999
 </style>

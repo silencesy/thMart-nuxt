@@ -12,13 +12,15 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: '//at.alicdn.com/t/font_771689_0m5oqgd5zujb.css' }
+      { rel: 'stylesheet', href: '//at.alicdn.com/t/font_771689_maawk36aics.css' }
     ]
   },
   // css重置
-  css: ['~assets/css/style.css',
-        { src: '~assets/sass/common.sass', lang: 'sass' },
-        {src:'element-ui/lib/theme-chalk/index.css'}
+  css: [
+        {src:'element-ui/lib/theme-chalk/index.css'},
+        '~assets/css/style.css',
+        { src: '~assets/sass/common.sass', lang: 'sass' }
+        
   ],
   /*
   ** Customize the progress bar color
