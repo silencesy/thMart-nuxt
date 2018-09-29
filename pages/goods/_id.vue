@@ -26,9 +26,9 @@
 					<div class="goodsRight">
 						<p>{{goodsInfo.title}}</p>
 						<div class="box">
-							<ul class="list">
+							<div class="list">
 								<!-- 页面加载的时候显示价格 -->
-								<li v-if="!skuInfo">
+								<div class="row-item" v-if="!skuInfo">
 									<span>Price</span>
 									<div>
 										<el-badge value="new" class="item">
@@ -36,9 +36,9 @@
 										</el-badge>
 										<del v-if="goodsInfo.coupon_price">¥ {{goodsInfo.coupon_price}}</del>
 									</div>
-								</li>
+								</div>
 								<!-- 选择sku显示价格 -->
-								<li v-if="skuInfo">
+								<div class="row-item" v-if="skuInfo">
 									<span>Price</span>
 									<div>
 										<el-badge value="new" class="item">
@@ -46,43 +46,52 @@
 										</el-badge>
 										<del v-if="skuInfo.coupon_price">¥ {{skuInfo.coupon_price}}</del>
 									</div>
-								</li>
-								<li>
+								</div>
+								<div class="row-item">
 									<span>Shipping</span>
 									<div>
 										<span>¥ 10.00</span>
 										<span>99元免运费</span>
 									</div>
-								</li>
-								<li v-for="(item,key) in list.result" :key="key">
-									<span class="type">{{key}}</span>
-									<div class="btn">
-										<span v-for="(value,index) in item" class="noselect" v-bind:class="{selected: value.active, soldOut: !value.active && value.disabled}"  @click="handleActive(key, value)" :key="index">{{ value.name }}</span>
-									</div>
-								</li>
-								<li>
-									<span class="type">Quantity</span>
-									<div>
-										<el-input-number size="small" :min="1" v-model="num1"></el-input-number>
-									</div>
-									<!-- 当前商品所有库存 -->
-									<div v-if="!skuInfo">
-										<span class="stock">Stock: {{goodsInfo.sumStock}}</span>
-									</div>
-									<!-- 选择单个sku的库存 -->
-									<div v-if="skuInfo">
-										<span class="stock">Stock: {{skuInfo.stock}}</span>
-									</div>
-								</li>
-								<li class="buy">
+								</div>
+								<div :class="{'group-border': groupBorder}">
+                                    <div class="title" v-if="groupBorder">
+                                        Please choose your preferred options!
+                                        <i class="iconfont icon-close" @click="closeGroupBorder"></i>
+                                    </div>
+                                    <div class="row-item" v-for="(item,key) in list.result" :key="key">
+                                        <span class="type">{{key}}</span>
+                                        <div class="btn">
+                                            <span v-for="(value,index) in item" class="noselect" v-bind:class="{selected: value.active, soldOut: !value.active && value.disabled}"  @click="handleActive(key, value)" :key="index">{{ value.name }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row-item">
+                                        <span class="type">Quantity</span>
+                                        <div v-if="!skuInfo">
+                                            <el-input-number size="small" :max="Number(goodsInfo.sumStock)" :min="1" v-model="num1"></el-input-number>
+                                        </div>
+                                        <div v-if="skuInfo">
+                                            <el-input-number size="small" :max="Number(skuInfo.stock)" :min="1" v-model="num1"></el-input-number>
+                                        </div>
+                                        <!-- 当前商品所有库存 -->
+                                        <div v-if="!skuInfo">
+                                            <span class="stock">Stock: {{goodsInfo.sumStock}}</span>
+                                        </div>
+                                        <!-- 选择单个sku的库存 -->
+                                        <div v-if="skuInfo">
+                                            <span class="stock">Stock: {{skuInfo.stock}}</span>
+                                        </div>
+                                    </div>                        
+                                </div>
+								<div class="buy row-item" v-show="!groupBorder">
 									<button @click="buyNow">Buy Now</button>
 									<button @click="addToCart">Add To Cart</button>
-								</li>
-								<li class="tips">
+								</div>
+								<div class="tips row-item">
 									<span><i class="iconfont icon-unreview"></i>favourite</span>
 									<span><i class="iconfont icon-kefu"></i>Add To Cart</span>
-								</li>
-							</ul>						
+								</div>
+							</div>						
 						</div>
 					</div>
 				</div>
@@ -101,6 +110,8 @@
 	import PicZoom from "~/components/base/PicZoom"
 	// 接口API
 	import interfaceApi from '~/plugins/interfaceApi'
+    // 提示语
+    import prompt from '~/assets/js/prompt'
 	export default {
 		layout: 'shopHome',
 		props: {
@@ -124,7 +135,13 @@
                 message: "",
                 highKeys: {},
                 singleSkuInfo: null,
-                skuInfo: null
+                skuInfo: null,
+                styleObj: {
+                    'border': '2px solid #c00',
+                    'margin': '10px 0',
+                    'padding-bottom': '15px'
+                },
+                groupBorder: false
 	        }
         },
         async asyncData ({app,params}) {
@@ -159,6 +176,7 @@
 					that.skuInfo = res.data.data;
 					that.piczoomurl = that.skuInfo.pic;
 					that.smallImgActiveNumber = -1;
+                    that.groupBorder = false;
 				})
             },
 			// 初始化sku列表
@@ -485,12 +503,12 @@
             	if (that.mustChooseAll()) {
             		// 公共函数里面的方法
 			      	if (!that.user.isLogin()) {
-			      		alert("请登录");
+			      		that.$router.push({path: '/loginModule/login'});
 			      	} else {
 			      		alert("buy");
 			      	}
 	  			} else {
-	  				alert("请选择商品");
+	  				that.groupBorder = true;
 	  			}
             },
             // 加入购物车
@@ -499,13 +517,28 @@
             	if (that.mustChooseAll()) {
             		// 公共函数里面的方法
 			      	if (!that.user.isLogin()) {
-			      		alert("请登录");
+			      		that.$router.push({path: '/loginModule/login'});
 			      	} else {
-			      		alert("buy");
+			      		that.addToCartAjax();
 			      	}
 	  			} else {
-	  				alert("请选择商品");
+	  				that.groupBorder = true;
 	  			}
+            },
+            addToCartAjax() {
+                const that = this;
+                const param = {
+                    goodsId: that.goodsInfo.id,
+                    skuId: that.skuId,
+                    number: that.num1
+                }
+                that.$axios.post(interfaceApi.addCart,param).then(res=> {
+                    that.$notify({
+                      title: '添加购物车成功',
+                      message: '',
+                      type: 'success'
+                    });
+                })
             },
             // 必须选完全才能加入购物车或者购买
 	  		mustChooseAll() {
@@ -523,7 +556,11 @@
 	  		},
 	  		smallImgActive(index) {
 	  			this.smallImgActiveNumber = index;
-	  		}
+	  		},
+            // 关闭购买提示框
+            closeGroupBorder() {
+                this.groupBorder = false;
+            }
         },
 	  	watch: {
             skuId: function(newVal,oldVal) {
@@ -582,7 +619,7 @@
 							width: 510px	
 							.list
 								overflow: hidden
-								li:first-child 
+								>.row-item:first-child 
 									background-color: #eee
 									height: 48px
 									span
@@ -594,7 +631,7 @@
 											@include sc(14px, #999)
 											margin-left: 75px
 
-								li
+								.row-item
 									margin-top: 20px
 									overflow: hidden
 									span 

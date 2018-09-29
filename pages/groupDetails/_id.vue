@@ -488,7 +488,7 @@
             	if (that.mustChooseAll()) {
             		// 公共函数里面的方法
 			      	if (!that.user.isLogin()) {
-			      		alert("请登录");
+			      		alert("请登录123");
 			      	} else {
 			      		alert("buy");
 			      	}

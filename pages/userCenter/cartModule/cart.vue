@@ -63,7 +63,7 @@
     				<!-- <span>Selected <i>1</i> Goods</span> -->
     				<span>Total: <i>¥ {{dataList.total}}</i></span>
     				<i v-if="dataList.reduceTotal!=0">优惠 <i>¥ {{dataList.reduceTotal}}</i></i>
-    				<button>Checkout Now</button>
+    				<button @click="checkout">Checkout Now</button>
     			</div>
     		</div>
 		</div>
@@ -388,6 +388,17 @@
 			showIsEmpty() {
 				if (this.dataList.data.length == 0) {
 					this.$router.push({path: '/userCenter/cartModule/cartEmpty'});
+				}
+			},
+			checkout() {
+				if (this.dataList.total == 0) {
+					this.$notify({
+                      title: '请勾选购买商品',
+                      message: '',
+                      type: 'warning'
+                    });
+				} else {
+					this.$router.push({path: '/payProcess/orderConfirm'});
 				}
 			}
 		}

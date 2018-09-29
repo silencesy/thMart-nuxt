@@ -6,6 +6,7 @@ let prompt = {
 	// 请输入有效的验证码
 	code: 'Please enter the verification code!',
 	// 两次密码不一致
-	twoPasswords: 'The two passwords you entered do not match!'
+	twoPasswords: 'The two passwords you entered do not match!',
+	selectGoodsAttr: '请选择商品属性'
 }
 export default prompt

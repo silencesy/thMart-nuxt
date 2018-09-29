@@ -102,7 +102,7 @@
 				<nuxt-link to="/">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
 			</div>
 			<div class="articlePer">
-				<nuxt-link v-for="(item,index) in homeData.article.data" :key="index" v-if="index<6" :to="{name: 'article-id',params: {id: item.id}}">
+				<nuxt-link v-for="(item,index) in homeData.article.data" :key="item.id" v-if="index<6" :to="{name: 'article-id',params: {id: item.id}}">
 					<p><img :src="item.pic" alt=""></p> 
 					<div class="per">
 						<p>{{item.title}}</p>

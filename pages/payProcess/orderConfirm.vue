@@ -8,7 +8,7 @@
 						<button>Add Address</button>
 					</div>
 					<div class="address">
-						<div class="box defaultBox">
+						<div class="box defaultBox noselect">
 							<p><span>Amanda</span><span>13614539894</span></p>
 							<p>Amanda@gamil.com</p>
 							<p>上海市黄浦区打浦桥街道蒙自路169号智造</p>
@@ -17,25 +17,75 @@
 								<span>Default</span>
 							</div>
 						</div>
-						<div class="box" v-for="item in 3" :key="item">
+						<!-- <div class="box" v-for="item in 3" :key="item">
 							<p><span>Amanda</span><span>13614539894</span></p>
 							<p>Amanda@gamil.com</p>
 							<p>上海市黄浦区打浦桥街道蒙自路169号智造</p>
 							<div>
 								<span><i class="iconfont icon-bianji"></i>Edit</span>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="more"><span>More</span></div>					
 				</div>
 				<div class="confirmGoods">
 					<div class="title">Order Confirmation</div>
 					<div class="goodsBox">
-			    		<div class="shopPer" v-for="item in 2" :key="item">
+					<!-- 按照满减分 -->
+						<div  v-for="(item,index) in orderData.overReduceArray" :key="index">
+			    			<div class="shopPer" v-for="(itemshop,index) in item.data" :key="index">
+				    			<div class="title">
+				    				<div>
+				    					<span class="iconfont icon--dianpu"></span>
+				    					<span>{{itemshop.brandName}}</span>
+				    				</div>
+				    				<div class="iconfont icon-combinedshapefuben"></div>
+				    			</div>
+				    			<p class="titleList">
+				    				<span>Product Name</span>
+				    				<span>Price</span>
+				    				<span>Quantity</span>			    				
+				    				<span>Subtotal</span>
+				    			</p>    			
+					            <div class="goodsInfo">
+					                <div class="details" v-for="(val,index) in itemshop.data" :key="index">
+				                        <div class="goods">
+				                            <div><img :src="val.pic" alt=""></div>
+				                            <div>
+				                                <p>{{val.goodsName}}</p>
+				                                <span class="color"><i v-for="(value,index) in val.prop" :key="index">{{value[0]}}</i></span>
+				                            </div>
+				                        </div>
+				                        <div class="price">
+				                            <div>
+				                                <span>¥{{val.price}}</span>
+				                                <!-- <del>¥129</del> -->
+				                            </div>
+				                        </div>
+				                        <div class="quantity">
+				                            <div>
+				                                <span>{{val.number}}</span>
+				                            </div>
+				                        </div>
+				                        <div class="subtotal">
+				                            <div>
+				                                <span>¥{{val.price*val.number}}</span>
+				                            </div>
+				                        </div>
+					                </div>
+					                <div class="quantity-discount">
+					                	<span>Quantity Discount :</span>
+					                	<span>-￥{{item.reduce}}</span>
+					                </div>
+					            </div>
+				    		</div>
+			    		</div>
+			    		<!-- 按照商户分 -->
+			    		<div class="shopPer" v-for="(item,index) in orderData.brandArray" :key="index">
 			    			<div class="title">
 			    				<div>
 			    					<span class="iconfont icon--dianpu"></span>
-			    					<span>Shop Name</span>
+			    					<span>{{item.brandName}}</span>
 			    				</div>
 			    				<div class="iconfont icon-combinedshapefuben"></div>
 			    			</div>
@@ -46,33 +96,35 @@
 			    				<span>Subtotal</span>
 			    			</p>    			
 				            <div class="goodsInfo">
-				                <div class="details" v-for="item in 2" :key="item">
+				                <div class="details" v-for="(val,index) in item.data" :key="index">
 			                        <div class="goods">
-			                            <div><img src="~/static/images/flower.jpg" alt=""></div>
+			                            <div><img :src="val.pic" alt=""></div>
 			                            <div>
-			                                <p>Midea Air Fryer, Oil Free Design, Oil Free Design, Model: TN20A</p>
-			                                <span class="color">Color: Black</span>
+			                                <p>{{val.goodsName}}</p>
+			                                <span class="color"><i v-for="(value,index) in val.prop" :key="index">{{value[0]}}</i></span>
 			                            </div>
 			                        </div>
 			                        <div class="price">
 			                            <div>
-			                                <span>¥99</span>
-			                                <del>¥129</del>
+			                                <span>¥{{val.price}}</span>
+			                                <!-- <del>¥129</del> -->
 			                            </div>
 			                        </div>
 			                        <div class="quantity">
 			                            <div>
-			                                <span>2</span>
+			                                <span>{{val.number}}</span>
 			                            </div>
 			                        </div>
 			                        <div class="subtotal">
 			                            <div>
-			                                <span>¥99</span>
+			                                <span>¥{{val.price*val.number}}</span>
 			                            </div>
 			                        </div>
 				                </div>
 				            </div>
 			    		</div>
+			    		
+			    		
 					</div>
 					<div class="payItem">
 						<div class="left">
@@ -85,11 +137,11 @@
 						<div class="right">
 							<div>
 								<span>Shipping :</span>
-								<span>¥ 10</span>
+								<span>¥ {{orderData.feeTotal}}</span>
 							</div>
 							<div>
 								<span>Quantity Discount :</span>
-								<span>- ¥ 5</span>
+								<span>- ¥ {{fullreduction}}</span>
 							</div>
 							<div>
 								<span class="CouponSelect">
@@ -119,10 +171,10 @@
 					</div>
 					<div class="finalPrice">
 						<span>Final Price :</span>
-						<span>¥ 193</span>
+						<span>¥ {{orderData.total}}</span>
 					</div>
 					<div class="btn">
-						<button>Place Your Order</button>
+						<button @click="placeOrder">Place Your Order</button>
 					</div>
 				</div>
 			</div>
@@ -130,6 +182,8 @@
 	</div>
 </template>
 <script>
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'payHome',
 		data() {
@@ -137,7 +191,13 @@
 
 			}
 		},
-		// middleware: 'userAuth',
+		middleware: 'userAuth',
+		async asyncData ({app,params}) {
+		 	const goodsInfo = await app.$axios.post(interfaceApi.prepareOrder);
+  			return { 
+  				orderData: goodsInfo.data.data
+            }
+		},
 		components: {
 
 		},
@@ -146,10 +206,20 @@
 			
 		},
 	  	computed: {  
-		    
+		    fullreduction: function() {
+		    	if (this.orderData.overReduceArray) {
+		    		var number = 0;
+			    	for (var i = 0; i < this.orderData.overReduceArray.length; i++) {
+			    		number += Number(this.orderData.overReduceArray[i].reduce);
+			    	}
+			    	return number;
+		    	}
+		    }
 	  	},
 		methods: {
-
+			placeOrder() {
+				this.$router.push({path: '/payProcess/aliPay'});
+			}
 		}
 	}
 </script>
@@ -289,6 +359,9 @@
 												display: block
 											.fullCut
 												@include sc(14px, $theme_color)
+											span
+												i
+													margin-right: 10px
 									.price, .subtotal, .quantity
 										width: 227px
 										height: 104px
@@ -309,6 +382,12 @@
 									border-bottom: none
 
 									padding-bottom: 0
+								.quantity-discount
+									@include hh(50px, 50px)
+									span:nth-child(2)
+										float: right
+										color: $theme_color
+
 					.payItem
 						overflow: hidden
 						border-top: $border 

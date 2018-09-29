@@ -45,7 +45,14 @@ let api = {
 	changeSelectAndTotalPrice: 'Cart/changeSelectAndTotalPrice',
 	// 修改购物车数量
 	editNumber: 'Cart/editNumber',
+	// 添加购物车
+	addCart: 'Cart/edit',
 	// 删除
-	cartDelete: 'Cart/delete'
+	cartDelete: 'Cart/delete',
+	/**
+	 * 订单模块
+	 */
+	prepareOrder: 'Order/prepareOrder'
+
 }
 export default api

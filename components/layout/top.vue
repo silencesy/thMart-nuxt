@@ -30,7 +30,7 @@
                 <div class="right">
                     <nuxt-link to="/userCenter/cartModule/cart" class="cart">
                         <i class="iconfont icon-gouwuche"></i>Cart
-                        <span class="number">12</span>
+                        <!-- <span class="number">12</span> -->
                     </nuxt-link>
                     <nuxt-link to="/userCenter/orderList/all">My Order</nuxt-link>
                     <nuxt-link to="">Do Business With Us</nuxt-link>
@@ -56,6 +56,7 @@
                 Cookie.remove('headimgurl');
                 this.$store.commit('NICKNAME','');
                 this.$store.commit('HEADIMGURL','');
+                this.$router.push({path: '/loginModule/login'})
             }
         }
     }
