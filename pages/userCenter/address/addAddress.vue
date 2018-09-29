@@ -1,0 +1,117 @@
+<template>
+	<div class="addAddress">
+		<div class="container">
+			<userLayout>
+				<div class="addInfo" slot="userContent">
+					<div class="title">Address Book</div>
+					<div class="box">
+						<div class="boxFrom">
+							<div>
+								<label><i>*</i> Full Name :</label>
+								<input type="text" name="" id="name">
+							</div>
+							<div>
+								<label><i>*</i> Phone :</label>
+								<input type="text" name="" id="phone">
+							</div>
+							<div>
+								<label><i>*</i> Email :</label>
+								<input type="text" name="" id="email">
+							</div>
+							<div>
+								<label><i>*</i> Address :</label>
+								<citySelect />
+							</div>
+							<div>
+								 <textarea name="" id="detailAddress" placeholder="* Please write down your detailed address in Chinese"></textarea>
+							</div>
+							<div class="setDefault noselect">
+								<label><i class="iconfont icon-weixuanzhong"></i>Default</label>
+								<!-- 选为默认的情况 -->
+								<!-- <label class="default"><i class="iconfont icon-xuanzhong1"></i>Default</label> -->
+							</div>
+						</div>
+						<div class="btn"><button>Save</button></div>
+					</div>
+				</div>
+			</userLayout>
+			<goodsItem :titleIsShow="titleIsShow" />
+		</div>
+	</div>
+</template>
+<script>
+	import goodsItem from "~/components/base/goodsItem"
+	import userLayout from "~/components/user/userLayout"
+	import citySelect from "~/components/base/citySelect"
+	export default {
+		layout: 'userHome',
+		data() {
+			return {
+				titleIsShow: true,
+			}
+		},
+		components: {
+			goodsItem, 
+			userLayout,
+			citySelect
+		},
+		mounted() {
+
+			
+		},
+	  	computed: {  
+		    
+	  	},
+		methods: {
+
+		}
+	}
+</script>
+
+<style lang='sass' scoped>
+	@import '~/assets/sass/common.sass'
+	.addAddress
+		.container
+			.addInfo
+				.title
+					padding-bottom: 13px 
+					border-bottom: $border
+				.box 
+					.boxFrom
+						margin-top: 15px
+						>div 
+							margin-bottom: 15px
+							overflow: hidden
+							label 
+								float: left
+								line-height: 40px
+								width: 100px
+								color: #666
+							input 
+								float: left
+								@include wh(445px, 40px)
+								padding: 5px
+							textarea 
+								width: 446px
+								height: 150px
+								font-size: 16px
+								margin-left: 99px
+						.setDefault
+							label
+								cursor: pointer
+								i 
+									font-size: 18px
+									padding-right: 5px
+							label.default
+								color: $theme_color
+					.btn 
+						width: 545px
+						text-align: center
+						margin-top: 50px
+						button 
+							@include whch(145px, 40px, center, 40px)
+							background-color: $theme_color
+							color: #fff
+							border-radius: $border_radius
+
+</style>
