@@ -5,28 +5,27 @@
 				<div class="confirmAddress">
 					<div class="title">
 						<span>Shipping Address</span>
-						<button>Add Address</button>
+						<button @click="addAddress">Add Address</button>
 					</div>
-					<div class="address">
-						<div class="box defaultBox noselect">
-							<p><span>Amanda</span><span>13614539894</span></p>
-							<p>Amanda@gamil.com</p>
-							<p>上海市黄浦区打浦桥街道蒙自路169号智造</p>
+					<div class="address" :class="{show: moreShow}">
+						<div class="box noselect" :class="{defaultBox: index==defaultBox}" v-for="(item,index) in addressList" :key="item.id">
+							<div @click="checkAddrBtn(index)">
+								<p><span>{{item.fullName}}</span><span>{{item.phone}}</span></p>
+								<p>{{item.email}}</p>
+								<p>{{item.province}}{{item.city}}{{item.regionDetail}}</p>
+							</div>
 							<div>
 								<span><i class="iconfont icon-bianji"></i>Edit</span>
-								<span>Default</span>
+								<span :class="{active: index==checkAddr}" @click="checkAddrDefault(index,item.id)">Default</span>
 							</div>
 						</div>
-						<!-- <div class="box" v-for="item in 3" :key="item">
-							<p><span>Amanda</span><span>13614539894</span></p>
-							<p>Amanda@gamil.com</p>
-							<p>上海市黄浦区打浦桥街道蒙自路169号智造</p>
-							<div>
-								<span><i class="iconfont icon-bianji"></i>Edit</span>
-							</div>
-						</div> -->
+						<div class="info" v-if="addressList.length==0 && moreShow == false">Please add your detailed address.</div>
+						<div class="addAddress" @click="addAddress" v-if="addressList.length==0 && moreShow == false"><span>Add Address</span></div>
 					</div>
-					<div class="more"><span>More</span></div>					
+					<div class="more" v-if="addressList.length>4 && moreShow == false" @click="moreShowBtn"><span>More</span></div>				
+					<div class="addAddress" v-if="addressList.length>4 && moreShow == true" @click="addAddress"><span>Add Address</span></div>
+					
+
 				</div>
 				<div class="confirmGoods">
 					<div class="title">Order Confirmation</div>
@@ -77,6 +76,10 @@
 					                	<span>Quantity Discount :</span>
 					                	<span>-￥{{item.reduce}}</span>
 					                </div>
+					                <div class="quantity-discount">
+					                	<span></span>
+					                	<span>Total: ￥{{item.total}}</span>
+					                </div>
 					            </div>
 				    		</div>
 			    		</div>
@@ -121,6 +124,10 @@
 			                            </div>
 			                        </div>
 				                </div>
+				                <div class="quantity-discount">
+				                	<span></span>
+				                	<span>Total￥{{item.total}}</span>
+				                </div>
 				            </div>
 			    		</div>
 			    		
@@ -137,7 +144,7 @@
 						<div class="right">
 							<div>
 								<span>Shipping :</span>
-								<span>¥ {{orderData.feeTotal}}</span>
+								<span class="theme_color">¥ {{orderData.feeTotal}}</span>
 							</div>
 							<div>
 								<span>Quantity Discount :</span>
@@ -178,28 +185,82 @@
 					</div>
 				</div>
 			</div>
-		</div>
+			<!-- 模态框 -->
+			<div class="layer-box" v-if="showlayer" @click="closeLayer" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: rgba(0,0,0,0.5)"></div>
+				<div v-if="showlayer" slot="userContent" :class="{addInfo: showlayer,zoomIn: showlayer,animated: showlayer}" >
+					<div class="box">
+						<div class="boxFrom">
+							<div>
+								<label><i>*</i> Full Name :</label>
+								<input type="text" v-model="addressInfo.fullName">
+							</div>
+							<div>
+								<label><i>*</i> Phone :</label>
+								<input type="text" v-model="addressInfo.phone">
+							</div>
+							<div>
+								<label><i>*</i> Email :</label>
+								<input type="text" v-model="addressInfo.fullName">
+							</div>
+							<div>
+								<label><i>*</i> Address :</label>
+								<citySelect />
+							</div>
+							<div>
+								 <textarea v-model="addressInfo.regionDetail" id="detailAddress" placeholder="* Please write down your detailed address in Chinese"></textarea>
+							</div>
+							<div class="setDefault noselect" @click="setDefault">
+								<label v-if="!isDefault"><i class="iconfont icon-weixuanzhong"></i>Default</label>
+								<!-- 选为默认的情况 -->
+								<label v-if="isDefault" class="default"><i class="iconfont icon-xuanzhong1"></i>Default</label>
+							</div>
+						</div>
+						<div class="btn"><button>Save</button></div>
+					</div>
+				</div>
+			</div>
+		
 	</div>
 </template>
 <script>
 	// 接口API
 	import interfaceApi from '~/plugins/interfaceApi'
+	import citySelect from "~/components/base/citySelect"
 	export default {
 		layout: 'payHome',
 		data() {
 			return {
-
+				defaultBox: 0, 	//选中地址索引
+				// checkedAddrId: 0,
+				checkAddr: 0, 	//默认地址
+				moreShow: false,
+				showlayer: false,
+				isDefault: false,
+				addressInfo: {
+					fullName: '',
+					phone: '',
+					isDefault: '',
+					provinceCity: '',
+					email: '',
+					regionDetail: ''
+				}
 			}
 		},
 		middleware: 'userAuth',
 		async asyncData ({app,params}) {
+			let param = {
+				pageSize: 1000,
+				page: 1
+			}
 		 	const goodsInfo = await app.$axios.post(interfaceApi.prepareOrder);
+		 	const addressList = await app.$axios.post(interfaceApi.addressList,param);
   			return { 
-  				orderData: goodsInfo.data.data
+  				orderData: goodsInfo.data.data,
+  				addressList: addressList.data.data.data
             }
 		},
 		components: {
-
+			citySelect
 		},
 		mounted() {
 
@@ -213,12 +274,44 @@
 			    		number += Number(this.orderData.overReduceArray[i].reduce);
 			    	}
 			    	return number;
+		    	} else {
+		    		var number = 0;
+		    		return number;
 		    	}
 		    }
 	  	},
 		methods: {
 			placeOrder() {
 				this.$router.push({path: '/payProcess/aliPay'});
+			},
+			// 添加地址
+			addAddress() {
+				this.showlayer = true;
+			},
+			closeLayer() {
+				this.showlayer = false;
+			},
+			// 选择地址
+			checkAddrBtn(index) {
+				console.log(index);
+				this.defaultBox = index;
+			},
+			// 修改默认地址
+			checkAddrDefault(index,id) {
+				var that =this;
+				that.$axios.post(interfaceApi.changeDefault,{
+					id: id
+				}).then(function (response) {
+					that.checkAddr = index;
+				});
+			},
+			// 展示所有地址
+			moreShowBtn() {
+				console.log(123);
+				this.moreShow = true;
+			},
+			setDefault() {
+				this.isDefault = !this.isDefault;
 			}
 		}
 	}
@@ -232,6 +325,21 @@
 				.confirmAddress
 					border: $border
 					padding: 15px 15px 0 15px
+					.info
+						text-align: center
+						padding: 10px
+						margin-top: 30px
+					.addAddress
+					    width: 100px
+					    height: 26px
+					    text-align: center
+					    line-height: 26px
+					    font-size: 14px
+					    color: #fff
+					    background-color: #F9421E
+					    border-radius: 4px
+					    margin: 0 auto 15px auto
+					    cursor: pointer
 					.title 
 						overflow: hidden 
 						padding-bottom: 10px 
@@ -249,6 +357,7 @@
 							border-radius: $border_radius
 					.address 
 						overflow: hidden
+						height: 155px
 						.box 
 							border: $border
 							border-radius: $border_radius
@@ -256,6 +365,8 @@
 							float: left
 							padding: 15px
 							margin-right: 16px
+							margin-bottom: 16px
+							cursor: pointer
 							overflow: hidden
 							p 
 								@include sc(14px, #666)
@@ -268,13 +379,18 @@
 									float: left
 									@include sc(14px, #666)
 									cursor: pointer
-								span:nth-child(2)
+								span.active
 									float: right
 									@include sc(14px, $theme_color)
-						.box:last-child
+								span
+									float: right
+									@include sc(14px, #666)
+						.box:nth-child(4n)
 							margin-right: 0
 						.box.defaultBox
 							border: 1px solid $theme_color
+					.address.show
+						height: auto
 					.more 
 						width: 100%
 						text-align: center
@@ -387,6 +503,8 @@
 									span:nth-child(2)
 										float: right
 										color: $theme_color
+								.quantity-discount:nth-child(3)
+									border-top: 1px solid #dfdfdf
 
 					.payItem
 						overflow: hidden
@@ -475,4 +593,54 @@
 		padding: 0 20px
 	.el-icon-arrow-down.el-icon--right
 		padding-left: 5px
+	
+	.addInfo
+		@include wh(580px,520px)
+		position: fixed
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		margin: auto
+		z-index: 2
+		padding: 0 15px
+		background: #fff
+		border-radius: 8px
+		transition: all 1s ease
+		.box 
+			.boxFrom
+				margin-top: 15px
+				>div 
+					margin-bottom: 15px
+					overflow: hidden
+					label 
+						float: left
+						line-height: 40px
+						width: 100px
+						color: #666
+					input 
+						float: left
+						@include wh(445px, 40px)
+						padding: 5px
+					textarea 
+						width: 446px
+						height: 150px
+						font-size: 16px
+						margin-left: 99px
+				.setDefault
+					label
+						cursor: pointer
+						i 
+							font-size: 18px
+							padding-right: 5px
+					label.default
+						color: $theme_color
+			.btn 
+				width: 545px
+				text-align: center
+				button 
+					@include whch(145px, 40px, center, 40px)
+					background-color: $theme_color
+					color: #fff
+					border-radius: $border_radius
 </style>

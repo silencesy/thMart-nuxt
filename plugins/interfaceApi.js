@@ -52,7 +52,13 @@ let api = {
 	/**
 	 * 订单模块
 	 */
-	prepareOrder: 'Order/prepareOrder'
-
+	prepareOrder: 'Order/prepareOrder',
+	/**
+	 * 地址模块
+	 */
+	// 地址列表
+	addressList: 'User/Address/list',
+	// 修改默认地址
+	changeDefault: 'User/Address/changeDefault'
 }
 export default api

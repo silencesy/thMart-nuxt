@@ -7,9 +7,9 @@
 		    <el-select v-model="shi" @change="choseCity" placeholder="City">
 			    <el-option v-for="item in shi1" :key="item.id" :label="item.value" :value="item.id"></el-option>
 		    </el-select>
-		    <el-select v-model="qu" @change="choseBlock" placeholder="District">
+		    <!-- <el-select v-model="qu" @change="choseBlock" placeholder="District">
 			    <el-option v-for="item in qu1" :key="item.id" :label="item.value" :value="item.id"></el-option>
-		    </el-select>
+		    </el-select> -->
 		</div>	
 	</div>
 </template>
