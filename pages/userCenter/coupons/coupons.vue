@@ -1,7 +1,7 @@
 <template>
 	<div class="coupons">
 		<div class="container">
-			<userLayout>
+			<userLayout active="Coupons">
 				<div class="couponsContent" slot="userContent">
 					<div class="title">thMart-Coupons</div>
 					<div class="noCoupons">

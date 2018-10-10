@@ -1,38 +1,53 @@
 <template>
 	<div class="address">
 		<div class="container">
-			<userLayout>
+			<userLayout active="Address">
 				<div class="addressList" slot="userContent">
 					<div class="title">
 						<span>Address Book</span>
 						<nuxt-link to="/userCenter/address/addAddress">+ Add New Shipping Address</nuxt-link>
 					</div>
-					<div class="addressBox">
+					<div class="addressBox" v-if="addressList.data.length>0" v-for="(item,index) in addressList.data" :key="item.id">
 						<div class="box">
 							<div class="left">
 								<p>
 									<span>Name</span>
-									<span>鞋带</span>
+									<span>{{item.fullName}}</span>
 								</p>
 								<p>
 									<span>Phone</span>
-									<span>176021471111</span>
+									<span>{{item.phone}}</span>
+								</p>
+								<p>
+									<span>Email</span>
+									<span>{{item.email}}</span>
 								</p>
 								<p>
 									<span>Address</span>
-									<span>上海市黄浦区蒙自路169号</span>
+									<span>{{item.province}}{{item.city}}{{item.regionDetail}}</span>
 								</p>
 							</div>
 							<div class="right">
 								<!-- 去掉default这个class 取消默认 -->
-								<p class="default noselect"><i class="iconfont icon-duihao"></i> Default</p>
+								<p class="default noselect" :class="{active: item.isDefault==1}" @click="setDefault(item,index)"><i class="iconfont icon-duihao"></i> Default</p>
 								<p class="noselect edit"><i class="iconfont icon-bianji"></i> Edit</p>
-								<p class="noselect delete"><i class="iconfont icon-shanchu"></i> Delete</p>
+								<p class="noselect edit"></p>
+								<p class="noselect delete" @click="deleteAdrr(item,index)"><i class="iconfont icon-shanchu"></i> Delete</p>
 							</div>
 						</div>
 					</div>
 					<!-- 没有地址的情况 -->
-					<!-- <div class="noAddress"><p>No more address</p></div> -->
+					<div class="noAddress" v-if="addressList.data.length==0"><p>No more address</p></div>
+					<div class="changePage" v-if="addressList.totalPage!=0">
+						<el-pagination
+						  	background
+						  	layout="prev, pager, next"
+						  	:current-page.sync="currentPage"
+							@size-change="handleSizeChange"
+		      				@current-change="handleCurrentChange"
+						  	:total="addressList.totalPage * 10">
+						</el-pagination>
+					</div>
 				</div>
 			</userLayout>
 			<goodsItem :titleIsShow="titleIsShow" />
@@ -42,12 +57,26 @@
 <script>
 	import goodsItem from "~/components/base/goodsItem"
 	import userLayout from "~/components/user/userLayout"
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'userHome',
 		data() {
 			return {
 				titleIsShow: true,
+				currentPage: 1
 			}
+		},
+		middleware: 'userAuth',
+		async asyncData ({app,query}) {
+			let param = {
+				pageSize: 10,
+				page: 1
+			}
+		 	const addressList = await app.$axios.post(interfaceApi.addressList,param);
+  			return { 
+  				addressList: addressList.data.data
+            }
 		},
 		components: {
 			goodsItem, 
@@ -61,7 +90,70 @@
 		    
 	  	},
 		methods: {
-
+			// 获取数据
+			getData(val) {
+				var that = this;
+				const param = {
+					page: val,
+					pageSize: 10
+				}
+				that.$axios.post(interfaceApi.addressList,param).then(res=> {
+					that.addressList = res.data.data;
+				})
+			},
+			// 回到顶部
+			goBackTop() {
+				document.body.scrollTop = 0
+				document.documentElement.scrollTop = 0
+			},
+			// 改变页数
+			handleSizeChange(val) {
+		        this.getData(val);
+		    },
+		    // 上下页
+		    handleCurrentChange(val) {
+		        this.goBackTop();
+		        this.getData(val);
+		    },
+		    // 删除地址
+		    deleteAdrr(item,index) {
+				this.$confirm('删除该条地址吗?', '', {
+					confirmButtonText: 'Done',
+					cancelButtonText: 'Cancel',
+					type: 'warning'
+				}).then(() => {
+					this.deleteAddrAxios(item.id,index);
+				}).catch(() => {
+					       
+				});
+		    },
+		    // 删除地址
+		    deleteAddrAxios(id,index) {
+		    	var that = this;
+				var param = {
+					id: id
+				}
+				that.$axios.post(interfaceApi.deleteAddAddress,param).then(res=> {
+					that.addressList.data.splice(index,1);
+				})
+		    },
+		    // 修改默认地址
+		    setDefault(item,index) {
+		    	this.setDefaultAxios(item.id,index);
+		    },
+		    // 修改默认地址
+		    setDefaultAxios(id,index) {
+		    	var that = this;
+				var param = {
+					id: id
+				}
+				that.$axios.post(interfaceApi.changeDefault,param).then(res=> {
+					for (var i = 0; i < that.addressList.data.length; i++) {
+						that.addressList.data[i].isDefault = 0;
+					}
+					that.addressList.data[index].isDefault = 1;
+				})
+		    },
 		}
 	}
 </script>
@@ -103,8 +195,6 @@
 							span:nth-child(2)
 								font-size: 14px
 								color: #666
-						p:last-child
-							margin-bottom: 0
 					.right 
 						float: right
 						p 
@@ -114,9 +204,10 @@
 							i 
 								font-size: 16px
 								padding-right: 5px
-						p.default 
-							color: $theme_color
+						p.default
 							padding: 15px 15px 7px 15px
+						p.active
+							color: $theme_color
 						p.edit 
 							padding: 8px 15px 7px 15px
 						p.delete 

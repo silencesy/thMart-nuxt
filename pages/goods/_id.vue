@@ -505,7 +505,7 @@
 			      	if (!that.user.isLogin()) {
 			      		that.$router.push({path: '/loginModule/login'});
 			      	} else {
-			      		alert("buy");
+			      		that.$router.push({path:'/payProcess/orderConfirm',query: {skuId: that.skuId, number: that.num1}})
 			      	}
 	  			} else {
 	  				that.groupBorder = true;

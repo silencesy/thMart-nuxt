@@ -1,7 +1,7 @@
 <template>
 	<div class="wishList">
 		<div class="container">
-			<userLayout>
+			<userLayout active="Wishlist">
 				<div class="wish" slot="userContent">
 					<div class="title">Wishlist</div>
 					<div>

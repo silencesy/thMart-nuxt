@@ -1,34 +1,34 @@
 <template>
 	<div class="addAddress">
 		<div class="container">
-			<userLayout>
+			<userLayout active="Address">
 				<div class="addInfo" slot="userContent">
 					<div class="title">Address Book</div>
 					<div class="box">
 						<div class="boxFrom">
 							<div>
 								<label><i>*</i> Full Name :</label>
-								<input type="text" name="" id="name">
+								<input type="text" name="" v-model="addAddressInfo.fullName">
 							</div>
 							<div>
 								<label><i>*</i> Phone :</label>
-								<input type="text" name="" id="phone">
+								<input type="text" name="" v-model="addAddressInfo.phone">
 							</div>
 							<div>
 								<label><i>*</i> Email :</label>
-								<input type="text" name="" id="email">
+								<input type="text" name="" v-model="addAddressInfo.email">
 							</div>
 							<div>
 								<label><i>*</i> Address :</label>
 								<citySelect />
 							</div>
 							<div>
-								 <textarea name="" id="detailAddress" placeholder="* Please write down your detailed address in Chinese"></textarea>
+								 <textarea name=""  v-model="addAddressInfo.regionDetail" placeholder="* Please write down your detailed address in Chinese"></textarea>
 							</div>
-							<div class="setDefault noselect">
-								<label><i class="iconfont icon-weixuanzhong"></i>Default</label>
+							<div class="setDefault noselect" @click="toggleDefault">
+								<label v-if="addAddressInfo.isDefault == 0"><i class="iconfont icon-weixuanzhong"></i>Default</label>
 								<!-- 选为默认的情况 -->
-								<!-- <label class="default"><i class="iconfont icon-xuanzhong1"></i>Default</label> -->
+								<label  v-if="addAddressInfo.isDefault == 1" class="default"><i class="iconfont icon-xuanzhong1"></i>Default</label>
 							</div>
 						</div>
 						<div class="btn"><button>Save</button></div>
@@ -45,9 +45,20 @@
 	import citySelect from "~/components/base/citySelect"
 	export default {
 		layout: 'userHome',
+		middleware: 'userAuth',
 		data() {
 			return {
 				titleIsShow: true,
+				addAddressInfo: {
+					id: '',
+					fullName: '',
+					phone: '',
+					province: '',
+					city: '',
+					email: '',
+					regionDetail: '',
+					isDefault: 0,
+				}
 			}
 		},
 		components: {
@@ -57,13 +68,14 @@
 		},
 		mounted() {
 
-			
 		},
 	  	computed: {  
 		    
 	  	},
 		methods: {
-
+			toggleDefault() {
+				this.addAddressInfo.isDefault = this.addAddressInfo.isDefault==0?1:0;
+			}
 		}
 	}
 </script>

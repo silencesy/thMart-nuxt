@@ -53,12 +53,17 @@ let api = {
 	 * 订单模块
 	 */
 	prepareOrder: 'Order/prepareOrder',
+	placeOrder :'Order/placeOrder',
 	/**
 	 * 地址模块
 	 */
 	// 地址列表
 	addressList: 'User/Address/list',
 	// 修改默认地址
-	changeDefault: 'User/Address/changeDefault'
+	changeDefault: 'User/Address/changeDefault',
+	// 添加地址
+	addAddress: 'User/Address/edit',
+	// 删除地址栏
+	deleteAddAddress :'User/Address/delete'
 }
 export default api

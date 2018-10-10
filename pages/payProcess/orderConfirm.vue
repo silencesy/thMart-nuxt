@@ -9,13 +9,13 @@
 					</div>
 					<div class="address" :class="{show: moreShow}">
 						<div class="box noselect" :class="{defaultBox: index==defaultBox}" v-for="(item,index) in addressList" :key="item.id">
-							<div @click="checkAddrBtn(index)">
+							<div @click="checkAddrBtn(index,item)">
 								<p><span>{{item.fullName}}</span><span>{{item.phone}}</span></p>
 								<p>{{item.email}}</p>
 								<p>{{item.province}}{{item.city}}{{item.regionDetail}}</p>
 							</div>
 							<div>
-								<span><i class="iconfont icon-bianji"></i>Edit</span>
+								<span @click="edit(item)"><i class="iconfont icon-bianji"></i>Edit</span>
 								<span :class="{active: index==checkAddr}" @click="checkAddrDefault(index,item.id)">Default</span>
 							</div>
 						</div>
@@ -154,25 +154,24 @@
 								<span class="CouponSelect">
 									<span>thMart-Coupons :</span>
 									<div>
-										<!-- Coupon for RMB 10
-										<el-dropdown split-button>
-										  <el-dropdown-menu slot="dropdown">
-										    <el-dropdown-item>Coupon for RMB 10</el-dropdown-item>
-										    <el-dropdown-item>Don’t use Coupon</el-dropdown-item>
-										  </el-dropdown-menu>
-										</el-dropdown> -->
-										<el-dropdown>
-											<el-button>
-											    Coupon for RMB 10<i class="el-icon-arrow-down el-icon--right"></i>
+										<el-dropdown trigger="click" @command="handleCommand" v-if="orderData.userCouponList.length>0">
+											<el-button v-if="defaultCoupons">
+											    {{defaultCoupons.name}} reduce {{defaultCoupons.reduce}}<i class="el-icon-arrow-down el-icon--right"></i>
+											</el-button>
+											<el-button v-if="!defaultCoupons">
+											   	不使用优惠券<i class="el-icon-arrow-down el-icon--right"></i>
 											</el-button>
 											<el-dropdown-menu slot="dropdown">
-											    <el-dropdown-item>Coupon for RMB 10</el-dropdown-item>
-											    <el-dropdown-item>Don’t use Coupon</el-dropdown-item>
+											    <el-dropdown-item v-for="item in orderData.userCouponList" :key="item.couponId" :command="item">{{item.name}} reduce {{item.reduce}}</el-dropdown-item>
+											    <el-dropdown-item>不使用优惠券</el-dropdown-item>
 											</el-dropdown-menu>
 										</el-dropdown>				
 									</div>
+									<div v-if="orderData.userCouponList.length==0">
+										你没有优惠券
+									</div>
 								</span>
-								<span>- ¥ 10</span>				
+								<span v-if="orderData.userCouponList.length>0">- ¥ {{orderData.couponReduce}}</span>
 							</div>
 						</div>
 					</div>
@@ -200,22 +199,22 @@
 							</div>
 							<div>
 								<label><i>*</i> Email :</label>
-								<input type="text" v-model="addressInfo.fullName">
+								<input type="text" v-model="addressInfo.email">
 							</div>
 							<div>
 								<label><i>*</i> Address :</label>
-								<citySelect />
+								<citySelect :provinceProps="addressInfo.province" :cityProps="addressInfo.city"  @changeProvince="changeProvince" @changeCity="changeCity"/>
 							</div>
 							<div>
 								 <textarea v-model="addressInfo.regionDetail" id="detailAddress" placeholder="* Please write down your detailed address in Chinese"></textarea>
 							</div>
 							<div class="setDefault noselect" @click="setDefault">
-								<label v-if="!isDefault"><i class="iconfont icon-weixuanzhong"></i>Default</label>
+								<label v-if="addressInfo.isDefault==0"><i class="iconfont icon-weixuanzhong"></i>Default</label>
 								<!-- 选为默认的情况 -->
-								<label v-if="isDefault" class="default"><i class="iconfont icon-xuanzhong1"></i>Default</label>
+								<label v-if="addressInfo.isDefault==1" class="default"><i class="iconfont icon-xuanzhong1"></i>Default</label>
 							</div>
 						</div>
-						<div class="btn"><button>Save</button></div>
+						<div class="btn"><button @click="saveAddress">Save</button></div>
 					</div>
 				</div>
 			</div>
@@ -225,6 +224,9 @@
 <script>
 	// 接口API
 	import interfaceApi from '~/plugins/interfaceApi'
+	// 表单验证正则
+	import v from '~/assets/js/validate'
+	// 地址选择组件
 	import citySelect from "~/components/base/citySelect"
 	export default {
 		layout: 'payHome',
@@ -232,38 +234,47 @@
 			return {
 				defaultBox: 0, 	//选中地址索引
 				// checkedAddrId: 0,
+				addressList: [],
 				checkAddr: 0, 	//默认地址
-				moreShow: false,
-				showlayer: false,
-				isDefault: false,
-				addressInfo: {
+				moreShow: false, //展示更多地址
+				showlayer: false, //展示添加地址模态框
+				addressInfo: { //添加地址信息
+					id: null,
 					fullName: '',
 					phone: '',
-					isDefault: '',
-					provinceCity: '',
+					isDefault: 0,
+					province: '',
+					city: '',
 					email: '',
 					regionDetail: ''
 				}
 			}
 		},
 		middleware: 'userAuth',
-		async asyncData ({app,params}) {
+		async asyncData ({app,query}) {
 			let param = {
 				pageSize: 1000,
 				page: 1
 			}
-		 	const goodsInfo = await app.$axios.post(interfaceApi.prepareOrder);
+			let param2 = {
+				skuId: query.skuId,
+				number: query.number
+			}
+		 	const goodsInfo = await app.$axios.post(interfaceApi.prepareOrder,param2);
 		 	const addressList = await app.$axios.post(interfaceApi.addressList,param);
+		 	// 如果优惠券数量大于一则赋值优惠券默认值
+		 	
   			return { 
   				orderData: goodsInfo.data.data,
-  				addressList: addressList.data.data.data
+  				defaultCoupons: goodsInfo.data.data.userCouponList.length>0?goodsInfo.data.data.userCouponList[0]:null,
+  				addressList: addressList.data.data.data,
+  				defaultAddressid: addressList.data.data.data.length>0?addressList.data.data.data[0].id:null
             }
 		},
 		components: {
 			citySelect
 		},
 		mounted() {
-
 			
 		},
 	  	computed: {  
@@ -281,8 +292,27 @@
 		    }
 	  	},
 		methods: {
+			// 下单
 			placeOrder() {
-				this.$router.push({path: '/payProcess/aliPay'});
+				var that = this;
+				if (that.defaultAddressid == null) {
+					that.$message({
+						message: '请选择地址',
+						type: 'warning'
+					});
+				} else {
+					var param = {
+						couponId: that.defaultCoupons==null?0:that.defaultCoupons.couponId,
+						addressId: that.defaultAddressid,
+						skuId: that.$route.query.skuId,
+						number: that.$route.query.number
+					}
+					that.$axios.post(interfaceApi.placeOrder,param).then(res=> {
+						console.log(res);
+						that.$router.push({path: '/payProcess/aliPay', query: {orderNumber: res.data.data.orderNumber}});
+					})
+					
+				}
 			},
 			// 添加地址
 			addAddress() {
@@ -290,11 +320,13 @@
 			},
 			closeLayer() {
 				this.showlayer = false;
+				// this.fillLayer(true);
 			},
 			// 选择地址
-			checkAddrBtn(index) {
+			checkAddrBtn(index,item) {
 				console.log(index);
 				this.defaultBox = index;
+				this.defaultAddressid = item.id;
 			},
 			// 修改默认地址
 			checkAddrDefault(index,id) {
@@ -310,9 +342,116 @@
 				console.log(123);
 				this.moreShow = true;
 			},
+			// 设置默认地址
 			setDefault() {
-				this.isDefault = !this.isDefault;
-			}
+				this.addressInfo.isDefault = this.addressInfo.isDefault==0?1:0;
+			},
+			// 修改省份
+			changeProvince(province) {
+				this.addressInfo.province = province;
+			},
+			// 修改城市
+			changeCity(city) {
+				this.addressInfo.city = city;
+			},
+			// 保存地址
+			saveAddress() {
+				var that = this;
+				if (!v.required(that.addressInfo.fullName)) {
+					that.$message({
+			          message: '请填写名字',
+			          type: 'warning'
+			        });
+				} else if(!v.tel(that.addressInfo.phone)) {
+					that.$message({
+			          message: '请填写正确的电话号码',
+			          type: 'warning'
+			        });
+				} else if(!v.email(that.addressInfo.email)) {
+					that.$message({
+			          message: '请填写正确的邮箱地址',
+			          type: 'warning'
+			        });
+				} else if(!v.required(that.addressInfo.province) && !v.required(that.addressInfo.city)) {
+					that.$message({
+			          message: '请选择地址',
+			          type: 'warning'
+			        });
+				} else if(!v.required(that.addressInfo.regionDetail)) {
+					that.$message({
+			          message: '请填写详细地址',
+			          type: 'warning'
+			        });
+				} else {
+					that.saveAddressAxios();
+					setTimeout(function (){
+						// 更新地址列表
+						that.getAddrList();
+						// 清空弹出框内容
+						that.fillLayer();
+					}, 200);
+				}
+			},
+			// 添加地址发送请求
+			saveAddressAxios() {
+				var that = this;
+				that.$axios.post(interfaceApi.addAddress,that.addressInfo).then(res=> {
+					that.showlayer = false;
+				})
+			},
+			// 重新获取地址列表
+			getAddrList() {
+				var that = this;
+				var param = {
+					pageSize: 1000,
+					page: 1
+				}
+				that.$axios.post(interfaceApi.addressList,param).then(res=> {
+					console.log(res);
+					console.log(that.addressList);
+					that.addressList = res.data.data.data;
+					that.defaultAddressid = res.data.data.data[0].id;
+
+				})
+			},
+			// 添加完成清空弹出框内容
+			fillLayer() {
+				this.addressInfo.id = null;
+				this.addressInfo.fullName = '';
+				this.addressInfo.phone = '';
+				this.addressInfo.isDefault = 0;
+				this.addressInfo.province = '';
+				this.addressInfo.city = '';
+				this.addressInfo.email = '';
+				this.addressInfo.regionDetail = '';
+			},
+			edit(obj) {
+				this.showlayer = true;
+				this.addressInfo = obj;
+			},
+			// 修改优惠券
+			handleCommand(command) {
+				this.defaultCoupons = command;
+				if (command == undefined) {
+					this.getPrice(0);
+				} else {
+					this.getPrice(command.couponId);
+				}
+		    },
+		    // 修改优惠券获取价格
+		    getPrice(couponId) {
+		    	var that = this;
+				var param = {
+					couponId: couponId,
+					skuId: that.$route.query.skuId,
+					number: that.$route.query.number
+				}
+				that.$axios.post(interfaceApi.prepareOrder,param).then(res=> {
+					this.orderData.couponReduce = res.data.data.couponReduce;
+					this.orderData.total = res.data.data.total;
+				})
+		    }
+
 		}
 	}
 </script>

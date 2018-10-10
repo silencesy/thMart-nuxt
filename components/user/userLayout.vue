@@ -20,13 +20,13 @@
                 <li>
                     <nuxt-link to="/userCenter/cartModule/cart">Cart</nuxt-link>
                 </li>
-                <li>
+                <li :class="{active: active=='Wishlist'}">
                     <nuxt-link to="/userCenter/wish/wish">Wishlist</nuxt-link>
                 </li>
-                <li>
+                <li :class="{active: active=='Coupons'}">
                     <nuxt-link to="/userCenter/coupons/coupons">thMart-Coupons</nuxt-link>
                 </li>
-                <li>
+                <li :class="{active: active=='Address'}">
                     <nuxt-link to="/userCenter/address/addressList">Address Book</nuxt-link>
                 </li>
             </ul>

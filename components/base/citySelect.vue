@@ -16,18 +16,28 @@
 <script>
 	import mapJson from '~/static/json/map.json'
 	export default {
-	  data () {
-	    return {
-	      	mapJson: mapJson,
-	      	province:'',
-	      	sheng: '',
-	      	shi: '',
-	      	shi1: [],
-	      	qu: '',
-	      	qu1: [],
-	      	city:'',
-	      	block:'',
-	    }
+		props: {
+			provinceProps: {
+                type: [Number,String],
+                default: ''
+            },
+            cityProps: {
+                type: [Number,String],
+                default: ''
+            }
+		},
+		data () {
+		return {
+			mapJson: mapJson,
+			province:'',
+			sheng: this.provinceProps,
+			shi: this.cityProps,
+			shi1: [],
+			qu: '',
+			qu1: [],
+			city:'',
+			block:'',
+		}
 	  },
 	  methods:{
 	    // 加载china地点数据，三级
@@ -75,6 +85,11 @@
 	            this.E = this.qu1[0].id
 	          }
 	        }
+
+	       	// 修改省份
+	        this.$emit("changeProvince",this.mapJson[e]);
+	        // 修改城市
+	        this.$emit("changeCity",this.shi);
 	    },
 	    // 选市
 	    choseCity:function(e) {
@@ -86,6 +101,7 @@
 	            // console.log(this.E)
 	          }
 	        }
+	        this.$emit("changeCity",this.mapJson[e]);
 	    },
 	    // 选区
 	    choseBlock:function(e) {
