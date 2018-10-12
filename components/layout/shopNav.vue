@@ -6,20 +6,20 @@
                     <nuxt-link to="/"><img src="~static/images/thmart.png" alt=""></nuxt-link>
                     <div class="shopName">
                         <span>{{$store.state.shopInfo.name}}</span>
-                        <span><i class="iconfont icon-unreview"></i>Favourite</span>
+                        <span class="noselect" :class="{theme_color: $store.state.shopInfo.isCollect==1}" @click="favourite"><i class="iconfont icon-review"></i>Favourite</span>
                     </div>
                 </div>
                 <div class="center">
                     <i v-show="searchTipsTextShow" class="iconfont icon-sousuo"> What are you looking for?</i>
                     <input v-model="searchText" @blur="blurinput" type="search" @focus="handleinput()" value="" name="" id="">
                     <button @click="searchBtn">Search</button>
-                    <button class="btnShop">Shop</button>
+                    <button  @click="shopSearchBtn" class="btnShop">Shop</button>
                 </div>
                 <div class="right"><img src="~static/images/thmartCode.jpg" alt=""></div>
             </div> 
         </div>
         <div class="shopTopPic"><img src="~static/images/top-banner.png" alt=""></div>
-        <div class="container shopContainer">
+        <div class="container shopContainer" v-show="show">
             <div class="shopTitle">
                 <nuxt-link :to="{name: 'shop-id',params: {id: $store.state.shopInfo.id?$store.state.shopInfo.id:$route.query.id}}" :class="{theme_color: $route.name == 'shop-id'}">Home</nuxt-link>
                 <nuxt-link :to="{path: '/shop/shopGoodsListALL',query: {id: $store.state.shopInfo.id?$store.state.shopInfo.id:$route.query.id}}" :class="{theme_color: $route.name == 'shop-shopGoodsListAll'}">All</nuxt-link>
@@ -29,6 +29,8 @@
     </div>
 </template>
 <script>
+    // 接口API
+    import interfaceApi from '~/plugins/interfaceApi'
     export default {
         props: {
             infoData: {
@@ -37,6 +39,10 @@
                     return {}
                 }
             },
+            show: {
+                type: Boolean,
+                default: true
+            }
             // configObj: 
         },
         data() {
@@ -44,6 +50,10 @@
                 searchText: '',
                 searchTipsTextShow: true
             }
+        },
+        mounted() {
+            this.searchTextFun();
+            this.blurinput();
         },
         methods: {
             handleinput() {
@@ -58,6 +68,37 @@
             },
             searchBtn() {
                 this.$router.push({path: '/searchModeule/search',query: {searchInfo: this.searchText,classification: 'categories'}});
+            },
+            shopSearchBtn() {
+                if (this.$route.name == 'shop-shopGoodsListSearch') {
+                    this.$router.push({path: '/shop/shopGoodsListSearch',query: {searchInfo: this.searchText,id: this.$route.params.id || this.$route.query.id}});
+                    setTimeout(function(){
+                        window.location.reload();
+                    },20);
+                } else {
+                    this.$router.push({path: '/shop/shopGoodsListSearch',query: {searchInfo: this.searchText,id: this.$route.params.id || this.$route.query.id}});
+                }
+            },
+            favourite() {
+                var that = this;
+                var copy = that.$store.state.shopInfo;
+                copy.isCollect = copy.isCollect==0?1:0;
+                that.$store.commit('SET_SHOP_INFO',copy);
+                const param = {
+                    contentId: that.$route.params.id,
+                    type: 2,
+                    isCollect: that.$store.state.shopInfo.isCollect
+                }
+                that.$axios.post(interfaceApi.Collect,param).then(res=> {
+                    // that.$notify({
+                    //   title: '收藏成功',
+                    //   message: '',
+                    //   type: 'success'
+                    // });
+                })
+            },
+            searchTextFun() {
+                this.searchText = this.$route.query.searchInfo || '';
             }
         }
     }

@@ -1,7 +1,7 @@
 <template>
     <div>
         <top/>
-        <shopNav/>
+        <shopNav />
         <nuxt/>
         <bottom/>
     </div>

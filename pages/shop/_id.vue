@@ -58,10 +58,7 @@
 		methods: {
 			setShopInfo() {
 				// 设置商户的信息在layout布局中的shopnav组件中使用数据
-				const shopInfo = {};
-			 	shopInfo['name'] = this.shopData.name;
-			 	shopInfo['id'] = this.shopData.id;
-			 	this.$store.commit('SET_SHOP_INFO',shopInfo);
+			 	this.$store.commit('SET_SHOP_INFO',this.shopData);
 			}
 		}
 	}

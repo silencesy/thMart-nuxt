@@ -13,13 +13,13 @@
 					<h3>{{articleData.title}}</h3>
 					<span>{{articleData.createTime}}</span>
 					<div class="text" v-html="articleData.article_content"></div>
-					<div class="goods">
-						<div><img src="~static/images/flower.jpg" alt=""></div>
+					<div class="goods" v-for="item in articleData.itemList" :key="item.itemId">
+						<div><img :src="item.pic" alt=""></div>
 						<div>
-							<p>MEE HOTG Honey Refill Bundle, 3 Flavors, 21 Bags in 3 Refill Packs</p>
+							<p>{{item.title}}</p>
 							<div>
-								<span>¥14999</span>
-								<button>Buy Now</button>
+								<span>¥{{item.price}}</span>
+								<button @click="goDetails(item.itemId)">Buy Now</button>
 							</div>
 						</div>						
 					</div>
@@ -69,7 +69,9 @@
 		    
 	  	},
 		methods:{
-
+			goDetails(id) {
+				this.$router.push({name: 'goods-id', params: {id: id}});
+			}
         }
 	}
 </script>
