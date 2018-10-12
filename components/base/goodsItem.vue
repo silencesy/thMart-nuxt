@@ -42,7 +42,6 @@
                 let imgBoxstyleObj = {};
                 imgBoxstyleObj['width'] = (parseInt(this.styleObj.width) - 2) + 'px';
                 imgBoxstyleObj['height'] = (parseInt(this.styleObj.width) - 2) + 'px';
-                console.log(imgBoxstyleObj)
                 return imgBoxstyleObj;
             }
         }

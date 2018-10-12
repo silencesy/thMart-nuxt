@@ -41,8 +41,7 @@
 				}
 			}
 		},
-		async asyncData ({app,query}) {
-			console.log(query)
+		async asyncData ({app,query}) {     
 			let param = {
 				id: 0,
 				page: 1,
