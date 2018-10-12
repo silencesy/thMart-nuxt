@@ -26,21 +26,21 @@
 		            	<div>
 		            		<div class="title">Delivery Status</div>
 			            	<div class="status">
-			            		<div v-for="item in 3" :key="item">
+			            		<!-- <div v-for="item in 1" :key="item">
 			            			<div><img src="~/static/images/flower.jpg" alt=""></div>
 			            			<div>
 			            				<p>[上海市]快件离开上海已发往卢湾</p>
 			            				<span>2018.08.15 07:21:45 <nuxt-link to="/">Tracking Your Order >></nuxt-link></span>
 			            			</div>
-			            		</div>
+			            		</div> -->
 			            		<!-- 没有订单状态的情况 -->
-			            		<!-- <div class="noOrder"><p>No more delivery status</p></div> -->
+			            		<div class="noOrder"><p>No more delivery status</p></div>
 			            	</div>
 			            </div>
 			            <div>
 			            	<div class="title">Wishlist</div>
 			            	<div class="wishList">
-			            		<div class="wishBox goods">
+			            		<div class="wishBox goods" v-if="goodsList.length>0">
 				            		<nuxt-link v-for="item in goodsList" :key="item.id" :to="{name: 'goods-id', params: {id: item.id}}"  class="boxPer">
 				            			<div>
 					            			<div>
@@ -51,7 +51,7 @@
 					            		</div>
 				            		</nuxt-link>								
 				            	</div>
-				            	<div class="wishBox shop">
+				            	<div class="wishBox shop" v-if="shopList.length>0">
 				            		<nuxt-link v-for="item in shopList" :key="item.contentId" :to="{name: 'shop-id',params: {id: item.contentId}}" class="boxPer">
 				            			<div>
 					            			<div>
@@ -62,7 +62,7 @@
 				            		</nuxt-link>
 				            	</div>
 				            	<!-- 没有收藏的情况 -->
-				            	<!-- <div class="noWish"><p>No more wishlist</p></div> -->
+				            	<div class="noWish" v-if="shopList.length==0 && goodsList.length==0"><p>No more wishlist</p></div>
 			            	</div> 
 			            </div>
 		            </div>				
@@ -160,6 +160,7 @@
 						border-bottom: $border 
 					.status 
 						overflow: hidden
+						height: 309px
 						>div 
 							overflow: hidden
 							float: left
@@ -184,7 +185,8 @@
 									a 
 										color: $theme_color
 					.wishList
-						padding: 15px 
+						padding: 15px
+						height: 309px
 						.wishBox 
 							overflow: hidden
 							.boxPer

@@ -88,7 +88,7 @@
 									<button @click="addToCart">Add To Cart</button>
 								</div>
 								<div class="tips row-item">
-									<span><i class="iconfont icon-unreview"></i>favourite</span>
+									<span class="noselect active" @click="favourite"><i class="iconfont icon-unreview"></i>favourite</span>
 									<span><i class="iconfont icon-kefu"></i>Add To Cart</span>
 								</div>
 							</div>						
@@ -560,6 +560,9 @@
             // 关闭购买提示框
             closeGroupBorder() {
                 this.groupBorder = false;
+            },
+            favourite() {
+                console.log(123);
             }
         },
 	  	watch: {

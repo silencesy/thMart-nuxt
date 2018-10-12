@@ -30,7 +30,7 @@
 							<div class="right">
 								<!-- 去掉default这个class 取消默认 -->
 								<p class="default noselect" :class="{active: item.isDefault==1}" @click="setDefault(item,index)"><i class="iconfont icon-duihao"></i> Default</p>
-								<p class="noselect edit"><i class="iconfont icon-bianji"></i> Edit</p>
+								<p class="noselect edit" @click="editAddr(item.id)"><i class="iconfont icon-bianji"></i> Edit</p>
 								<p class="noselect edit"></p>
 								<p class="noselect delete" @click="deleteAdrr(item,index)"><i class="iconfont icon-shanchu"></i> Delete</p>
 							</div>
@@ -154,6 +154,10 @@
 					that.addressList.data[index].isDefault = 1;
 				})
 		    },
+		    // 编辑地址
+		    editAddr(id) {
+		    	this.$router.push({name: 'userCenter-address-addAddress',query: {id: id}});
+		    }
 		}
 	}
 </script>

@@ -5,33 +5,58 @@
 				<div class="wish" slot="userContent">
 					<div class="title">Wishlist</div>
 					<div>
-					  	<el-tabs v-model="activeName" @tab-click="handleClick">
+					  	<!-- <el-tabs v-model="activeName" @tab-click="handleClick"> -->
+					  	<el-tabs v-model="activeName">
 						    <el-tab-pane label="Goods" name="goods" class="section">
-								<div class="box" v-for="item in 10" :key="item">
-									<nuxt-link to="/">
-										<div><img src="~/static/images/flower.jpg" alt=""></div>
-										<p>An Affectionate Encounter Bouquet / Flowers</p>
-										<div class="bottom">
-											<span>¥ 269</span>
-											<i class="iconfont icon-review"></i>
-										</div>
-									</nuxt-link>
+								<div style="overflow: hidden">
+									<div class="box" v-if="goodList.data.length>0" v-for="item in goodList.data" :key="item.id">
+										<nuxt-link  :to="{name: 'goods-id', params: {id: item.id}}">
+											<div><img :src="item.pic" alt=""></div>
+											<p>{{item.title}}</p>
+											<div class="bottom">
+												<span>¥ {{item.price}}</span>
+												<i class="iconfont icon-review"></i>
+											</div>
+										</nuxt-link>
+									</div>
 								</div>
 								<!-- 没有收藏的情况 -->
-								<!-- <div class="noWishlist"><p>No more wishlist</p></div> -->
+								<div class="noWishlist" v-if="goodList.data.length==0"><p>No more wishlist</p></div>
+								<div class="changePage" v-if="goodList.totalPage!=0">
+									<el-pagination
+									  	background
+									  	layout="prev, pager, next"
+									  	:current-page.sync="currentPage"
+										@size-change="handleSizeChange"
+					      				@current-change="handleCurrentChange"
+									  	:total="goodList.totalPage * 10">
+									</el-pagination>
+								</div>
 						    </el-tab-pane>
 						    <el-tab-pane label="Shops" name="shops" class="section">
-								<div class="box" v-for="item in 10" :key="item">
-									<nuxt-link to="/">
-										<div><img src="~/static/images/flower.jpg" alt=""></div>
-										<p>Fairmont Peace Hotel</p>
-										<div class="bottom bottomStar">
-											<i class="iconfont icon-review"></i>
-										</div>
-									</nuxt-link>
+								<div style="overflow: hidden">
+									<div class="box" v-if="shopList.data.length>0" v-for="item in shopList.data" :key="item.contentId">
+										<nuxt-link :to="{name: 'shop-id',params: {id: item.contentId}}">
+											<div><img :src="item.pic" alt=""></div>
+											<p>{{item.name}}</p>
+											<div class="bottom bottomStar">
+												<i class="iconfont icon-review"></i>
+											</div>
+										</nuxt-link>
+									</div>
 								</div>
 								<!-- 没有收藏的情况 -->
-								<!-- <div class="noWishlist"><p>No more wishlist</p></div> -->
+								<div class="noWishlist" v-if="shopList.data.length == 0"><p>No more wishlist</p></div>
+								<div class="changePage" v-if="shopList.totalPage!=0">
+									<el-pagination
+									  	background
+									  	layout="prev, pager, next"
+									  	:current-page.sync="currentPage2"
+										@size-change="handleSizeChange2"
+					      				@current-change="handleCurrentChange2"
+									  	:total="shopList.totalPage * 10">
+									</el-pagination>
+								</div>
 						    </el-tab-pane>
 					  	</el-tabs>
 					</div>
@@ -42,6 +67,8 @@
 	</div>
 </template>
 <script>
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	import goodsItem from "~/components/base/goodsItem"
 	import userLayout from "~/components/user/userLayout"
 	export default {
@@ -49,8 +76,29 @@
 		data() {
 			return {
 				titleIsShow: true,
-				activeName: 'goods'
+				activeName: 'goods',
+				currentPage: 1,
+				currentPage2: 1
 			}
+		},
+		middleware: 'userAuth',
+		async asyncData ({app}) {
+			var param1 = {
+				type: 1,
+				page: 1,
+				pageSize: 10
+			};
+			var param2 = {
+				type: 2,
+				page: 1,
+				pageSize: 10
+			}
+		 	const goodList = await app.$axios.post(interfaceApi.collectList,param1);
+		 	const shopList = await app.$axios.post(interfaceApi.collectList,param2);
+  			return { 
+  				goodList: goodList.data.data,
+  				shopList: shopList.data.data
+  			}
 		},
 		components: {
 			goodsItem, 
@@ -64,7 +112,53 @@
 		    
 	  	},
 		methods: {
-
+			// 获取数据商品
+			getData(val) {
+				var that = this;
+				const param = {
+					page: val,
+					pageSize: 10,
+					type: 1
+				}
+				that.$axios.post(interfaceApi.collectList,param).then(res=> {
+					that.goodList = res.data.data;
+				})
+			},
+			// 获取数据商户
+			getData2(val) {
+				var that = this;
+				const param = {
+					page: val,
+					pageSize: 10,
+					type: 2
+				}
+				that.$axios.post(interfaceApi.collectList,param).then(res=> {
+					that.shopList = res.data.data;
+				})
+			},
+			// 回到顶部
+			goBackTop() {
+				document.body.scrollTop = 0
+				document.documentElement.scrollTop = 0
+			},
+			// 改变页数
+			handleSizeChange(val) {
+		        this.getData(val);
+		    },
+		    // 上下页
+		    handleCurrentChange(val) {
+		        this.goBackTop();
+		        this.getData(val);
+		    },
+		    // 改变页数
+			handleSizeChange2(val) {
+		        this.getData(val);
+		    },
+		    // 上下页
+		    handleCurrentChange2(val) {
+		        this.goBackTop();
+		        this.getData2(val);
+		    }
 		}
 	}
 </script>

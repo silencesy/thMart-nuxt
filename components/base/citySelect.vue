@@ -30,14 +30,26 @@
 		return {
 			mapJson: mapJson,
 			province:'',
-			sheng: this.provinceProps,
-			shi: this.cityProps,
+			sheng: '',
+			shi: '',
 			shi1: [],
 			qu: '',
 			qu1: [],
 			city:'',
 			block:'',
 		}
+	  },
+	  mounted() {
+	  	// var that = this;
+	  	// that.setId(that.provinceProps);
+	  	// // var that = that;
+	  	// that.choseProvince(that.sheng);
+	  	// setTimeout(function() {
+	  	// 	that.setId2(that.cityProps);
+	  	// 	setTimeout(function() {
+	  	// 		that.choseCity(that.shi);
+	  	// 	},300);
+	  	// },300);
 	  },
 	  methods:{
 	    // 加载china地点数据，三级
@@ -85,7 +97,11 @@
 	            this.E = this.qu1[0].id
 	          }
 	        }
-
+	        // console.log(this.shi1);
+	        // console.log(this.shi);
+	        // console.log(this.qu1);
+	        // console.log(this.qu);
+	        // console.log(this.E);
 	       	// 修改省份
 	        this.$emit("changeProvince",this.mapJson[e]);
 	        // 修改城市
@@ -101,12 +117,32 @@
 	            // console.log(this.E)
 	          }
 	        }
+	        console.log(this.qu1);
+	        console.log(this.qu);
+	        console.log(this.E);
 	        this.$emit("changeCity",this.mapJson[e]);
 	    },
 	    // 选区
 	    choseBlock:function(e) {
 	        this.E=e;
 	        // console.log(this.E)
+	    },
+	    // 设置省市的id
+	    setId(sheng) {
+	    	var data = this.mapJson;
+	    	for (var item in data) {
+              if (sheng == data[item]) {//省
+                this.sheng = item;
+              }
+            }
+	    },
+	    setId2(shi) {
+	    	var data = this.mapJson;
+	    	for (var item in data) {
+              if (shi == data[item]) {//市
+              	this.shi = item;
+              }
+            }
 	    }
 	},
 	created:function(){

@@ -64,6 +64,24 @@ let api = {
 	// 添加地址
 	addAddress: 'User/Address/edit',
 	// 删除地址栏
-	deleteAddAddress :'User/Address/delete'
+	deleteAddAddress :'User/Address/delete',
+	// 获取单条地址
+	oneAddress:	'User/Address/detail',
+	/**
+	 * 收藏
+	 */
+	collectList: 'Collect/list',
+	collect: 'Collect/collect',
+	/**
+	 * 优惠券
+	 */
+	couponList: 'Coupon/list',
+	couponItemList: 'Coupon/itemList',
+	// 个人中心
+	changeNickName: 'User/changeNickName',
+	// 修改密码
+	changePassword: 'User/changePassword',
+	// 修改头像
+	changeHead: 'User/changeHead'
 }
 export default api

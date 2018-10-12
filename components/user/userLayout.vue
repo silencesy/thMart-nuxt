@@ -75,7 +75,8 @@
                                 @include wh(80px, 80px)
                                 border-radius: 50%
                                 text-align: center
-                                margin-bottom: 5px
+                                margin-bottom: 
+                                display: block
                         p 
                             white-space: nowrap
                             text-overflow: ellipsis

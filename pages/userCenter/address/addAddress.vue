@@ -20,7 +20,7 @@
 							</div>
 							<div>
 								<label><i>*</i> Address :</label>
-								<citySelect />
+								<citySelect :provinceProps="addAddressInfo.province" :cityProps="addAddressInfo.city" @changeProvince="changeProvince" @changeCity="changeCity" />
 							</div>
 							<div>
 								 <textarea name=""  v-model="addAddressInfo.regionDetail" placeholder="* Please write down your detailed address in Chinese"></textarea>
@@ -31,7 +31,7 @@
 								<label  v-if="addAddressInfo.isDefault == 1" class="default"><i class="iconfont icon-xuanzhong1"></i>Default</label>
 							</div>
 						</div>
-						<div class="btn"><button>Save</button></div>
+						<div class="btn"><button @click="saveAddress">Save</button></div>
 					</div>
 				</div>
 			</userLayout>
@@ -43,6 +43,10 @@
 	import goodsItem from "~/components/base/goodsItem"
 	import userLayout from "~/components/user/userLayout"
 	import citySelect from "~/components/base/citySelect"
+	// 表单验证正则
+	import v from '~/assets/js/validate'
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'userHome',
 		middleware: 'userAuth',
@@ -61,6 +65,35 @@
 				}
 			}
 		},
+		async asyncData ({app,query}) {
+			// 修改
+			if (query.id) {
+				let param = {
+					id: query.id
+				}
+			 	const addAddressInfo = await app.$axios.post(interfaceApi.oneAddress,param);
+			 	// 如果优惠券数量大于一则赋值优惠券默认值
+			 	
+	  			return { 
+	  				addAddressInfo: addAddressInfo.data.data
+	            }	
+			} else {
+			// 添加
+				let addAddressInfo = {
+					id: '',
+					fullName: '',
+					phone: '',
+					province: '',
+					city: '',
+					email: '',
+					regionDetail: '',
+					isDefault: 0,
+				}
+				return { 
+	  				addAddressInfo: addAddressInfo
+	            }	
+			}
+		},
 		components: {
 			goodsItem, 
 			userLayout,
@@ -75,7 +108,54 @@
 		methods: {
 			toggleDefault() {
 				this.addAddressInfo.isDefault = this.addAddressInfo.isDefault==0?1:0;
-			}
+			},
+			// 修改省份
+			changeProvince(province) {
+				this.addAddressInfo.province = province;
+			},
+			// 修改城市
+			changeCity(city) {
+				this.addAddressInfo.city = city;
+			},
+			// 保存地址
+			saveAddress() {
+				var that = this;
+				if (!v.required(that.addAddressInfo.fullName)) {
+					that.$message({
+			          message: '请填写名字',
+			          type: 'warning'
+			        });
+				} else if(!v.tel(that.addAddressInfo.phone)) {
+					that.$message({
+			          message: '请填写正确的电话号码',
+			          type: 'warning'
+			        });
+				} else if(!v.email(that.addAddressInfo.email)) {
+					that.$message({
+			          message: '请填写正确的邮箱地址',
+			          type: 'warning'
+			        });
+				} else if(!v.required(that.addAddressInfo.province) && !v.required(that.addAddressInfo.city)) {
+					that.$message({
+			          message: '请选择地址',
+			          type: 'warning'
+			        });
+				} else if(!v.required(that.addAddressInfo.regionDetail)) {
+					that.$message({
+			          message: '请填写详细地址',
+			          type: 'warning'
+			        });
+				} else {
+					that.saveAddressAxios();
+				}
+			},
+			// 添加地址发送请求
+			saveAddressAxios() {
+				var that = this;
+				that.$axios.post(interfaceApi.addAddress,that.addAddressInfo).then(res=> {
+					that.$router.push({path: '/userCenter/address/addressList'});
+				})
+			},
 		}
 	}
 </script>
