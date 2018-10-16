@@ -18,7 +18,7 @@
         			<p><i class="iconfont icon-kefu"></i>After-sales Services</p>
         			<p>If you come across any problems with your thMart experience, please email us at <a href="mailto:thmart@urbanatomy.com">thmart@urbanatomy.com</a> with your name, mobile number and issue.</p>
       			<p>You can also scan the QR code at left to follow our official WeChat account, where you can directly message us about any issue.</p>
-      			<p><nuxt-link to="/"><i class="iconfont icon-hezuo-copy"></i>Do Business With Us</nuxt-link></p>
+      			<p><nuxt-link to="/business/businessEn"><i class="iconfont icon-hezuo-copy"></i>Do Business With Us</nuxt-link></p>
         		</div>
         		<div class="right">
         			<img src="~static/images/thatCode.jpg" alt="">

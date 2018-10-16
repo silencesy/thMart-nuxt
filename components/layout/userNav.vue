@@ -69,9 +69,9 @@
             .userCenter
                 background: #fff
                 @include hh(40px, 40px)
-                @include ttbb(4px, 0, 4px, 0)
                 margin-top: 21px
-                @include whh(500px, 40px, 40px)     
+                @include whh(500px, 40px, 40px)   
+                border-radius: 4px  
                 i
                     position: absolute
                     color: #999
