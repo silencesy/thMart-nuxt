@@ -33,7 +33,7 @@
                         <!-- <span class="number">12</span> -->
                     </nuxt-link>
                     <nuxt-link to="/userCenter/orderList/all">My Order</nuxt-link>
-                    <nuxt-link to="">Do Business With Us</nuxt-link>
+                    <nuxt-link to="/business/businessEn">Do Business With Us</nuxt-link>
                 </div>
             </div> 
         </div>
@@ -90,7 +90,9 @@
                 .el-icon--right
                     padding-left: 5px
                 .popper__arrow
-                    display: none                       
+                    display: none 
+                .el-dropdown:active 
+                    border: none                      
         .right  
             float: right
             a
