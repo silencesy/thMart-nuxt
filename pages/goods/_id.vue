@@ -88,7 +88,7 @@
 									<button @click="addToCart">Add To Cart</button>
 								</div>
 								<div class="tips row-item">
-									<span class="noselect active" @click="favourite"><i class="iconfont icon-unreview"></i>favourite</span>
+									<span class="noselect" :class="{theme_color: goodsInfo.isCollect==1}" @click="favourite"><i class="iconfont icon-review"></i>favourite</span>
 									<span><i class="iconfont icon-kefu"></i>Add To Cart</span>
 								</div>
 							</div>						
@@ -562,7 +562,21 @@
                 this.groupBorder = false;
             },
             favourite() {
-                console.log(123);
+                
+                const that = this;
+                that.goodsInfo.isCollect = this.goodsInfo.isCollect==1?0:1;
+                const param = {
+                    contentId: that.goodsInfo.id,
+                    type: 1,
+                    isCollect: that.goodsInfo.isCollect
+                }
+                that.$axios.post(interfaceApi.Collect,param).then(res=> {
+                    // that.$notify({
+                    //   title: '收藏成功',
+                    //   message: '',
+                    //   type: 'success'
+                    // });
+                })
             }
         },
 	  	watch: {
