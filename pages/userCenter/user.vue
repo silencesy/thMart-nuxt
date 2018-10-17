@@ -147,7 +147,7 @@
 						content: " "
 			.userCenter
 				overflow: hidden
-				margin-top: 15px
+				margin-top: 14px
 				>div:first-child 
 					margin-right: 15px
 				>div

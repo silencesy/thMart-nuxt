@@ -116,7 +116,7 @@
             border: $border
             .date
                 @include hh(36px, 36px)
-                background-color: #f9421e0d
+                background-color: #eee
                 padding: 0 15px
                 span 
                     padding-right: 100px
