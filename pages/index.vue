@@ -1,120 +1,127 @@
 <template>
-	<div class="home" ref="mescroll">
-		<!-- 轮播图 -->
-		<SwiperComponent :swiperData="homeData.figure"/>
-		<!-- today's deal -->
-		<div class="deal">
-			<div class="container">
-				<nuxt-link to="/">
-					<div class="deal-logo" :style="{backgroundImage:'url(' + homeData.deal.pic + ')'}"></div>
-				</nuxt-link>
-				<div class="deal-swiper">
-					
+	<div class="home">
+		<mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
+
+			<!-- 轮播图 -->
+			<SwiperComponent :swiperData="homeData.figure"/>
+			<!-- today's deal -->
+			<div class="deal">
+				<div class="container">
+					<nuxt-link to="/">
+						<div class="deal-logo" :style="{backgroundImage:'url(' + homeData.deal.pic + ')'}"></div>
+					</nuxt-link>
+					<div class="deal-swiper">
+						
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="homeSection container">
-			<!-- 商户组 -->
-			<div class="hotShops">
-				<div class="title">
-					<img src="~static/images/shops.png" alt="">
-					<nuxt-link to="/shop/shopList">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
+			<div class="homeSection container">
+				<!-- 商户组 -->
+				<div class="hotShops">
+					<div class="title">
+						<img src="~static/images/shops.png" alt="">
+						<nuxt-link to="/shop/shopList">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
+					</div>
+					<div class="pic">
+						<nuxt-link v-for="item in homeData.shop.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img :src="item.pic" :alt="item.title"></nuxt-link>
+					</div>
 				</div>
-				<div class="pic">
-					<nuxt-link v-for="item in homeData.shop.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img :src="item.pic" :alt="item.title"></nuxt-link>
+				<!-- 团购组 -->
+				<div class="groupBuy">
+					<div class="title">
+						<img src="~static/images/groupBuy.png" alt="">
+						<nuxt-link to="/">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
+					</div>
+					<div class="goods">
+						<nuxt-link to="/">
+							<b class="hot"><i>HOT</i></b>
+							<div><img src="~static/images/flower.jpg" alt=""></div>
+							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+							<span>¥1499</span>
+							<del>¥1599</del>
+						</nuxt-link>
+						<nuxt-link to="/">
+							<b class="hot"><i>HOT</i></b>
+							<div><img src="~static/images/flower.jpg" alt=""></div>
+							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+							<span>¥1499</span>
+							<del>¥1599</del>
+						</nuxt-link>
+						<nuxt-link to="/">
+							<div><img src="~static/images/flower.jpg" alt=""></div>
+							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+							<span>¥1499</span>
+							<del>¥1599</del>
+						</nuxt-link>
+						<nuxt-link to="/">
+							<b class="hot"><i>HOT</i></b>
+							<div><img src="~static/images/flower.jpg" alt=""></div>
+							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+							<span>¥1499</span>
+							<del>¥1599</del>
+						</nuxt-link>
+						<nuxt-link to="/">
+							<div><img src="~static/images/flower.jpg" alt=""></div>
+							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+							<span>¥1499</span>
+							<del>¥1599</del>
+						</nuxt-link>
+						<nuxt-link to="/">
+							<b class="hot"><i>HOT</i></b>
+							<div><img src="~static/images/flower.jpg" alt=""></div>
+							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+							<span>¥1499</span>
+							<del>¥1599</del>
+						</nuxt-link>
+						<nuxt-link to="/">
+							<div><img src="~static/images/flower.jpg" alt=""></div>
+							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+							<span>¥1499</span>
+							<del>¥1599</del>
+						</nuxt-link>
+						<nuxt-link to="/">
+							<b class="hot"><i>HOT</i></b>
+							<div><img src="~static/images/flower.jpg" alt=""></div>
+							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
+							<span>¥1499</span>
+							<del>¥1599</del>
+						</nuxt-link>
+					</div>
 				</div>
 			</div>
-			<!-- 团购组 -->
-			<div class="groupBuy">
+			<floor :floorData="homeData.ticketing"/>
+			<div class="homeAd container"><img src="~static/images/ad.jpg" alt=""></div>
+			<floor :floorData="homeData.flowers"/>
+			<floor :floorData="homeData.thDispatcher"/>
+			<floor :floorData="homeData.homeWare"/>
+			<floor :floorData="homeData.babyProduct"/>
+			<floor :floorData="homeData.toys"/>
+			<floor :floorData="homeData.coupon"/>
+			<floor :floorData="homeData.electronic"/>
+			<div class="editor container">
 				<div class="title">
-					<img src="~static/images/groupBuy.png" alt="">
+					<img src="~static/images/editor.png" alt="">
 					<nuxt-link to="/">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
 				</div>
-				<div class="goods">
-					<nuxt-link to="/">
-						<b class="hot"><i>HOT</i></b>
-						<div><img src="~static/images/flower.jpg" alt=""></div>
-						<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-						<span>¥1499</span>
-						<del>¥1599</del>
-					</nuxt-link>
-					<nuxt-link to="/">
-						<b class="hot"><i>HOT</i></b>
-						<div><img src="~static/images/flower.jpg" alt=""></div>
-						<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-						<span>¥1499</span>
-						<del>¥1599</del>
-					</nuxt-link>
-					<nuxt-link to="/">
-						<div><img src="~static/images/flower.jpg" alt=""></div>
-						<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-						<span>¥1499</span>
-						<del>¥1599</del>
-					</nuxt-link>
-					<nuxt-link to="/">
-						<b class="hot"><i>HOT</i></b>
-						<div><img src="~static/images/flower.jpg" alt=""></div>
-						<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-						<span>¥1499</span>
-						<del>¥1599</del>
-					</nuxt-link>
-					<nuxt-link to="/">
-						<div><img src="~static/images/flower.jpg" alt=""></div>
-						<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-						<span>¥1499</span>
-						<del>¥1599</del>
-					</nuxt-link>
-					<nuxt-link to="/">
-						<b class="hot"><i>HOT</i></b>
-						<div><img src="~static/images/flower.jpg" alt=""></div>
-						<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-						<span>¥1499</span>
-						<del>¥1599</del>
-					</nuxt-link>
-					<nuxt-link to="/">
-						<div><img src="~static/images/flower.jpg" alt=""></div>
-						<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-						<span>¥1499</span>
-						<del>¥1599</del>
-					</nuxt-link>
-					<nuxt-link to="/">
-						<b class="hot"><i>HOT</i></b>
-						<div><img src="~static/images/flower.jpg" alt=""></div>
-						<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-						<span>¥1499</span>
-						<del>¥1599</del>
+				<div class="articlePer">
+					<nuxt-link v-for="(item,index) in homeData.article.data" :key="item.id" v-if="index<6" :to="{name: 'article-id',params: {id: item.id}}">
+						<p><img :src="item.pic" alt=""></p> 
+						<div class="per">
+							<p>{{item.title}}</p>
+							<span>{{item.createTime}}</span>
+						</div>
 					</nuxt-link>
 				</div>
 			</div>
-		</div>
-		<floor :floorData="homeData.ticketing"/>
-		<div class="homeAd container"><img src="~static/images/ad.jpg" alt=""></div>
-		<floor :floorData="homeData.flowers"/>
-		<floor :floorData="homeData.thDispatcher"/>
-		<floor :floorData="homeData.homeWare"/>
-		<floor :floorData="homeData.babyProduct"/>
-		<floor :floorData="homeData.toys"/>
-		<floor :floorData="homeData.coupon"/>
-		<floor :floorData="homeData.electronic"/>
-		<div class="editor container">
-			<div class="title">
-				<img src="~static/images/editor.png" alt="">
-				<nuxt-link to="/">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
-			</div>
-			<div class="articlePer">
-				<nuxt-link v-for="(item,index) in homeData.article.data" :key="item.id" v-if="index<6" :to="{name: 'article-id',params: {id: item.id}}">
-					<p><img :src="item.pic" alt=""></p> 
-					<div class="per">
-						<p>{{item.title}}</p>
-						<span>{{item.createTime}}</span>
-					</div>
-				</nuxt-link>
-			</div>
-		</div>
-		<goodsItem :hotData='hotData' :titleIsShow="titleIsShow" />
+			<goodsItem :hotData='hotData' :titleIsShow="titleIsShow" />
+
+    	</mescroll-vue>
+		
 	</div>
 </template>
 <script>
+	// 引入mescroll的vue组件
+	import MescrollVue from 'mescroll.js/mescroll.vue'
 	import SwiperComponent from "~/components/base/Swiper"
 	import floor from '~/components/home/floor'
 	import goodsItem from '~/components/base/goodsItem'
@@ -127,8 +134,6 @@
 			return {
 				// 上拉加载数据//
 				hotData: [],
-				// 是否结束上拉
-				end: false,
 				hotGoodsPara: {
 					id: 12,
 					pageSize: 18,
@@ -136,10 +141,18 @@
 					sort: 'order_asc'
 				},
 				totalPage: -1,
-				// goodsItemStyleObj: {
-				// 	width: '50px',
-				// 	height: '100px'
-				// }
+				mescrollDown: {
+					isLock: true
+				},
+				mescrollUp: {
+					callback: this.upCallback,
+					offset: 500,
+					page: {
+						num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
+						size: 18, //每页数据条数,默认10
+					}
+				},
+				mescroll: null,
 				titleIsShow: true
 			}
 		},
@@ -150,90 +163,37 @@
 		components: {
 			SwiperComponent,
 			floor,
-			goodsItem
-		},
-		mounted() {
-			
-		   this.pullRefresh();
+			goodsItem,
+			MescrollVue
 		},
 	  	computed: {  
 		    
 	  	},
+	  	beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
+			next(vm => {
+				vm.$refs.mescroll.beforeRouteEnter() // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
+			})
+		},
+		beforeRouteLeave (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写
+			this.mescroll.destroy() // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
+			next()
+		},
 		methods: {
-			//文档的总高度
-            getScrollTop: function () {
-                var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
-                if (document.body) {
-                    bodyScrollTop = document.body.scrollTop;
-                }
-                if (document.documentElement) {
-                    documentScrollTop = document.documentElement.scrollTop;
-                }
-                scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
-                return scrollTop;
-            },
-            //浏览器视口的高度
-            getScrollHeight: function () {
-                var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
-                if (document.body) {
-                    bodyScrollHeight = document.body.scrollHeight;
-                }
-                if (document.documentElement) {
-                    documentScrollHeight = document.documentElement.scrollHeight;
-                }
-                scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
-                return scrollHeight;
-            },
-            //浏览器视口的高度
-            getWindowHeight: function () {
-                var windowHeight = 0;
-                if (document.compatMode == "CSS1Compat") {
-                    windowHeight = document.documentElement.clientHeight;
-                } else {
-                    windowHeight = document.body.clientHeight;
-                }
-                return windowHeight;
-            },
-            // 下拉加载ajax
-            pullRefresh: function () {
-                var that = this;
-                window.onscroll = function () {
-                    that.scrollChange()
-                }
-            },
-            scrollChange: function () {
-                var that = this;
-                that.scollY = that.getScrollTop() + that.getWindowHeight() - that.getScrollHeight();
-                // 把下拉刷新置为false，防止多次请求
-                if (that.end) {
-                	return false;
-                }
-                if (that.scollY >= -1200) {
-                    if (!that.pullRefreshss) {
-                        return false;
-                    }
-                    that.end = true;
-                    // 模拟ajax请求
-                    that.$axios.post('https://proj6.thatsmags.com/thmartApi/Ads/list',that.hotGoodsPara).then(res=> {
-						if (res.data.data.totalPage == 0 || res.data.data.totalPage == that.totalPage) {
-							that.end = true;
-						} else {
-							that.end = false;
-						}
-						that.totalPage = res.data.data.totalPage;
-						that.hotData = that.hotData.concat(res.data.data.data);
+			mescrollInit (mescroll) {
+			    this.mescroll = mescroll
+			},
+			upCallback (page, mescroll) {
+				console.log(page)
+				var that = this;
+				that.hotGoodsPara.page = page.num;
+				that.hotGoodsPara.pageSize = page.size;
+				that.$axios.post('https://proj6.thatsmags.com/thmartApi/Ads/list',that.hotGoodsPara).then(res=> {
+					mescroll.endSuccess(res.data.data.data.length)
+					that.totalPage = res.data.data.totalPage;
+					that.hotData = that.hotData.concat(res.data.data.data);
 
-					})
-                    that.pullRefreshss = false;
-                    // 加页码数
-                    that.hotGoodsPara.page++;
-                }
-                else {
-                    // 其他时候把下拉刷新置为true
-                    that.pullRefreshss = true;
-                }
-            }
-			
+				})
+			}
 		}
 	}
 </script>
