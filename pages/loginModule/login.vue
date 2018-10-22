@@ -167,11 +167,17 @@
 				    }
 				})
 			},
-			SetCookie(name, value) {
-	            var exp = new Date();
-	            exp.setTime(exp.getTime() + 6 * 24 * 60 * 60 * 1000); //6天过期
-	            document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-	            return true;
+			SetCookie(c_name,value) {
+	            // var exp = new Date();
+	            // exp.setTime(exp.getTime() + 6 * 24 * 60 * 60 * 1000); //6天过期
+	            // document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+	            // return true;
+
+	            var exdate=new Date()
+				exdate.setDate(exdate.getDate()+15)
+				document.cookie=c_name+ "=" +escape(value)+
+				((15==null) ? "" : ";expires="+exdate.toGMTString())
+
 	        }
 	    }
 	}
