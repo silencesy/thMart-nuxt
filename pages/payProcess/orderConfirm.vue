@@ -185,7 +185,7 @@
 				</div>
 			</div>
 			<!-- 模态框 -->
-			<div class="layer-box" v-if="showlayer" @click="closeLayer" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: rgba(0,0,0,0.5)"></div>
+			<!-- <div class="layer-box" v-if="showlayer" @click="closeLayer" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: rgba(0,0,0,0.5)"></div>
 				<div v-if="showlayer" slot="userContent" :class="{addInfo: showlayer,zoomIn: showlayer,animated: showlayer}" >
 					<div class="box">
 						<div class="boxFrom">
@@ -210,12 +210,47 @@
 							</div>
 							<div class="setDefault noselect" @click="setDefault">
 								<label v-if="addressInfo.isDefault==0"><i class="iconfont icon-weixuanzhong"></i>Default</label>
-								<!-- 选为默认的情况 -->
+
 								<label v-if="addressInfo.isDefault==1" class="default"><i class="iconfont icon-xuanzhong1"></i>Default</label>
 							</div>
 						</div>
 						<div class="btn"><button @click="saveAddress">Save</button></div>
 					</div>
+				</div> -->
+				<div class="layer">
+					<el-dialog title="Address" :visible.sync="showlayer">
+						<div class="addInfo">
+							<div class="box">
+								<div class="boxFrom">
+									<div>
+										<label><i>*</i> Full Name :</label>
+										<input type="text" v-model="addressInfo.fullName">
+									</div>
+									<div>
+										<label><i>*</i> Phone :</label>
+										<input type="text" v-model="addressInfo.phone">
+									</div>
+									<div>
+										<label><i>*</i> Email :</label>
+										<input type="text" v-model="addressInfo.email">
+									</div>
+									<div>
+										<label><i>*</i> Address :</label>
+										<citySelect :provinceProps="addressInfo.province" :cityProps="addressInfo.city"  @changeProvince="changeProvince" @changeCity="changeCity"/>
+									</div>
+									<div>
+										 <textarea v-model="addressInfo.regionDetail" id="detailAddress" placeholder="* Please write down your detailed address in Chinese"></textarea>
+									</div>
+									<div class="setDefault noselect" @click="setDefault">
+										<label v-if="addressInfo.isDefault==0"><i class="iconfont icon-weixuanzhong"></i>Default</label>
+
+										<label v-if="addressInfo.isDefault==1" class="default"><i class="iconfont icon-xuanzhong1"></i>Default</label>
+									</div>
+								</div>
+								<div class="btn"><button @click="saveAddress">Save</button></div>
+							</div>
+						</div>
+					</el-dialog>
 				</div>
 			</div>
 		
@@ -427,6 +462,7 @@
 			},
 			edit(obj) {
 				this.showlayer = true;
+				console.log(obj);
 				this.addressInfo = obj;
 			},
 			// 修改优惠券
@@ -735,17 +771,9 @@
 	
 	.addInfo
 		@include wh(580px,520px)
-		position: fixed
-		top: 0
-		left: 0
-		right: 0
-		bottom: 0
-		margin: auto
-		z-index: 2
 		padding: 0 15px
 		background: #fff
 		border-radius: 8px
-		transition: all 1s ease
 		.box 
 			.boxFrom
 				margin-top: 15px
@@ -782,4 +810,5 @@
 					background-color: $theme_color
 					color: #fff
 					border-radius: $border_radius
+
 </style>

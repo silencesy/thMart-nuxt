@@ -30,8 +30,8 @@
 		return {
 			mapJson: mapJson,
 			province:'',
-			sheng: '',
-			shi: '',
+			sheng: this.provinceProps,
+			shi: this.cityProps,
 			shi1: [],
 			qu: '',
 			qu1: [],
