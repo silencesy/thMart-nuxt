@@ -168,12 +168,15 @@
         overflow: hidden
         background-color: rgba(0,0,0,.7)
         border: none
-        left: 67px
+        right: 0
         >div 
             float: left
             width: 240px
             li 
                 text-align: center
                 color: #fff
+            li:hover
+                background-color: rgba(0,0,0,0)
+                color: $theme_color
 
 </style>
