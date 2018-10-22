@@ -510,6 +510,11 @@
 							p 
 								@include sc(14px, #666)
 								margin-bottom: 10px
+								overflow: hidden
+								text-overflow: ellipsis
+								display: -webkit-box
+								-webkit-box-orient: vertical
+								-webkit-line-clamp: 2
 							>div 
 								overflow: hidden
 								.icon-bianji
