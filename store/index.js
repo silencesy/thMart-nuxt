@@ -55,6 +55,9 @@ const store = () => new Vuex.Store({
         commit('SET_USER', unescape(utils.getcookiesInServer(req).token))
         commit('NICKNAME', unescape(utils.getcookiesInServer(req).nickname))
         commit('HEADIMGURL', unescape(utils.getcookiesInServer(req).headimgurl))
+        // commit('SET_USER', utils.getcookiesInServer(req).token)
+        // commit('NICKNAME', utils.getcookiesInServer(req).nickname)
+        // commit('HEADIMGURL', utils.getcookiesInServer(req).headimgurl)
       }
       
     }
