@@ -49,8 +49,6 @@
 <script>
 	// 验证正则
 	import v from "~/assets/js/validate"
-	// 设置cookie
-	import Cookie from 'js-cookie'
 	// 接口API
 	import interfaceApi from '~/plugins/interfaceApi'
 	// 提示语
@@ -152,16 +150,22 @@
 						/**
 						 * 登录成功之后设置store (token,nickname,headimgurl)
 						 */
-				    	Cookie.set('token', res.data.data.token);
+				    	that.SetCookie('token', res.data.data.token);
+						that.SetCookie('nickname',res.data.data.nickname);
+						that.SetCookie('headimgurl',res.data.data.headimgurl);
 						that.$store.commit('SET_USER',res.data.data.token);
-						Cookie.set('nickname',res.data.data.nickname);
-						Cookie.set('headimgurl',res.data.data.headimgurl);
 						that.$store.commit('NICKNAME',res.data.data.nickname);
 						that.$store.commit('HEADIMGURL',res.data.data.headimgurl);	
 				    	that.user.JumpBackToPage();
 				    }
 				})
-			}
+			},
+			SetCookie(name, value) {
+	            var exp = new Date();
+	            exp.setTime(exp.getTime() + 6 * 24 * 60 * 60 * 1000); //6天过期
+	            document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+	            return true;
+	        }
 	    }
 	}
 </script>

@@ -22,14 +22,14 @@
 		                    </li>
 		                </ul>               
 		            </div>
-					<div class="orderTitle">
+					<div v-if="orderList.length>0" class="orderTitle">
 						<span>Product Name</span>
 						<span>Price</span>
 						<span>Quantity</span>
 						<span>Final Price</span>
 						<span>Status</span>
 					</div>
-					<div v-for="item in orderList" :key="item.orderNumber">
+					<div v-if="orderList.length>0" v-for="item in orderList" :key="item.orderNumber">
 						<div v-if="item.status == 0">
 							<userOrder :orderDataList="item" flag="pay" type="unpaid" />
 						</div>
@@ -47,7 +47,7 @@
 						</div>
 					</div>
 					<!-- 没有订单的情况 -->
-					<!-- <div class="noOrderList"><p>No more order</p></div>-->
+					 <div v-if="orderList.length==0" class="noOrderList"><p>No more order</p></div>
 				</div>
 			</userLayout>
 			<div class="changePage" v-if="totalPage!=0">

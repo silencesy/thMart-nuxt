@@ -14,6 +14,7 @@
                 </div>
             </div>
             <div class="details">
+            
                 <div class="detailsLeft">
                     <div class="listPer" v-for="item in orderDataList.skuList" :key="item.skuId">
                         <div class="goods">
