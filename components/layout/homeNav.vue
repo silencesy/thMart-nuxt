@@ -168,6 +168,7 @@
         overflow: hidden
         background-color: rgba(0,0,0,.7)
         border: none
+        left: 67px
         >div 
             float: left
             width: 240px
