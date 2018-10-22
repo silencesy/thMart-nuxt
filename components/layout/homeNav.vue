@@ -155,5 +155,7 @@
     .nav
         .line
             border-bottom: 1px solid $theme_color
+    .el-dropdown-menu
+        width: 240px
 
 </style>
