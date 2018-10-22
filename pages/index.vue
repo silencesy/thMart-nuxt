@@ -121,7 +121,7 @@
 </template>
 <script>
 	// 引入mescroll的vue组件
-	import MescrollVue from 'mescroll.js/mescroll.vue'
+	import MescrollVue from '~/components/home/mescroll.js/mescroll.vue'
 	import SwiperComponent from "~/components/base/Swiper"
 	import floor from '~/components/home/floor'
 	import goodsItem from '~/components/base/goodsItem'
