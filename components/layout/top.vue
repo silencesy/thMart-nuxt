@@ -18,10 +18,12 @@
                                     <nuxt-link to="/userCenter/user" class="userPic">
                                         <div class="headImg"><img :src="$store.state.headimgurl" alt=""></div>
                                     </nuxt-link>
-                                    <nuxt-link to="/userCenter/user" class="info">
-                                        <p>{{$store.state.nickname}}</p>
-                                    </nuxt-link>
-                                    <p @click="logout">Log out</p>
+                                    <div class="dropdownRightBox">
+                                        <nuxt-link to="/userCenter/user" class="info">
+                                            <p>{{$store.state.nickname}}</p>
+                                        </nuxt-link>
+                                        <p @click="logout">Log out</p>
+                                    </div>
                                 </div>
                             </el-dropdown-menu>
                         </el-dropdown>
@@ -135,6 +137,8 @@
         a 
             float: left
             display: inline-block
+        .dropdownRightBox
+            float: left
         .userPic
             margin-right: 10px
             .headImg

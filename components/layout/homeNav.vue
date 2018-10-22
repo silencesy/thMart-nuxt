@@ -13,7 +13,21 @@
             <div class="homeNav">
                 <ul>
                     <li>
-                        <nuxt-link to=""><i class="iconfont icon-fenlei"></i>All Categories</nuxt-link>
+                        <nuxt-link to="">
+                            <el-dropdown style="width: 100%;height: 100%">
+                                <!-- <i class="iconfont icon-fenlei"></i>All Categories -->
+                                <el-button style="width: 100%;height: 100%;display: block">
+                                    <i class="iconfont icon-fenlei"></i>All Categories
+                                </el-button>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item>黄金糕</el-dropdown-item>
+                                    <el-dropdown-item>狮子头</el-dropdown-item>
+                                    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                                    <el-dropdown-item>双皮奶</el-dropdown-item>
+                                    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>                            
+                        </nuxt-link>
                     </li>
                     <li>
                         <nuxt-link :class="{theme_color: $route.path == '/'}" to="/">Home</nuxt-link>

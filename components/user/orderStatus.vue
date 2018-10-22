@@ -165,7 +165,9 @@
     .redColor
         background-color: $theme_color
         @include sc(16px, #fff)
-        padding: 10px 20px
+        padding: 6px 50px
+        border-radius: $border_radius
+        margin-left: 95px
     .iconfont.icon-jindutiao1-copy
         color: #dfdfdf
         padding: 17px 20px 0 20px
@@ -225,6 +227,7 @@
                                 margin-bottom: 40px
                             span:last-child 
                                 margin-bottom: 0
+                                margin-top: 27px
                         .right 
                             width: 276px
                             span:last-child 

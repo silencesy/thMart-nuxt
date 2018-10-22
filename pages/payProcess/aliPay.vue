@@ -96,8 +96,10 @@
 							margin-bottom: 15px
 							font-size: 28px
 							color: #fff
+							border-radius: 4px
 						.icon-weixinzhifu 
 							background-color: #4caf50
 							font-size: 29px
+							border-radius: 4px
 
 </style>
