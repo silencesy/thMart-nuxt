@@ -20,11 +20,20 @@
                                     <i class="iconfont icon-fenlei"></i>All Categories
                                 </el-button>
                                 <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item>黄金糕</el-dropdown-item>
-                                    <el-dropdown-item>狮子头</el-dropdown-item>
-                                    <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                                    <el-dropdown-item>双皮奶</el-dropdown-item>
-                                    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+                                    <div>
+                                        <el-dropdown-item>黄金糕</el-dropdown-item>
+                                        <el-dropdown-item>狮子头</el-dropdown-item>
+                                        <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                                        <el-dropdown-item>双皮奶</el-dropdown-item>
+                                        <el-dropdown-item>蚵仔煎</el-dropdown-item>   
+                                    </div>
+                                    <div>
+                                        <el-dropdown-item>黄金糕</el-dropdown-item>
+                                        <el-dropdown-item>狮子头</el-dropdown-item>
+                                        <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                                        <el-dropdown-item>双皮奶</el-dropdown-item>
+                                        <el-dropdown-item>蚵仔煎</el-dropdown-item>   
+                                    </div>
                                 </el-dropdown-menu>
                             </el-dropdown>                            
                         </nuxt-link>
@@ -155,7 +164,15 @@
     .nav
         .line
             border-bottom: 1px solid $theme_color
-    .el-dropdown-menu
-        width: 240px
+    .el-dropdown-menu 
+        overflow: hidden
+        background-color: rgba(0,0,0,.7)
+        border: none
+        >div 
+            float: left
+            width: 240px
+            li 
+                text-align: center
+                color: #fff
 
 </style>
