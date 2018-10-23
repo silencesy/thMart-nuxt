@@ -153,9 +153,15 @@
 						 * 登录成功之后设置store (token,nickname,headimgurl)
 						 */
 
+
 				  		Cookie.set('token', res.data.data.token);
 						Cookie.set('nickname',res.data.data.nickname);
 						Cookie.set('headimgurl',res.data.data.headimgurl);
+
+
+						// that.SetCookie('token', res.data.data.token);
+						// that.SetCookie('nickname',res.data.data.nickname);
+						// that.SetCookie('headimgurl',res.data.data.headimgurl);
 
 						// that.SetCookie('token', res.data.data.token);
 						// that.SetCookie('nickname',res.data.data.nickname);
@@ -166,17 +172,7 @@
 				    	that.user.JumpBackToPage();
 				    }
 				})
-			},
-			SetCookie(cookieName,value) {
-	            // var exp = new Date();
-	            // exp.setTime(exp.getTime() + 6 * 24 * 60 * 60 * 1000); //6天过期
-	            // document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-	            // return true;
-
-	            var exp = new Date();
-       			exp.setTime(exp.getTime() + 24*3600*1000);//应该改为exp.getTime(),否则cookie有效期总失效。
-  				document.cookie = 'cookieName' + '=' + escape(value) + ';expires=' + exp.toGMTString();
-	        }
+			}
 	    }
 	}
 </script>
