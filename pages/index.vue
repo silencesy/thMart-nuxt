@@ -11,7 +11,32 @@
 						<div class="deal-logo" :style="{backgroundImage:'url(' + homeData.deal.pic + ')'}"></div>
 					</nuxt-link>
 					<div class="deal-swiper">
-						
+						<div class="swiper-container">
+						    <div class="swiper-wrapper">
+							    <div class="swiper-slide">
+							    	<img src="~/static/images/photo_01.jpg" alt="">
+							    </div>
+							    <div class="swiper-slide">
+							    	<img src="~/static/images/photo_02.jpg" alt="">
+							    </div>
+							    <div class="swiper-slide">
+							    	<img src="~/static/images/photo_03.jpg" alt="">
+							    </div>
+							    <div class="swiper-slide">
+							    	<img src="~/static/images/photo_01.jpg" alt="">
+							    </div>
+							    <div class="swiper-slide">
+							    	<img src="~/static/images/photo_02.jpg" alt="">
+							    </div>
+							    <div class="swiper-slide">
+							    	<img src="~/static/images/photo_03.jpg" alt="">
+							    </div>
+							</div>
+							<div class="swiper-pagination"></div>
+							<!-- Add Arrows -->
+						    <div class="swiper-button-next"></div>
+						    <div class="swiper-button-prev"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -125,6 +150,7 @@
 	import SwiperComponent from "~/components/base/Swiper"
 	import floor from '~/components/home/floor'
 	import goodsItem from '~/components/base/goodsItem'
+	import Swiper from 'swiper'
 	export default {
 		layout: 'indexHome',
 		layout (context) {
@@ -178,6 +204,16 @@
 			this.mescroll.destroy() // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
 			next()
 		},
+		mounted(){
+	        var swiper = new Swiper('.swiper-container', {
+		      	slidesPerView: 5,
+		      	spaceBetween: 0,
+		      	navigation: {
+			        nextEl: '.swiper-button-next',
+			        prevEl: '.swiper-button-prev',
+			    }
+    		});
+      	},
 		methods: {
 			mescrollInit (mescroll) {
 			    this.mescroll = mescroll
@@ -204,14 +240,14 @@
 		background-color: #eee
 		.container
 			height: 274px
-			background-color: pink
+			background-color: #fff
 			.deal-logo
 				float: left
 				@include wh(240px,274px)
 			.deal-swiper
 				float: left
 				@include wh(960px,274px)
-				background-color: red
+				background-color: #fff
 				.slide-item
 					@include wh(100%,100%)
 
@@ -386,4 +422,8 @@
 					margin-right: 0 
 				a:nth-child(8) 
 					margin-right: 0		
+	.swiper-slide
+		@include wh(192px, 274px)
+		img 
+			@include wh(100%, 100%)
 </style>
