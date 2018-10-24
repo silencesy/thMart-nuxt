@@ -136,7 +136,7 @@
 				hotData: [],
 				hotGoodsPara: {
 					id: 12,
-					pageSize: 18,
+					pageSize: 6,
 					page: 0,
 					sort: 'order_asc'
 				},

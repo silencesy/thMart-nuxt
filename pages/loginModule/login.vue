@@ -152,7 +152,9 @@
 						/**
 						 * 登录成功之后设置store (token,nickname,headimgurl)
 						 */
-				    	Cookie.set('token', res.data.data.token);
+
+
+				  		Cookie.set('token', res.data.data.token);
 						Cookie.set('nickname',res.data.data.nickname);
 						Cookie.set('headimgurl',res.data.data.headimgurl);
 						that.$store.commit('SET_USER',res.data.data.token);
