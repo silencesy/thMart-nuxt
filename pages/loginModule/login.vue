@@ -157,15 +157,6 @@
 				  		Cookie.set('token', res.data.data.token);
 						Cookie.set('nickname',res.data.data.nickname);
 						Cookie.set('headimgurl',res.data.data.headimgurl);
-
-
-						// that.SetCookie('token', res.data.data.token);
-						// that.SetCookie('nickname',res.data.data.nickname);
-						// that.SetCookie('headimgurl',res.data.data.headimgurl);
-
-						// that.SetCookie('token', res.data.data.token);
-						// that.SetCookie('nickname',res.data.data.nickname);
-						// that.SetCookie('headimgurl',res.data.data.headimgurl);
 						that.$store.commit('SET_USER',res.data.data.token);
 						that.$store.commit('NICKNAME',res.data.data.nickname);
 						that.$store.commit('HEADIMGURL',res.data.data.headimgurl);	
