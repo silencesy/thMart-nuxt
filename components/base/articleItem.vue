@@ -4,7 +4,7 @@
             <div class="list" v-for="item in articleData" :key="item.id">
                 <nuxt-link :to="{name: 'article-id',params: {id: item.id}}">
                     <div>
-                        <img :src="item.pic" alt="">
+                        <img v-lazy="item.pic" alt="">
                     </div>
                     <div>                        
                         <p>{{item.title}}</p>

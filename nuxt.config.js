@@ -11,7 +11,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/thmart.ico' },
       { rel: 'stylesheet', href: '//at.alicdn.com/t/font_771689_ytddyqnszi.css' }
     ]
   },
@@ -46,6 +46,7 @@ module.exports = {
   plugins: [
     {src:'~/plugins/vue-awesome-swiper', ssr: false},
     {src:'~plugins/element-ui', ssr: true},
+    {src:'~plugins/vue-lazyload', ssr: false},
     // {src:'~plugins/api', ssr: true},
     /**
      * [公共函数]
