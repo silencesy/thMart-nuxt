@@ -13,23 +13,19 @@
 					<div class="deal-swiper">
 						<div class="swiper-container">
 						    <div class="swiper-wrapper">
-							    <div class="swiper-slide">
-							    	<img src="~/static/images/photo_01.jpg" alt="">
-							    </div>
-							    <div class="swiper-slide">
-							    	<img src="~/static/images/photo_02.jpg" alt="">
-							    </div>
-							    <div class="swiper-slide">
-							    	<img src="~/static/images/photo_03.jpg" alt="">
-							    </div>
-							    <div class="swiper-slide">
-							    	<img src="~/static/images/photo_01.jpg" alt="">
-							    </div>
-							    <div class="swiper-slide">
-							    	<img src="~/static/images/photo_02.jpg" alt="">
-							    </div>
-							    <div class="swiper-slide">
-							    	<img src="~/static/images/photo_03.jpg" alt="">
+							    <div class="swiper-slide" v-for="(item,index) in homeData.ticketing.data" :key="index">
+							    	<nuxt-link to="/">
+										<div class="dealSwiper">
+											<div><img :src="item.pic" alt=""></div>
+											<div class="dealTxt">
+												<p>San Benedetto Natural Premium</p>
+												<div>
+													<span>¥14999</span>
+													<del>¥16999</del>
+												</div>
+											</div>
+										</div>
+									</nuxt-link>
 							    </div>
 							</div>
 							<div class="swiper-pagination"></div>
@@ -246,6 +242,7 @@
 				@include wh(240px,274px)
 			.deal-swiper
 				float: left
+				overflow: hidden
 				@include wh(960px,274px)
 				background-color: #fff
 				.slide-item
@@ -424,6 +421,46 @@
 					margin-right: 0		
 	.swiper-slide
 		@include wh(192px, 274px)
-		img 
+		border-right: $border
+		a
+			display: block
 			@include wh(100%, 100%)
-</style>
+			.dealSwiper
+				padding: 0 7px
+				>div:first-child
+					@include wh(176px,176px)
+					margin-bottom: 10px 
+					img 
+						@include wh(100%, 100%)
+				.dealTxt
+					p
+						overflow: hidden
+						text-overflow: ellipsis
+						display: -webkit-box
+						-webkit-box-orient: vertical
+						-webkit-line-clamp: 2
+						min-height: 44px
+						line-height: 22px
+						text-align: center
+					>div 
+						overflow: hidden
+						padding: 10px 5px 0
+						>span 
+							color: #f9421e
+						del 
+							@include sc(14px, #999)
+							float: right
+	.swiper-button-next
+		background-image: url("~/static/images/ar.png")
+	.swiper-button-prev
+		background-image: url("~/static/images/al.png")
+	.swiper-button-next, .swiper-button-prev
+		background-color: rgba(31, 45, 61, .25)
+		@include wh(40px, 40px)
+		background-size: auto
+		top: 44%
+	.swiper-button-next:active, .swiper-button-prev:active
+		outline: none
+	.swiper-button-next:focus, .swiper-button-prev:focus
+		outline: none
+</style>0
