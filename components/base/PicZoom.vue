@@ -1,6 +1,6 @@
 <template>
     <div class="magnifier-box" :class="vertical?'vertical':''" :ref="id" @mousemove="mousemove" @mouseover="mouseover" @mouseleave="mouseleave">
-        <img v-show="showImg" v-lazy="imgUrl" alt="">
+        <img v-show="showImg" :src="imgUrl" alt="">
         <div class="mouse-cover"></div>
         <div class="edit-wrap" v-if="showEidt">
             <span class="rotate-left" @click="rotate('left')"></span>

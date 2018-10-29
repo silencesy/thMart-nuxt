@@ -14,28 +14,34 @@
                 <ul>
                     <li>
                         <nuxt-link to="">
-                            <el-dropdown style="width: 100%;height: 100%">
-                                <!-- <i class="iconfont icon-fenlei"></i>All Categories -->
-                                <el-button style="width: 100%;height: 100%;display: block">
-                                    <i class="iconfont icon-fenlei"></i>All Categories
-                                </el-button>
-                                <el-dropdown-menu slot="dropdown">
-                                    <div>
-                                        <el-dropdown-item>黄金糕</el-dropdown-item>
-                                        <el-dropdown-item>狮子头</el-dropdown-item>
-                                        <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                                        <el-dropdown-item>双皮奶</el-dropdown-item>
-                                        <el-dropdown-item>蚵仔煎</el-dropdown-item>   
-                                    </div>
-                                    <div>
-                                        <el-dropdown-item>黄金糕</el-dropdown-item>
-                                        <el-dropdown-item>狮子头</el-dropdown-item>
-                                        <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                                        <el-dropdown-item>双皮奶</el-dropdown-item>
-                                        <el-dropdown-item>蚵仔煎</el-dropdown-item>   
-                                    </div>
-                                </el-dropdown-menu>
-                            </el-dropdown>                            
+                            <div>
+                                <el-dropdown class="allCateBox">
+                                    <!-- <i class="iconfont icon-fenlei"></i>All Categories -->
+                                    <el-button class="allCate">
+                                        <i class="iconfont icon-fenlei"></i>All Categories
+                                    </el-button>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <div class="dropdownBox">
+                                            <div>
+                                                <el-dropdown-item>黄金糕</el-dropdown-item>
+                                                <el-dropdown-item>狮子头</el-dropdown-item>
+                                                <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                                                <el-dropdown-item>双皮奶</el-dropdown-item>
+                                                <el-dropdown-item>蚵仔煎</el-dropdown-item> 
+                                                <el-dropdown-item>黄金糕</el-dropdown-item>
+                                                <el-dropdown-item>狮子头</el-dropdown-item>  
+                                            </div>
+                                            <div>
+                                                <el-dropdown-item>黄金糕</el-dropdown-item>
+                                                <el-dropdown-item>狮子头</el-dropdown-item>
+                                                <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                                                <el-dropdown-item>双皮奶</el-dropdown-item>
+                                                <el-dropdown-item>蚵仔煎</el-dropdown-item>   
+                                            </div>
+                                        </div>
+                                    </el-dropdown-menu>
+                                </el-dropdown> 
+                            </div>                           
                         </nuxt-link>
                     </li>
                     <li>
@@ -164,19 +170,35 @@
     .nav
         .line
             border-bottom: 1px solid $theme_color
+    .allCateBox
+        width: 100%
+        height: 100%
+        position: relative
+        .allCate
+            width: 100%
+            height: 100%
+            display: block
     .el-dropdown-menu 
         overflow: hidden
         background-color: rgba(0,0,0,.7)
         border: none
         right: 0
-        >div 
-            float: left
-            width: 240px
-            li 
-                text-align: center
-                color: #fff
-            li:hover
-                background-color: rgba(0,0,0,0)
-                color: $theme_color
-
+        margin-top: -1px
+        .dropdownBox
+            width: 1200px
+            margin: 0 auto
+            >div 
+                float: left
+                width: 238px
+                li 
+                    text-align: center
+                    color: #fff
+                    padding-top: 10px
+                li:hover
+                    background-color: rgba(0,0,0,0)
+                    color: $theme_color
+                li:first-child
+                    padding-top: 13px
+                li:last-child
+                    padding-bottom: 15px
 </style>
