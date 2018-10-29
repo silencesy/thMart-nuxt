@@ -87,7 +87,7 @@
                         <div class="listPer" v-for="val in item.data" :key="val.skuId">
                             <div class="goods">
                                 <nuxt-link :to="{name: 'goods-id', params: {id: val.goodsId}}">
-                                    <div><img :src="val.pic" alt=""></div>
+                                    <div><img v-lazy="val.pic" alt=""></div>
                                     <div>
                                         <p>{{val.title}}</p>
                                         <span>

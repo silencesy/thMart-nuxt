@@ -4,7 +4,7 @@
     	<div class="products">
 			<nuxt-link :to="{name: 'goods-id', params: {id: item.id}}" v-for="item in hotData" :key="item.id" :style="styleObj">
                 <b class="hot"><i>SALE</i></b>
-                <div class="hasImg" :style="imgBox"><img :style="imgBox" :src="item.pic" alt=""></div>
+                <div class="hasImg" :style="imgBox"><img :style="imgBox" v-lazy="item.pic" alt=""></div>
                 <p>{{item.title}}</p>
                 <span class="groupPrice">¥{{item.price}}</span>
                 <del v-if="item.originalPrice">¥{{item.originalPrice}}</del>

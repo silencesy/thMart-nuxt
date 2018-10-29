@@ -3,7 +3,7 @@
     	<div class="moreTitle">Related Articles</div>
     	<div class="products">
 			<nuxt-link v-for="item in articleData" :to="{name: 'article-id',params: {id: item.id}}" :key="item.id">
-				<div><img :src="item.pic" alt=""></div>
+				<div><img v-lazy="item.pic" alt=""></div>
 				<p>{{item.title}}</p>
 			</nuxt-link>
 		</div>

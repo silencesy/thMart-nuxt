@@ -16,7 +16,7 @@
                             <el-dropdown-menu slot="dropdown">
                                 <div class="dropdownBox">
                                     <nuxt-link to="/userCenter/user" class="userPic">
-                                        <div class="headImg"><img :src="$store.state.headimgurl" alt=""></div>
+                                        <div class="headImg"><img v-lazy="$store.state.headimgurl" alt=""></div>
                                     </nuxt-link>
                                     <div class="dropdownRightBox">
                                         <nuxt-link to="/userCenter/user" class="info">

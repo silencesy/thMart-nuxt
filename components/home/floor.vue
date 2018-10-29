@@ -3,7 +3,7 @@
         <div class="top">
             <div class="topLeft"> 
                 <nuxt-link to="/"> 
-                    <img :src="floorData.pic" alt="">
+                    <img v-lazy="floorData.pic" alt="">
                 </nuxt-link>
             </div>
             <div class="topList">
@@ -13,7 +13,7 @@
                             <div>
                                 <p>{{item.title}}</p>
                                 <span>￥{{item.price}}</span>
-                                <img :src="item.pic" alt="">
+                                <img v-lazy="item.pic" alt="">
                             </div>
                         </nuxt-link> 
                     </div>
@@ -29,7 +29,7 @@
                 <div class="listBottom">
                     <nuxt-link :to="{name: 'goods-id', params: {id: item.id}}" v-for="item in floorCenterFourPic" :key="item.id">
                         <p class="smallPic">
-                            <img :src="item.pic" alt="">
+                            <img v-lazy="item.pic" alt="">
                             <span><i>SALE</i></span>
                         </p>
                         <div>
@@ -52,7 +52,7 @@
         <div class="bottom">
             <nuxt-link :to="{name: 'goods-id', params: {id: item.id}}" v-for="item in floorBootomFourPic" :key="item.id">
                 <p class="smallPic">
-                    <img :src="item.pic" alt="">
+                    <img v-lazy="item.pic" alt="">
                     <span><i>SALE</i></span>
                 </p>
                 <div>
