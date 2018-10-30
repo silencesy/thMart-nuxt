@@ -23,7 +23,7 @@
 	                		<span class="iconfont" :class="{ 'icon-xuanzhong1': value.isSelect==1, 'icon-weixuanzhong': value.isSelect==0 }"></span>
 	                	</div>
                         <div class="goods" @click="goGoodsDetails(value.goodsId)">
-                            <div><img class="noselect" :src="value.pic" alt=""></div>
+                            <div><img class="noselect" v-lazy="value.pic" alt=""></div>
                             <div>
                                 <p>{{value.goodsName}}</p>
                                 <p v-if="value.over">满{{value.over}}减{{value.reduce}}</p>

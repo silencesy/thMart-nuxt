@@ -44,7 +44,7 @@
 				            		<nuxt-link v-for="item in goodsList" :key="item.id" :to="{name: 'goods-id', params: {id: item.id}}"  class="boxPer">
 				            			<div>
 					            			<div>
-					            				<img :src="item.pic" alt="">
+					            				<img v-lazy="item.pic" alt="">
 					            			</div>
 					            			<p>{{item.title}}</p>
 					            			<span>¥{{item.price}}</span>
@@ -55,7 +55,7 @@
 				            		<nuxt-link v-for="item in shopList" :key="item.contentId" :to="{name: 'shop-id',params: {id: item.contentId}}" class="boxPer">
 				            			<div>
 					            			<div>
-					            				<img :src="item.pic" alt="">
+					            				<img v-lazy="item.pic" alt="">
 					            			</div>
 					            			<p>{{item.name}}</p>
 					            		</div>

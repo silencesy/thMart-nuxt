@@ -11,7 +11,7 @@
 								<div style="overflow: hidden">
 									<div class="box" v-if="goodList.data.length>0" v-for="item in goodList.data" :key="item.id">
 										<nuxt-link  :to="{name: 'goods-id', params: {id: item.id}}">
-											<div><img :src="item.pic" alt=""></div>
+											<div><img v-lazy="item.pic" alt=""></div>
 											<p>{{item.title}}</p>
 											<div class="bottom">
 												<span>¥ {{item.price}}</span>
@@ -37,7 +37,7 @@
 								<div style="overflow: hidden">
 									<div class="box" v-if="shopList.data.length>0" v-for="item in shopList.data" :key="item.contentId">
 										<nuxt-link :to="{name: 'shop-id',params: {id: item.contentId}}">
-											<div><img :src="item.pic" alt=""></div>
+											<div><img v-lazy="item.pic" alt=""></div>
 											<p>{{item.name}}</p>
 											<div class="bottom bottomStar">
 												<i class="iconfont icon-review"></i>

@@ -14,7 +14,7 @@
 					<span>{{articleData.createTime}}</span>
 					<div class="text" v-html="articleData.article_content"></div>
 					<div class="goods" v-for="item in articleData.itemList" :key="item.itemId">
-						<div><img :src="item.pic" alt=""></div>
+						<div><img v-lazy="item.pic" alt=""></div>
 						<div>
 							<p>{{item.title}}</p>
 							<div>

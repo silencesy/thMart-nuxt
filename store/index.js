@@ -48,14 +48,13 @@ const store = () => new Vuex.Store({
   },
 
   actions: {
-    nuxtServerInit ({ commit }, { req }) {
+    nuxtServerInit ({commit}, {route,req, redirect}) {
       // 获取token
       if (req.headers.cookie) {
         commit('SET_USER', decodeURIComponent(utils.getcookiesInServer(req).token))
         commit('NICKNAME', decodeURIComponent(utils.getcookiesInServer(req).nickname))
         commit('HEADIMGURL', decodeURIComponent(utils.getcookiesInServer(req).headimgurl))
       }
-      
     }
   }
 

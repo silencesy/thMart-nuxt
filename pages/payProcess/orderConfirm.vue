@@ -49,7 +49,7 @@
 					            <div class="goodsInfo">
 					                <div class="details" v-for="(val,index) in itemshop.data" :key="index">
 				                        <div class="goods">
-				                            <div><img :src="val.pic" alt=""></div>
+				                            <div><img v-lazy="val.pic" alt=""></div>
 				                            <div>
 				                                <p>{{val.goodsName}}</p>
 				                                <span class="color"><i v-for="(value,index) in val.prop" :key="index">{{value[0]}}</i></span>
@@ -101,7 +101,7 @@
 				            <div class="goodsInfo">
 				                <div class="details" v-for="(val,index) in item.data" :key="index">
 			                        <div class="goods">
-			                            <div><img :src="val.pic" alt=""></div>
+			                            <div><img v-lazy="val.pic" alt=""></div>
 			                            <div>
 			                                <p>{{val.goodsName}}</p>
 			                                <span class="color"><i v-for="(value,index) in val.prop" :key="index">{{value[0]}}</i></span>

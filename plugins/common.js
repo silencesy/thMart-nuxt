@@ -7,17 +7,19 @@ var commonJs= {
         Vue.prototype.user = {
         	// 设置登录成功之后回跳地址
         	SetComebackAddress: function() {
+                console.log(123);
         		var goBackAddr = window.location.href;
         		localStorage.setItem('goback',goBackAddr);
         	},
         	// 执行回跳地址
-        	JumpBackToPage: function() {
-        		var address = localStorage.getItem('goback') || null;
+        	JumpBackToPage: function(callbackurl) {
+        		var address = callbackurl || localStorage.getItem('goback') ||  null;
         		if (address) {
         			window.location.href = address;
         		} else {
         			window.location.href = 'http://localhost:3000';
         		}
+                localStorage.removeItem('goback')
         	},
             // 判断是否登录
             isLogin: function () {

@@ -5,8 +5,8 @@
                 <div class="left">
                     <span>That’s making your life easier !</span> 
                     <div class="login" v-if="!$store.state.token">
-                        <nuxt-link :to="{name: 'loginModule-login'}">Login</nuxt-link>
-                        <nuxt-link :to="{name: 'loginModule-signPhone'}">Sign up</nuxt-link>
+                        <a @click="login">Login</a>
+                        <a @click="signUp">Sign up</a>
                     </div>
                     <div class="logged" v-if="$store.state.token">
                         <el-dropdown>
@@ -48,9 +48,14 @@
         methods: {
             login() {
                 this.user.SetComebackAddress();
-                this.$router.push({name: 'login'});
+                this.$router.push({name: 'loginModule-login'});
+            },
+            signUp() {
+                this.user.SetComebackAddress();
+                this.$router.push({name: 'loginModule-signPhone'});
             },
             logout() {
+                this.user.SetComebackAddress();
                 // 下线
                 Cookie.remove('token');
                 this.$store.commit('SET_USER','');

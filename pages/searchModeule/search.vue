@@ -26,7 +26,7 @@
 					    	<div class="searchShop" v-if="!searchShopData.data.length == 0">
 					    		<div class="shopList" v-for="item in searchShopData.data" :key="item.id">
 					    			<div>
-					    				<p><img :src="item.pic" alt=""></p>
+					    				<p><img v-lazy="item.pic" alt=""></p>
 					    				<span v-text="item.title"></span>
 					    			</div>
 					    			<div>

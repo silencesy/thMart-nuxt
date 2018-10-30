@@ -16,7 +16,7 @@
 							    <div class="swiper-slide" v-for="(item,index) in homeData.ticketing.data" :key="index">
 							    	<nuxt-link to="/">
 										<div class="dealSwiper">
-											<div><img :src="item.pic" alt=""></div>
+											<div><img v-lazy="item.pic" alt=""></div>
 											<div class="dealTxt">
 												<p>San Benedetto Natural Premium</p>
 												<div>
@@ -44,7 +44,7 @@
 						<nuxt-link to="/shop/shopList">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
 					</div>
 					<div class="pic">
-						<nuxt-link v-for="item in homeData.shop.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img :src="item.pic" :alt="item.title"></nuxt-link>
+						<nuxt-link v-for="item in homeData.shop.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img v-lazy="item.pic" :alt="item.title"></nuxt-link>
 					</div>
 				</div>
 				<!-- 团购组 -->
@@ -126,7 +126,7 @@
 				</div>
 				<div class="articlePer">
 					<nuxt-link v-for="(item,index) in homeData.article.data" :key="item.id" v-if="index<6" :to="{name: 'article-id',params: {id: item.id}}">
-						<p><img :src="item.pic" alt=""></p> 
+						<p><img v-lazy="item.pic" alt=""></p> 
 						<div class="per">
 							<p>{{item.title}}</p>
 							<span>{{item.createTime}}</span>
@@ -179,7 +179,7 @@
 			}
 		},
 		async asyncData ({app}) {
-		 	const homeData = await app.$axios.post('https://proj6.thatsmags.com/thmartApi/Ads/Home/list')
+		 	const homeData = await app.$axios.post('Ads/Home/list')
   			return { homeData: homeData.data.data}
 		},
 		components: {
@@ -219,7 +219,7 @@
 				var that = this;
 				that.hotGoodsPara.page = page.num;
 				that.hotGoodsPara.pageSize = page.size;
-				that.$axios.post('https://proj6.thatsmags.com/thmartApi/Ads/list',that.hotGoodsPara).then(res=> {
+				that.$axios.post('Ads/list',that.hotGoodsPara).then(res=> {
 					mescroll.endSuccess(res.data.data.data.length)
 					that.totalPage = res.data.data.totalPage;
 					that.hotData = that.hotData.concat(res.data.data.data);

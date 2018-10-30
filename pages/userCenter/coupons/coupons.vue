@@ -6,7 +6,7 @@
 					<div class="title">thMart-Coupons</div>
 					<div class="coupons-container" v-if="couponList.data.length>0">
 						<div class="coupons-item" @click="goCouponGoods(item.couponId)" v-for="item in couponList.data" :key="item.couponId">
-							<img :src="item.pic" alt="">
+							<img v-lazy="item.pic" alt="">
 						</div>
 					</div>
 					<div class="noCoupons" v-if="couponList.data.length==0">

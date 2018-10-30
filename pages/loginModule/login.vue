@@ -160,7 +160,7 @@
 						that.$store.commit('SET_USER',res.data.data.token);
 						that.$store.commit('NICKNAME',res.data.data.nickname);
 						that.$store.commit('HEADIMGURL',res.data.data.headimgurl);	
-				    	that.user.JumpBackToPage();
+				    	that.user.JumpBackToPage(window.location.origin+that.$route.query.ref);
 				    }
 				})
 			}

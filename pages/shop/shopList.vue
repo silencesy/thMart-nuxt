@@ -18,7 +18,7 @@
 				<rank :isShowObj="isShowObj" />
 				<div class="normalShop">
 					<div>
-						<nuxt-link v-for="item in shopListData.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img :src="item.pic" alt=""></nuxt-link>
+						<nuxt-link v-for="item in shopListData.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img v-lazy="item.pic" alt=""></nuxt-link>
 					</div>
 				</div>
 				<div class="changePage">

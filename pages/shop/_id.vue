@@ -8,7 +8,7 @@
 				<!-- <img src="~static/images/flower.jpg" alt="">
 				<img src="~static/images/flower.jpg" alt=""> -->
 				<a v-for="(item,index) in shopData.content" :href="item.url" :key="index">
-					<img :src="item.pic" alt="">
+					<img v-lazy="item.pic" alt="">
 				</a>
 			</div>
 		</div>
