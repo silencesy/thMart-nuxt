@@ -11,28 +11,26 @@
 						<div class="deal-logo" :style="{backgroundImage:'url(' + homeData.deal.pic + ')'}"></div>
 					</nuxt-link>
 					<div class="deal-swiper">
-						<div class="swiper-container">
-						    <div class="swiper-wrapper">
-							    <div class="swiper-slide" v-for="(item,index) in homeData.ticketing.data" :key="index">
-							    	<nuxt-link to="/">
-										<div class="dealSwiper">
-											<div><img v-lazy="item.pic" alt=""></div>
-											<div class="dealTxt">
-												<p>San Benedetto Natural Premium</p>
-												<div>
-													<span>¥14999</span>
-													<del>¥16999</del>
-												</div>
+					    <swiper :options="swiperOption">
+					      	<swiper-slide class="swiper-slide" v-for="(item,index) in homeData.ticketing.data" :key="index">
+								<nuxt-link to="/">
+									<div class="dealSwiper">
+										<div><img :src="item.pic" alt=""></div>
+										<div class="dealTxt">
+											<p>San Benedetto Natural Premium</p>
+											<div>
+												<span>¥14999</span>
+												<del>¥16999</del>
 											</div>
 										</div>
-									</nuxt-link>
-							    </div>
-							</div>
-							<div class="swiper-pagination"></div>
-							<!-- Add Arrows -->
-						    <div class="swiper-button-next"></div>
-						    <div class="swiper-button-prev"></div>
-						</div>
+									</div>
+								</nuxt-link>
+					      	</swiper-slide>
+					    </swiper>
+						<div class="swiper-pagination"></div>
+					
+					    <div class="swiper-button-next"></div>
+					    <div class="swiper-button-prev"></div>
 					</div>
 				</div>
 			</div>
@@ -146,7 +144,7 @@
 	import SwiperComponent from "~/components/base/Swiper"
 	import floor from '~/components/home/floor'
 	import goodsItem from '~/components/base/goodsItem'
-	import Swiper from 'swiper'
+	// import Swiper from 'swiper'
 	export default {
 		layout: 'indexHome',
 		layout (context) {
@@ -154,7 +152,17 @@
 		},
 		data() {
 			return {
-				// 上拉加载数据//
+				//Deals轮播
+				swiperOption: {
+			      	autoplay: 3000,
+			      	slidesPerView: 5,
+			      	spaceBetween: 0,
+			      	navigation: {
+			        	nextEl: '.swiper-button-next',
+			        	prevEl: '.swiper-button-prev',
+			   	  	}
+			    },
+				// 上拉加载数据
 				hotData: [],
 				hotGoodsPara: {
 					id: 12,
@@ -200,16 +208,6 @@
 			this.mescroll.destroy() // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
 			next()
 		},
-		mounted(){
-	        var swiper = new Swiper('.swiper-container', {
-		      	slidesPerView: 5,
-		      	spaceBetween: 0,
-		      	navigation: {
-			        nextEl: '.swiper-button-next',
-			        prevEl: '.swiper-button-prev',
-			    }
-    		});
-      	},
 		methods: {
 			mescrollInit (mescroll) {
 			    this.mescroll = mescroll
@@ -245,6 +243,7 @@
 				overflow: hidden
 				@include wh(960px,274px)
 				background-color: #fff
+				position: relative
 				.slide-item
 					@include wh(100%,100%)
 
@@ -295,7 +294,7 @@
 						-webkit-box-orient: vertical
 						-webkit-line-clamp: 2 
 						line-height: 22px 
-						min-height: 44px
+						height: 44px
 						
 					span 
 						@include sc(14px, #999)
@@ -396,7 +395,7 @@
 						-webkit-box-orient: vertical 
 						-webkit-line-clamp: 2
 						line-height: 22px 
-						min-height: 44px 
+						height: 44px 
 						margin-top: 4px
 						margin-bottom: 5px
 						text-align: center
@@ -439,7 +438,7 @@
 						display: -webkit-box
 						-webkit-box-orient: vertical
 						-webkit-line-clamp: 2
-						min-height: 44px
+						height: 44px
 						line-height: 22px
 						text-align: center
 					>div 
@@ -463,4 +462,6 @@
 		outline: none
 	.swiper-button-next:focus, .swiper-button-prev:focus
 		outline: none
-</style>0
+	.swiper-button-next:hover, .swiper-button-prev:hover
+		background-color: rgba(31, 45, 61, .45)
+</style>

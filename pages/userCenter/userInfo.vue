@@ -149,7 +149,7 @@
 				this.dialogFormVisible = true;
 			},
 			submitForm(formName) {
-			this.$refs[formName].validate((valid) => {
+				this.$refs[formName].validate((valid) => {
 					if (valid) {
 						this.changePasswordAxios();
 					} else {
