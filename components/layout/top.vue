@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="right">
-                    <nuxt-link to="/userCenter/cartModule/cart" class="cart">
+                    <nuxt-link to="/userCenter/cartModule/cart" class="cart" @click="loginFirst">
                         <i class="iconfont icon-gouwuche"></i>Cart
                         <!-- <span class="number">12</span> -->
                     </nuxt-link>
@@ -40,11 +40,65 @@
             </div> 
         </div>
         <div class="topLine"></div>
+
+        <!-- 登录框 -->
+        <el-dialog title="Change Password" :visible.sync="$store.state.dialogFormVisible">
+        
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="130px" class="demo-ruleForm">
+                <el-form-item label="Current Password" prop="phone">
+                    <el-input type="text" v-model="ruleForm.phone"></el-input>
+                </el-form-item>
+                <el-form-item label="New Password" prop="password">
+                    <el-input type="password" v-model="ruleForm.password"></el-input>
+                </el-form-item>
+               
+                <el-form-item>
+                    <el-button type="danger" @click="submitForm('ruleForm')">修改</el-button>
+                    <el-button type="info" @click="resetForm('ruleForm')">重置</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
     </div>
 </template>
 <script>
     import Cookie from 'js-cookie'
+    // 验证正则
+    import v from "~/assets/js/validate"
     export default {
+        data() {
+            var phone = (rule, value, callback) => {
+                if (value == '') {
+                    callback(new Error('请输入手机号'));
+                } else if (!v.tel(value)) {
+                    callback(new Error('请输入正确格式的手机号'));
+                } else {
+                    callback();
+                }
+            };
+            var password = (rule, value, callback) => {
+                if (value == '') {
+                    callback(new Error('请输入密码'));
+                } else if (!v.password(value)) {
+                    callback(new Error('请输入正确格式的密码'));
+                } else {
+                    callback();
+                }
+            };
+            return {
+                ruleForm: {
+                    phone: '',
+                    password: ''
+                },
+                rules: {
+                    phone: [
+                        { validator: phone, trigger: 'blur' }
+                    ],
+                    password: [
+                        { validator: password, trigger: 'blur' }
+                    ]
+                }
+            }
+        },
         methods: {
             login() {
                 this.user.SetComebackAddress();
@@ -59,6 +113,16 @@
                 this.$store.commit('NICKNAME','');
                 this.$store.commit('HEADIMGURL','');
                 this.$router.push({path: '/loginModule/login'})
+            },
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        this.changePasswordAxios();
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                }); 
             }
         }
     }

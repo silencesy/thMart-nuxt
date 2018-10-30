@@ -209,7 +209,7 @@
 										-webkit-box-orient: vertical
 										-webkit-line-clamp: 2
 										line-height: 22px
-										min-height: 44px
+										height: 44px
 										margin-bottom: 5px
 									span 
 										color: $theme_color

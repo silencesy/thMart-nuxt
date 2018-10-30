@@ -648,7 +648,7 @@
 												-webkit-box-orient: vertical
 												-webkit-line-clamp: 2
 												line-height: 22px
-												min-height: 44px
+												height: 44px
 											.color									
 												@include sc(14px, #666)
 												padding: 15px 0 5px 0
