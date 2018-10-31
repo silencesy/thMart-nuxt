@@ -42,21 +42,49 @@
         <div class="topLine"></div>
 
         <!-- 登录框 -->
-        <el-dialog title="Change Password" :visible.sync="$store.state.dialogFormVisible">
-        
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="130px" class="demo-ruleForm">
-                <el-form-item label="Current Password" prop="phone">
-                    <el-input type="text" v-model="ruleForm.phone"></el-input>
-                </el-form-item>
-                <el-form-item label="New Password" prop="password">
-                    <el-input type="password" v-model="ruleForm.password"></el-input>
-                </el-form-item>
-               
-                <el-form-item>
-                    <el-button type="danger" @click="submitForm('ruleForm')">修改</el-button>
-                    <el-button type="info" @click="resetForm('ruleForm')">重置</el-button>
-                </el-form-item>
-            </el-form>
+        <el-dialog title="Please login first!" :visible.sync="$store.state.dialogFormVisible">
+            <div class="loginBox">
+                 <el-tabs v-model="activeName" @tab-click="handleClick">
+                    <el-tab-pane label="Login via password" name="first">
+                        <el-input v-model="phoneNumber" placeholder="Phone">
+                            <i slot="prefix" class="iconfont icon-zhanghao"></i>
+                        </el-input>
+                        <el-input v-model="password" type="password" placeholder="Password">
+                            <i slot="prefix" class="iconfont icon-mima1"></i>
+                        </el-input>
+                        <button class="btn">Login</button>
+                        <div class="foot">
+                            <nuxt-link :to="{name: 'loginModule-signPhone'}">Sign Up</nuxt-link>
+                            <nuxt-link :to="{name: 'loginModule-passwordPhone'}">Forgot Password</nuxt-link>    
+                        </div>
+                        <div class="wechat">
+                            <span class="iconfont icon-weixin1"></span>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="Login via SMS" name="second">
+                        <el-input placeholder="Enter phone number" v-model='phoneNumber'>
+                            <i slot="prefix" class="iconfont icon-zhanghao"></i>
+                        </el-input>
+                        <button class="codeBtn">
+                            <span v-if="!sendMsgDisabled">Send Code</span>
+                            <span v-if="sendMsgDisabled">{{time}}</span>
+                        </button>
+                        <el-input placeholder="Enter verification code" v-model="code">
+                            <i slot="prefix" class="iconfont icon-mima1"></i>
+                        </el-input>
+                        <button class="btn">
+                            Login
+                        </button>
+                        <div class="foot">
+                            <nuxt-link :to="{name: 'loginModule-signPhone'}">Sign Up</nuxt-link>
+                            <nuxt-link :to="{name: 'loginModule-passwordPhone'}">Forgot Password</nuxt-link>    
+                        </div>
+                        <div class="wechat">
+                            <span class="iconfont icon-weixin1"></span>
+                        </div>
+                    </el-tab-pane>
+                </el-tabs>
+            </div>
         </el-dialog>
     </div>
 </template>
@@ -66,37 +94,8 @@
     import v from "~/assets/js/validate"
     export default {
         data() {
-            var phone = (rule, value, callback) => {
-                if (value == '') {
-                    callback(new Error('请输入手机号'));
-                } else if (!v.tel(value)) {
-                    callback(new Error('请输入正确格式的手机号'));
-                } else {
-                    callback();
-                }
-            };
-            var password = (rule, value, callback) => {
-                if (value == '') {
-                    callback(new Error('请输入密码'));
-                } else if (!v.password(value)) {
-                    callback(new Error('请输入正确格式的密码'));
-                } else {
-                    callback();
-                }
-            };
             return {
-                ruleForm: {
-                    phone: '',
-                    password: ''
-                },
-                rules: {
-                    phone: [
-                        { validator: phone, trigger: 'blur' }
-                    ],
-                    password: [
-                        { validator: password, trigger: 'blur' }
-                    ]
-                }
+                activeName: 'first'
             }
         },
         methods: {
@@ -220,7 +219,37 @@
             p:first-child
                 margin-top: 10px
 
-                
-
+    .loginBox
+            @include wh(80%, 300px)
+            background-color: #fff
+            margin: 0 auto
+    .btn 
+        @include whch(100%, 36px, center, 36px)
+        @include sc(16px, #fff) 
+        background-color: $theme_color
+        border-radius: $border_radius
+    .foot 
+        overflow: hidden 
+        a 
+            float: left
+            @include sc(14px, #666)
+            padding: 15px 0 5px 0
+        a:last-child 
+            float: right
+    .wechat 
+        text-align: center
+        .icon-weixin1 
+            color: #4CAF50
+            font-size: 25px
+    .codeBtn 
+        position: absolute
+        @include whch(30%, 30px, center, 30px)
+        @include sc(16px, #fff)
+        background-color: $theme_color
+        border-radius: $border_radius
+        right: 5px 
+        top: 5px
+    .codeBtn.bg
+        background-color: #ccc               
 
 </style>
