@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <nuxt-link to="/userCenter/user">
-                        <div class="hasImg"><img v-lazy="$store.state.headimgurl" alt=""></div>
+                        <div class="hasImg"><img :src="$store.state.headimgurl" alt=""></div>
                         <p>{{$store.state.nickname}}</p>
                     </nuxt-link>
                 </li>

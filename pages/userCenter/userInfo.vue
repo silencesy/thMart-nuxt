@@ -8,7 +8,7 @@
 						<div>
 							<span>Profile Photo :</span>
 							<div class="photo">
-								<div><img v-lazy="$store.state.headimgurl" alt=""></div>
+								<div><img :src="$store.state.headimgurl" alt=""></div>
 								<button class="photoBtn">Edit</button>
 								<input @change="change" type="file" name="file" class="imgForm" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg">
 							</div>

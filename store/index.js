@@ -17,7 +17,7 @@ const store = () => new Vuex.Store({
     searchText: '',
     classification: 'categories',
     shopInfo: {},
-    dialogFormVisible: true
+    dialogFormVisible: false
   },
 
   mutations: {

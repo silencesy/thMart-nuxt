@@ -19,9 +19,9 @@ export default function ({ $axios, redirect,store }) {
 		// 	store.commit('NICKNAME',res.data.data.nickname);
 		// 	store.commit('HEADIMGURL',res.data.data.headimgurl);
 		// }
-		// if (res.data.code==0) {
-		// 	redirect('/')
-		// }
+		if (res.data.code==0) {
+			redirect('/userCenter/cartModule/cartEmpty')
+		}
 	})
 	// 网络错误统一处理
 	$axios.onError(error => {
