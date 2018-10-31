@@ -81,21 +81,27 @@
             },
             favourite() {
                 var that = this;
-                var copy = that.$store.state.shopInfo;
-                copy.isCollect = copy.isCollect==0?1:0;
-                that.$store.commit('SET_SHOP_INFO',copy);
-                const param = {
-                    contentId: that.$route.params.id,
-                    type: 2,
-                    isCollect: that.$store.state.shopInfo.isCollect
+                // 公共函数里面的方法
+                if (!that.user.isLogin()) {
+                    that.$store.commit('LOGIN',true);
+                } else {
+                    var copy = that.$store.state.shopInfo;
+                    copy.isCollect = copy.isCollect==0?1:0;
+                    that.$store.commit('SET_SHOP_INFO',copy);
+                    const param = {
+                        contentId: that.$route.params.id,
+                        type: 2,
+                        isCollect: that.$store.state.shopInfo.isCollect
+                    }
+                    that.$axios.post(interfaceApi.Collect,param).then(res=> {
+                        // that.$notify({
+                        //   title: '收藏成功',
+                        //   message: '',
+                        //   type: 'success'
+                        // });
+                    });
                 }
-                that.$axios.post(interfaceApi.Collect,param).then(res=> {
-                    // that.$notify({
-                    //   title: '收藏成功',
-                    //   message: '',
-                    //   type: 'success'
-                    // });
-                })
+                
             },
             searchTextFun() {
                 this.searchText = this.$route.query.searchInfo || '';
