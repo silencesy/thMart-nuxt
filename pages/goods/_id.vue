@@ -503,7 +503,8 @@
             	if (that.mustChooseAll()) {
             		// 公共函数里面的方法
 			      	if (!that.user.isLogin()) {
-			      		that.$router.push({path: '/loginModule/login'});
+			      		// that.$router.push({path: '/loginModule/login'});
+                        that.$store.commit('LOGIN',true);
 			      	} else {
 			      		that.$router.push({path:'/payProcess/orderConfirm',query: {skuId: that.skuId, number: that.num1}})
 			      	}
@@ -517,7 +518,7 @@
             	if (that.mustChooseAll()) {
             		// 公共函数里面的方法
 			      	if (!that.user.isLogin()) {
-			      		that.$router.push({path: '/loginModule/login'});
+			      		that.$store.commit('LOGIN',true);
 			      	} else {
 			      		that.addToCartAjax();
 			      	}
@@ -564,19 +565,25 @@
             favourite() {
                 
                 const that = this;
-                that.goodsInfo.isCollect = this.goodsInfo.isCollect==1?0:1;
-                const param = {
-                    contentId: that.goodsInfo.id,
-                    type: 1,
-                    isCollect: that.goodsInfo.isCollect
+                // 公共函数里面的方法
+                if (!that.user.isLogin()) {
+                    that.$store.commit('LOGIN',true);
+                } else {
+                    that.goodsInfo.isCollect = this.goodsInfo.isCollect==1?0:1;
+                    const param = {
+                        contentId: that.goodsInfo.id,
+                        type: 1,
+                        isCollect: that.goodsInfo.isCollect
+                    }
+                    that.$axios.post(interfaceApi.Collect,param).then(res=> {
+                        // that.$notify({
+                        //   title: '收藏成功',
+                        //   message: '',
+                        //   type: 'success'
+                        // });
+                    });
                 }
-                that.$axios.post(interfaceApi.Collect,param).then(res=> {
-                    // that.$notify({
-                    //   title: '收藏成功',
-                    //   message: '',
-                    //   type: 'success'
-                    // });
-                })
+                
             }
         },
 	  	watch: {

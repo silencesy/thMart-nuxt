@@ -44,6 +44,9 @@ const store = () => new Vuex.Store({
     // 设置商户信息
     SET_SHOP_INFO: function(state,obj) {
       state.shopInfo = obj;
+    },
+    LOGIN: function(state,flag) {
+      state.dialogFormVisible = flag;
     }
 
   },
