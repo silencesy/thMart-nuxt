@@ -10,6 +10,7 @@ body
 a
 	text-decoration: none
 	color: #222
+	outline: none
 
 li
 	list-style: none
@@ -315,9 +316,25 @@ textarea
 	padding: 11px 54px
 .allCateBox .el-button
 	padding: 13px 0
-
-	
-	
+.thTop .el-dialog__wrapper .el-dialog
+    width: 28%
+.thTop .el-dialog__header
+	padding: 17px 20px 10px
+.thTop .el-dialog__body
+	padding-top: 0
+.el-dialog__headerbtn .el-dialog__close:hover
+	color: #F9421E 
+.thTop .loginBox .el-tabs__content
+	margin: 0
+.thTop .loginBox .el-tabs__item.is-active
+	border-bottom: 1px solid #f9421e
+.thTop .loginBox .el-tabs__item:hover
+	color: #f9421e
+.thTop .loginBox .el-tabs__nav > div:nth-child(2):after
+	content: ''
+	padding-left: 0
+.thTop .loginBox #tab-first
+	padding-left: 0
 //主体字体颜色
 $font_color: #222
 
