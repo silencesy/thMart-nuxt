@@ -54,8 +54,8 @@
                         </el-input>
                         <button class="btn" @click="loginPassword">Login</button>
                         <div class="foot">
-                            <nuxt-link :to="{name: 'loginModule-signPhone'}">Sign Up</nuxt-link>
-                            <nuxt-link :to="{name: 'loginModule-passwordPhone'}">Forgot Password</nuxt-link>    
+                            <a @click="signUp">Sign Up</a>
+                            <a @click="resetPassword">Forgot Password</a>    
                         </div>
                         <div class="wechat">
                             <span class="iconfont icon-weixin1"></span>
@@ -76,8 +76,8 @@
                             Login
                         </button>
                         <div class="foot">
-                            <nuxt-link :to="{name: 'loginModule-signPhone'}">Sign Up</nuxt-link>
-                            <nuxt-link :to="{name: 'loginModule-passwordPhone'}">Forgot Password</nuxt-link>    
+                            <a @click="signUp">Sign Up</a>
+                            <a @click="resetPassword">Forgot Password</a>    
                         </div>
                         <div class="wechat">
                             <span class="iconfont icon-weixin1"></span>
@@ -127,6 +127,10 @@
                 this.$store.commit('NICKNAME','');
                 this.$store.commit('HEADIMGURL','');
                 this.$router.push({path: '/loginModule/login'})
+            },
+            resetPassword () {
+                this.user.SetComebackAddress();
+                this.$router.push({name: 'loginModule-passwordPhone'});
             },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
@@ -339,6 +343,7 @@
             float: left
             @include sc(14px, #666)
             padding: 15px 0 5px 0
+            cursor: pointer
         a:last-child 
             float: right
     .wechat 
