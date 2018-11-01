@@ -44,7 +44,7 @@
         <!-- 登录框 -->
         <el-dialog title="Please login first!" :visible.sync="$store.state.dialogFormVisible">
             <div class="loginBox">
-                 <el-tabs v-model="activeName" @tab-click="handleClick">
+                 <el-tabs v-model="activeName">
                     <el-tab-pane label="Login via password" name="first">
                         <el-input v-model="phoneNumber" placeholder="Phone">
                             <i slot="prefix" class="iconfont icon-zhanghao"></i>
@@ -109,14 +109,20 @@
             }
         },
         methods: {
+            // 去登陆页面
             login() {
                 this.user.SetComebackAddress();
+                // 登录成功关闭弹出框
+                this.$store.commit('LOGIN',false);  
                 this.$router.push({name: 'loginModule-login'});
+
             },
+            // 去注册页面
             signUp() {
                 this.user.SetComebackAddress();
                 this.$router.push({name: 'loginModule-signPhone'});
             },
+            // 下线
             logout() {
                 this.user.SetComebackAddress();
                 // 下线
@@ -128,22 +134,13 @@
                 this.$store.commit('HEADIMGURL','');
                 this.$router.push({path: '/loginModule/login'})
             },
+            // 去重置密码页面
             resetPassword () {
                 this.user.SetComebackAddress();
+                // 登录成功关闭弹出框
+                this.$store.commit('LOGIN',false);  
                 this.$router.push({name: 'loginModule-passwordPhone'});
-            },
-            submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        this.changePasswordAxios();
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                }); 
-            },
-            handleClick(tab, event) {
-                console.log(tab, event);
+                
             },
             // 密码登录
             loginPassword() {
