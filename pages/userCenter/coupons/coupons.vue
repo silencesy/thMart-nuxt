@@ -36,6 +36,11 @@
 	export default {
 		layout: 'userHome',
 		middleware: 'userAuth',
+		head () {
+    		return {
+      			title: 'thMart-Coupons'
+        	}
+  		},
 		data() {
 			return {
 				titleIsShow: true,

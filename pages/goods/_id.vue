@@ -114,6 +114,11 @@
     import prompt from '~/assets/js/prompt'
 	export default {
 		layout: 'shopHome',
+        head () {
+            return {
+                title: this.goodsInfo.title
+            }
+        },
 		props: {
 
 	    },
@@ -147,7 +152,7 @@
         async asyncData ({app,params}) {
         	console.log(params)
 			let param = {
-				id: 4,
+				id: params.id,
 			}
 		 	const goodsInfo = await app.$axios.post(interfaceApi.goodsDeatail,param);
   			return { 

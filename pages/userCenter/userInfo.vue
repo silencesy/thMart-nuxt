@@ -61,6 +61,11 @@
 	export default {
 		layout: 'userHome',
 		middleware: 'userAuth',
+		head () {
+    		return {
+      			title: 'Personal Info'
+        	}
+  		},
 		data() {
 			var pass = (rule, value, callback) => {
 				if (value == '') {

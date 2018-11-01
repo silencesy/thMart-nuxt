@@ -50,6 +50,11 @@
 	export default {
 		layout: 'userHome',
 		middleware: 'userAuth',
+		head () {
+    		return {
+      			title: 'Address Book'
+        	}
+  		},
 		data() {
 			return {
 				titleIsShow: true,

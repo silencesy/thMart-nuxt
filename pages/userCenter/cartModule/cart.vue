@@ -75,6 +75,11 @@
 	export default {
 		layout: 'userHome',
 		middleware: 'userAuth',
+		head () {
+    		return {
+      			title: 'Cart'
+        	}
+  		},
 		data() {
 			return {
 				allSelect: false

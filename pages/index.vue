@@ -144,7 +144,8 @@
 	import SwiperComponent from "~/components/base/Swiper"
 	import floor from '~/components/home/floor'
 	import goodsItem from '~/components/base/goodsItem'
-	// import Swiper from 'swiper'
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'indexHome',
 		layout (context) {
@@ -186,8 +187,11 @@
 				titleIsShow: true
 			}
 		},
-		async asyncData ({app}) {
-		 	const homeData = await app.$axios.post('Ads/Home/list')
+		async asyncData ({app,store}) {
+		 	const homeData = await app.$axios.post(interfaceApi.home);
+		 	// 获取分类
+		 	const categoryList = await app.$axios.post(interfaceApi.categoryList,{fname: 0})
+		 	store.commit('SET_CATEGORYLIST',categoryList.data.data);
   			return { homeData: homeData.data.data}
 		},
 		components: {

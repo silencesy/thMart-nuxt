@@ -25,9 +25,11 @@
 		// Must be a number
 			return /^\d+$/.test(params.id)
 		},
-		// head: {
-  //   		title: this.shopData.name,
-  // 		},
+		head () {
+            return {
+                title: this.shopData.name
+            }
+        },
 		data() {
 			return {
 				

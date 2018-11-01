@@ -43,6 +43,11 @@
 	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'indexHome',
+		head () {
+    		return {
+      			title: 'Shops'
+        	}
+  		},
 		data() {
 			return {
 				isShowObj: {
@@ -59,14 +64,17 @@
 				}
 			}
 		},
-		async asyncData ({app,params}) {
+		async asyncData ({app,params,store}) {
 			const param = {
 				id: 5,
 				page: 1,
 				pageSize: 6,
 				sort: 'order_asc'
 			}
-		 	const shopListData = await app.$axios.post(interfaceApi.adsList,param)
+		 	const shopListData = await app.$axios.post(interfaceApi.adsList,param);
+		 	// 获取分类
+		 	const categoryList = await app.$axios.post(interfaceApi.categoryList,{fname: 0})
+		 	store.commit('SET_CATEGORYLIST',categoryList.data.data);
   			return { shopListData: shopListData.data.data}
 		},
 		components: {

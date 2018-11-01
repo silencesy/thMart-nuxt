@@ -1,4 +1,8 @@
 let api = {
+	// 首页
+	home: 'Ads/Home/list',
+	// 分类列表
+	categoryList:'Category/list',
 	// 登录接口（密码登录和验证码登录）
 	login: 'User/mobileLogin',
 	// 获取验证码

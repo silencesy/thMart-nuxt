@@ -73,6 +73,11 @@
 	export default {
 		layout: 'userHome',
 		middleware: 'userAuth',
+		head () {
+    		return {
+      			title: 'Orders'
+        	}
+  		},
 		validate ({ params }) {
 		// Must be a number
 			return params.id == 'all' || params.id == 'unpaid' || params.id == 'unshipped' || params.id == 'progress' || params.id == 'shipped';

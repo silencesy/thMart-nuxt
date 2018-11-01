@@ -15,6 +15,11 @@
 	import backEn from "~/components/business/backEn"
 	export default {
 		layout: 'business',
+		head () {
+    		return {
+      			title: 'Do Business With Us'
+        	}
+  		},
 		data() {
 			return {
 

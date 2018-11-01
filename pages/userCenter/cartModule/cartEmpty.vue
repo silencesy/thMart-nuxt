@@ -16,6 +16,11 @@
 	export default {
 		layout: 'userHome',
 		middleware: 'userAuth',
+		head () {
+    		return {
+      			title: 'Cart'
+        	}
+  		},
 		async asyncData ({app,params,store,redirect}) {
 		 	const dataList = await app.$axios.post(interfaceApi.cartList);
 		 	// 如果购物车数量为0，则跳转空购物车

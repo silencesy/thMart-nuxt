@@ -29,6 +29,11 @@
 	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'indexHome',
+		head () {
+    		return {
+      			title: 'Editor’s Pick'
+        	}
+  		},
 		props: {
 
 	    },
@@ -43,13 +48,16 @@
 				
 	        }
         },
-        async asyncData ({app,params}) {
+        async asyncData ({app,params,store}) {
         	const param = {
         		page: 1,
         		pageSize: 10,
         		sort: 'createTime_desc'
         	}
-		 	const articleListData = await app.$axios.post(interfaceApi.articleList,param)
+		 	const articleListData = await app.$axios.post(interfaceApi.articleList,param);
+		 	// 获取分类
+		 	const categoryList = await app.$axios.post(interfaceApi.categoryList,{fname: 0})
+		 	store.commit('SET_CATEGORYLIST',categoryList.data.data);
   			return { articleListData: articleListData.data.data}
 		},
 		components: {

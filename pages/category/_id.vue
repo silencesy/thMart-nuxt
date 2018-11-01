@@ -9,11 +9,11 @@
 		</div>
 		<div class="container goodsListBox">
 			<div class="goodsList">
-				<div class="item">
+				<div class="item" v-if="goodsListData.data.length>0">
 					<rank @Sort = "Sort"/>
 				</div>
 				<goodsItem :styleObj="goodsItemStyleObj" :hotData="goodsListData.data"/>
-				<div class="changePage">
+				<div class="changePage" v-if="goodsListData.data.length>0">
 					<el-pagination
 					  	background
 					  	layout="prev, pager, next"
@@ -36,6 +36,11 @@
 	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'indexHome',
+		head () {
+    		return {
+      			title: '分类名字'
+        	}
+  		},
 		validate ({ params }) {
 		// Must be a number
 			return /^\d+$/.test(params.id)
@@ -59,14 +64,17 @@
 				}
 	        }
         },
-        async asyncData ({app,params}) {
+        async asyncData ({app,params,store}) {
         	const param = {
         		id: params.id,
         		page: 1,
         		pageSize: 10,
         		sort: 'createTime_desc'
         	}
-		 	const goodsListData = await app.$axios.post(interfaceApi.goodsList,param)
+		 	const goodsListData = await app.$axios.post(interfaceApi.goodsList,param);
+		 	// 获取分类
+		 	const categoryList = await app.$axios.post(interfaceApi.categoryList,{fname: 0})
+		 	store.commit('SET_CATEGORYLIST',categoryList.data.data);
   			return { goodsListData: goodsListData.data.data }
 		},
 		components: {

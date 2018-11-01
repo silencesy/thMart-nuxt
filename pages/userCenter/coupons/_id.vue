@@ -33,6 +33,11 @@
 	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'indexHome',
+		head () {
+    		return {
+      			title: 'thMart-Coupons'
+        	}
+  		},
 		validate ({ params }) {
 		// Must be a number
 			return /^\d+$/.test(params.id)

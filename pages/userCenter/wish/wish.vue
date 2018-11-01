@@ -73,6 +73,11 @@
 	import userLayout from "~/components/user/userLayout"
 	export default {
 		layout: 'userHome',
+		head () {
+    		return {
+      			title: 'WishList'
+        	}
+  		},
 		data() {
 			return {
 				titleIsShow: true,

@@ -61,6 +61,11 @@
 	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'userHome',
+		head () {
+    		return {
+      			title: 'Address Book'
+        	}
+  		},
 		data() {
 			return {
 				titleIsShow: true,

@@ -7,6 +7,11 @@
 </template>
 <script>
 	export default {
+        head () {
+            return {
+                title: 'Do Business With Us'
+            }
+        },
         data () {
             return {
 

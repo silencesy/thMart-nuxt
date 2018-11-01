@@ -15,6 +15,11 @@
 	import backCn from "~/components/business/backCn"
 	export default {
 		layout: 'business',
+		head () {
+    		return {
+      			title: 'Do Business With Us'
+        	}
+  		},
 		data() {
 			return {
 

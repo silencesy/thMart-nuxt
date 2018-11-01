@@ -213,6 +213,11 @@
 <script>
 	export default {
 		layout: 'searchHome',
+		head () {
+    		return {
+      			title: 'Do Business With Us'
+        	}
+  		},
 		data() {
 			return {
 

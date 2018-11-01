@@ -15,7 +15,7 @@
                     <li>
                         <nuxt-link to="">
                             <div>
-                                <el-dropdown class="allCateBox">
+                                <el-dropdown class="allCateBox" @command="handleCommand">
                                     <!-- <i class="iconfont icon-fenlei"></i>All Categories -->
                                     <el-button class="allCate">
                                         <i class="iconfont icon-fenlei"></i>All Categories
@@ -23,21 +23,21 @@
                                     <el-dropdown-menu slot="dropdown">
                                         <div class="dropdownBox">
                                             <div>
-                                                <el-dropdown-item>黄金糕</el-dropdown-item>
-                                                <el-dropdown-item>狮子头</el-dropdown-item>
-                                                <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                                                <el-dropdown-item>双皮奶</el-dropdown-item>
-                                                <el-dropdown-item>蚵仔煎</el-dropdown-item> 
-                                                <el-dropdown-item>黄金糕</el-dropdown-item>
-                                                <el-dropdown-item>狮子头</el-dropdown-item>  
+                                                <el-dropdown-item v-for="(item,index) in $store.state.categoryList" v-if="index>0 && index <8" :key="index" :command="item.id">{{item.title}}</el-dropdown-item>
                                             </div>
                                             <div>
-                                                <el-dropdown-item>黄金糕</el-dropdown-item>
-                                                <el-dropdown-item>狮子头</el-dropdown-item>
-                                                <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                                                <el-dropdown-item>双皮奶</el-dropdown-item>
-                                                <el-dropdown-item>蚵仔煎</el-dropdown-item>   
+                                                <el-dropdown-item v-for="(item,index) in $store.state.categoryList" v-if="index>7 && index <15" :key="index" :command="item.id">{{item.title}}</el-dropdown-item>
                                             </div>
+                                             <div>
+                                                <el-dropdown-item v-for="(item,index) in $store.state.categoryList" v-if="index>14 && index <22" :key="index" :command="item.id">{{item.title}}</el-dropdown-item>
+                                            </div>
+                                            <div>
+                                                <el-dropdown-item v-for="(item,index) in $store.state.categoryList" v-if="index>21 && index <29" :key="index" :command="item.id">{{item.title}}</el-dropdown-item>
+                                            </div>
+                                             <div>
+                                                <el-dropdown-item v-for="(item,index) in $store.state.categoryList" v-if="index>28 && index <36" :key="index" :command="item.id">{{item.title}}</el-dropdown-item>
+                                            </div>
+                                            
                                         </div>
                                     </el-dropdown-menu>
                                 </el-dropdown> 
@@ -92,8 +92,8 @@
             searchBtn() {
                 this.$router.push({path: '/searchModeule/search',query: {searchInfo: this.searchText,classification: 'categories'}});
             },
-            sss() {
-                alert(123);
+            handleCommand(command) {
+                this.$router.push({name: 'category-id',params: {id: command}});
             }
         }
     }

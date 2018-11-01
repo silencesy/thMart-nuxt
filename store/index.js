@@ -17,7 +17,9 @@ const store = () => new Vuex.Store({
     searchText: '',
     classification: 'categories',
     shopInfo: {},
-    dialogFormVisible: false
+    dialogFormVisible: false,
+    // 分类数据
+    categoryList: []
   },
 
   mutations: {
@@ -45,10 +47,14 @@ const store = () => new Vuex.Store({
     SET_SHOP_INFO: function(state,obj) {
       state.shopInfo = obj;
     },
+    // 弹出框
     LOGIN: function(state,flag) {
       state.dialogFormVisible = flag;
+    },
+    // 分类数据
+    SET_CATEGORYLIST: function(state,arr) {
+      state.categoryList = arr;
     }
-
   },
 
   actions: {
