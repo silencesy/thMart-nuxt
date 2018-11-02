@@ -9,16 +9,16 @@ export default function ({ $axios, redirect,store }) {
 	})
 	// 响应拦截
 	$axios.onResponse(res=>{
-		if (res.data.code==1 && res.data.data.token) {
-			Cookie.set('token', res.data.data.token);
-			store.commit('SET_USER',res.data.data.token);
-		}
-		if (res.data.code==1 && res.data.data.nickname) {
-			Cookie.set('nickname',res.data.data.nickname);
-			Cookie.set('headimgurl',res.data.data.headimgurl);
-			store.commit('NICKNAME',res.data.data.nickname);
-			store.commit('HEADIMGURL',res.data.data.headimgurl);
-		}
+		// if (res.data.code==1 && res.data.data.token) {
+		// 	Cookie.set('token', res.data.data.token);
+		// 	store.commit('SET_USER',res.data.data.token);
+		// }
+		// if (res.data.code==1 && res.data.data.nickname) {
+		// 	Cookie.set('nickname',res.data.data.nickname);
+		// 	Cookie.set('headimgurl',res.data.data.headimgurl);
+		// 	store.commit('NICKNAME',res.data.data.nickname);
+		// 	store.commit('HEADIMGURL',res.data.data.headimgurl);
+		// }
 		// 未传token
 		if (res.data.code == 100 || res.data.code == 101 || res.data.code == 102 || res.data.code == 103) {
 		  router.push({

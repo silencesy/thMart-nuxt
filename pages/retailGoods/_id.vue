@@ -485,12 +485,12 @@
             	if (that.mustChooseAll()) {
             		// 公共函数里面的方法
 			      	if (!that.user.isLogin()) {
-			      		alert("请登录");
+			      		alert("Please login first!");
 			      	} else {
 			      		alert("buy");
 			      	}
 	  			} else {
-	  				alert("请选择商品");
+	  				alert("Please select at least one goods!");
 	  			}
             },
             // 加入购物车
@@ -499,12 +499,12 @@
             	if (that.mustChooseAll()) {
             		// 公共函数里面的方法
 			      	if (!that.user.isLogin()) {
-			      		alert("请登录");
+			      		alert("Please login first!");
 			      	} else {
 			      		alert("buy");
 			      	}
 	  			} else {
-	  				alert("请选择商品");
+	  				alert("Please select at least one goods!");
 	  			}
             },
             // 必须选完全才能加入购物车或者购买

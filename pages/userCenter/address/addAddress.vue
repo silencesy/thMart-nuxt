@@ -127,27 +127,27 @@
 				var that = this;
 				if (!v.required(that.addAddressInfo.fullName)) {
 					that.$message({
-			          message: '请填写名字',
+			          message: 'Please enter your name!',
 			          type: 'warning'
 			        });
 				} else if(!v.tel(that.addAddressInfo.phone)) {
 					that.$message({
-			          message: '请填写正确的电话号码',
+			          message: 'Please enter a 11-digit valid number!',
 			          type: 'warning'
 			        });
 				} else if(!v.email(that.addAddressInfo.email)) {
 					that.$message({
-			          message: '请填写正确的邮箱地址',
+			          message: 'Please enter a valid email address!',
 			          type: 'warning'
 			        });
 				} else if(!v.required(that.addAddressInfo.province) && !v.required(that.addAddressInfo.city)) {
 					that.$message({
-			          message: '请选择地址',
+			          message: 'Please select the address!',
 			          type: 'warning'
 			        });
 				} else if(!v.required(that.addAddressInfo.regionDetail)) {
 					that.$message({
-			          message: '请填写详细地址',
+			          message: 'Please write down your detailed address!',
 			          type: 'warning'
 			        });
 				} else {

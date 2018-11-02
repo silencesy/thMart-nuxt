@@ -332,7 +332,7 @@
 			// 删除购物车
 			deleteCart(id) {
 				var that = this;
-				this.$confirm('从购物车删除当前商品', '', {
+				this.$confirm('Are you sure to delete the selected goods?', '', {
 		          confirmButtonText: 'Done',
 		          cancelButtonText: 'Cancel',
 		          type: 'warning'
@@ -376,7 +376,7 @@
 								that.controlAllSelect();
 								this.$message({
 									type: 'success',
-									message: '删除成功!'
+									message: 'Successfully!'
 								});
 							}
 						}
@@ -398,7 +398,7 @@
 			checkout() {
 				if (this.dataList.total == 0) {
 					this.$notify({
-                      title: '请勾选购买商品',
+                      title: 'Please select at least one goods!',
                       message: '',
                       type: 'warning'
                     });

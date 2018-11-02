@@ -311,6 +311,7 @@
         a 
             float: left
             display: inline-block
+            padding-bottom: 10px
         .dropdownRightBox
             float: left
         .userPic
