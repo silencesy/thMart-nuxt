@@ -1,6 +1,7 @@
 <template>
 	<div class="orderConfirm">
 		<div class="container">
+			<payNav :isShowObj="isShowObj" />
 			<div class="confirmBox">
 				<div class="confirmAddress">
 					<div class="title">
@@ -264,10 +265,17 @@
 	import v from '~/assets/js/validate'
 	// 地址选择组件
 	import citySelect from "~/components/base/citySelect"
+	//支付进度条组件
+	import payNav from '~/components/layout/payNav.vue'
 	export default {
 		layout: 'payHome',
 		data() {
 			return {
+				isShowObj: {
+                    oneIsShow: true,
+                    twoIsShow: false,
+                    threeIsShow: false
+				},
 				defaultBox: 0, 	//选中地址索引
 				// checkedAddrId: 0,
 				addressList: [],
@@ -308,7 +316,8 @@
             }
 		},
 		components: {
-			citySelect
+			citySelect,
+			payNav
 		},
 		mounted() {
 			

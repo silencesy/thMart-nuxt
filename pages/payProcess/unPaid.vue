@@ -22,11 +22,15 @@
 					</p>
 					<p>
 						<span>Final Price :</span>
-						<span>¥ 398</span>
+						<span class="price">¥ 398</span>
+					</p>
+					<p>
+						<span class="iconfont icon-jingshi"></span>
+						<span class="paid">Non-Payment</span>
 					</p>
 					<div>
-						<button class="iconfont icon-zhifubao"></button>
-						<button class="iconfont icon-weixinzhifu"></button>
+						<button class="backOrder">Continue To Pay</button>
+						<button class="backHome">Home</button>
 					</div>
 				</div>
 			</div>
@@ -85,6 +89,7 @@
 					>p 
 						overflow: hidden
 						margin-bottom: 15px
+						margin-left: 10px
 						span
 							float: left
 						span:first-child
@@ -94,23 +99,26 @@
 						span:nth-child(2)
 							width: 270px
 							text-align: left
+						.price 
+							color: $theme_color
+						.icon-jingshi
+							color: $theme_color
+							font-weight: 600
+							font-size: 18px
+						.paid
+							font-size: 18px
 					>div 
 						width: 100%
-						padding-left: 63px
 						padding-top: 5px
+						overflow: hidden
 						button
 							display: block
 							color: #fff
-							@include whch(250px, 40px, center, 40px)
-						.icon-zhifubao
-							background-color: #2196f3 
-							margin-bottom: 15px
-							font-size: 28px
-							color: #fff
-							border-radius: 4px
-						.icon-weixinzhifu 
-							background-color: #4caf50
-							font-size: 29px
-							border-radius: 4px
+							@include whch(180px, 40px, center, 40px)
+							background-color: $theme_color
+							border-radius: $border_radius
+							float: left
+						.backHome
+							margin-left: 30px
 
 </style>

@@ -269,10 +269,12 @@
 							>div 
 								overflow: hidden
 								@include wh(80px, 80px)
+								background-color: #eee
+								border-radius: 40px
 								float: left
 								img 
 									@include wh(80px, 80px)
-									border-radius: 50%
+									border-radius: 40px
 							.photoBtn 
 								float: left
 								@include whch(100px, 30x, center, 30px)

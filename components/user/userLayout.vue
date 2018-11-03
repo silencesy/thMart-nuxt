@@ -71,9 +71,11 @@
                         .hasImg
                             display: inline-block
                             @include wh(80px, 80px)
+                            background-color: #fff 
+                            border-radius: 40px
                             img 
                                 @include wh(80px, 80px)
-                                border-radius: 50%
+                                border-radius: 40px
                                 text-align: center
                                 margin-bottom: 
                                 display: block
