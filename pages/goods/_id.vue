@@ -510,7 +510,12 @@
 			      	if (!that.user.isLogin()) {
 			      		// that.$router.push({path: '/loginModule/login'});
                         that.$store.commit('LOGIN',true);
-			      	} else {
+			      	} else if (that.skuInfo.stock == 0) {
+                        that.$message({
+                            message: '库存不足',
+                            type: 'warning'
+                        });
+                    } else {
 			      		that.$router.push({path:'/payProcess/orderConfirm',query: {skuId: that.skuId, number: that.num1}})
 			      	}
 	  			} else {
@@ -524,7 +529,12 @@
             		// 公共函数里面的方法
 			      	if (!that.user.isLogin()) {
 			      		that.$store.commit('LOGIN',true);
-			      	} else {
+			      	} else if (that.skuInfo.stock == 0) {
+                        that.$message({
+                            message: '库存不足',
+                            type: 'warning'
+                        });
+                    } else {
 			      		that.addToCartAjax();
 			      	}
 	  			} else {
