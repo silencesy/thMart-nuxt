@@ -17,7 +17,7 @@
 					</el-pagination>
 				</div>
 			</div>
-			<moreGoods />
+			<moreGoods :featuredGoods="articleListData.recommend"/>
 		</div>
 	</div>
 </template>
@@ -41,7 +41,7 @@
             return{
             	param: {
 	        		page: 1,
-	        		pageSize: 10,
+	        		pageSize: 20,
 	        		sort: 'createTime_desc'
 	        	},
 	        	currentPage: 1,
@@ -51,7 +51,7 @@
         async asyncData ({app,params,store}) {
         	const param = {
         		page: 1,
-        		pageSize: 10,
+        		pageSize: 20,
         		sort: 'createTime_desc'
         	}
 		 	const articleListData = await app.$axios.post(interfaceApi.articleList,param);

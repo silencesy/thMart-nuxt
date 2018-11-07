@@ -81,7 +81,7 @@ export default function ({ $axios, redirect,store }) {
 			redirect('/loginModule/login')
 		}
 		if (code === 500) {
-			redirect('https://www.imooc.com/wenda/detail/398980')
+			// redirect('https://www.imooc.com/wenda/detail/398980')
 		}
 	})
 }

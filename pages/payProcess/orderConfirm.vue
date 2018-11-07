@@ -1,6 +1,7 @@
 <template>
 	<div class="orderConfirm">
 		<div class="container">
+			<payNav :isShowObj="isShowObj" />
 			<div class="confirmBox">
 				<div class="confirmAddress">
 					<div class="title">
@@ -10,9 +11,10 @@
 					<div class="address" :class="{show: moreShow}">
 						<div class="box noselect" :class="{defaultBox: index==defaultBox}" v-for="(item,index) in addressList" :key="item.id">
 							<div @click="checkAddrBtn(index,item)">
-								<p><span>{{item.fullName}}</span><span>{{item.phone}}</span></p>
+								<p>{{item.fullName}}</p>
+								<p>{{item.phone}}</p>
 								<p>{{item.email}}</p>
-								<p>{{item.province}}{{item.city}}{{item.regionDetail}}</p>
+								<p class="addressP">{{item.province}}{{item.city}}{{item.regionDetail}}</p>
 							</div>
 							<div>
 								<span @click="edit(item)"><i class="iconfont icon-bianji"></i>Edit</span>
@@ -263,10 +265,17 @@
 	import v from '~/assets/js/validate'
 	// 地址选择组件
 	import citySelect from "~/components/base/citySelect"
+	//支付进度条组件
+	import payNav from '~/components/layout/payNav.vue'
 	export default {
 		layout: 'payHome',
 		data() {
 			return {
+				isShowObj: {
+                    oneIsShow: true,
+                    twoIsShow: false,
+                    threeIsShow: false
+				},
 				defaultBox: 0, 	//选中地址索引
 				// checkedAddrId: 0,
 				addressList: [],
@@ -307,7 +316,8 @@
             }
 		},
 		components: {
-			citySelect
+			citySelect,
+			payNav
 		},
 		mounted() {
 			
@@ -332,7 +342,7 @@
 				var that = this;
 				if (that.defaultAddressid == null) {
 					that.$message({
-						message: '请选择地址',
+						message: 'Please select the address!',
 						type: 'warning'
 					});
 				} else {
@@ -344,7 +354,7 @@
 					}
 					that.$axios.post(interfaceApi.placeOrder,param).then(res=> {
 						console.log(res);
-						that.$router.push({path: '/payProcess/aliPay', query: {orderNumber: res.data.data.orderNumber}});
+						that.$router.replace({path: '/payProcess/aliPay', query: {orderNumber: res.data.data.orderNumber}});
 					})
 					
 				}
@@ -394,27 +404,27 @@
 				var that = this;
 				if (!v.required(that.addressInfo.fullName)) {
 					that.$message({
-			          message: '请填写名字',
+			          message: 'Please enter your name!',
 			          type: 'warning'
 			        });
 				} else if(!v.tel(that.addressInfo.phone)) {
 					that.$message({
-			          message: '请填写正确的电话号码',
+			          message: 'Please enter a 11-digit valid number!',
 			          type: 'warning'
 			        });
 				} else if(!v.email(that.addressInfo.email)) {
 					that.$message({
-			          message: '请填写正确的邮箱地址',
+			          message: 'Please enter a valid email address!',
 			          type: 'warning'
 			        });
 				} else if(!v.required(that.addressInfo.province) && !v.required(that.addressInfo.city)) {
 					that.$message({
-			          message: '请选择地址',
+			          message: 'Please select the address!',
 			          type: 'warning'
 			        });
 				} else if(!v.required(that.addressInfo.regionDetail)) {
 					that.$message({
-			          message: '请填写详细地址',
+			          message: 'Please write down your detailed address!',
 			          type: 'warning'
 			        });
 				} else {
@@ -536,7 +546,7 @@
 						.box 
 							border: $border
 							border-radius: $border_radius
-							@include wh(280px, 150px)
+							@include wh(280px, 155px)
 							float: left
 							padding: 15px
 							margin-right: 16px
@@ -546,25 +556,23 @@
 							p 
 								@include sc(14px, #666)
 								margin-bottom: 10px
+							p.addressP
 								overflow: hidden
 								text-overflow: ellipsis
 								display: -webkit-box
 								-webkit-box-orient: vertical
-								-webkit-line-clamp: 2
+								-webkit-line-clamp: 1
+								height: 20px
 							>div 
 								overflow: hidden
 								.icon-bianji
 									padding-right: 5px
-								span:first-child
-									float: left
-									@include sc(14px, #666)
-									cursor: pointer
+								span:nth-child(2) 
+									float: right
+									font-size: 14px
 								span.active
 									float: right
-									@include sc(14px, $theme_color)
-								span
-									float: right
-									@include sc(14px, #666)
+									@include sc(14px, $theme_color)							
 						.box:nth-child(4n)
 							margin-right: 0
 						.box.defaultBox

@@ -8,7 +8,7 @@
       <span>{{msTime.minutes}}</span><i>{{minutesTxt}}</i>
       <span>{{msTime.seconds}}</span><i>{{secondsTxt}}</i>
     </p>
-    <!-- <p v-if="!msTime.show">{{endText}}</p> -->
+    <p v-if="!msTime.show">{{endText}}</p>
   </div>
 </template>
 <script>

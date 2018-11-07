@@ -32,7 +32,7 @@
 					</el-pagination>
 				</div>
 			</div>
-			<moreGoods />
+			<moreGoods :featuredGoods="shopListData.recommend"/>
 		</div>
 	</div>
 </template>
@@ -59,7 +59,7 @@
 				param: {
 					id: 5,
 					page: 1,
-					pageSize: 6,
+					pageSize: 36,
 					sort: 'order_asc'
 				}
 			}
@@ -68,7 +68,7 @@
 			const param = {
 				id: 5,
 				page: 1,
-				pageSize: 6,
+				pageSize: 36,
 				sort: 'order_asc'
 			}
 		 	const shopListData = await app.$axios.post(interfaceApi.adsList,param);

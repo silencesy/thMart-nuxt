@@ -50,9 +50,9 @@
                     <li>
                         <nuxt-link :class="{theme_color: $route.path == '/category/1'}" :to="{name: 'category-id',params: {id: 1}}">Ticketing</nuxt-link>
                     </li>
-                    <li>
+<!--                     <li>
                         <nuxt-link to="">Family</nuxt-link>
-                    </li>
+                    </li> -->
                     <li>
                         <nuxt-link :class="{theme_color: $route.path == '/groupBuy/1'}" :to="{name: 'groupBuy-id',params: {id: 1}}">GroupBuy</nuxt-link>
                     </li>
@@ -149,7 +149,7 @@
             li 
                 float: left
                 a
-                    padding: 0 50px 
+                    padding: 0 68px 
                     display: inline-block
                     @include hh(40px, 40px)
             li:first-child
@@ -163,7 +163,12 @@
                     padding-right: 15px
             li:nth-child(2)
                 a
-                    padding-left: 100px
+                    padding-left: 123px
+                    padding-right: 48px
+            li:nth-child(3)
+                a
+                    padding-left: 78px
+                    padding-right: 58px
             li:last-child
                 a 
                     padding-right: 0
@@ -189,9 +194,9 @@
             margin: 0 auto
             >div 
                 float: left
-                width: 238px
+                width: 310px
                 li 
-                    text-align: center
+                    padding-left: 50px
                     color: #fff
                     padding-top: 10px
                 li:hover

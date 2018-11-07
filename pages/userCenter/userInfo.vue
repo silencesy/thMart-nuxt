@@ -69,27 +69,27 @@
 		data() {
 			var pass = (rule, value, callback) => {
 				if (value == '') {
-					callback(new Error('请输入原始密码'));
+					callback(new Error('Please enter your original password!'));
 				} else if (!v.password(value)) {
-					callback(new Error('请输入正确格式的原始密码'));
+					callback(new Error('The original password is incorrect!'));
 				} else {
 					callback();
 				}
 			};
 			var validatePass = (rule, value, callback) => {
 				if (value == '') {
-					callback(new Error('请输入新密码'));
+					callback(new Error('Please enter your new password!'));
 				} else if (!v.password(value)) {
-					callback(new Error('请输入正确格式的新密码'));
+					callback(new Error('Please enter your password with 6-16 digits (must contain numbers and letters)!'));
 				} else {
 					callback();
 				}
 			};
 			var validatePass2 = (rule, value, callback) => {
 				if (value === '') {
-					callback(new Error('请再次输入新密码'));
+					callback(new Error('Please enter your new password again!'));
 				} else if (value !== this.ruleForm.password) {
-					callback(new Error('两次输入密码不一致!'));
+					callback(new Error('The two passwords you entered did not match!'));
 				} else {
 					callback();
 				}
@@ -269,10 +269,12 @@
 							>div 
 								overflow: hidden
 								@include wh(80px, 80px)
+								background-color: #eee
+								border-radius: 40px
 								float: left
 								img 
 									@include wh(80px, 80px)
-									border-radius: 50%
+									border-radius: 40px
 							.photoBtn 
 								float: left
 								@include whch(100px, 30x, center, 30px)

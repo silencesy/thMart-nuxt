@@ -2,27 +2,20 @@
     <div class="moreProducts">
     	<div class="moreTitle">Featured Products</div>
     	<div class="products">
-			<nuxt-link to="/">
+			<nuxt-link to="/" v-for="(item,index) in featuredGoods" :key="index">
 				<b class="hot"><i>SALE</i></b>
-				<div><img src="~static/images/flower.jpg" alt=""></div>
-				<p>Kellogg's Corn Flake Copy 5</p>
-				<span>¥14999</span>
-				<del>¥15999</del>
+				<div><img v-lazy="item.pic" alt=""></div>
+				<p>{{item.title}}</p>
+				<span>¥{{item.price}}</span>
+				<del v-show="item.originalPrice">¥{{item.originalPrice}}</del>
 			</nuxt-link>
-            <nuxt-link to="/">
-                <b class="hot"><i>SALE</i></b>
-                <div><img src="~static/images/flower.jpg" alt=""></div>
-                <p>Kellogg's Corn Flake Copy 5</p>
-                <span>¥14999</span>
-                <del>¥15999</del>
-            </nuxt-link>
 		</div>
     </div>
 </template>
 <script>
 	export default {
 		props: {
-			hotData: {
+			featuredGoods: {
 				type: Array,
 				default: function() {
 					return []

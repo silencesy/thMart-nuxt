@@ -3,6 +3,11 @@
         <div class="container">
             <div class="homeHead">
                 <div class="left"><nuxt-link to="/"><img src="~static/images/thmart.png" alt=""></nuxt-link></div>
+                <div class="right">
+                    <img src="~static/images/process1.png" alt="" v-if="isShowObj.oneIsShow">
+                    <img src="~static/images/process2.png" alt="" v-if="isShowObj.twoIsShow">
+                    <img src="~static/images/process3.png" alt="" v-if="isShowObj.threeIsShow">
+                </div>
             </div> 
         </div> 
     </div>
@@ -10,12 +15,27 @@
 
 <script>
     export default {
+        props: {
+            isShowObj: {
+                type: Object,
+                default: function() {
+                    return {
+                        oneIsShow: true,
+                        twoIsShow: false,
+                        threeIsShow: false
+                    }
+                }
+            }
+        },
         data() {
             return {
                 searchText: '',
                 searchTipsTextShow: true,
                 activeCategoryData: ''
             }
+        },
+        components: {
+
         },
         methods: {
             handleinput() {
@@ -52,5 +72,9 @@
         .left
             img
                 @include wh(80px, 60px)
+        .right
+            float: right
+            img 
+                width: 680px
 
 </style>

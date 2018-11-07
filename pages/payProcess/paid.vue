@@ -22,11 +22,15 @@
 					</p>
 					<p>
 						<span>Final Price :</span>
-						<span class="theme_color">¥ {{details.priceTotal}}</span>
+						<span class="price">¥ {{details.priceTotal}}</span>
+					</p>
+					<p>
+						<span class="iconfont icon-duihao"></span>
+						<span class="paid">Payment successful</span>
 					</p>
 					<div>
-						<button class="iconfont icon-zhifubao" @click="alipay"></button>
-						<button class="iconfont icon-weixinzhifu"></button>
+						<button @click="goOrder" class="backOrder">Order List</button>
+						<button @click="goHome" class="backHome">Home</button>
 					</div>
 				</div>
 			</div>
@@ -34,18 +38,18 @@
 	</div>
 </template>
 <script>
-	// 接口API
-	import interfaceApi from '~/plugins/interfaceApi'
 	//支付进度条组件
 	import payNav from '~/components/layout/payNav.vue'
+		// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'payHome',
 		data() {
 			return {
 				isShowObj: {
                     oneIsShow: false,
-                    twoIsShow: true,
-                    threeIsShow: false
+                    twoIsShow: false,
+                    threeIsShow: true
 				},
 			}
 		},
@@ -63,25 +67,19 @@
 			payNav
 		},
 		mounted() {
-			if (window.history && window.history.pushState) {
-				history.pushState(null, null, document.URL);
-				window.addEventListener('popstate', this.goBack, false);
-			}
-		},
-		destroyed(){
-			window.removeEventListener('popstate', this.goBack, false);
+
+			
 		},
 	  	computed: {  
 		    
 	  	},
 		methods: {
-			alipay() {
-				window.location.href = "http://proj6.thatsmags.com/thmartApi/Alipay/alipayapiPc?orderNumber=" + this.details.orderNumber;
+			goHome() {
+				this.$router.push('/')
 			},
-			goBack(){
-			    this.$router.replace({path: '/payProcess/unPaid', query: {orderNumber: this.details.orderNumber}});
+			goOrder() {
+				this.$router.push('/userCenter/orderlist/all');
 			}
-
 		}
 	}
 </script>
@@ -107,6 +105,7 @@
 					>p 
 						overflow: hidden
 						margin-bottom: 15px
+						margin-left: 10px
 						span
 							float: left
 						span:first-child
@@ -116,23 +115,26 @@
 						span:nth-child(2)
 							width: 270px
 							text-align: left
+						.price 
+							color: $theme_color
+						.icon-duihao
+							color: #00B700
+							font-weight: 600
+							font-size: 18px
+						.paid
+							font-size: 18px
 					>div 
 						width: 100%
-						padding-left: 63px
 						padding-top: 5px
+						overflow: hidden
 						button
 							display: block
 							color: #fff
-							@include whch(250px, 40px, center, 40px)
-						.icon-zhifubao
-							background-color: #2196f3 
-							margin-bottom: 15px
-							font-size: 28px
-							color: #fff
-							border-radius: 4px
-						.icon-weixinzhifu 
-							background-color: #4caf50
-							font-size: 29px
-							border-radius: 4px
+							@include whch(180px, 40px, center, 40px)
+							background-color: $theme_color
+							border-radius: $border_radius
+							float: left
+						.backHome
+							margin-left: 30px
 
 </style>

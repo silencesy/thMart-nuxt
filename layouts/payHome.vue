@@ -1,19 +1,19 @@
 <template>
     <div>
         <top/>
-        <payNav/>
+        <!-- <payNav/> -->
         <nuxt/>
         <bottom/>
     </div>
 </template>
 <script>
     import top from '~/components/layout/top.vue'
-    import payNav from '~/components/layout/payNav.vue'
+    // import payNav from '~/components/layout/payNav.vue'
     import bottom from '~/components/layout/bottom.vue' 
     export default {
         components: {
           top,
-          payNav,
+          // payNav,
           bottom
         }
     }
