@@ -354,7 +354,7 @@
 					}
 					that.$axios.post(interfaceApi.placeOrder,param).then(res=> {
 						console.log(res);
-						that.$router.push({path: '/payProcess/aliPay', query: {orderNumber: res.data.data.orderNumber}});
+						that.$router.replace({path: '/payProcess/aliPay', query: {orderNumber: res.data.data.orderNumber}});
 					})
 					
 				}

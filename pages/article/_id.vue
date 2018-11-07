@@ -25,7 +25,7 @@
 					</div>
 				</div>
 			</div>
-			<moreArticle :articleData="articleList" />
+			<moreArticle :articleData="articleData.recommend" />
 		</div>
 	</div>
 </template>
@@ -48,17 +48,12 @@
 		 	const articleData = await app.$axios.post(interfaceApi.articleDetail,{
 		 		id: params.id
 		 	})
-		 	const articleList = await app.$axios.post(interfaceApi.articleList,{
-		 		page: 1,
-		 		pageSize: 5,
-		 		sort: 'createTime_desc',
-		 	})
+		 	
 		 	// 获取分类
 		 	const categoryList = await app.$axios.post(interfaceApi.categoryList,{fname: 0})
 		 	store.commit('SET_CATEGORYLIST',categoryList.data.data);
   			return { 
-  				articleData: articleData.data.data,
-  				articleList: articleList.data.data.data
+  				articleData: articleData.data.data
   			}
 		},
 		data(){

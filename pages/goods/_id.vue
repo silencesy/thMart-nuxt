@@ -13,12 +13,12 @@
 					<!-- 左边 -->
 					<div class="goodImg goodsLeft">
 						<div class="big-img-container">
-							<pic-zoom :url="piczoomurl" :scale="3" :scroll="true"></pic-zoom>
+							<pic-zoom :url="goodsInfo.pic" :scale="3" :scroll="true"></pic-zoom>
 							<!-- <img src="~static/images/flower.jpg" alt=""> -->
 						</div>
 					    <div class="small-img-container">
-					    	<div class="small-img-box" :class="{active: smallImgActiveNumber==item}" v-for="item in 5" @mouseover='smallImgActive(item)' :key="item">
-					    		<img src="~static/images/flower.jpg" alt="">
+					    	<div class="small-img-box" :class="{active: smallImgActiveNumber==index}" v-for="(item,index) in goodsInfo.figure" @mouseover='smallImgActive(index,item)' :key="index">
+					    		<img v-lazy="item" alt="">
 					    	</div>
 					    </div>
 					</div>
@@ -101,7 +101,7 @@
 				</div>
 			</div>
 
-			<moreGoods />
+			<moreGoods :featuredGoods="goodsInfo.recommend"/>
 		</div>
 	</div>
 </template>
@@ -126,7 +126,7 @@
             return{
             	num1: 1,
             	smallImgActiveNumber: -1,
-            	piczoomurl: 'http://www.bkjia.com/uploads/allimg/150522/212110HP-1.png',
+            	// piczoomurl: 'http://www.bkjia.com/uploads/allimg/150522/212110HP-1.png',
             	data: [],
                 skuId: "",
                 skuName: "skuId",
@@ -510,7 +510,12 @@
 			      	if (!that.user.isLogin()) {
 			      		// that.$router.push({path: '/loginModule/login'});
                         that.$store.commit('LOGIN',true);
-			      	} else {
+			      	} else if (that.skuInfo.stock == 0) {
+                        that.$message({
+                            message: '库存不足',
+                            type: 'warning'
+                        });
+                    } else {
 			      		that.$router.push({path:'/payProcess/orderConfirm',query: {skuId: that.skuId, number: that.num1}})
 			      	}
 	  			} else {
@@ -524,7 +529,12 @@
             		// 公共函数里面的方法
 			      	if (!that.user.isLogin()) {
 			      		that.$store.commit('LOGIN',true);
-			      	} else {
+			      	} else if (that.skuInfo.stock == 0) {
+                        that.$message({
+                            message: '库存不足',
+                            type: 'warning'
+                        });
+                    } else {
 			      		that.addToCartAjax();
 			      	}
 	  			} else {
@@ -560,8 +570,9 @@
 	  			}
 	  			return this.keys.length == chooseNumer? true: false;
 	  		},
-	  		smallImgActive(index) {
+	  		smallImgActive(index,item) {
 	  			this.smallImgActiveNumber = index;
+                this.goodsInfo.pic = item;
 	  		},
             // 关闭购买提示框
             closeGroupBorder() {

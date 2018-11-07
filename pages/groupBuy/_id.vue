@@ -64,7 +64,6 @@
 				},
 				currentPage: 1,
 				param: {
-					id: this.$route.params.id,
 	        		page: 1,
 	        		pageSize: 10,
 	        		sort: 'createTime_desc'
@@ -73,12 +72,11 @@
         },
         async asyncData ({app,params,store}) {
         	const param = {
-        		id: params.id,
         		page: 1,
         		pageSize: 10,
         		sort: 'createTime_desc'
         	}
-		 	const goodsListData = await app.$axios.post(interfaceApi.goodsList,param);
+		 	const goodsListData = await app.$axios.post(interfaceApi.groupBuying,param);
 		 	// 获取分类
 		 	const categoryList = await app.$axios.post(interfaceApi.categoryList,{fname: 0})
 		 	store.commit('SET_CATEGORYLIST',categoryList.data.data);
@@ -97,12 +95,14 @@
 		    
 	  	},
 		methods:{
+
 			// 初始化参数
 			initParam() {
 				this.param.page = 1;
 			},
 			// 改变排序
 			changeSortParam(sort) {
+				console.log(sort)
 				this.param.sort = sort;
 				this.currentPage = 1;
 				console.log(0);
@@ -110,7 +110,7 @@
 			// 获取数据
 			getData() {
 				var that = this;
-				that.$axios.post(interfaceApi.goodsList,that.param).then(res=> {
+				that.$axios.post(interfaceApi.groupBuying,that.param).then(res=> {
 					console.log(res);
 					that.goodsListData = res.data.data;
 				})

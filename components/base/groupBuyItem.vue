@@ -8,8 +8,11 @@
                 <p>{{item.title}}</p>
                 <span class="groupPrice">¥{{item.price}}</span>
                 <del v-if="item.originalPrice">¥{{item.originalPrice}}</del>
+
                 <div class="countDown">
-                    <span>15</span><i>:</i><span>35</span><i>:</i><span>20</span><i>:</i><span>24</span>
+                    <!-- <CountDown></CountDown> -->
+                    <count-down v-on:start_callback="countDownS_cb(1)" v-on:end_callback="countDownE_cb(1)" :currentTime="item.currentTime" :startTime="item.currentTime" :endTime="item.endTime" :tipText="''" :tipTextEnd="''" :endText="'活动结束'" :dayTxt="'Days '" :hourTxt="':'" :minutesTxt="':'" :secondsTxt="''"></count-down>
+                    <!-- <span>15</span><i>:</i><span>35</span><i>:</i><span>20</span><i>:</i><span>24</span> -->
                 </div>
 			</nuxt-link>
 		</div>
@@ -17,6 +20,7 @@
     </div>
 </template>
 <script>
+    import CountDown from "~/components/base/countDown"
 	export default {
 		props: {
 			hotData: {
@@ -40,6 +44,9 @@
                 default: false
             }
 		},
+        components: {
+            CountDown
+        },
         computed: {
             imgBox: function() {
                 let imgBoxstyleObj = {};
@@ -48,6 +55,14 @@
                 console.log(imgBoxstyleObj)
                 return imgBoxstyleObj;
             }
+        },
+        methods: {
+            countDownS_cb: function (x) {
+                console.log(x)
+            },
+            countDownE_cb: function (x) {
+                console.log(x)
+            },
         }
 	}
 </script>

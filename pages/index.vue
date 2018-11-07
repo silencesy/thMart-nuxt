@@ -15,12 +15,12 @@
 					      	<swiper-slide class="swiper-slide" v-for="(item,index) in homeData.ticketing.data" :key="index">
 								<nuxt-link to="/">
 									<div class="dealSwiper">
-										<div><img :src="item.pic" alt=""></div>
+										<div><img v-lazy="item.pic" alt=""></div>
 										<div class="dealTxt">
-											<p>San Benedetto Natural Premium</p>
+											<p>{{item.title}}</p>
 											<div>
-												<span>¥14999</span>
-												<del>¥16999</del>
+												<span>¥{{item.price}}</span>
+												<del v-if="item.originalPrice">¥{{item.originalPrice}}</del>
 											</div>
 										</div>
 									</div>
@@ -49,61 +49,15 @@
 				<div class="groupBuy">
 					<div class="title">
 						<img src="~static/images/groupBuy.png" alt="">
-						<nuxt-link to="/">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
+						<nuxt-link to="/groupBuy/1">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
 					</div>
 					<div class="goods">
-						<nuxt-link to="/">
+						<nuxt-link to="/" v-show="index<8" v-for="(item,index) in homeData.groupBuying.data" :key="index">
 							<b class="hot"><i>HOT</i></b>
-							<div><img src="~static/images/flower.jpg" alt=""></div>
-							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-							<span>¥1499</span>
-							<del>¥1599</del>
-						</nuxt-link>
-						<nuxt-link to="/">
-							<b class="hot"><i>HOT</i></b>
-							<div><img src="~static/images/flower.jpg" alt=""></div>
-							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-							<span>¥1499</span>
-							<del>¥1599</del>
-						</nuxt-link>
-						<nuxt-link to="/">
-							<div><img src="~static/images/flower.jpg" alt=""></div>
-							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-							<span>¥1499</span>
-							<del>¥1599</del>
-						</nuxt-link>
-						<nuxt-link to="/">
-							<b class="hot"><i>HOT</i></b>
-							<div><img src="~static/images/flower.jpg" alt=""></div>
-							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-							<span>¥1499</span>
-							<del>¥1599</del>
-						</nuxt-link>
-						<nuxt-link to="/">
-							<div><img src="~static/images/flower.jpg" alt=""></div>
-							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-							<span>¥1499</span>
-							<del>¥1599</del>
-						</nuxt-link>
-						<nuxt-link to="/">
-							<b class="hot"><i>HOT</i></b>
-							<div><img src="~static/images/flower.jpg" alt=""></div>
-							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-							<span>¥1499</span>
-							<del>¥1599</del>
-						</nuxt-link>
-						<nuxt-link to="/">
-							<div><img src="~static/images/flower.jpg" alt=""></div>
-							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-							<span>¥1499</span>
-							<del>¥1599</del>
-						</nuxt-link>
-						<nuxt-link to="/">
-							<b class="hot"><i>HOT</i></b>
-							<div><img src="~static/images/flower.jpg" alt=""></div>
-							<p>BRITA Marella 3.5L(blue)+Maxtra Filter Cartridge</p>
-							<span>¥1499</span>
-							<del>¥1599</del>
+							<div><img v-lazy="item.pic" alt=""></div>
+							<p>{{item.title}}</p>
+							<span>¥{{item.price}}</span>
+							<del v-if="item.originalPrice">¥{{item.originalPrice}}</del>
 						</nuxt-link>
 					</div>
 				</div>
@@ -120,7 +74,7 @@
 			<div class="editor container">
 				<div class="title">
 					<img src="~static/images/editor.png" alt="">
-					<nuxt-link to="/">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
+					<nuxt-link to="/article/articleList">More<i class="iconfont icon-combinedshapefuben"></i></nuxt-link>
 				</div>
 				<div class="articlePer">
 					<nuxt-link v-for="(item,index) in homeData.article.data" :key="item.id" v-if="index<6" :to="{name: 'article-id',params: {id: item.id}}">

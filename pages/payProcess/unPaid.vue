@@ -6,31 +6,27 @@
 				<div>
 					<p>
 						<span>Order No. : </span>
-						<span>2017121245326</span>
+						<span>{{details.orderNumber}}</span>
 					</p>
 					<p>
 						<span>Ordered : </span>
-						<span>2018-08-08 15:23:45</span>
+						<span>{{details.orderTime}}</span>
 					</p>
 					<p>
 						<span>Receiver : </span>
-						<span>Amanda 136****3567</span>
+						<span>{{details.fullName}} {{details.phone}}</span>
 					</p>
 					<p>
 						<span>Address : </span>
-						<span>上海市黄浦区蒙自路169号智造局一期 2号楼305</span>
+						<span>{{details.province}}{{details.city}}{{details.regionDetail}}</span>
 					</p>
 					<p>
 						<span>Final Price :</span>
-						<span class="price">¥ 398</span>
-					</p>
-					<p>
-						<span class="iconfont icon-jingshi"></span>
-						<span class="paid">Non-Payment</span>
+						<span class="theme_color">¥ {{details.priceTotal}}</span>
 					</p>
 					<div>
-						<button class="backOrder">Continue To Pay</button>
-						<button class="backHome">Home</button>
+						<button @click="pay" class="backOrder">Continue To Pay</button>
+						<button @click="goHome" class="backHome">Home</button>
 					</div>
 				</div>
 			</div>
@@ -40,6 +36,8 @@
 <script>
 	//支付进度条组件
 	import payNav from '~/components/layout/payNav.vue'
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'payHome',
 		data() {
@@ -52,6 +50,15 @@
 			}
 		},
 		middleware: 'userAuth',
+		async asyncData ({app,query}) {
+			let param = {
+				orderNumber: query.orderNumber,
+			}
+		 	const details = await app.$axios.post(interfaceApi.payOrderDetail,param);
+  			return { 
+  				details: details.data.data
+            }
+		},
 		components: {
 			payNav
 		},
@@ -63,7 +70,12 @@
 		    
 	  	},
 		methods: {
-
+			goHome() {
+				this.$router.push('/')
+			},
+			pay() {
+				this.$router.replace({path: '/payProcess/aliPay',query: {orderNumber: this.$route.query.orderNumber}})
+			}
 		}
 	}
 </script>

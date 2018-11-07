@@ -43,6 +43,8 @@ let api = {
 	orderList: 'Order/list',
 	// 订单详情页
 	OrderDetail: 'Order/detail',
+	// 支付页信息
+	payOrderDetail: 'Order/payOrderDetail',
 	/**
 	 * 购物车
 	 */
@@ -86,6 +88,10 @@ let api = {
 	// 修改密码
 	changePassword: 'User/changePassword',
 	// 修改头像
-	changeHead: 'User/changeHead'
+	changeHead: 'User/changeHead',
+	/**
+	 * 团购
+	 */
+	groupBuying: 'Item/groupBuying'
 }
 export default api

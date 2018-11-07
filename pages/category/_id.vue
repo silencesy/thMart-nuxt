@@ -24,7 +24,7 @@
 					</el-pagination>
 				</div>
 			</div>
-			<moreGoods />
+			<moreGoods :featuredGoods="goodsListData.recommend"/>
 		</div>
 	</div>
 </template>
@@ -59,7 +59,7 @@
 				param: {
 					id: this.$route.params.id,
 	        		page: 1,
-	        		pageSize: 10,
+	        		pageSize: 20,
 	        		sort: 'createTime_desc'
 				}
 	        }
@@ -68,7 +68,7 @@
         	const param = {
         		id: params.id,
         		page: 1,
-        		pageSize: 10,
+        		pageSize: 20,
         		sort: 'createTime_desc'
         	}
 		 	const goodsListData = await app.$axios.post(interfaceApi.goodsList,param);

@@ -52,7 +52,7 @@
                     </div>
                     <div class="right rightBtn" :style="{height: 114.5*orderDataList.skuList.length + 'px'}">
                         <div :class="{statusBtn: flag=='pay'}">
-                            <button class="redColor">Pay</button>
+                            <button class="redColor" @click="pay(orderDataList.orderNumber)">Pay</button>
                             <button class="greyColor" @click="goDetails(orderDataList.status,orderDataList.orderNumber)">Details</button>  
                         </div>
                         <div :class="{statusBtn: flag=='details'}">
@@ -105,6 +105,9 @@
                 } else if (status == 4) { // 关闭
                     this.$router.push({path: '/userCenter/orderStatus/orderClosed',query: {orderNumber: orderNumber}})
                 }
+            },
+            pay(orderNumber) {
+                this.$router.push({path: '/payProcess/aliPay',query: {orderNumber: orderNumber}})
             }
         }
 	}

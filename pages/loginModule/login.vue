@@ -16,7 +16,7 @@
 							<nuxt-link :to="{name: 'loginModule-passwordPhone'}">Forgot Password</nuxt-link>	
 						</div>
 						<div class="wechat">
-							<span class="iconfont icon-weixin1"></span>
+							<span @click="wechatLogin" class="iconfont icon-weixin1"></span>
 						</div>
 				    </el-tab-pane>
 				    <el-tab-pane label="Login via SMS" name="second">
@@ -38,7 +38,7 @@
 							<nuxt-link :to="{name: 'loginModule-passwordPhone'}">Forgot Password</nuxt-link>	
 						</div>
 						<div class="wechat">
-							<span class="iconfont icon-weixin1"></span>
+							<span @click="wechatLogin" class="iconfont icon-weixin1"></span>
 						</div>
 				    </el-tab-pane>
 				</el-tabs>
@@ -163,6 +163,9 @@
 				    	that.user.JumpBackToPage(that.$route.query.ref?window.location.origin+that.$route.query.ref:false);
 				    }
 				})
+			},
+			wechatLogin() {
+				window.location.href="http://page.thatsmags.com/WebAccess/get-weixin-code.html?appid=wx06e97f4ed4ac07e3&scope=snsapi_login&state=STATE&redirect_uri=http%3A%2F%2Fwww.baidu.com";
 			}
 	    }
 	}
@@ -199,6 +202,7 @@
 			.icon-weixin1 
 				color: #4CAF50
 				font-size: 25px
+				cursor: pointer
 		.codeBtn 
 			position: absolute
 			@include whch(80px, 30px, center, 30px)

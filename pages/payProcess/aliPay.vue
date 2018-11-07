@@ -6,26 +6,26 @@
 				<div>
 					<p>
 						<span>Order No. : </span>
-						<span>2017121245326</span>
+						<span>{{details.orderNumber}}</span>
 					</p>
 					<p>
 						<span>Ordered : </span>
-						<span>2018-08-08 15:23:45</span>
+						<span>{{details.orderTime}}</span>
 					</p>
 					<p>
 						<span>Receiver : </span>
-						<span>Amanda 136****3567</span>
+						<span>{{details.fullName}} {{details.phone}}</span>
 					</p>
 					<p>
 						<span>Address : </span>
-						<span>上海市黄浦区蒙自路169号智造局一期 2号楼305</span>
+						<span>{{details.province}}{{details.city}}{{details.regionDetail}}</span>
 					</p>
 					<p>
 						<span>Final Price :</span>
-						<span>¥ 398</span>
+						<span class="theme_color">¥ {{details.priceTotal}}</span>
 					</p>
 					<div>
-						<button class="iconfont icon-zhifubao"></button>
+						<button class="iconfont icon-zhifubao" @click="alipay"></button>
 						<button class="iconfont icon-weixinzhifu"></button>
 					</div>
 				</div>
@@ -34,6 +34,8 @@
 	</div>
 </template>
 <script>
+	// 接口API
+	import interfaceApi from '~/plugins/interfaceApi'
 	//支付进度条组件
 	import payNav from '~/components/layout/payNav.vue'
 	export default {
@@ -48,17 +50,37 @@
 			}
 		},
 		middleware: 'userAuth',
+		async asyncData ({app,query}) {
+			let param = {
+				orderNumber: query.orderNumber,
+			}
+		 	const details = await app.$axios.post(interfaceApi.payOrderDetail,param);
+  			return { 
+  				details: details.data.data
+            }
+		},
 		components: {
 			payNav
 		},
 		mounted() {
-
-			
+			if (window.history && window.history.pushState) {
+				history.pushState(null, null, document.URL);
+				window.addEventListener('popstate', this.goBack, false);
+			}
+		},
+		destroyed(){
+			window.removeEventListener('popstate', this.goBack, false);
 		},
 	  	computed: {  
 		    
 	  	},
 		methods: {
+			alipay() {
+				window.location.href = "http://proj6.thatsmags.com/thmartApi/Alipay/alipayapiPc?orderNumber=" + this.details.orderNumber;
+			},
+			goBack(){
+			    this.$router.replace({path: '/payProcess/unPaid', query: {orderNumber: this.details.orderNumber}});
+			}
 
 		}
 	}
