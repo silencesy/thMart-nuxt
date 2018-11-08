@@ -30,6 +30,23 @@
 					</div>
 				</div>
 			</div>
+	        <!-- 微信支付框 -->
+	        <el-dialog class="wechatBox" title="" :visible.sync="dialogWechatVisible">
+	            <div class="box">
+	                <span class="iconfont icon-weixinzhifu"></span>
+	                <p class="priceBox">
+						<span>Order number:15363476629937638</span>
+						<span>¥175</span>
+	                </p>
+	                <div class="saoyisao">
+	                	<div class="left">
+	                		<img src="~static/images/wxcode.png" alt="">
+	                		<p><i class="iconfont icon-scan"></i> Scan the QR Code to Pay</p>
+	                	</div>
+	                	<img src="~static/images/iphone.jpg" alt="">
+	                </div>
+	            </div>
+	        </el-dialog>
 		</div>
 	</div>
 </template>
@@ -42,6 +59,7 @@
 		layout: 'payHome',
 		data() {
 			return {
+				dialogWechatVisible: true,
 				isShowObj: {
                     oneIsShow: false,
                     twoIsShow: true,
@@ -134,5 +152,45 @@
 							background-color: #4caf50
 							font-size: 29px
 							border-radius: 4px
+	.wechatBox
+		.box
+			height: 430px
+			.icon-weixinzhifu 
+				color: #4caf50
+				font-size: 35px
+				padding-left: 20px
+			.priceBox
+				background-color: #eee
+				margin: 15px
+				padding: 15px 100px
+				overflow: hidden
+				span 
+					color: #222
+					font-size: 16px
+					float: left
+				span:nth-child(2)
+					color: $theme_color
+					float: right
+			.saoyisao
+				width: 450px
+				margin: 0 auto
+				overflow: hidden
+				.left 
+					float: left
+					border: 1px solid #dfdfdf
+					img 
+						width: 245px
+					p 
+						text-align: center
+						font-size: 16px
+						padding-bottom: 5px
+					.icon-scan
+						color: $theme_color
+						font-size: 20px
+						vertical-align: middle
+				>img 
+					float: left
+					width: 153px
+					margin-left: 50px
 
 </style>

@@ -202,6 +202,8 @@
                 li:hover
                     background-color: rgba(0,0,0,0)
                     color: $theme_color
+                li:active 
+                    background-color: rgba(0,0,0,0)
                 li:first-child
                     padding-top: 13px
                 li:last-child
