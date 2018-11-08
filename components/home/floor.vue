@@ -2,7 +2,7 @@
     <div class="floor container">
         <div class="top">
             <div class="topLeft"> 
-                <nuxt-link to="/"> 
+                <nuxt-link :to="{name: 'category-id',params: {id: floorData.id}}"> 
                     <img v-lazy="floorData.pic" alt="">
                 </nuxt-link>
             </div>

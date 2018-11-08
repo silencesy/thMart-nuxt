@@ -13,7 +13,7 @@
 					<div class="deal-swiper">
 					    <swiper :options="swiperOption">
 					      	<swiper-slide class="swiper-slide" v-for="(item,index) in homeData.ticketing.data" :key="index">
-								<nuxt-link to="/">
+								<nuxt-link :to="{name: 'goods-id', params: {id: item.id}}">
 									<div class="dealSwiper">
 										<div><img v-lazy="item.pic" alt=""></div>
 										<div class="dealTxt">
@@ -62,15 +62,17 @@
 					</div>
 				</div>
 			</div>
-			<floor :floorData="homeData.ticketing"/>
-			<div class="homeAd container"><img src="~static/images/ad.jpg" alt=""></div>
+			
+			<!-- <div class="homeAd container"><img src="~static/images/ad.jpg" alt=""></div> -->
+			<!-- <floor :floorData="homeData.ticketing"/>
 			<floor :floorData="homeData.flowers"/>
 			<floor :floorData="homeData.thDispatcher"/>
 			<floor :floorData="homeData.homeWare"/>
 			<floor :floorData="homeData.babyProduct"/>
 			<floor :floorData="homeData.toys"/>
 			<floor :floorData="homeData.coupon"/>
-			<floor :floorData="homeData.electronic"/>
+			<floor :floorData="homeData.electronic"/> -->
+			<floor v-for="(item,index) in homeData.category" :key="index"  :floorData="item"/>
 			<div class="editor container">
 				<div class="title">
 					<img src="~static/images/editor.png" alt="">
@@ -142,7 +144,7 @@
 			}
 		},
 		async asyncData ({app,store}) {
-		 	const homeData = await app.$axios.post(interfaceApi.home);
+		 	const homeData = await app.$axios.post(interfaceApi.home,{terminal: 'PC'});
 		 	// 获取分类
 		 	const categoryList = await app.$axios.post(interfaceApi.categoryList,{fname: 0})
 		 	store.commit('SET_CATEGORYLIST',categoryList.data.data);

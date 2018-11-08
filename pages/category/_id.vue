@@ -3,7 +3,7 @@
 		<div class="bread">
 			<el-breadcrumb separator-class="el-icon-arrow-right">
 			  <el-breadcrumb-item to="/">Home</el-breadcrumb-item>
-			  <el-breadcrumb-item>Flowers
+			  <el-breadcrumb-item>{{goodsListData.categoryName}}
 			  </el-breadcrumb-item>
 			</el-breadcrumb>
 		</div>
@@ -38,7 +38,7 @@
 		layout: 'indexHome',
 		head () {
     		return {
-      			title: '分类名字'
+      			title: this.goodsListData.categoryName
         	}
   		},
 		validate ({ params }) {

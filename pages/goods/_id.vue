@@ -37,6 +37,18 @@
 										<del v-if="goodsInfo.coupon_price">¥ {{goodsInfo.coupon_price}}</del>
 									</div>
 								</div>
+                                <div v-if="!skuInfo">
+                                    <span class="price">Price</span>
+                                    <div>
+                                        <el-badge value="new" class="item">
+                                            <el-button size="small">¥ {{goodsInfo.price}}</el-button>
+                                        </el-badge>
+                                        <del class="del" v-if="goodsInfo.coupon_price">¥ {{goodsInfo.coupon_price}}</del>
+                                    </div>
+                                    <div class="GroupCountDown">
+                                        <strong>15</strong><i>:</i><strong>35</strong><i>:</i><strong>20</strong><i>:</i><strong>24</strong>
+                                    </div>
+                                </div>
 								<!-- 选择sku显示价格 -->
 								<div class="row-item" v-if="skuInfo">
 									<span>Price</span>

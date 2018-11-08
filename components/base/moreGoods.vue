@@ -2,7 +2,7 @@
     <div class="moreProducts">
     	<div class="moreTitle">Featured Products</div>
     	<div class="products">
-			<nuxt-link to="/" v-for="(item,index) in featuredGoods" :key="index">
+			<nuxt-link :to="{name: 'goods-id', params: {id: item.id}}" v-for="(item,index) in featuredGoods" :key="index">
 				<b class="hot"><i>SALE</i></b>
 				<div><img v-lazy="item.pic" alt=""></div>
 				<p>{{item.title}}</p>

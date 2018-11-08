@@ -73,7 +73,9 @@
 					</el-tabs>
 				</div>
 			</div>
-			<moreGoods />
+			<moreGoods :featuredGoods="searchGoodsData.recommend"/>
+			<moreGoods :featuredGoods="searchShopData.recommend"/>
+			<moreGoods :featuredGoods="searchArticleData.recommend"/>
 		</div>
 	</div>
 </template>
