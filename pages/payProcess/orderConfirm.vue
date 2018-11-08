@@ -509,7 +509,7 @@
 			.confirmBox
 				.confirmAddress
 					border: $border
-					padding: 15px 15px 0 15px
+					padding: 15px
 					.info
 						text-align: center
 						padding: 10px
@@ -582,7 +582,7 @@
 					.more 
 						width: 100%
 						text-align: center
-						padding: 15px 0
+						padding-top: 15px 
 						cursor: pointer
 						@include sc(14px, #666)
 					.more:hover, .more:active 
