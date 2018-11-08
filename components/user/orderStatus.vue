@@ -58,7 +58,7 @@
                             <span v-if="orderDetails.feeTotal!=0">¥ {{orderDetails.feeTotal}}</span>
                             <!-- <span>¥ 10</span> -->
                             <!-- <span>¥ 5</span> -->
-                            <span>¥ {{orderDetails.priceTotal}} <button v-if="orderDetails.status == 0" class="redColor">Pay</button></span>
+                            <span>¥ {{orderDetails.priceTotal}} <button @click="pay" v-if="orderDetails.status == 0" class="redColor">Pay</button></span>
 
                         </div>
                     </div>
@@ -153,9 +153,15 @@
                 }
             }
         },
-	   data() {
+	    data() {
             return {
 
+            }
+        },
+        methods: {
+            // 去支付
+            pay() {
+                this.$router.push({path: '/payProcess/aliPay',query: {orderNumber: this.$route.query.orderNumber}});
             }
         }
 	}
