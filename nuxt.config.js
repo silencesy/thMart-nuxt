@@ -12,7 +12,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/thmart.ico' },
-      { rel: 'stylesheet', href: '//at.alicdn.com/t/font_771689_5h5t591c6yu.css' }
+      { rel: 'stylesheet', href: '//at.alicdn.com/t/font_771689_iwxjig8g31i.css' }
     ]
   },
   // css重置
