@@ -45,7 +45,7 @@
 					</el-form-item>
 				</el-form>
 			</el-dialog>
-			<goodsItem :titleIsShow="titleIsShow" />
+			<goodsItem :titleIsShow="titleIsShow" :hotData='hotData' />
 		</div>
 	</div>
 </template>
@@ -114,6 +114,18 @@
 					]
 				}
 			}
+		},
+			async asyncData ({app}) {
+			let param2 = {
+				id: 12,
+				pageSize: 12,
+				page: 0,
+				sort: 'order_asc'
+			}
+		 	const hotData = await app.$axios.post(interfaceApi.adsList,param2);
+  			return { 
+  				hotData: hotData.data.data.data
+  			}
 		},
 		components: {
 			goodsItem, 

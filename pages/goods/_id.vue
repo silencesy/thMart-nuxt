@@ -161,12 +161,13 @@
                 groupBorder: false
 	        }
         },
-        async asyncData ({app,params}) {
+        async asyncData ({app,params,store}) {
         	console.log(params)
 			let param = {
 				id: params.id,
 			}
 		 	const goodsInfo = await app.$axios.post(interfaceApi.goodsDeatail,param);
+            store.commit('SET_SHOP_INFO',goodsInfo.data.data.brand);
   			return { 
   				goodsInfo: goodsInfo.data.data
             }

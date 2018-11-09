@@ -50,7 +50,7 @@
 					</div>
 				</div>
 			</userLayout>
-			<goodsItem :titleIsShow="titleIsShow" />
+	
 		</div>
 	</div>
 </template>
@@ -78,9 +78,18 @@
 				pageSize: 10,
 				page: 1
 			}
+			let param2 = {
+				id: 12,
+				pageSize: 30,
+				page: 0,
+				sort: 'order_asc'
+			}
+		 	
+		 	const hotData = await app.$axios.post(interfaceApi.adsList,param2);
 		 	const addressList = await app.$axios.post(interfaceApi.addressList,param);
   			return { 
-  				addressList: addressList.data.data
+  				addressList: addressList.data.data,
+  				hotData: hotData.data.data.data
             }
 		},
 		components: {

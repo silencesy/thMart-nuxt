@@ -6,11 +6,7 @@
 					<div class="title">Featured Shops</div>
 					<div class="shops">
 						<div>
-							<nuxt-link to="/"><img src="~/static/images/flower.jpg" alt=""></nuxt-link>
-							<nuxt-link to="/"><img src="~/static/images/flower.jpg" alt=""></nuxt-link>
-							<nuxt-link to="/"><img src="~/static/images/flower.jpg" alt=""></nuxt-link>
-							<nuxt-link to="/"><img src="~/static/images/flower.jpg" alt=""></nuxt-link>
-							<nuxt-link to="/"><img src="~/static/images/flower.jpg" alt=""></nuxt-link>
+							<nuxt-link v-for="item in shopListData.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img v-lazy="item.pic" alt=""></nuxt-link>
 						</div>
 						<p><span>More</span></p>
 					</div>
@@ -18,7 +14,7 @@
 				<rank :isShowObj="isShowObj" />
 				<div class="normalShop">
 					<div>
-						<nuxt-link v-for="item in shopListData.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img v-lazy="item.pic" alt=""></nuxt-link>
+						<nuxt-link v-for="item in shopListData2.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img v-lazy="item.pic" alt=""></nuxt-link>
 					</div>
 				</div>
 				<div class="changePage">
@@ -28,7 +24,7 @@
 					  	:current-page.sync="currentPage"
 						@size-change="handleSizeChange"
 	      				@current-change="handleCurrentChange"
-					  	:total="shopListData.totalPage * 10">
+					  	:total="shopListData2.totalPage * 10">
 					</el-pagination>
 				</div>
 			</div>
@@ -61,6 +57,10 @@
 					page: 1,
 					pageSize: 36,
 					sort: 'order_asc'
+				},
+				param2: {
+					page: 1,
+					pageSize: 6
 				}
 			}
 		},
@@ -68,14 +68,22 @@
 			const param = {
 				id: 5,
 				page: 1,
-				pageSize: 36,
+				pageSize: 10000,
 				sort: 'order_asc'
 			}
+			const param2 = {
+				page: 1,
+				pageSize: 36
+			}
 		 	const shopListData = await app.$axios.post(interfaceApi.adsList,param);
+		 	const shopListData2 = await app.$axios.post(interfaceApi.brandList,param2);
 		 	// 获取分类
 		 	const categoryList = await app.$axios.post(interfaceApi.categoryList,{fname: 0})
 		 	store.commit('SET_CATEGORYLIST',categoryList.data.data);
-  			return { shopListData: shopListData.data.data}
+  			return {
+  				shopListData: shopListData.data.data,
+  				shopListData2: shopListData2.data.data
+  			}
 		},
 		components: {
 			moreGoods,
@@ -92,8 +100,8 @@
 			// 获取数据
 			getData() {
 				var that = this;
-				that.$axios.post(interfaceApi.adsList,that.param).then(res=> {
-					that.shopListData = res.data.data;
+				that.$axios.post(interfaceApi.brandList,that.param2).then(res=> {
+					that.shopListData2 = res.data.data;
 				})
 			},
 			// 回到顶部
@@ -103,12 +111,12 @@
 			},
 			// 改变页数
 			handleSizeChange(val) {
-		        this.param.page = val;
+		        this.param2.page = val;
 		        this.getData();
 		    },
 		    // 上下页
 		    handleCurrentChange(val) {
-		        this.param.page = val;
+		        this.param2.page = val;
 		        this.goBackTop();
 		        this.getData();
 		    }

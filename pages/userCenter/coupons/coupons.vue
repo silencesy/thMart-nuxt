@@ -24,7 +24,6 @@
 					</div>
 				</div>
 			</userLayout>
-			<goodsItem :titleIsShow="titleIsShow" />
 		</div>
 	</div>
 </template>

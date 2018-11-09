@@ -89,7 +89,7 @@
                     copy.isCollect = copy.isCollect==0?1:0;
                     that.$store.commit('SET_SHOP_INFO',copy);
                     const param = {
-                        contentId: that.$route.params.id,
+                        contentId: that.$store.state.shopInfo.id,
                         type: 2,
                         isCollect: that.$store.state.shopInfo.isCollect
                     }

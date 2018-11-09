@@ -17,6 +17,8 @@ let api = {
 	checkMobileAndCode: 'User/checkMobileAndCode',
 	// 重置密码
 	resetPassword: 'User/resetPassword',
+	// 所以商户列表页
+	brandList: 'Brand/list',
 	// 商户首页
 	shop: 'Brand/detail',
 	// 商品列表页
@@ -92,6 +94,10 @@ let api = {
 	/**
 	 * 团购
 	 */
-	groupBuying: 'Item/groupBuying'
+	groupBuying: 'Item/groupBuying',
+	/**
+	 * 微信支付成功跳转
+	 */
+	weixinpayed: 'Wx/orderQuery'
 }
 export default api

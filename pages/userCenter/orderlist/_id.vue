@@ -60,7 +60,6 @@
 				  	:total="totalPage * 10">
 				</el-pagination>
 			</div>
-			<goodsItem :titleIsShow="titleIsShow" />
 		</div>
 	</div>
 </template>

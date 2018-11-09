@@ -71,7 +71,7 @@ export default function ({ $axios, redirect,store }) {
 		}
 		
 		if (res.data.code==0) {
-			redirect('/userCenter/cartModule/cartEmpty')
+			redirect('/error/networkError')
 		}
 	})
 	// 网络错误统一处理
