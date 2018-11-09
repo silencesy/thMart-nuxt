@@ -4,7 +4,7 @@
 		<div class="sign">
 			<div>
 				<i class="iconfont icon-chenggongcopy-"></i>
-				<p>注册成功，<nuxt-link to="/">开始购物！</nuxt-link></p>
+				<p>Registration Success.<nuxt-link to="/">You may start shopping!</nuxt-link></p>
 			</div>
 		</div>
 	</div>

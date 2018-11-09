@@ -71,6 +71,4 @@
 		text-align: center
 		img
 			width: 750px
-
-
 </style>

@@ -11,7 +11,7 @@
 			<div class="btn" @click="submit">
 				<button>Submit</button>
 			</div>
-			<p>Have an account already? <nuxt-link :to="{name: 'loginModule-login'}">Log in</nuxt-link></p>
+			<p>Have an account already? <nuxt-link :to="{name: 'loginModule-login'}">Login</nuxt-link></p>
 		</div>
 	</div>
 </template>

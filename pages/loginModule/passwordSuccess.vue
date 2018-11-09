@@ -4,7 +4,7 @@
 		<div class="pW">
 			<div>
 				<i class="iconfont icon-chenggongcopy-"></i>
-				<p>密码重置成功，<nuxt-link :to="{name: 'loginModule-login'}">去登录！</nuxt-link></p>
+				<p>Password Reset Success.<nuxt-link :to="{name: 'loginModule-login'}">You may log in!</nuxt-link></p>
 			</div>
 		</div>
 	</div>

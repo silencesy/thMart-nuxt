@@ -9,7 +9,7 @@
 			<div class="btn" @click="NextStep">
 				<button>Next Step</button>
 			</div>
-			<p>Have an account already? <nuxt-link :to="{name: 'loginModule-login'}">Log in</nuxt-link></p>
+			<p>Have an account already? <nuxt-link :to="{name: 'loginModule-login'}">Login</nuxt-link></p>
 		</div>
 	</div>
 </template>

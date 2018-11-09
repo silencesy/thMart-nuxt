@@ -40,8 +40,8 @@
 						<el-input type="password" v-model="ruleForm.rePassword"></el-input>
 					</el-form-item>
 					<el-form-item>
-					    <el-button type="danger" @click="submitForm('ruleForm')">修改</el-button>
-					    <el-button type="info" @click="resetForm('ruleForm')">重置</el-button>
+					    <el-button type="danger" @click="submitForm('ruleForm')">Revision</el-button>
+					    <el-button type="info" @click="resetForm('ruleForm')">Reset</el-button>
 					</el-form-item>
 				</el-form>
 			</el-dialog>
@@ -128,11 +128,11 @@
 	  	},
 		methods: {
 			changeName() {
-				this.$prompt('请输入昵称', 'info', {
+				this.$prompt('Input Nickname', 'info', {
 					confirmButtonText: 'Done',
 					cancelButtonText: 'Cancel',
 					inputPattern: /\S/,
-					inputErrorMessage: '不能为空'
+					inputErrorMessage: 'Required'
 				}).then(({ value }) => {
 					this.changeNameAxios(value);
 				}).catch(() => {

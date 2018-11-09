@@ -4,11 +4,11 @@
 			<div slot="statusInfo" class="statusInfo">
 				<p>
 					<span><img src="~/static/images/icon-yuandian.png" alt="">2018-08-17 14:37:13</span>
-					<span>您未及时支付，该笔订单已关闭</span>
+					<span>Pay failed. Order cancelled. </span>
 				</p>
 				<p>
 					<span><i class="iconfont icon-dot"></i>2018-08-17 14:22:13</span>
-					<span>您提交了订单，请在15分钟内支付，否则该笔订单将关闭。</span>
+					<span>You have placed the order. Please make your payment within 15 minutes, or otherwise the order will be cancelled. </span>
 				</p>
 			</div>
 		</orderStatus>

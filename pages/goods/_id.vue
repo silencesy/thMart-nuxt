@@ -63,7 +63,7 @@
 									<span>Shipping</span>
 									<div>
 										<span>¥ 10.00</span>
-										<span>99元免运费</span>
+										<span class="forFree">Free delivery for RMB99 purchase and up</span>
 									</div>
 								</div>
 								<div :class="{'group-border': groupBorder}">
@@ -524,7 +524,7 @@
                         that.$store.commit('LOGIN',true);
 			      	} else if (that.skuInfo.stock == 0) {
                         that.$message({
-                            message: '库存不足',
+                            message: 'low stocks',
                             type: 'warning'
                         });
                     } else {
@@ -543,7 +543,7 @@
 			      		that.$store.commit('LOGIN',true);
 			      	} else if (that.skuInfo.stock == 0) {
                         that.$message({
-                            message: '库存不足',
+                            message: 'low stocks',
                             type: 'warning'
                         });
                     } else {
@@ -562,7 +562,7 @@
                 }
                 that.$axios.post(interfaceApi.addCart,param).then(res=> {
                     that.$notify({
-                      title: '添加购物车成功',
+                      title: 'Add shopping cart success',
                       message: '',
                       type: 'success'
                     });

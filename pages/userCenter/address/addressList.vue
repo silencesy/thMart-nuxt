@@ -122,7 +122,7 @@
 		    },
 		    // 删除地址
 		    deleteAdrr(item,index) {
-				this.$confirm('删除该条地址吗?', '', {
+				this.$confirm('Are you sure to delete this address?', '', {
 					confirmButtonText: 'Done',
 					cancelButtonText: 'Cancel',
 					type: 'warning'

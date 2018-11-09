@@ -26,7 +26,7 @@
                             <div><img class="noselect" v-lazy="value.pic" alt=""></div>
                             <div>
                                 <p>{{value.goodsName}}</p>
-                                <p v-if="value.over">满{{value.over}}减{{value.reduce}}</p>
+                                <p v-if="value.over">RMB{{value.reduce}} less per RMB{{value.over}} purchase</p>
                                 <span class="color"><i class="label" v-for="(val,index) in value.prop" :key="index">{{val[0]}}</i></span>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
     			<div class="right">
     				<!-- <span>Selected <i>1</i> Goods</span> -->
     				<span>Total: <i>¥ {{dataList.total}}</i></span>
-    				<i v-if="dataList.reduceTotal!=0">优惠 <i>¥ {{dataList.reduceTotal}}</i></i>
+    				<i v-if="dataList.reduceTotal!=0">Coupon <i>¥ {{dataList.reduceTotal}}</i></i>
     				<button @click="checkout">Checkout Now</button>
     			</div>
     		</div>
@@ -385,7 +385,7 @@
 		        }).catch(() => {
 		          this.$message({
 		            type: 'info',
-		            message: '已取消删除'
+		            message: 'Undeleted'
 		          });          
 		        });
 			},
