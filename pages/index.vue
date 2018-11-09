@@ -372,6 +372,8 @@
 						background-color: $theme_color
 						@include whch(38px, 18px, center, 18px)
 						border-radius: $border_radius
+						left: 5px
+						top: 5px
 						i 
 							@include sc(12px, #fff) 
 				a:nth-child(4) 

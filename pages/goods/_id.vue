@@ -28,7 +28,7 @@
 						<div class="box">
 							<div class="list">
 								<!-- 页面加载的时候显示价格 -->
-								<div class="row-item" v-if="!skuInfo">
+								<div class="row-item rowPrice" v-if="!skuInfo">
 									<span>Price</span>
 									<div>
 										<el-badge value="new" class="item">
@@ -37,7 +37,7 @@
 										<del v-if="goodsInfo.coupon_price">¥ {{goodsInfo.coupon_price}}</del>
 									</div>
 								</div>
-                                <div v-if="!skuInfo">
+                                <div class="row-item rowPrice redPrice" v-if="!skuInfo">
                                     <span class="price">Price</span>
                                     <div>
                                         <el-badge value="new" class="item">
@@ -672,7 +672,7 @@
 							width: 510px	
 							.list
 								overflow: hidden
-								>.row-item:first-child 
+								>.row-item.rowPrice
 									background-color: #eee
 									height: 48px
 									span
@@ -748,6 +748,5 @@
 						text-align: center
 						img
 							width: 750px
-									
 
 </style>
