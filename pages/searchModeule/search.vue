@@ -73,9 +73,9 @@
 					</el-tabs>
 				</div>
 			</div>
-			<moreGoods :featuredGoods="searchGoodsData.recommend"/>
-			<moreGoods :featuredGoods="searchShopData.recommend"/>
-			<moreGoods :featuredGoods="searchArticleData.recommend"/>
+			<moreGoods v-if="activeName == 'categories'" :featuredGoods="searchGoodsData.recommend"/>
+			<moreGoods v-if="activeName == 'shops'" :featuredGoods="searchShopData.recommend"/>
+			<moreGoods v-if="activeName == 'article'" :featuredGoods="searchArticleData.recommend"/>
 		</div>
 	</div>
 </template>

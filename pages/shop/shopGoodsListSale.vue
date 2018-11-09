@@ -41,7 +41,7 @@
 				}
 			}
 		},
-		async asyncData ({app,query}) {
+		async asyncData ({app,query,store}) {
 			console.log(query)
 			let param = {
 				id: 0,
@@ -51,6 +51,7 @@
 				brandId: query.id
 			}
 		 	const shopGoodsData = await app.$axios.post(interfaceApi.goodsList,param)
+		 	store.commit('SET_SHOP_INFO',shopGoodsData.data.data.brand);
   			return { shopGoodsData: shopGoodsData.data.data}
 		},
 		components: {

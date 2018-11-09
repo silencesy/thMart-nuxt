@@ -26,7 +26,7 @@
 					</p>
 					<div>
 						<button class="iconfont icon-zhifubao" @click="alipay"></button>
-						<button class="iconfont icon-weixinzhifu"></button>
+						<button class="iconfont icon-weixinzhifu" @click="wechatpay"></button>
 					</div>
 				</div>
 			</div>
@@ -35,12 +35,12 @@
 	            <div class="box">
 	                <span class="iconfont icon-weixinzhifu"></span>
 	                <p class="priceBox">
-						<span>Order number:15363476629937638</span>
-						<span>¥175</span>
+						<span>Order number:{{details.orderNumber}}</span>
+						<span>¥{{details.priceTotal}}</span>
 	                </p>
 	                <div class="saoyisao">
 	                	<div class="left">
-	                		<img src="~static/images/wxcode.png" alt="">
+	                		<img :src="'http://api.mall.thatsmags.com/Api/Wx/qrcode?data=' + details.jsApiParameters" alt="">
 	                		<p><i class="iconfont icon-scan"></i> Scan the QR Code to Pay</p>
 	                	</div>
 	                	<img src="~static/images/iphone.jpg" alt="">
@@ -59,12 +59,13 @@
 		layout: 'payHome',
 		data() {
 			return {
-				dialogWechatVisible: true,
+				dialogWechatVisible: false,
 				isShowObj: {
                     oneIsShow: false,
                     twoIsShow: true,
                     threeIsShow: false
 				},
+				timer: null
 			}
 		},
 		middleware: 'userAuth',
@@ -85,6 +86,8 @@
 				history.pushState(null, null, document.URL);
 				window.addEventListener('popstate', this.goBack, false);
 			}
+			// 检测微信支付成功跳转
+			this.weixinpayed();
 		},
 		destroyed(){
 			window.removeEventListener('popstate', this.goBack, false);
@@ -98,6 +101,26 @@
 			},
 			goBack(){
 			    this.$router.replace({path: '/payProcess/unPaid', query: {orderNumber: this.details.orderNumber}});
+			},
+			wechatpay() {
+				this.dialogWechatVisible = true;
+			},
+			weixinpayed() {
+				var that = this;
+				that.timer = setInterval(function() {
+					that.setIntervalAxios();
+				}, 4000);
+			},
+			setIntervalAxios() {
+				var that = this;
+				that.$axios.post(interfaceApi.weixinpayed,{trade_no: that.$route.query.orderNumber}).then(res=> {
+					console.log(res);
+					if (res.data.code == 1) {
+						clearInterval(that.timer);
+						that.$router.push({path: '/payProcess/paid',query: {orderNumber: that.$route.query.orderNumber}})
+						console.log(123);
+					}
+				})
 			}
 
 		}

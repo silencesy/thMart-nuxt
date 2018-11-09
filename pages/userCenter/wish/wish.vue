@@ -62,7 +62,7 @@
 					</div>
 				</div>
 			</userLayout>
-			<goodsItem :titleIsShow="titleIsShow" />
+			<goodsItem :titleIsShow="titleIsShow" :hotData='hotData' />
 		</div>
 	</div>
 </template>
@@ -98,11 +98,19 @@
 				page: 1,
 				pageSize: 10
 			}
+			let param3 = {
+				id: 12,
+				pageSize: 12,
+				page: 0,
+				sort: 'order_asc'
+			}
+		 	const hotData = await app.$axios.post(interfaceApi.adsList,param3);
 		 	const goodList = await app.$axios.post(interfaceApi.collectList,param1);
 		 	const shopList = await app.$axios.post(interfaceApi.collectList,param2);
   			return { 
   				goodList: goodList.data.data,
-  				shopList: shopList.data.data
+  				shopList: shopList.data.data,
+  				hotData: hotData.data.data.data
   			}
 		},
 		components: {

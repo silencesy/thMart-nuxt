@@ -165,7 +165,7 @@
 				})
 			},
 			wechatLogin() {
-				window.location.href="http://page.thatsmags.com/WebAccess/get-weixin-code.html?appid=wx06e97f4ed4ac07e3&scope=snsapi_login&state=STATE&redirect_uri=http%3A%2F%2Fwww.baidu.com";
+				window.location.href="https://open.weixin.qq.com/connect/qrconnect?appid=wxf62ca307a8f76a6e&redirect_uri=http%3A%2F%2Fproj6.thatsmags.com%2FthmartApi%2FUser%2FWx%2FPcLogin&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect";
 			}
 	    }
 	}
