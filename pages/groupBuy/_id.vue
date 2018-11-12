@@ -1,7 +1,7 @@
 <template>
 	<div class="goodsContent">
 		<!-- banner图 -->
-		<div class="bannerPic"><img src="~/static/images/bigBanner.png" alt=""></div>
+		<div class="bannerPic"><img v-lazy="goodsListData.banner[0].pic" alt=""></div>
 		<div class="bread">
 			<el-breadcrumb separator-class="el-icon-arrow-right">
 			  <el-breadcrumb-item to="/">Home</el-breadcrumb-item>
@@ -66,7 +66,8 @@
 				param: {
 	        		page: 1,
 	        		pageSize: 10,
-	        		sort: 'createTime_desc'
+	        		sort: 'createTime_desc',
+	        		terminal: 'PC'
 				},
 	        }
         },
@@ -74,7 +75,8 @@
         	const param = {
         		page: 1,
         		pageSize: 10,
-        		sort: 'createTime_desc'
+        		sort: 'createTime_desc',
+        		terminal: 'PC'
         	}
 		 	const goodsListData = await app.$axios.post(interfaceApi.groupBuying,param);
 		 	// 获取分类

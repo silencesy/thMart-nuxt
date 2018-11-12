@@ -5,10 +5,10 @@
 				<div class="featured">
 					<div class="title">Featured Shops</div>
 					<div class="shops">
-						<div>
+						<div :class="{height: !showShop}">
 							<nuxt-link v-for="item in shopListData.data" :key="item.id" :to="{name: 'shop-id',params: {id: item.id}}"><img v-lazy="item.pic" alt=""></nuxt-link>
 						</div>
-						<p><span>More</span></p>
+						<p v-if="shopListData.data.length > 6"><span v-if="!showShop" @click="more">More</span></p>
 					</div>
 				</div>
 				<rank :isShowObj="isShowObj" />
@@ -52,16 +52,11 @@
                     rankSearchIsShow: true
 				},
 				currentPage: 1,
-				param: {
-					id: 5,
-					page: 1,
-					pageSize: 36,
-					sort: 'order_asc'
-				},
 				param2: {
 					page: 1,
-					pageSize: 6
-				}
+					pageSize: 36
+				},
+				showShop: false
 			}
 		},
 		async asyncData ({app,params,store}) {
@@ -119,6 +114,9 @@
 		        this.param2.page = val;
 		        this.goBackTop();
 		        this.getData();
+		    },
+		    more() {
+		    	this.showShop = true;
 		    }
 		}
 	}
@@ -126,6 +124,8 @@
 
 <style lang='sass' scoped>
 	@import '~/assets/sass/common.sass'
+	.height
+		height: 176px
 	.shopList 
 		.shopListBox 
 			margin-top: 15px

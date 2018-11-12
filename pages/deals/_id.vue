@@ -1,11 +1,11 @@
 <template>
 	<div class="goodsContent">
 		<!-- banner图 -->
-		<div class="bannerPic"><img src="~/static/images/bigBanner.png" alt=""></div>
+		<div class="bannerPic"><img v-lazy="goodsListData.banner[0].pic" alt=""></div>
 		<div class="bread">
 			<el-breadcrumb separator-class="el-icon-arrow-right">
 			  <el-breadcrumb-item to="/">Home</el-breadcrumb-item>
-			  <el-breadcrumb-item>Flowers
+			  <el-breadcrumb-item>Deals
 			  </el-breadcrumb-item>
 			</el-breadcrumb>
 		</div>
@@ -53,21 +53,23 @@
 				},
 				currentPage: 1,
 				param: {
-					id: this.$route.params.id,
+					id: 17,
 	        		page: 1,
 	        		pageSize: 10,
-	        		sort: 'createTime_desc'
+	        		sort: 'createTime_desc',
+	        		terminal: 'PC'
 				},
 	        }
         },
         async asyncData ({app,params}) {
         	const param = {
-        		id: params.id,
+        		id: 17,
         		page: 1,
         		pageSize: 10,
-        		sort: 'createTime_desc'
+        		sort: 'createTime_desc',
+        		terminal: 'PC'
         	}
-		 	const goodsListData = await app.$axios.post(interfaceApi.goodsList,param)
+		 	const goodsListData = await app.$axios.post(interfaceApi.adsList,param)
   			return { goodsListData: goodsListData.data.data }
 		},
 		components: {
@@ -95,7 +97,7 @@
 			// 获取数据
 			getData() {
 				var that = this;
-				that.$axios.post(interfaceApi.goodsList,that.param).then(res=> {
+				that.$axios.post(interfaceApi.adsList,that.param).then(res=> {
 					console.log(res);
 					that.goodsListData = res.data.data;
 				})

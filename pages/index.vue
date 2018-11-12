@@ -7,7 +7,7 @@
 			<!-- today's deal -->
 			<div class="deal">
 				<div class="container">
-					<nuxt-link to="/">
+					<nuxt-link to="/deals/1">
 						<div class="deal-logo" :style="{backgroundImage:'url(' + homeData.deal.pic + ')'}"></div>
 					</nuxt-link>
 					<div class="deal-swiper">
@@ -148,6 +148,7 @@
 		 	// 获取分类
 		 	const categoryList = await app.$axios.post(interfaceApi.categoryList,{fname: 0})
 		 	store.commit('SET_CATEGORYLIST',categoryList.data.data);
+		 	store.commit('SET_TOPBANNER',homeData.data.data.topBanner);
   			return { homeData: homeData.data.data}
 		},
 		components: {

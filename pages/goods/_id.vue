@@ -3,7 +3,7 @@
 		<div class="bread">
 			<el-breadcrumb separator-class="el-icon-arrow-right">
 			  <el-breadcrumb-item to="/">Home</el-breadcrumb-item>
-			  <el-breadcrumb-item>Amor flora</el-breadcrumb-item>
+			  <el-breadcrumb-item>{{$store.state.shopInfo.name}}</el-breadcrumb-item>
 			  <el-breadcrumb-item>{{goodsInfo.title}}</el-breadcrumb-item>
 			</el-breadcrumb>
 		</div>

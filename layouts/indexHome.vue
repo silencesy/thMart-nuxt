@@ -1,5 +1,6 @@
 <template>
     <div>
+        <topBanner />
         <top/>
         <homeNav/>
         <nuxt/>
@@ -8,13 +9,15 @@
 </template>
 <script>
     import top from '~/components/layout/top.vue'
+    import topBanner from '~/components/layout/topBanner.vue'
     import homeNav from '~/components/layout/homeNav.vue'
     import bottom from '~/components/layout/bottom.vue' 
     export default {
         components: {
           top,
           homeNav,
-          bottom
+          bottom,
+          topBanner
         }
     }
 </script>

@@ -19,7 +19,9 @@ const store = () => new Vuex.Store({
     shopInfo: {},
     dialogFormVisible: false,
     // 分类数据
-    categoryList: []
+    categoryList: [],
+    // 首页顶部广告
+    topBanner: []
   },
 
   mutations: {
@@ -54,6 +56,10 @@ const store = () => new Vuex.Store({
     // 分类数据
     SET_CATEGORYLIST: function(state,arr) {
       state.categoryList = arr;
+    },
+    // 分类数据
+    SET_TOPBANNER: function(state,arr) {
+      state.topBanner = arr;
     }
   },
 
