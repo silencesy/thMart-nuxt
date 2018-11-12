@@ -54,7 +54,7 @@
 									<span>Shipping</span>
 									<div>
 										<span>¥ 10.00</span>
-										<span>99元免运费</span>
+										<span class="forFree">Free delivery for RMB99 purchase and up</span>
 									</div>
 								</li>
 								<li v-for="(item,key) in list.result" :key="key">
@@ -488,12 +488,12 @@
             	if (that.mustChooseAll()) {
             		// 公共函数里面的方法
 			      	if (!that.user.isLogin()) {
-			      		alert("请登录123");
+			      		alert("Please login");
 			      	} else {
 			      		alert("buy");
 			      	}
 	  			} else {
-	  				alert("请选择商品");
+	  				alert("Please select goods");
 	  			}
             },
             // 加入购物车
@@ -502,12 +502,12 @@
             	if (that.mustChooseAll()) {
             		// 公共函数里面的方法
 			      	if (!that.user.isLogin()) {
-			      		alert("请登录");
+			      		alert("Please login");
 			      	} else {
 			      		alert("buy");
 			      	}
 	  			} else {
-	  				alert("请选择商品");
+	  				alert("Please select goods");
 	  			}
             },
             // 必须选完全才能加入购物车或者购买

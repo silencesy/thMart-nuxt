@@ -71,8 +71,8 @@
                     @include sc(14px, #999)
                 b 
                     position: absolute 
-                    top: 15px
-                    left: 0
+                    top: 20px
+                    left: 5
                     background-color: $theme_color 
                     @include whch(38px, 18px, center, 18px) 
                     border-radius: $border_radius 

@@ -38,12 +38,12 @@
       //距离开始提示文字
       tipText: {
         type: String,
-        default: '距离开始'
+        default: 'Start at'
       },
       //距离结束提示文字
       tipTextEnd: {
         type: String,
-        default: '距离结束'
+        default: 'Expires'
       },
       //时间控件ID
       id: {
@@ -65,7 +65,7 @@
       // 倒计时结束显示文本
       endText: {
         type: String,
-        default: '已结束'
+        default: 'Closed'
       },
       //自定义显示文字:天
       dayTxt: {

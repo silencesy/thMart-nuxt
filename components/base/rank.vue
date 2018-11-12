@@ -113,8 +113,5 @@
                     top: 6px
                 i:nth-child(2)
                     top: 14px
-
-
-    
     					
 </style>

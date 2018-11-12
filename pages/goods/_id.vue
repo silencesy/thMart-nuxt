@@ -28,7 +28,7 @@
 						<div class="box">
 							<div class="list">
 								<!-- 页面加载的时候显示价格 -->
-								<div class="row-item" v-if="!skuInfo">
+								<div class="row-item rowPrice" v-if="!skuInfo">
 									<span>Price</span>
 									<div>
 										<el-badge value="new" class="item">
@@ -37,7 +37,7 @@
 										<del v-if="goodsInfo.coupon_price">¥ {{goodsInfo.coupon_price}}</del>
 									</div>
 								</div>
-                                <div v-if="!skuInfo">
+                                <div class="row-item rowPrice redPrice" v-if="!skuInfo">
                                     <span class="price">Price</span>
                                     <div>
                                         <el-badge value="new" class="item">
@@ -63,7 +63,7 @@
 									<span>Shipping</span>
 									<div>
 										<span>¥ 10.00</span>
-										<span>99元免运费</span>
+										<span class="forFree">Free delivery for RMB99 purchase and up</span>
 									</div>
 								</div>
 								<div :class="{'group-border': groupBorder}">
@@ -525,7 +525,7 @@
                         that.$store.commit('LOGIN',true);
 			      	} else if (that.skuInfo.stock == 0) {
                         that.$message({
-                            message: '库存不足',
+                            message: 'low stocks',
                             type: 'warning'
                         });
                     } else {
@@ -544,7 +544,7 @@
 			      		that.$store.commit('LOGIN',true);
 			      	} else if (that.skuInfo.stock == 0) {
                         that.$message({
-                            message: '库存不足',
+                            message: 'low stocks',
                             type: 'warning'
                         });
                     } else {
@@ -563,7 +563,7 @@
                 }
                 that.$axios.post(interfaceApi.addCart,param).then(res=> {
                     that.$notify({
-                      title: '添加购物车成功',
+                      title: 'Add shopping cart success',
                       message: '',
                       type: 'success'
                     });
@@ -672,7 +672,7 @@
 							width: 510px	
 							.list
 								overflow: hidden
-								>.row-item:first-child 
+								>.row-item.rowPrice
 									background-color: #eee
 									height: 48px
 									span
@@ -748,6 +748,5 @@
 						text-align: center
 						img
 							width: 750px
-									
 
 </style>

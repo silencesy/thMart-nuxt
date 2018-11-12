@@ -161,16 +161,16 @@
 											    {{defaultCoupons.name}} reduce {{defaultCoupons.reduce}}<i class="el-icon-arrow-down el-icon--right"></i>
 											</el-button>
 											<el-button v-if="!defaultCoupons">
-											   	不使用优惠券<i class="el-icon-arrow-down el-icon--right"></i>
+											   	No use of coupon<i class="el-icon-arrow-down el-icon--right"></i>
 											</el-button>
 											<el-dropdown-menu slot="dropdown">
 											    <el-dropdown-item v-for="item in orderData.userCouponList" :key="item.couponId" :command="item">{{item.name}} reduce {{item.reduce}}</el-dropdown-item>
-											    <el-dropdown-item>不使用优惠券</el-dropdown-item>
+											    <el-dropdown-item>No use of coupon</el-dropdown-item>
 											</el-dropdown-menu>
 										</el-dropdown>				
 									</div>
 									<div v-if="orderData.userCouponList.length==0">
-										你没有优惠券
+										No coupon
 									</div>
 								</span>
 								<span v-if="orderData.userCouponList.length>0">- ¥ {{orderData.couponReduce}}</span>

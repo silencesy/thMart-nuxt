@@ -147,6 +147,4 @@
 									background-color: $theme_color
 									margin-top: 7px
 
-
-
 </style>
