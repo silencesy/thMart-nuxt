@@ -29,7 +29,7 @@
 						<span>Final Price</span>
 						<span>Status</span>
 					</div>
-					<div v-if="orderList.length>0" v-for="item in orderList" :key="item.orderNumber">
+					<div v-if="orderList.length>0" v-for="(item,index) in orderList" :key="item.orderNumber">
 						<div v-if="item.status == 0">
 							<userOrder :orderDataList="item" flag="pay" type="unpaid" />
 						</div>
@@ -40,10 +40,10 @@
 							<userOrder :orderDataList="item" flag="track" type="progress" />
 						</div>
 						<div v-else-if="item.status == 3">
-							<userOrder :orderDataList="item" flag="track" type="shipped" />
+							<userOrder :orderDataList="item" :index="index" flag="track" type="shipped" />
 						</div>
 						<div v-else-if="item.status == 4">
-							<userOrder :orderDataList="item" flag="details" type="closed" />
+							<userOrder :orderDataList="item" :index="index" @delete="deleteOrder" flag="details" type="closed" />
 						</div>
 					</div>
 					<!-- 没有订单的情况 -->
@@ -78,14 +78,18 @@
         	}
   		},
 		validate ({ params }) {
-		// Must be a number
 			return params.id == 'all' || params.id == 'unpaid' || params.id == 'unshipped' || params.id == 'progress' || params.id == 'shipped';
 		},
 		data() {
 			return {
 				titleIsShow: true,
 				status: '',
-				currentPage: 1
+				currentPage: 1,
+				param: {
+					status: 12,
+					page: 1,
+					pageSize: 2
+				}
 			}
 		},
 		async asyncData ({app,params}) {
@@ -105,7 +109,7 @@
 			const param = {
 				status: status,
 				page: 1,
-				pageSize: 5
+				pageSize: 2
 			}
 		 	// const goodsList = await app.$axios.post(interfaceApi.CollectList,goodsPara);
 		 	const orderList = await app.$axios.post(interfaceApi.orderList,param);
@@ -130,15 +134,11 @@
 	  	},
 		methods: {
 			// 获取数据
-			getData(val) {
+			getData() {
 				var that = this;
-				const param = {
-					status: that.status,
-					page: val,
-					pageSize: 5
-				}
-				that.$axios.post(interfaceApi.orderList,param).then(res=> {
+				that.$axios.post(interfaceApi.orderList,that.param).then(res=> {
 					that.orderList = res.data.data.data;
+					that.totalPage = res.data.data.totalPage;
 				})
 			},
 			// 回到顶部
@@ -147,13 +147,26 @@
 				document.documentElement.scrollTop = 0
 			},
 			// 改变页数
-			handleSizeChange(val) {
+			handleSizeChange() {
+				this.param.page = val;
 		        this.getData(val);
 		    },
 		    // 上下页
 		    handleCurrentChange(val) {
+		    	this.param.page = val;
 		        this.goBackTop();
 		        this.getData(val);
+		    },
+		    deleteOrder(index) {
+		    	if(this.orderList.length == 0 && this.param.page != 1) {
+		    		console.log(123);
+		    		this.param.page = this.param.page-1;
+		    		this.currentPage = this.param.page;
+		    		this.getData();
+		    	} else {
+		    		console.log(456)
+		    		this.orderList.splice(index,1);
+		    	}
 		    }
 		}
 	}

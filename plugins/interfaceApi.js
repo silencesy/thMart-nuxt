@@ -61,7 +61,9 @@ let api = {
 	 * 订单模块
 	 */
 	prepareOrder: 'Order/prepareOrder',
-	placeOrder :'Order/placeOrder',
+	placeOrder: 'Order/placeOrder',
+	// 删除订单
+	orderDelete: 'Order/delete',
 	/**
 	 * 地址模块
 	 */
