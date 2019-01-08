@@ -13,7 +13,7 @@
 					<!-- 左边 -->
 					<div class="goodImg goodsLeft">
 						<div class="big-img-container">
-							<pic-zoom :url="goodsInfo.pic" :scale="3" :scroll="true"></pic-zoom>
+							<pic-zoom ref="zoom" :url="goodsInfo.pic" :scale="3" :scroll="true"></pic-zoom>
 							<!-- <img src="~static/images/flower.jpg" alt=""> -->
 						</div>
 					    <div class="small-img-container">
@@ -183,6 +183,13 @@
 	  	computed: {  
 		    
 	  	},
+        // beforeRouteLeave (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写con
+        //     setTimeout(function() {
+        //         this.$refs.zoom.mouseleave();
+        //     },200);
+            
+        //     next()
+        // },
 		methods:{
 			// 获取单个sku信息
             getSkuId(id) {

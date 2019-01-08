@@ -7,7 +7,7 @@
                 <!-- <span><i class="iconfont icon--dianpu"></i> Amor flor</span> -->
                 <div class="dateRight">
                     <span :class="{status: type=='unpaid'}">Unpaid</span>
-                    <span class="del" :class="{status: type=='closed'}"><i class="iconfont icon-shanchu"></i> Closed</span>
+                    <span class="del" :class="{status: type=='closed'}" @click="deleteOrder(orderDataList.orderNumber)"><i class="iconfont icon-shanchu"></i> Closed</span>
                     <span :class="{status: type=='unshipped'}">Unshipped</span>
                     <span :class="{status: type=='progress'}">In Progress</span>
                     <span class="del" :class="{status: type=='shipped'}"><i class="iconfont icon-shanchu"></i> Shipped</span>
@@ -69,6 +69,8 @@
     </div>
 </template>
 <script>
+    // 接口API
+    import interfaceApi from '~/plugins/interfaceApi'
 	export default {
         props: {
             flag: {
@@ -84,6 +86,10 @@
                 default: function() {
                     return {}
                 }
+            },
+            index: {
+                type: Number,
+                default: 0
             }
         },
 	    data() {
@@ -108,6 +114,31 @@
             },
             pay(orderNumber) {
                 this.$router.push({path: '/payProcess/aliPay',query: {orderNumber: orderNumber}})
+            },
+            // 删除订单
+            deleteOrder(orderNumber) {
+                var that = this; 
+                that.$confirm('是否删除订单?', 'info', {
+                  confirmButtonText: '确定',
+                  cancelButtonText: '取消',
+                  type: 'warning'
+                }).then(() => { 
+                    const param = {
+                        orderNumber: orderNumber
+                    }
+                    that.$axios.post(interfaceApi.orderDelete,param).then(res=> {
+                        console.log(res);
+                        if (res.data.code == 1) {
+                            that.$emit('delete',that.index); 
+                            that.$message({
+                                type: 'success',
+                                message: '删除成功!'
+                            });
+                        }
+                    })
+
+                    
+                })
             }
         }
 	}

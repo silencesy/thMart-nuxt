@@ -95,6 +95,10 @@
 	  	computed: {  
 		    
 	  	},
+	  	beforeRouteLeave (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写
+			clearInterval(this.timer); // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
+			next()
+		},
 		methods: {
 			alipay() {
 				window.location.href = "http://proj6.thatsmags.com/thmartApi/Alipay/alipayapiPc?orderNumber=" + this.details.orderNumber;
