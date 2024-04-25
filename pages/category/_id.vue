@@ -32,7 +32,7 @@
 	import moreGoods from "~/components/base/moreGoods"
 	import rank from "~/components/base/rank"
 	import goodsItem from "~/components/base/goodsItem"
-	// 接口API
+	// 接口API123123
 	import interfaceApi from '~/plugins/interfaceApi'
 	export default {
 		layout: 'indexHome',
